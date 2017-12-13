@@ -1,0 +1,657 @@
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchbK3Y2.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"BLUE_LED_PM.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.bss
+  20              		.align	2
+  21              	BLUE_LED_backup:
+  22 0000 00000000 		.space	12
+  22      00000000 
+  22      00000000 
+  23              		.section	.text.BLUE_LED_Sleep,"ax",%progbits
+  24              		.align	2
+  25              		.global	BLUE_LED_Sleep
+  26              		.code	16
+  27              		.thumb_func
+  28              		.type	BLUE_LED_Sleep, %function
+  29              	BLUE_LED_Sleep:
+  30              	.LFB0:
+  31              		.file 1 "Generated_Source\\PSoC4\\BLUE_LED_PM.c"
+   1:Generated_Source\PSoC4/BLUE_LED_PM.c **** /*******************************************************************************
+   2:Generated_Source\PSoC4/BLUE_LED_PM.c **** * File Name: BLUE_LED.c  
+   3:Generated_Source\PSoC4/BLUE_LED_PM.c **** * Version 2.20
+   4:Generated_Source\PSoC4/BLUE_LED_PM.c **** *
+   5:Generated_Source\PSoC4/BLUE_LED_PM.c **** * Description:
+   6:Generated_Source\PSoC4/BLUE_LED_PM.c **** *  This file contains APIs to set up the Pins component for low power modes.
+   7:Generated_Source\PSoC4/BLUE_LED_PM.c **** *
+   8:Generated_Source\PSoC4/BLUE_LED_PM.c **** * Note:
+   9:Generated_Source\PSoC4/BLUE_LED_PM.c **** *
+  10:Generated_Source\PSoC4/BLUE_LED_PM.c **** ********************************************************************************
+  11:Generated_Source\PSoC4/BLUE_LED_PM.c **** * Copyright 2015, Cypress Semiconductor Corporation.  All rights reserved.
+  12:Generated_Source\PSoC4/BLUE_LED_PM.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  13:Generated_Source\PSoC4/BLUE_LED_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  14:Generated_Source\PSoC4/BLUE_LED_PM.c **** * the software package with which this file was provided.
+  15:Generated_Source\PSoC4/BLUE_LED_PM.c **** *******************************************************************************/
+  16:Generated_Source\PSoC4/BLUE_LED_PM.c **** 
+  17:Generated_Source\PSoC4/BLUE_LED_PM.c **** #include "cytypes.h"
+  18:Generated_Source\PSoC4/BLUE_LED_PM.c **** #include "BLUE_LED.h"
+  19:Generated_Source\PSoC4/BLUE_LED_PM.c **** 
+  20:Generated_Source\PSoC4/BLUE_LED_PM.c **** static BLUE_LED_BACKUP_STRUCT  BLUE_LED_backup = {0u, 0u, 0u};
+  21:Generated_Source\PSoC4/BLUE_LED_PM.c **** 
+  22:Generated_Source\PSoC4/BLUE_LED_PM.c **** 
+  23:Generated_Source\PSoC4/BLUE_LED_PM.c **** /*******************************************************************************
+  24:Generated_Source\PSoC4/BLUE_LED_PM.c **** * Function Name: BLUE_LED_Sleep
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchbK3Y2.s 			page 2
+
+
+  25:Generated_Source\PSoC4/BLUE_LED_PM.c **** ****************************************************************************//**
+  26:Generated_Source\PSoC4/BLUE_LED_PM.c **** *
+  27:Generated_Source\PSoC4/BLUE_LED_PM.c **** * \brief Stores the pin configuration and prepares the pin for entering chip 
+  28:Generated_Source\PSoC4/BLUE_LED_PM.c **** *  deep-sleep/hibernate modes. This function applies only to SIO and USBIO pins.
+  29:Generated_Source\PSoC4/BLUE_LED_PM.c **** *  It should not be called for GPIO or GPIO_OVT pins.
+  30:Generated_Source\PSoC4/BLUE_LED_PM.c **** *
+  31:Generated_Source\PSoC4/BLUE_LED_PM.c **** * <b>Note</b> This function is available in PSoC 4 only.
+  32:Generated_Source\PSoC4/BLUE_LED_PM.c **** *
+  33:Generated_Source\PSoC4/BLUE_LED_PM.c **** * \return 
+  34:Generated_Source\PSoC4/BLUE_LED_PM.c **** *  None 
+  35:Generated_Source\PSoC4/BLUE_LED_PM.c **** *  
+  36:Generated_Source\PSoC4/BLUE_LED_PM.c **** * \sideeffect
+  37:Generated_Source\PSoC4/BLUE_LED_PM.c **** *  For SIO pins, this function configures the pin input threshold to CMOS and
+  38:Generated_Source\PSoC4/BLUE_LED_PM.c **** *  drive level to Vddio. This is needed for SIO pins when in device 
+  39:Generated_Source\PSoC4/BLUE_LED_PM.c **** *  deep-sleep/hibernate modes.
+  40:Generated_Source\PSoC4/BLUE_LED_PM.c **** *
+  41:Generated_Source\PSoC4/BLUE_LED_PM.c **** * \funcusage
+  42:Generated_Source\PSoC4/BLUE_LED_PM.c **** *  \snippet BLUE_LED_SUT.c usage_BLUE_LED_Sleep_Wakeup
+  43:Generated_Source\PSoC4/BLUE_LED_PM.c **** *******************************************************************************/
+  44:Generated_Source\PSoC4/BLUE_LED_PM.c **** void BLUE_LED_Sleep(void)
+  45:Generated_Source\PSoC4/BLUE_LED_PM.c **** {
+  32              		.loc 1 45 0
+  33              		.cfi_startproc
+  34              		@ args = 0, pretend = 0, frame = 0
+  35              		@ frame_needed = 0, uses_anonymous_args = 0
+  36              		@ link register save eliminated.
+  46:Generated_Source\PSoC4/BLUE_LED_PM.c ****     #if defined(BLUE_LED__PC)
+  47:Generated_Source\PSoC4/BLUE_LED_PM.c ****         BLUE_LED_backup.pcState = BLUE_LED_PC;
+  37              		.loc 1 47 0
+  38 0000 024B     		ldr	r3, .L2
+  39 0002 1A68     		ldr	r2, [r3]
+  40 0004 024B     		ldr	r3, .L2+4
+  41 0006 1A60     		str	r2, [r3]
+  48:Generated_Source\PSoC4/BLUE_LED_PM.c ****     #else
+  49:Generated_Source\PSoC4/BLUE_LED_PM.c ****         #if (CY_PSOC4_4200L)
+  50:Generated_Source\PSoC4/BLUE_LED_PM.c ****             /* Save the regulator state and put the PHY into suspend mode */
+  51:Generated_Source\PSoC4/BLUE_LED_PM.c ****             BLUE_LED_backup.usbState = BLUE_LED_CR1_REG;
+  52:Generated_Source\PSoC4/BLUE_LED_PM.c ****             BLUE_LED_USB_POWER_REG |= BLUE_LED_USBIO_ENTER_SLEEP;
+  53:Generated_Source\PSoC4/BLUE_LED_PM.c ****             BLUE_LED_CR1_REG &= BLUE_LED_USBIO_CR1_OFF;
+  54:Generated_Source\PSoC4/BLUE_LED_PM.c ****         #endif
+  55:Generated_Source\PSoC4/BLUE_LED_PM.c ****     #endif
+  56:Generated_Source\PSoC4/BLUE_LED_PM.c ****     #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(BLUE_LED__SIO)
+  57:Generated_Source\PSoC4/BLUE_LED_PM.c ****         BLUE_LED_backup.sioState = BLUE_LED_SIO_REG;
+  58:Generated_Source\PSoC4/BLUE_LED_PM.c ****         /* SIO requires unregulated output buffer and single ended input buffer */
+  59:Generated_Source\PSoC4/BLUE_LED_PM.c ****         BLUE_LED_SIO_REG &= (uint32)(~BLUE_LED_SIO_LPM_MASK);
+  60:Generated_Source\PSoC4/BLUE_LED_PM.c ****     #endif  
+  61:Generated_Source\PSoC4/BLUE_LED_PM.c **** }
+  42              		.loc 1 61 0
+  43 0008 C046     		nop
+  44              		@ sp needed
+  45 000a 7047     		bx	lr
+  46              	.L3:
+  47              		.align	2
+  48              	.L2:
+  49 000c 08030440 		.word	1074004744
+  50 0010 00000000 		.word	BLUE_LED_backup
+  51              		.cfi_endproc
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchbK3Y2.s 			page 3
+
+
+  52              	.LFE0:
+  53              		.size	BLUE_LED_Sleep, .-BLUE_LED_Sleep
+  54              		.section	.text.BLUE_LED_Wakeup,"ax",%progbits
+  55              		.align	2
+  56              		.global	BLUE_LED_Wakeup
+  57              		.code	16
+  58              		.thumb_func
+  59              		.type	BLUE_LED_Wakeup, %function
+  60              	BLUE_LED_Wakeup:
+  61              	.LFB1:
+  62:Generated_Source\PSoC4/BLUE_LED_PM.c **** 
+  63:Generated_Source\PSoC4/BLUE_LED_PM.c **** 
+  64:Generated_Source\PSoC4/BLUE_LED_PM.c **** /*******************************************************************************
+  65:Generated_Source\PSoC4/BLUE_LED_PM.c **** * Function Name: BLUE_LED_Wakeup
+  66:Generated_Source\PSoC4/BLUE_LED_PM.c **** ****************************************************************************//**
+  67:Generated_Source\PSoC4/BLUE_LED_PM.c **** *
+  68:Generated_Source\PSoC4/BLUE_LED_PM.c **** * \brief Restores the pin configuration that was saved during Pin_Sleep(). This 
+  69:Generated_Source\PSoC4/BLUE_LED_PM.c **** * function applies only to SIO and USBIO pins. It should not be called for
+  70:Generated_Source\PSoC4/BLUE_LED_PM.c **** * GPIO or GPIO_OVT pins.
+  71:Generated_Source\PSoC4/BLUE_LED_PM.c **** *
+  72:Generated_Source\PSoC4/BLUE_LED_PM.c **** * For USBIO pins, the wakeup is only triggered for falling edge interrupts.
+  73:Generated_Source\PSoC4/BLUE_LED_PM.c **** *
+  74:Generated_Source\PSoC4/BLUE_LED_PM.c **** * <b>Note</b> This function is available in PSoC 4 only.
+  75:Generated_Source\PSoC4/BLUE_LED_PM.c **** *
+  76:Generated_Source\PSoC4/BLUE_LED_PM.c **** * \return 
+  77:Generated_Source\PSoC4/BLUE_LED_PM.c **** *  None
+  78:Generated_Source\PSoC4/BLUE_LED_PM.c **** *  
+  79:Generated_Source\PSoC4/BLUE_LED_PM.c **** * \funcusage
+  80:Generated_Source\PSoC4/BLUE_LED_PM.c **** *  Refer to BLUE_LED_Sleep() for an example usage.
+  81:Generated_Source\PSoC4/BLUE_LED_PM.c **** *******************************************************************************/
+  82:Generated_Source\PSoC4/BLUE_LED_PM.c **** void BLUE_LED_Wakeup(void)
+  83:Generated_Source\PSoC4/BLUE_LED_PM.c **** {
+  62              		.loc 1 83 0
+  63              		.cfi_startproc
+  64              		@ args = 0, pretend = 0, frame = 0
+  65              		@ frame_needed = 0, uses_anonymous_args = 0
+  66              		@ link register save eliminated.
+  84:Generated_Source\PSoC4/BLUE_LED_PM.c ****     #if defined(BLUE_LED__PC)
+  85:Generated_Source\PSoC4/BLUE_LED_PM.c ****         BLUE_LED_PC = BLUE_LED_backup.pcState;
+  67              		.loc 1 85 0
+  68 0000 024A     		ldr	r2, .L5
+  69 0002 034B     		ldr	r3, .L5+4
+  70 0004 1B68     		ldr	r3, [r3]
+  71 0006 1360     		str	r3, [r2]
+  86:Generated_Source\PSoC4/BLUE_LED_PM.c ****     #else
+  87:Generated_Source\PSoC4/BLUE_LED_PM.c ****         #if (CY_PSOC4_4200L)
+  88:Generated_Source\PSoC4/BLUE_LED_PM.c ****             /* Restore the regulator state and come out of suspend mode */
+  89:Generated_Source\PSoC4/BLUE_LED_PM.c ****             BLUE_LED_USB_POWER_REG &= BLUE_LED_USBIO_EXIT_SLEEP_PH1;
+  90:Generated_Source\PSoC4/BLUE_LED_PM.c ****             BLUE_LED_CR1_REG = BLUE_LED_backup.usbState;
+  91:Generated_Source\PSoC4/BLUE_LED_PM.c ****             BLUE_LED_USB_POWER_REG &= BLUE_LED_USBIO_EXIT_SLEEP_PH2;
+  92:Generated_Source\PSoC4/BLUE_LED_PM.c ****         #endif
+  93:Generated_Source\PSoC4/BLUE_LED_PM.c ****     #endif
+  94:Generated_Source\PSoC4/BLUE_LED_PM.c ****     #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(BLUE_LED__SIO)
+  95:Generated_Source\PSoC4/BLUE_LED_PM.c ****         BLUE_LED_SIO_REG = BLUE_LED_backup.sioState;
+  96:Generated_Source\PSoC4/BLUE_LED_PM.c ****     #endif
+  97:Generated_Source\PSoC4/BLUE_LED_PM.c **** }
+  72              		.loc 1 97 0
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchbK3Y2.s 			page 4
+
+
+  73 0008 C046     		nop
+  74              		@ sp needed
+  75 000a 7047     		bx	lr
+  76              	.L6:
+  77              		.align	2
+  78              	.L5:
+  79 000c 08030440 		.word	1074004744
+  80 0010 00000000 		.word	BLUE_LED_backup
+  81              		.cfi_endproc
+  82              	.LFE1:
+  83              		.size	BLUE_LED_Wakeup, .-BLUE_LED_Wakeup
+  84              		.text
+  85              	.Letext0:
+  86              		.file 2 "Generated_Source\\PSoC4\\cytypes.h"
+  87              		.file 3 "Generated_Source\\PSoC4\\BLUE_LED.h"
+  88              		.section	.debug_info,"",%progbits
+  89              	.Ldebug_info0:
+  90 0000 05010000 		.4byte	0x105
+  91 0004 0400     		.2byte	0x4
+  92 0006 00000000 		.4byte	.Ldebug_abbrev0
+  93 000a 04       		.byte	0x4
+  94 000b 01       		.uleb128 0x1
+  95 000c 06000000 		.4byte	.LASF20
+  96 0010 0C       		.byte	0xc
+  97 0011 A9000000 		.4byte	.LASF21
+  98 0015 0E010000 		.4byte	.LASF22
+  99 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 100 001d 00000000 		.4byte	0
+ 101 0021 00000000 		.4byte	.Ldebug_line0
+ 102 0025 02       		.uleb128 0x2
+ 103 0026 01       		.byte	0x1
+ 104 0027 06       		.byte	0x6
+ 105 0028 43020000 		.4byte	.LASF0
+ 106 002c 02       		.uleb128 0x2
+ 107 002d 01       		.byte	0x1
+ 108 002e 08       		.byte	0x8
+ 109 002f D4000000 		.4byte	.LASF1
+ 110 0033 02       		.uleb128 0x2
+ 111 0034 02       		.byte	0x2
+ 112 0035 05       		.byte	0x5
+ 113 0036 1F020000 		.4byte	.LASF2
+ 114 003a 02       		.uleb128 0x2
+ 115 003b 02       		.byte	0x2
+ 116 003c 07       		.byte	0x7
+ 117 003d F4000000 		.4byte	.LASF3
+ 118 0041 02       		.uleb128 0x2
+ 119 0042 04       		.byte	0x4
+ 120 0043 05       		.byte	0x5
+ 121 0044 3A020000 		.4byte	.LASF4
+ 122 0048 02       		.uleb128 0x2
+ 123 0049 04       		.byte	0x4
+ 124 004a 07       		.byte	0x7
+ 125 004b E2000000 		.4byte	.LASF5
+ 126 004f 02       		.uleb128 0x2
+ 127 0050 08       		.byte	0x8
+ 128 0051 05       		.byte	0x5
+ 129 0052 FD010000 		.4byte	.LASF6
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchbK3Y2.s 			page 5
+
+
+ 130 0056 02       		.uleb128 0x2
+ 131 0057 08       		.byte	0x8
+ 132 0058 07       		.byte	0x7
+ 133 0059 B6010000 		.4byte	.LASF7
+ 134 005d 03       		.uleb128 0x3
+ 135 005e 04       		.byte	0x4
+ 136 005f 05       		.byte	0x5
+ 137 0060 696E7400 		.ascii	"int\000"
+ 138 0064 02       		.uleb128 0x2
+ 139 0065 04       		.byte	0x4
+ 140 0066 07       		.byte	0x7
+ 141 0067 A9010000 		.4byte	.LASF8
+ 142 006b 04       		.uleb128 0x4
+ 143 006c A2010000 		.4byte	.LASF12
+ 144 0070 02       		.byte	0x2
+ 145 0071 D401     		.2byte	0x1d4
+ 146 0073 48000000 		.4byte	0x48
+ 147 0077 02       		.uleb128 0x2
+ 148 0078 04       		.byte	0x4
+ 149 0079 04       		.byte	0x4
+ 150 007a CE000000 		.4byte	.LASF9
+ 151 007e 02       		.uleb128 0x2
+ 152 007f 08       		.byte	0x8
+ 153 0080 04       		.byte	0x4
+ 154 0081 07010000 		.4byte	.LASF10
+ 155 0085 02       		.uleb128 0x2
+ 156 0086 01       		.byte	0x1
+ 157 0087 08       		.byte	0x8
+ 158 0088 0B020000 		.4byte	.LASF11
+ 159 008c 04       		.uleb128 0x4
+ 160 008d 00000000 		.4byte	.LASF13
+ 161 0091 02       		.byte	0x2
+ 162 0092 7E02     		.2byte	0x27e
+ 163 0094 98000000 		.4byte	0x98
+ 164 0098 05       		.uleb128 0x5
+ 165 0099 6B000000 		.4byte	0x6b
+ 166 009d 06       		.uleb128 0x6
+ 167 009e 0C       		.byte	0xc
+ 168 009f 03       		.byte	0x3
+ 169 00a0 21       		.byte	0x21
+ 170 00a1 CA000000 		.4byte	0xca
+ 171 00a5 07       		.uleb128 0x7
+ 172 00a6 29020000 		.4byte	.LASF14
+ 173 00aa 03       		.byte	0x3
+ 174 00ab 23       		.byte	0x23
+ 175 00ac 6B000000 		.4byte	0x6b
+ 176 00b0 00       		.byte	0
+ 177 00b1 07       		.uleb128 0x7
+ 178 00b2 F4010000 		.4byte	.LASF15
+ 179 00b6 03       		.byte	0x3
+ 180 00b7 24       		.byte	0x24
+ 181 00b8 6B000000 		.4byte	0x6b
+ 182 00bc 04       		.byte	0x4
+ 183 00bd 07       		.uleb128 0x7
+ 184 00be 31020000 		.4byte	.LASF16
+ 185 00c2 03       		.byte	0x3
+ 186 00c3 25       		.byte	0x25
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchbK3Y2.s 			page 6
+
+
+ 187 00c4 6B000000 		.4byte	0x6b
+ 188 00c8 08       		.byte	0x8
+ 189 00c9 00       		.byte	0
+ 190 00ca 08       		.uleb128 0x8
+ 191 00cb CD010000 		.4byte	.LASF17
+ 192 00cf 03       		.byte	0x3
+ 193 00d0 26       		.byte	0x26
+ 194 00d1 9D000000 		.4byte	0x9d
+ 195 00d5 09       		.uleb128 0x9
+ 196 00d6 10020000 		.4byte	.LASF18
+ 197 00da 01       		.byte	0x1
+ 198 00db 2C       		.byte	0x2c
+ 199 00dc 00000000 		.4byte	.LFB0
+ 200 00e0 14000000 		.4byte	.LFE0-.LFB0
+ 201 00e4 01       		.uleb128 0x1
+ 202 00e5 9C       		.byte	0x9c
+ 203 00e6 09       		.uleb128 0x9
+ 204 00e7 E4010000 		.4byte	.LASF19
+ 205 00eb 01       		.byte	0x1
+ 206 00ec 52       		.byte	0x52
+ 207 00ed 00000000 		.4byte	.LFB1
+ 208 00f1 14000000 		.4byte	.LFE1-.LFB1
+ 209 00f5 01       		.uleb128 0x1
+ 210 00f6 9C       		.byte	0x9c
+ 211 00f7 0A       		.uleb128 0xa
+ 212 00f8 92010000 		.4byte	.LASF23
+ 213 00fc 01       		.byte	0x1
+ 214 00fd 14       		.byte	0x14
+ 215 00fe CA000000 		.4byte	0xca
+ 216 0102 05       		.uleb128 0x5
+ 217 0103 03       		.byte	0x3
+ 218 0104 00000000 		.4byte	BLUE_LED_backup
+ 219 0108 00       		.byte	0
+ 220              		.section	.debug_abbrev,"",%progbits
+ 221              	.Ldebug_abbrev0:
+ 222 0000 01       		.uleb128 0x1
+ 223 0001 11       		.uleb128 0x11
+ 224 0002 01       		.byte	0x1
+ 225 0003 25       		.uleb128 0x25
+ 226 0004 0E       		.uleb128 0xe
+ 227 0005 13       		.uleb128 0x13
+ 228 0006 0B       		.uleb128 0xb
+ 229 0007 03       		.uleb128 0x3
+ 230 0008 0E       		.uleb128 0xe
+ 231 0009 1B       		.uleb128 0x1b
+ 232 000a 0E       		.uleb128 0xe
+ 233 000b 55       		.uleb128 0x55
+ 234 000c 17       		.uleb128 0x17
+ 235 000d 11       		.uleb128 0x11
+ 236 000e 01       		.uleb128 0x1
+ 237 000f 10       		.uleb128 0x10
+ 238 0010 17       		.uleb128 0x17
+ 239 0011 00       		.byte	0
+ 240 0012 00       		.byte	0
+ 241 0013 02       		.uleb128 0x2
+ 242 0014 24       		.uleb128 0x24
+ 243 0015 00       		.byte	0
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchbK3Y2.s 			page 7
+
+
+ 244 0016 0B       		.uleb128 0xb
+ 245 0017 0B       		.uleb128 0xb
+ 246 0018 3E       		.uleb128 0x3e
+ 247 0019 0B       		.uleb128 0xb
+ 248 001a 03       		.uleb128 0x3
+ 249 001b 0E       		.uleb128 0xe
+ 250 001c 00       		.byte	0
+ 251 001d 00       		.byte	0
+ 252 001e 03       		.uleb128 0x3
+ 253 001f 24       		.uleb128 0x24
+ 254 0020 00       		.byte	0
+ 255 0021 0B       		.uleb128 0xb
+ 256 0022 0B       		.uleb128 0xb
+ 257 0023 3E       		.uleb128 0x3e
+ 258 0024 0B       		.uleb128 0xb
+ 259 0025 03       		.uleb128 0x3
+ 260 0026 08       		.uleb128 0x8
+ 261 0027 00       		.byte	0
+ 262 0028 00       		.byte	0
+ 263 0029 04       		.uleb128 0x4
+ 264 002a 16       		.uleb128 0x16
+ 265 002b 00       		.byte	0
+ 266 002c 03       		.uleb128 0x3
+ 267 002d 0E       		.uleb128 0xe
+ 268 002e 3A       		.uleb128 0x3a
+ 269 002f 0B       		.uleb128 0xb
+ 270 0030 3B       		.uleb128 0x3b
+ 271 0031 05       		.uleb128 0x5
+ 272 0032 49       		.uleb128 0x49
+ 273 0033 13       		.uleb128 0x13
+ 274 0034 00       		.byte	0
+ 275 0035 00       		.byte	0
+ 276 0036 05       		.uleb128 0x5
+ 277 0037 35       		.uleb128 0x35
+ 278 0038 00       		.byte	0
+ 279 0039 49       		.uleb128 0x49
+ 280 003a 13       		.uleb128 0x13
+ 281 003b 00       		.byte	0
+ 282 003c 00       		.byte	0
+ 283 003d 06       		.uleb128 0x6
+ 284 003e 13       		.uleb128 0x13
+ 285 003f 01       		.byte	0x1
+ 286 0040 0B       		.uleb128 0xb
+ 287 0041 0B       		.uleb128 0xb
+ 288 0042 3A       		.uleb128 0x3a
+ 289 0043 0B       		.uleb128 0xb
+ 290 0044 3B       		.uleb128 0x3b
+ 291 0045 0B       		.uleb128 0xb
+ 292 0046 01       		.uleb128 0x1
+ 293 0047 13       		.uleb128 0x13
+ 294 0048 00       		.byte	0
+ 295 0049 00       		.byte	0
+ 296 004a 07       		.uleb128 0x7
+ 297 004b 0D       		.uleb128 0xd
+ 298 004c 00       		.byte	0
+ 299 004d 03       		.uleb128 0x3
+ 300 004e 0E       		.uleb128 0xe
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchbK3Y2.s 			page 8
+
+
+ 301 004f 3A       		.uleb128 0x3a
+ 302 0050 0B       		.uleb128 0xb
+ 303 0051 3B       		.uleb128 0x3b
+ 304 0052 0B       		.uleb128 0xb
+ 305 0053 49       		.uleb128 0x49
+ 306 0054 13       		.uleb128 0x13
+ 307 0055 38       		.uleb128 0x38
+ 308 0056 0B       		.uleb128 0xb
+ 309 0057 00       		.byte	0
+ 310 0058 00       		.byte	0
+ 311 0059 08       		.uleb128 0x8
+ 312 005a 16       		.uleb128 0x16
+ 313 005b 00       		.byte	0
+ 314 005c 03       		.uleb128 0x3
+ 315 005d 0E       		.uleb128 0xe
+ 316 005e 3A       		.uleb128 0x3a
+ 317 005f 0B       		.uleb128 0xb
+ 318 0060 3B       		.uleb128 0x3b
+ 319 0061 0B       		.uleb128 0xb
+ 320 0062 49       		.uleb128 0x49
+ 321 0063 13       		.uleb128 0x13
+ 322 0064 00       		.byte	0
+ 323 0065 00       		.byte	0
+ 324 0066 09       		.uleb128 0x9
+ 325 0067 2E       		.uleb128 0x2e
+ 326 0068 00       		.byte	0
+ 327 0069 3F       		.uleb128 0x3f
+ 328 006a 19       		.uleb128 0x19
+ 329 006b 03       		.uleb128 0x3
+ 330 006c 0E       		.uleb128 0xe
+ 331 006d 3A       		.uleb128 0x3a
+ 332 006e 0B       		.uleb128 0xb
+ 333 006f 3B       		.uleb128 0x3b
+ 334 0070 0B       		.uleb128 0xb
+ 335 0071 27       		.uleb128 0x27
+ 336 0072 19       		.uleb128 0x19
+ 337 0073 11       		.uleb128 0x11
+ 338 0074 01       		.uleb128 0x1
+ 339 0075 12       		.uleb128 0x12
+ 340 0076 06       		.uleb128 0x6
+ 341 0077 40       		.uleb128 0x40
+ 342 0078 18       		.uleb128 0x18
+ 343 0079 9742     		.uleb128 0x2117
+ 344 007b 19       		.uleb128 0x19
+ 345 007c 00       		.byte	0
+ 346 007d 00       		.byte	0
+ 347 007e 0A       		.uleb128 0xa
+ 348 007f 34       		.uleb128 0x34
+ 349 0080 00       		.byte	0
+ 350 0081 03       		.uleb128 0x3
+ 351 0082 0E       		.uleb128 0xe
+ 352 0083 3A       		.uleb128 0x3a
+ 353 0084 0B       		.uleb128 0xb
+ 354 0085 3B       		.uleb128 0x3b
+ 355 0086 0B       		.uleb128 0xb
+ 356 0087 49       		.uleb128 0x49
+ 357 0088 13       		.uleb128 0x13
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchbK3Y2.s 			page 9
+
+
+ 358 0089 02       		.uleb128 0x2
+ 359 008a 18       		.uleb128 0x18
+ 360 008b 00       		.byte	0
+ 361 008c 00       		.byte	0
+ 362 008d 00       		.byte	0
+ 363              		.section	.debug_aranges,"",%progbits
+ 364 0000 24000000 		.4byte	0x24
+ 365 0004 0200     		.2byte	0x2
+ 366 0006 00000000 		.4byte	.Ldebug_info0
+ 367 000a 04       		.byte	0x4
+ 368 000b 00       		.byte	0
+ 369 000c 0000     		.2byte	0
+ 370 000e 0000     		.2byte	0
+ 371 0010 00000000 		.4byte	.LFB0
+ 372 0014 14000000 		.4byte	.LFE0-.LFB0
+ 373 0018 00000000 		.4byte	.LFB1
+ 374 001c 14000000 		.4byte	.LFE1-.LFB1
+ 375 0020 00000000 		.4byte	0
+ 376 0024 00000000 		.4byte	0
+ 377              		.section	.debug_ranges,"",%progbits
+ 378              	.Ldebug_ranges0:
+ 379 0000 00000000 		.4byte	.LFB0
+ 380 0004 14000000 		.4byte	.LFE0
+ 381 0008 00000000 		.4byte	.LFB1
+ 382 000c 14000000 		.4byte	.LFE1
+ 383 0010 00000000 		.4byte	0
+ 384 0014 00000000 		.4byte	0
+ 385              		.section	.debug_line,"",%progbits
+ 386              	.Ldebug_line0:
+ 387 0000 83000000 		.section	.debug_str,"MS",%progbits,1
+ 387      02005600 
+ 387      00000201 
+ 387      FB0E0D00 
+ 387      01010101 
+ 388              	.LASF13:
+ 389 0000 72656733 		.ascii	"reg32\000"
+ 389      3200
+ 390              	.LASF20:
+ 391 0006 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 391      43313120 
+ 391      352E342E 
+ 391      31203230 
+ 391      31363036 
+ 392 0039 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 392      20726576 
+ 392      6973696F 
+ 392      6E203233 
+ 392      37373135 
+ 393 006c 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects -fomit-fram"
+ 393      66756E63 
+ 393      74696F6E 
+ 393      2D736563 
+ 393      74696F6E 
+ 394 009f 652D706F 		.ascii	"e-pointer\000"
+ 394      696E7465 
+ 394      7200
+ 395              	.LASF21:
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchbK3Y2.s 			page 10
+
+
+ 396 00a9 47656E65 		.ascii	"Generated_Source\\PSoC4\\BLUE_LED_PM.c\000"
+ 396      72617465 
+ 396      645F536F 
+ 396      75726365 
+ 396      5C50536F 
+ 397              	.LASF9:
+ 398 00ce 666C6F61 		.ascii	"float\000"
+ 398      7400
+ 399              	.LASF1:
+ 400 00d4 756E7369 		.ascii	"unsigned char\000"
+ 400      676E6564 
+ 400      20636861 
+ 400      7200
+ 401              	.LASF5:
+ 402 00e2 6C6F6E67 		.ascii	"long unsigned int\000"
+ 402      20756E73 
+ 402      69676E65 
+ 402      6420696E 
+ 402      7400
+ 403              	.LASF3:
+ 404 00f4 73686F72 		.ascii	"short unsigned int\000"
+ 404      7420756E 
+ 404      7369676E 
+ 404      65642069 
+ 404      6E7400
+ 405              	.LASF10:
+ 406 0107 646F7562 		.ascii	"double\000"
+ 406      6C6500
+ 407              	.LASF22:
+ 408 010e 443A5C44 		.ascii	"D:\\Dropbox\\5_kurs\\diploma\\led_lamp(for_diploma)"
+ 408      726F7062 
+ 408      6F785C35 
+ 408      5F6B7572 
+ 408      735C6469 
+ 409 013d 5C424C45 		.ascii	"\\BLE_Dynamic_GATT_Service_Configuration\\BLE_Dynam"
+ 409      5F44796E 
+ 409      616D6963 
+ 409      5F474154 
+ 409      545F5365 
+ 410 016e 69635F47 		.ascii	"ic_GATT_Service_Configuration.cydsn\000"
+ 410      4154545F 
+ 410      53657276 
+ 410      6963655F 
+ 410      436F6E66 
+ 411              	.LASF23:
+ 412 0192 424C5545 		.ascii	"BLUE_LED_backup\000"
+ 412      5F4C4544 
+ 412      5F626163 
+ 412      6B757000 
+ 413              	.LASF12:
+ 414 01a2 75696E74 		.ascii	"uint32\000"
+ 414      333200
+ 415              	.LASF8:
+ 416 01a9 756E7369 		.ascii	"unsigned int\000"
+ 416      676E6564 
+ 416      20696E74 
+ 416      00
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchbK3Y2.s 			page 11
+
+
+ 417              	.LASF7:
+ 418 01b6 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 418      206C6F6E 
+ 418      6720756E 
+ 418      7369676E 
+ 418      65642069 
+ 419              	.LASF17:
+ 420 01cd 424C5545 		.ascii	"BLUE_LED_BACKUP_STRUCT\000"
+ 420      5F4C4544 
+ 420      5F424143 
+ 420      4B55505F 
+ 420      53545255 
+ 421              	.LASF19:
+ 422 01e4 424C5545 		.ascii	"BLUE_LED_Wakeup\000"
+ 422      5F4C4544 
+ 422      5F57616B 
+ 422      65757000 
+ 423              	.LASF15:
+ 424 01f4 73696F53 		.ascii	"sioState\000"
+ 424      74617465 
+ 424      00
+ 425              	.LASF6:
+ 426 01fd 6C6F6E67 		.ascii	"long long int\000"
+ 426      206C6F6E 
+ 426      6720696E 
+ 426      7400
+ 427              	.LASF11:
+ 428 020b 63686172 		.ascii	"char\000"
+ 428      00
+ 429              	.LASF18:
+ 430 0210 424C5545 		.ascii	"BLUE_LED_Sleep\000"
+ 430      5F4C4544 
+ 430      5F536C65 
+ 430      657000
+ 431              	.LASF2:
+ 432 021f 73686F72 		.ascii	"short int\000"
+ 432      7420696E 
+ 432      7400
+ 433              	.LASF14:
+ 434 0229 70635374 		.ascii	"pcState\000"
+ 434      61746500 
+ 435              	.LASF16:
+ 436 0231 75736253 		.ascii	"usbState\000"
+ 436      74617465 
+ 436      00
+ 437              	.LASF4:
+ 438 023a 6C6F6E67 		.ascii	"long int\000"
+ 438      20696E74 
+ 438      00
+ 439              	.LASF0:
+ 440 0243 7369676E 		.ascii	"signed char\000"
+ 440      65642063 
+ 440      68617200 
+ 441              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

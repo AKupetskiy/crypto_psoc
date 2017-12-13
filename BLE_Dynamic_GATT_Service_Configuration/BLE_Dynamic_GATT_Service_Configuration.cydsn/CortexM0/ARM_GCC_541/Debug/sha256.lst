@@ -1,0 +1,3976 @@
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"sha256.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.sha256_init,"ax",%progbits
+  20              		.align	2
+  21              		.global	sha256_init
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	sha256_init, %function
+  25              	sha256_init:
+  26              	.LFB0:
+  27              		.file 1 "sha256.c"
+   1:sha256.c      **** /* Crypto/Sha256.c -- SHA-256 Hash
+   2:sha256.c      **** 2010-06-11 : Igor Pavlov : Public domain
+   3:sha256.c      **** This code is based on public domain code from Wei Dai's Crypto++ library. */
+   4:sha256.c      **** 
+   5:sha256.c      **** #include "rotate-bits.h"
+   6:sha256.c      **** #include "sha256.h"
+   7:sha256.c      **** 
+   8:sha256.c      **** /* define it for speed optimization */
+   9:sha256.c      **** #define _SHA256_UNROLL
+  10:sha256.c      **** #define _SHA256_UNROLL2
+  11:sha256.c      **** 
+  12:sha256.c      **** void
+  13:sha256.c      **** sha256_init(sha256_t *p)
+  14:sha256.c      **** {
+  28              		.loc 1 14 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 10B5     		push	{r4, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 4, -8
+  35              		.cfi_offset 14, -4
+  36 0002 82B0     		sub	sp, sp, #8
+  37              		.cfi_def_cfa_offset 16
+  38 0004 0190     		str	r0, [sp, #4]
+  15:sha256.c      ****   p->state[0] = 0x6a09e667;
+  39              		.loc 1 15 0
+  40 0006 019B     		ldr	r3, [sp, #4]
+  41 0008 0F4A     		ldr	r2, .L2
+  42 000a 1A60     		str	r2, [r3]
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 2
+
+
+  16:sha256.c      ****   p->state[1] = 0xbb67ae85;
+  43              		.loc 1 16 0
+  44 000c 019B     		ldr	r3, [sp, #4]
+  45 000e 0F4A     		ldr	r2, .L2+4
+  46 0010 5A60     		str	r2, [r3, #4]
+  17:sha256.c      ****   p->state[2] = 0x3c6ef372;
+  47              		.loc 1 17 0
+  48 0012 019B     		ldr	r3, [sp, #4]
+  49 0014 0E4A     		ldr	r2, .L2+8
+  50 0016 9A60     		str	r2, [r3, #8]
+  18:sha256.c      ****   p->state[3] = 0xa54ff53a;
+  51              		.loc 1 18 0
+  52 0018 019B     		ldr	r3, [sp, #4]
+  53 001a 0E4A     		ldr	r2, .L2+12
+  54 001c DA60     		str	r2, [r3, #12]
+  19:sha256.c      ****   p->state[4] = 0x510e527f;
+  55              		.loc 1 19 0
+  56 001e 019B     		ldr	r3, [sp, #4]
+  57 0020 0D4A     		ldr	r2, .L2+16
+  58 0022 1A61     		str	r2, [r3, #16]
+  20:sha256.c      ****   p->state[5] = 0x9b05688c;
+  59              		.loc 1 20 0
+  60 0024 019B     		ldr	r3, [sp, #4]
+  61 0026 0D4A     		ldr	r2, .L2+20
+  62 0028 5A61     		str	r2, [r3, #20]
+  21:sha256.c      ****   p->state[6] = 0x1f83d9ab;
+  63              		.loc 1 21 0
+  64 002a 019B     		ldr	r3, [sp, #4]
+  65 002c 0C4A     		ldr	r2, .L2+24
+  66 002e 9A61     		str	r2, [r3, #24]
+  22:sha256.c      ****   p->state[7] = 0x5be0cd19;
+  67              		.loc 1 22 0
+  68 0030 019B     		ldr	r3, [sp, #4]
+  69 0032 0C4A     		ldr	r2, .L2+28
+  70 0034 DA61     		str	r2, [r3, #28]
+  23:sha256.c      ****   p->count = 0;
+  71              		.loc 1 23 0
+  72 0036 019A     		ldr	r2, [sp, #4]
+  73 0038 0023     		movs	r3, #0
+  74 003a 0024     		movs	r4, #0
+  75 003c 1362     		str	r3, [r2, #32]
+  76 003e 5462     		str	r4, [r2, #36]
+  24:sha256.c      **** }
+  77              		.loc 1 24 0
+  78 0040 C046     		nop
+  79 0042 02B0     		add	sp, sp, #8
+  80              		@ sp needed
+  81 0044 10BD     		pop	{r4, pc}
+  82              	.L3:
+  83 0046 C046     		.align	2
+  84              	.L2:
+  85 0048 67E6096A 		.word	1779033703
+  86 004c 85AE67BB 		.word	-1150833019
+  87 0050 72F36E3C 		.word	1013904242
+  88 0054 3AF54FA5 		.word	-1521486534
+  89 0058 7F520E51 		.word	1359893119
+  90 005c 8C68059B 		.word	-1694144372
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 3
+
+
+  91 0060 ABD9831F 		.word	528734635
+  92 0064 19CDE05B 		.word	1541459225
+  93              		.cfi_endproc
+  94              	.LFE0:
+  95              		.size	sha256_init, .-sha256_init
+  96              		.section	.rodata
+  97              		.align	2
+  98              		.type	K, %object
+  99              		.size	K, 256
+ 100              	K:
+ 101 0000 982F8A42 		.word	1116352408
+ 102 0004 91443771 		.word	1899447441
+ 103 0008 CFFBC0B5 		.word	-1245643825
+ 104 000c A5DBB5E9 		.word	-373957723
+ 105 0010 5BC25639 		.word	961987163
+ 106 0014 F111F159 		.word	1508970993
+ 107 0018 A4823F92 		.word	-1841331548
+ 108 001c D55E1CAB 		.word	-1424204075
+ 109 0020 98AA07D8 		.word	-670586216
+ 110 0024 015B8312 		.word	310598401
+ 111 0028 BE853124 		.word	607225278
+ 112 002c C37D0C55 		.word	1426881987
+ 113 0030 745DBE72 		.word	1925078388
+ 114 0034 FEB1DE80 		.word	-2132889090
+ 115 0038 A706DC9B 		.word	-1680079193
+ 116 003c 74F19BC1 		.word	-1046744716
+ 117 0040 C1699BE4 		.word	-459576895
+ 118 0044 8647BEEF 		.word	-272742522
+ 119 0048 C69DC10F 		.word	264347078
+ 120 004c CCA10C24 		.word	604807628
+ 121 0050 6F2CE92D 		.word	770255983
+ 122 0054 AA84744A 		.word	1249150122
+ 123 0058 DCA9B05C 		.word	1555081692
+ 124 005c DA88F976 		.word	1996064986
+ 125 0060 52513E98 		.word	-1740746414
+ 126 0064 6DC631A8 		.word	-1473132947
+ 127 0068 C82703B0 		.word	-1341970488
+ 128 006c C77F59BF 		.word	-1084653625
+ 129 0070 F30BE0C6 		.word	-958395405
+ 130 0074 4791A7D5 		.word	-710438585
+ 131 0078 5163CA06 		.word	113926993
+ 132 007c 67292914 		.word	338241895
+ 133 0080 850AB727 		.word	666307205
+ 134 0084 38211B2E 		.word	773529912
+ 135 0088 FC6D2C4D 		.word	1294757372
+ 136 008c 130D3853 		.word	1396182291
+ 137 0090 54730A65 		.word	1695183700
+ 138 0094 BB0A6A76 		.word	1986661051
+ 139 0098 2EC9C281 		.word	-2117940946
+ 140 009c 852C7292 		.word	-1838011259
+ 141 00a0 A1E8BFA2 		.word	-1564481375
+ 142 00a4 4B661AA8 		.word	-1474664885
+ 143 00a8 708B4BC2 		.word	-1035236496
+ 144 00ac A3516CC7 		.word	-949202525
+ 145 00b0 19E892D1 		.word	-778901479
+ 146 00b4 240699D6 		.word	-694614492
+ 147 00b8 85350EF4 		.word	-200395387
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 4
+
+
+ 148 00bc 70A06A10 		.word	275423344
+ 149 00c0 16C1A419 		.word	430227734
+ 150 00c4 086C371E 		.word	506948616
+ 151 00c8 4C774827 		.word	659060556
+ 152 00cc B5BCB034 		.word	883997877
+ 153 00d0 B30C1C39 		.word	958139571
+ 154 00d4 4AAAD84E 		.word	1322822218
+ 155 00d8 4FCA9C5B 		.word	1537002063
+ 156 00dc F36F2E68 		.word	1747873779
+ 157 00e0 EE828F74 		.word	1955562222
+ 158 00e4 6F63A578 		.word	2024104815
+ 159 00e8 1478C884 		.word	-2067236844
+ 160 00ec 0802C78C 		.word	-1933114872
+ 161 00f0 FAFFBE90 		.word	-1866530822
+ 162 00f4 EB6C50A4 		.word	-1538233109
+ 163 00f8 F7A3F9BE 		.word	-1090935817
+ 164 00fc F27871C6 		.word	-965641998
+ 165              		.section	.text.sha256_transform,"ax",%progbits
+ 166              		.align	2
+ 167              		.code	16
+ 168              		.thumb_func
+ 169              		.type	sha256_transform, %function
+ 170              	sha256_transform:
+ 171              	.LFB1:
+  25:sha256.c      **** 
+  26:sha256.c      **** #define S0(x) (ROTR32(x, 2) ^ ROTR32(x,13) ^ ROTR32(x, 22))
+  27:sha256.c      **** #define S1(x) (ROTR32(x, 6) ^ ROTR32(x,11) ^ ROTR32(x, 25))
+  28:sha256.c      **** #define s0(x) (ROTR32(x, 7) ^ ROTR32(x,18) ^ (x >> 3))
+  29:sha256.c      **** #define s1(x) (ROTR32(x,17) ^ ROTR32(x,19) ^ (x >> 10))
+  30:sha256.c      **** 
+  31:sha256.c      **** #define blk0(i) (W[i] = data[i])
+  32:sha256.c      **** #define blk2(i) (W[i&15] += s1(W[(i-2)&15]) + W[(i-7)&15] + s0(W[(i-15)&15]))
+  33:sha256.c      **** 
+  34:sha256.c      **** #define Ch(x,y,z) (z^(x&(y^z)))
+  35:sha256.c      **** #define Maj(x,y,z) ((x&y)|(z&(x|y)))
+  36:sha256.c      **** 
+  37:sha256.c      **** #define a(i) T[(0-(i))&7]
+  38:sha256.c      **** #define b(i) T[(1-(i))&7]
+  39:sha256.c      **** #define c(i) T[(2-(i))&7]
+  40:sha256.c      **** #define d(i) T[(3-(i))&7]
+  41:sha256.c      **** #define e(i) T[(4-(i))&7]
+  42:sha256.c      **** #define f(i) T[(5-(i))&7]
+  43:sha256.c      **** #define g(i) T[(6-(i))&7]
+  44:sha256.c      **** #define h(i) T[(7-(i))&7]
+  45:sha256.c      **** 
+  46:sha256.c      **** 
+  47:sha256.c      **** #ifdef _SHA256_UNROLL2
+  48:sha256.c      **** 
+  49:sha256.c      **** #define R(a,b,c,d,e,f,g,h, i) h += S1(e) + Ch(e,f,g) + K[i+j] + (j?blk2(i):blk0(i));\
+  50:sha256.c      ****   d += h; h += S0(a) + Maj(a, b, c)
+  51:sha256.c      **** 
+  52:sha256.c      **** #define RX_8(i) \
+  53:sha256.c      ****   R(a,b,c,d,e,f,g,h, i); \
+  54:sha256.c      ****   R(h,a,b,c,d,e,f,g, (i+1)); \
+  55:sha256.c      ****   R(g,h,a,b,c,d,e,f, (i+2)); \
+  56:sha256.c      ****   R(f,g,h,a,b,c,d,e, (i+3)); \
+  57:sha256.c      ****   R(e,f,g,h,a,b,c,d, (i+4)); \
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 5
+
+
+  58:sha256.c      ****   R(d,e,f,g,h,a,b,c, (i+5)); \
+  59:sha256.c      ****   R(c,d,e,f,g,h,a,b, (i+6)); \
+  60:sha256.c      ****   R(b,c,d,e,f,g,h,a, (i+7))
+  61:sha256.c      **** 
+  62:sha256.c      **** #else
+  63:sha256.c      **** 
+  64:sha256.c      **** #define R(i) h(i) += S1(e(i)) + Ch(e(i),f(i),g(i)) + K[i+j] + (j?blk2(i):blk0(i));\
+  65:sha256.c      ****   d(i) += h(i); h(i) += S0(a(i)) + Maj(a(i), b(i), c(i))
+  66:sha256.c      **** 
+  67:sha256.c      **** #ifdef _SHA256_UNROLL
+  68:sha256.c      **** 
+  69:sha256.c      **** #define RX_8(i) R(i+0); R(i+1); R(i+2); R(i+3); R(i+4); R(i+5); R(i+6); R(i+7);
+  70:sha256.c      **** 
+  71:sha256.c      **** #endif
+  72:sha256.c      **** 
+  73:sha256.c      **** #endif
+  74:sha256.c      **** 
+  75:sha256.c      **** static const uint32_t K[64] = {
+  76:sha256.c      ****   0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5,
+  77:sha256.c      ****   0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+  78:sha256.c      ****   0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
+  79:sha256.c      ****   0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+  80:sha256.c      ****   0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc,
+  81:sha256.c      ****   0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+  82:sha256.c      ****   0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7,
+  83:sha256.c      ****   0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+  84:sha256.c      ****   0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13,
+  85:sha256.c      ****   0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+  86:sha256.c      ****   0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3,
+  87:sha256.c      ****   0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+  88:sha256.c      ****   0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5,
+  89:sha256.c      ****   0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+  90:sha256.c      ****   0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208,
+  91:sha256.c      ****   0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+  92:sha256.c      **** };
+  93:sha256.c      **** 
+  94:sha256.c      **** static void
+  95:sha256.c      **** sha256_transform(uint32_t *state, const uint32_t *data)
+  96:sha256.c      **** {
+ 172              		.loc 1 96 0
+ 173              		.cfi_startproc
+ 174              		@ args = 0, pretend = 0, frame = 112
+ 175              		@ frame_needed = 0, uses_anonymous_args = 0
+ 176 0000 30B5     		push	{r4, r5, lr}
+ 177              		.cfi_def_cfa_offset 12
+ 178              		.cfi_offset 4, -12
+ 179              		.cfi_offset 5, -8
+ 180              		.cfi_offset 14, -4
+ 181 0002 9DB0     		sub	sp, sp, #116
+ 182              		.cfi_def_cfa_offset 128
+ 183 0004 0190     		str	r0, [sp, #4]
+ 184 0006 0091     		str	r1, [sp]
+  97:sha256.c      ****   uint32_t W[16];
+  98:sha256.c      ****   unsigned j;
+  99:sha256.c      ****   #ifdef _SHA256_UNROLL2
+ 100:sha256.c      ****   uint32_t a,b,c,d,e,f,g,h;
+ 101:sha256.c      ****   a = state[0];
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 6
+
+
+ 185              		.loc 1 101 0
+ 186 0008 019B     		ldr	r3, [sp, #4]
+ 187 000a 1B68     		ldr	r3, [r3]
+ 188 000c 1A93     		str	r3, [sp, #104]
+ 102:sha256.c      ****   b = state[1];
+ 189              		.loc 1 102 0
+ 190 000e 019B     		ldr	r3, [sp, #4]
+ 191 0010 5B68     		ldr	r3, [r3, #4]
+ 192 0012 1993     		str	r3, [sp, #100]
+ 103:sha256.c      ****   c = state[2];
+ 193              		.loc 1 103 0
+ 194 0014 019B     		ldr	r3, [sp, #4]
+ 195 0016 9B68     		ldr	r3, [r3, #8]
+ 196 0018 1893     		str	r3, [sp, #96]
+ 104:sha256.c      ****   d = state[3];
+ 197              		.loc 1 104 0
+ 198 001a 019B     		ldr	r3, [sp, #4]
+ 199 001c DB68     		ldr	r3, [r3, #12]
+ 200 001e 1793     		str	r3, [sp, #92]
+ 105:sha256.c      ****   e = state[4];
+ 201              		.loc 1 105 0
+ 202 0020 019B     		ldr	r3, [sp, #4]
+ 203 0022 1B69     		ldr	r3, [r3, #16]
+ 204 0024 1693     		str	r3, [sp, #88]
+ 106:sha256.c      ****   f = state[5];
+ 205              		.loc 1 106 0
+ 206 0026 019B     		ldr	r3, [sp, #4]
+ 207 0028 5B69     		ldr	r3, [r3, #20]
+ 208 002a 1593     		str	r3, [sp, #84]
+ 107:sha256.c      ****   g = state[6];
+ 209              		.loc 1 107 0
+ 210 002c 019B     		ldr	r3, [sp, #4]
+ 211 002e 9B69     		ldr	r3, [r3, #24]
+ 212 0030 1493     		str	r3, [sp, #80]
+ 108:sha256.c      ****   h = state[7];
+ 213              		.loc 1 108 0
+ 214 0032 019B     		ldr	r3, [sp, #4]
+ 215 0034 DB69     		ldr	r3, [r3, #28]
+ 216 0036 1393     		str	r3, [sp, #76]
+ 109:sha256.c      ****   #else
+ 110:sha256.c      ****   uint32_t T[8];
+ 111:sha256.c      ****   for (j = 0; j < 8; j++)
+ 112:sha256.c      ****     T[j] = state[j];
+ 113:sha256.c      ****   #endif
+ 114:sha256.c      **** 
+ 115:sha256.c      ****   for (j = 0; j < 64; j += 16)
+ 217              		.loc 1 115 0
+ 218 0038 0023     		movs	r3, #0
+ 219 003a 1B93     		str	r3, [sp, #108]
+ 220 003c 00F0D1FE 		bl	.L5	@ far jump
+ 221              	.L38:
+ 116:sha256.c      ****   {
+ 117:sha256.c      ****     #if defined(_SHA256_UNROLL) || defined(_SHA256_UNROLL2)
+ 118:sha256.c      ****     RX_8(0); RX_8(8);
+ 222              		.loc 1 118 0
+ 223 0040 169B     		ldr	r3, [sp, #88]
+ 224 0042 0622     		movs	r2, #6
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 7
+
+
+ 225 0044 D341     		rors	r3, r3, r2
+ 226 0046 1A00     		movs	r2, r3
+ 227 0048 169B     		ldr	r3, [sp, #88]
+ 228 004a 0B21     		movs	r1, #11
+ 229 004c CB41     		rors	r3, r3, r1
+ 230 004e 5A40     		eors	r2, r3
+ 231 0050 169B     		ldr	r3, [sp, #88]
+ 232 0052 1921     		movs	r1, #25
+ 233 0054 CB41     		rors	r3, r3, r1
+ 234 0056 5A40     		eors	r2, r3
+ 235 0058 1599     		ldr	r1, [sp, #84]
+ 236 005a 149B     		ldr	r3, [sp, #80]
+ 237 005c 4B40     		eors	r3, r1
+ 238 005e 1699     		ldr	r1, [sp, #88]
+ 239 0060 1940     		ands	r1, r3
+ 240 0062 149B     		ldr	r3, [sp, #80]
+ 241 0064 4B40     		eors	r3, r1
+ 242 0066 D218     		adds	r2, r2, r3
+ 243 0068 EF4B     		ldr	r3, .L39
+ 244 006a 1B99     		ldr	r1, [sp, #108]
+ 245 006c 8900     		lsls	r1, r1, #2
+ 246 006e CB58     		ldr	r3, [r1, r3]
+ 247 0070 D218     		adds	r2, r2, r3
+ 248 0072 1B9B     		ldr	r3, [sp, #108]
+ 249 0074 002B     		cmp	r3, #0
+ 250 0076 27D0     		beq	.L6
+ 251              		.loc 1 118 0 is_stmt 0 discriminator 1
+ 252 0078 03AB     		add	r3, sp, #12
+ 253 007a 1968     		ldr	r1, [r3]
+ 254 007c 03AB     		add	r3, sp, #12
+ 255 007e 9B6B     		ldr	r3, [r3, #56]
+ 256 0080 1120     		movs	r0, #17
+ 257 0082 C341     		rors	r3, r3, r0
+ 258 0084 1800     		movs	r0, r3
+ 259 0086 03AB     		add	r3, sp, #12
+ 260 0088 9B6B     		ldr	r3, [r3, #56]
+ 261 008a 1324     		movs	r4, #19
+ 262 008c E341     		rors	r3, r3, r4
+ 263 008e 5840     		eors	r0, r3
+ 264 0090 03AB     		add	r3, sp, #12
+ 265 0092 9B6B     		ldr	r3, [r3, #56]
+ 266 0094 9B0A     		lsrs	r3, r3, #10
+ 267 0096 5840     		eors	r0, r3
+ 268 0098 03AB     		add	r3, sp, #12
+ 269 009a 5B6A     		ldr	r3, [r3, #36]
+ 270 009c C018     		adds	r0, r0, r3
+ 271 009e 03AB     		add	r3, sp, #12
+ 272 00a0 5B68     		ldr	r3, [r3, #4]
+ 273 00a2 0724     		movs	r4, #7
+ 274 00a4 E341     		rors	r3, r3, r4
+ 275 00a6 1C00     		movs	r4, r3
+ 276 00a8 03AB     		add	r3, sp, #12
+ 277 00aa 5B68     		ldr	r3, [r3, #4]
+ 278 00ac 1225     		movs	r5, #18
+ 279 00ae EB41     		rors	r3, r3, r5
+ 280 00b0 5C40     		eors	r4, r3
+ 281 00b2 03AB     		add	r3, sp, #12
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 8
+
+
+ 282 00b4 5B68     		ldr	r3, [r3, #4]
+ 283 00b6 DB08     		lsrs	r3, r3, #3
+ 284 00b8 6340     		eors	r3, r4
+ 285 00ba C318     		adds	r3, r0, r3
+ 286 00bc C918     		adds	r1, r1, r3
+ 287 00be 03AB     		add	r3, sp, #12
+ 288 00c0 1960     		str	r1, [r3]
+ 289 00c2 03AB     		add	r3, sp, #12
+ 290 00c4 1B68     		ldr	r3, [r3]
+ 291 00c6 05E0     		b	.L7
+ 292              	.L6:
+ 293              		.loc 1 118 0 discriminator 2
+ 294 00c8 009B     		ldr	r3, [sp]
+ 295 00ca 1968     		ldr	r1, [r3]
+ 296 00cc 03AB     		add	r3, sp, #12
+ 297 00ce 1960     		str	r1, [r3]
+ 298 00d0 03AB     		add	r3, sp, #12
+ 299 00d2 1B68     		ldr	r3, [r3]
+ 300              	.L7:
+ 301              		.loc 1 118 0 discriminator 4
+ 302 00d4 D318     		adds	r3, r2, r3
+ 303 00d6 139A     		ldr	r2, [sp, #76]
+ 304 00d8 D318     		adds	r3, r2, r3
+ 305 00da 1393     		str	r3, [sp, #76]
+ 306 00dc 179A     		ldr	r2, [sp, #92]
+ 307 00de 139B     		ldr	r3, [sp, #76]
+ 308 00e0 D318     		adds	r3, r2, r3
+ 309 00e2 1793     		str	r3, [sp, #92]
+ 310 00e4 1A9B     		ldr	r3, [sp, #104]
+ 311 00e6 0222     		movs	r2, #2
+ 312 00e8 D341     		rors	r3, r3, r2
+ 313 00ea 1A00     		movs	r2, r3
+ 314 00ec 1A9B     		ldr	r3, [sp, #104]
+ 315 00ee 0D21     		movs	r1, #13
+ 316 00f0 CB41     		rors	r3, r3, r1
+ 317 00f2 5A40     		eors	r2, r3
+ 318 00f4 1A9B     		ldr	r3, [sp, #104]
+ 319 00f6 1621     		movs	r1, #22
+ 320 00f8 CB41     		rors	r3, r3, r1
+ 321 00fa 5A40     		eors	r2, r3
+ 322 00fc 1A9B     		ldr	r3, [sp, #104]
+ 323 00fe 1999     		ldr	r1, [sp, #100]
+ 324 0100 1940     		ands	r1, r3
+ 325 0102 1A98     		ldr	r0, [sp, #104]
+ 326 0104 199B     		ldr	r3, [sp, #100]
+ 327 0106 0343     		orrs	r3, r0
+ 328 0108 1898     		ldr	r0, [sp, #96]
+ 329 010a 0340     		ands	r3, r0
+ 330 010c 0B43     		orrs	r3, r1
+ 331 010e D318     		adds	r3, r2, r3
+ 332 0110 139A     		ldr	r2, [sp, #76]
+ 333 0112 D318     		adds	r3, r2, r3
+ 334 0114 1393     		str	r3, [sp, #76]
+ 335 0116 179B     		ldr	r3, [sp, #92]
+ 336 0118 0622     		movs	r2, #6
+ 337 011a D341     		rors	r3, r3, r2
+ 338 011c 1A00     		movs	r2, r3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 9
+
+
+ 339 011e 179B     		ldr	r3, [sp, #92]
+ 340 0120 0B21     		movs	r1, #11
+ 341 0122 CB41     		rors	r3, r3, r1
+ 342 0124 5A40     		eors	r2, r3
+ 343 0126 179B     		ldr	r3, [sp, #92]
+ 344 0128 1921     		movs	r1, #25
+ 345 012a CB41     		rors	r3, r3, r1
+ 346 012c 5A40     		eors	r2, r3
+ 347 012e 1699     		ldr	r1, [sp, #88]
+ 348 0130 159B     		ldr	r3, [sp, #84]
+ 349 0132 4B40     		eors	r3, r1
+ 350 0134 1799     		ldr	r1, [sp, #92]
+ 351 0136 1940     		ands	r1, r3
+ 352 0138 159B     		ldr	r3, [sp, #84]
+ 353 013a 4B40     		eors	r3, r1
+ 354 013c D218     		adds	r2, r2, r3
+ 355 013e 1B9B     		ldr	r3, [sp, #108]
+ 356 0140 591C     		adds	r1, r3, #1
+ 357 0142 B94B     		ldr	r3, .L39
+ 358 0144 8900     		lsls	r1, r1, #2
+ 359 0146 CB58     		ldr	r3, [r1, r3]
+ 360 0148 D218     		adds	r2, r2, r3
+ 361 014a 1B9B     		ldr	r3, [sp, #108]
+ 362 014c 002B     		cmp	r3, #0
+ 363 014e 27D0     		beq	.L8
+ 364              		.loc 1 118 0 discriminator 5
+ 365 0150 03AB     		add	r3, sp, #12
+ 366 0152 5968     		ldr	r1, [r3, #4]
+ 367 0154 03AB     		add	r3, sp, #12
+ 368 0156 DB6B     		ldr	r3, [r3, #60]
+ 369 0158 1120     		movs	r0, #17
+ 370 015a C341     		rors	r3, r3, r0
+ 371 015c 1800     		movs	r0, r3
+ 372 015e 03AB     		add	r3, sp, #12
+ 373 0160 DB6B     		ldr	r3, [r3, #60]
+ 374 0162 1324     		movs	r4, #19
+ 375 0164 E341     		rors	r3, r3, r4
+ 376 0166 5840     		eors	r0, r3
+ 377 0168 03AB     		add	r3, sp, #12
+ 378 016a DB6B     		ldr	r3, [r3, #60]
+ 379 016c 9B0A     		lsrs	r3, r3, #10
+ 380 016e 5840     		eors	r0, r3
+ 381 0170 03AB     		add	r3, sp, #12
+ 382 0172 9B6A     		ldr	r3, [r3, #40]
+ 383 0174 C018     		adds	r0, r0, r3
+ 384 0176 03AB     		add	r3, sp, #12
+ 385 0178 9B68     		ldr	r3, [r3, #8]
+ 386 017a 0724     		movs	r4, #7
+ 387 017c E341     		rors	r3, r3, r4
+ 388 017e 1C00     		movs	r4, r3
+ 389 0180 03AB     		add	r3, sp, #12
+ 390 0182 9B68     		ldr	r3, [r3, #8]
+ 391 0184 1225     		movs	r5, #18
+ 392 0186 EB41     		rors	r3, r3, r5
+ 393 0188 5C40     		eors	r4, r3
+ 394 018a 03AB     		add	r3, sp, #12
+ 395 018c 9B68     		ldr	r3, [r3, #8]
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 10
+
+
+ 396 018e DB08     		lsrs	r3, r3, #3
+ 397 0190 6340     		eors	r3, r4
+ 398 0192 C318     		adds	r3, r0, r3
+ 399 0194 C918     		adds	r1, r1, r3
+ 400 0196 03AB     		add	r3, sp, #12
+ 401 0198 5960     		str	r1, [r3, #4]
+ 402 019a 03AB     		add	r3, sp, #12
+ 403 019c 5B68     		ldr	r3, [r3, #4]
+ 404 019e 05E0     		b	.L9
+ 405              	.L8:
+ 406              		.loc 1 118 0 discriminator 6
+ 407 01a0 009B     		ldr	r3, [sp]
+ 408 01a2 5968     		ldr	r1, [r3, #4]
+ 409 01a4 03AB     		add	r3, sp, #12
+ 410 01a6 5960     		str	r1, [r3, #4]
+ 411 01a8 03AB     		add	r3, sp, #12
+ 412 01aa 5B68     		ldr	r3, [r3, #4]
+ 413              	.L9:
+ 414              		.loc 1 118 0 discriminator 8
+ 415 01ac D318     		adds	r3, r2, r3
+ 416 01ae 149A     		ldr	r2, [sp, #80]
+ 417 01b0 D318     		adds	r3, r2, r3
+ 418 01b2 1493     		str	r3, [sp, #80]
+ 419 01b4 189A     		ldr	r2, [sp, #96]
+ 420 01b6 149B     		ldr	r3, [sp, #80]
+ 421 01b8 D318     		adds	r3, r2, r3
+ 422 01ba 1893     		str	r3, [sp, #96]
+ 423 01bc 139B     		ldr	r3, [sp, #76]
+ 424 01be 0222     		movs	r2, #2
+ 425 01c0 D341     		rors	r3, r3, r2
+ 426 01c2 1A00     		movs	r2, r3
+ 427 01c4 139B     		ldr	r3, [sp, #76]
+ 428 01c6 0D21     		movs	r1, #13
+ 429 01c8 CB41     		rors	r3, r3, r1
+ 430 01ca 5A40     		eors	r2, r3
+ 431 01cc 139B     		ldr	r3, [sp, #76]
+ 432 01ce 1621     		movs	r1, #22
+ 433 01d0 CB41     		rors	r3, r3, r1
+ 434 01d2 5A40     		eors	r2, r3
+ 435 01d4 139B     		ldr	r3, [sp, #76]
+ 436 01d6 1A99     		ldr	r1, [sp, #104]
+ 437 01d8 1940     		ands	r1, r3
+ 438 01da 1398     		ldr	r0, [sp, #76]
+ 439 01dc 1A9B     		ldr	r3, [sp, #104]
+ 440 01de 0343     		orrs	r3, r0
+ 441 01e0 1998     		ldr	r0, [sp, #100]
+ 442 01e2 0340     		ands	r3, r0
+ 443 01e4 0B43     		orrs	r3, r1
+ 444 01e6 D318     		adds	r3, r2, r3
+ 445 01e8 149A     		ldr	r2, [sp, #80]
+ 446 01ea D318     		adds	r3, r2, r3
+ 447 01ec 1493     		str	r3, [sp, #80]
+ 448 01ee 189B     		ldr	r3, [sp, #96]
+ 449 01f0 0622     		movs	r2, #6
+ 450 01f2 D341     		rors	r3, r3, r2
+ 451 01f4 1A00     		movs	r2, r3
+ 452 01f6 189B     		ldr	r3, [sp, #96]
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 11
+
+
+ 453 01f8 0B21     		movs	r1, #11
+ 454 01fa CB41     		rors	r3, r3, r1
+ 455 01fc 5A40     		eors	r2, r3
+ 456 01fe 189B     		ldr	r3, [sp, #96]
+ 457 0200 1921     		movs	r1, #25
+ 458 0202 CB41     		rors	r3, r3, r1
+ 459 0204 5A40     		eors	r2, r3
+ 460 0206 1799     		ldr	r1, [sp, #92]
+ 461 0208 169B     		ldr	r3, [sp, #88]
+ 462 020a 4B40     		eors	r3, r1
+ 463 020c 1899     		ldr	r1, [sp, #96]
+ 464 020e 1940     		ands	r1, r3
+ 465 0210 169B     		ldr	r3, [sp, #88]
+ 466 0212 4B40     		eors	r3, r1
+ 467 0214 D218     		adds	r2, r2, r3
+ 468 0216 1B9B     		ldr	r3, [sp, #108]
+ 469 0218 991C     		adds	r1, r3, #2
+ 470 021a 834B     		ldr	r3, .L39
+ 471 021c 8900     		lsls	r1, r1, #2
+ 472 021e CB58     		ldr	r3, [r1, r3]
+ 473 0220 D218     		adds	r2, r2, r3
+ 474 0222 1B9B     		ldr	r3, [sp, #108]
+ 475 0224 002B     		cmp	r3, #0
+ 476 0226 27D0     		beq	.L10
+ 477              		.loc 1 118 0 discriminator 9
+ 478 0228 03AB     		add	r3, sp, #12
+ 479 022a 9968     		ldr	r1, [r3, #8]
+ 480 022c 03AB     		add	r3, sp, #12
+ 481 022e 1B68     		ldr	r3, [r3]
+ 482 0230 1120     		movs	r0, #17
+ 483 0232 C341     		rors	r3, r3, r0
+ 484 0234 1800     		movs	r0, r3
+ 485 0236 03AB     		add	r3, sp, #12
+ 486 0238 1B68     		ldr	r3, [r3]
+ 487 023a 1324     		movs	r4, #19
+ 488 023c E341     		rors	r3, r3, r4
+ 489 023e 5840     		eors	r0, r3
+ 490 0240 03AB     		add	r3, sp, #12
+ 491 0242 1B68     		ldr	r3, [r3]
+ 492 0244 9B0A     		lsrs	r3, r3, #10
+ 493 0246 5840     		eors	r0, r3
+ 494 0248 03AB     		add	r3, sp, #12
+ 495 024a DB6A     		ldr	r3, [r3, #44]
+ 496 024c C018     		adds	r0, r0, r3
+ 497 024e 03AB     		add	r3, sp, #12
+ 498 0250 DB68     		ldr	r3, [r3, #12]
+ 499 0252 0724     		movs	r4, #7
+ 500 0254 E341     		rors	r3, r3, r4
+ 501 0256 1C00     		movs	r4, r3
+ 502 0258 03AB     		add	r3, sp, #12
+ 503 025a DB68     		ldr	r3, [r3, #12]
+ 504 025c 1225     		movs	r5, #18
+ 505 025e EB41     		rors	r3, r3, r5
+ 506 0260 5C40     		eors	r4, r3
+ 507 0262 03AB     		add	r3, sp, #12
+ 508 0264 DB68     		ldr	r3, [r3, #12]
+ 509 0266 DB08     		lsrs	r3, r3, #3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 12
+
+
+ 510 0268 6340     		eors	r3, r4
+ 511 026a C318     		adds	r3, r0, r3
+ 512 026c C918     		adds	r1, r1, r3
+ 513 026e 03AB     		add	r3, sp, #12
+ 514 0270 9960     		str	r1, [r3, #8]
+ 515 0272 03AB     		add	r3, sp, #12
+ 516 0274 9B68     		ldr	r3, [r3, #8]
+ 517 0276 05E0     		b	.L11
+ 518              	.L10:
+ 519              		.loc 1 118 0 discriminator 10
+ 520 0278 009B     		ldr	r3, [sp]
+ 521 027a 9968     		ldr	r1, [r3, #8]
+ 522 027c 03AB     		add	r3, sp, #12
+ 523 027e 9960     		str	r1, [r3, #8]
+ 524 0280 03AB     		add	r3, sp, #12
+ 525 0282 9B68     		ldr	r3, [r3, #8]
+ 526              	.L11:
+ 527              		.loc 1 118 0 discriminator 12
+ 528 0284 D318     		adds	r3, r2, r3
+ 529 0286 159A     		ldr	r2, [sp, #84]
+ 530 0288 D318     		adds	r3, r2, r3
+ 531 028a 1593     		str	r3, [sp, #84]
+ 532 028c 199A     		ldr	r2, [sp, #100]
+ 533 028e 159B     		ldr	r3, [sp, #84]
+ 534 0290 D318     		adds	r3, r2, r3
+ 535 0292 1993     		str	r3, [sp, #100]
+ 536 0294 149B     		ldr	r3, [sp, #80]
+ 537 0296 0222     		movs	r2, #2
+ 538 0298 D341     		rors	r3, r3, r2
+ 539 029a 1A00     		movs	r2, r3
+ 540 029c 149B     		ldr	r3, [sp, #80]
+ 541 029e 0D21     		movs	r1, #13
+ 542 02a0 CB41     		rors	r3, r3, r1
+ 543 02a2 5A40     		eors	r2, r3
+ 544 02a4 149B     		ldr	r3, [sp, #80]
+ 545 02a6 1621     		movs	r1, #22
+ 546 02a8 CB41     		rors	r3, r3, r1
+ 547 02aa 5A40     		eors	r2, r3
+ 548 02ac 149B     		ldr	r3, [sp, #80]
+ 549 02ae 1399     		ldr	r1, [sp, #76]
+ 550 02b0 1940     		ands	r1, r3
+ 551 02b2 1498     		ldr	r0, [sp, #80]
+ 552 02b4 139B     		ldr	r3, [sp, #76]
+ 553 02b6 0343     		orrs	r3, r0
+ 554 02b8 1A98     		ldr	r0, [sp, #104]
+ 555 02ba 0340     		ands	r3, r0
+ 556 02bc 0B43     		orrs	r3, r1
+ 557 02be D318     		adds	r3, r2, r3
+ 558 02c0 159A     		ldr	r2, [sp, #84]
+ 559 02c2 D318     		adds	r3, r2, r3
+ 560 02c4 1593     		str	r3, [sp, #84]
+ 561 02c6 199B     		ldr	r3, [sp, #100]
+ 562 02c8 0622     		movs	r2, #6
+ 563 02ca D341     		rors	r3, r3, r2
+ 564 02cc 1A00     		movs	r2, r3
+ 565 02ce 199B     		ldr	r3, [sp, #100]
+ 566 02d0 0B21     		movs	r1, #11
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 13
+
+
+ 567 02d2 CB41     		rors	r3, r3, r1
+ 568 02d4 5A40     		eors	r2, r3
+ 569 02d6 199B     		ldr	r3, [sp, #100]
+ 570 02d8 1921     		movs	r1, #25
+ 571 02da CB41     		rors	r3, r3, r1
+ 572 02dc 5A40     		eors	r2, r3
+ 573 02de 1899     		ldr	r1, [sp, #96]
+ 574 02e0 179B     		ldr	r3, [sp, #92]
+ 575 02e2 4B40     		eors	r3, r1
+ 576 02e4 1999     		ldr	r1, [sp, #100]
+ 577 02e6 1940     		ands	r1, r3
+ 578 02e8 179B     		ldr	r3, [sp, #92]
+ 579 02ea 4B40     		eors	r3, r1
+ 580 02ec D218     		adds	r2, r2, r3
+ 581 02ee 1B9B     		ldr	r3, [sp, #108]
+ 582 02f0 D91C     		adds	r1, r3, #3
+ 583 02f2 4D4B     		ldr	r3, .L39
+ 584 02f4 8900     		lsls	r1, r1, #2
+ 585 02f6 CB58     		ldr	r3, [r1, r3]
+ 586 02f8 D218     		adds	r2, r2, r3
+ 587 02fa 1B9B     		ldr	r3, [sp, #108]
+ 588 02fc 002B     		cmp	r3, #0
+ 589 02fe 27D0     		beq	.L12
+ 590              		.loc 1 118 0 discriminator 13
+ 591 0300 03AB     		add	r3, sp, #12
+ 592 0302 D968     		ldr	r1, [r3, #12]
+ 593 0304 03AB     		add	r3, sp, #12
+ 594 0306 5B68     		ldr	r3, [r3, #4]
+ 595 0308 1120     		movs	r0, #17
+ 596 030a C341     		rors	r3, r3, r0
+ 597 030c 1800     		movs	r0, r3
+ 598 030e 03AB     		add	r3, sp, #12
+ 599 0310 5B68     		ldr	r3, [r3, #4]
+ 600 0312 1324     		movs	r4, #19
+ 601 0314 E341     		rors	r3, r3, r4
+ 602 0316 5840     		eors	r0, r3
+ 603 0318 03AB     		add	r3, sp, #12
+ 604 031a 5B68     		ldr	r3, [r3, #4]
+ 605 031c 9B0A     		lsrs	r3, r3, #10
+ 606 031e 5840     		eors	r0, r3
+ 607 0320 03AB     		add	r3, sp, #12
+ 608 0322 1B6B     		ldr	r3, [r3, #48]
+ 609 0324 C018     		adds	r0, r0, r3
+ 610 0326 03AB     		add	r3, sp, #12
+ 611 0328 1B69     		ldr	r3, [r3, #16]
+ 612 032a 0724     		movs	r4, #7
+ 613 032c E341     		rors	r3, r3, r4
+ 614 032e 1C00     		movs	r4, r3
+ 615 0330 03AB     		add	r3, sp, #12
+ 616 0332 1B69     		ldr	r3, [r3, #16]
+ 617 0334 1225     		movs	r5, #18
+ 618 0336 EB41     		rors	r3, r3, r5
+ 619 0338 5C40     		eors	r4, r3
+ 620 033a 03AB     		add	r3, sp, #12
+ 621 033c 1B69     		ldr	r3, [r3, #16]
+ 622 033e DB08     		lsrs	r3, r3, #3
+ 623 0340 6340     		eors	r3, r4
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 14
+
+
+ 624 0342 C318     		adds	r3, r0, r3
+ 625 0344 C918     		adds	r1, r1, r3
+ 626 0346 03AB     		add	r3, sp, #12
+ 627 0348 D960     		str	r1, [r3, #12]
+ 628 034a 03AB     		add	r3, sp, #12
+ 629 034c DB68     		ldr	r3, [r3, #12]
+ 630 034e 05E0     		b	.L13
+ 631              	.L12:
+ 632              		.loc 1 118 0 discriminator 14
+ 633 0350 009B     		ldr	r3, [sp]
+ 634 0352 D968     		ldr	r1, [r3, #12]
+ 635 0354 03AB     		add	r3, sp, #12
+ 636 0356 D960     		str	r1, [r3, #12]
+ 637 0358 03AB     		add	r3, sp, #12
+ 638 035a DB68     		ldr	r3, [r3, #12]
+ 639              	.L13:
+ 640              		.loc 1 118 0 discriminator 16
+ 641 035c D318     		adds	r3, r2, r3
+ 642 035e 169A     		ldr	r2, [sp, #88]
+ 643 0360 D318     		adds	r3, r2, r3
+ 644 0362 1693     		str	r3, [sp, #88]
+ 645 0364 1A9A     		ldr	r2, [sp, #104]
+ 646 0366 169B     		ldr	r3, [sp, #88]
+ 647 0368 D318     		adds	r3, r2, r3
+ 648 036a 1A93     		str	r3, [sp, #104]
+ 649 036c 159B     		ldr	r3, [sp, #84]
+ 650 036e 0222     		movs	r2, #2
+ 651 0370 D341     		rors	r3, r3, r2
+ 652 0372 1A00     		movs	r2, r3
+ 653 0374 159B     		ldr	r3, [sp, #84]
+ 654 0376 0D21     		movs	r1, #13
+ 655 0378 CB41     		rors	r3, r3, r1
+ 656 037a 5A40     		eors	r2, r3
+ 657 037c 159B     		ldr	r3, [sp, #84]
+ 658 037e 1621     		movs	r1, #22
+ 659 0380 CB41     		rors	r3, r3, r1
+ 660 0382 5A40     		eors	r2, r3
+ 661 0384 159B     		ldr	r3, [sp, #84]
+ 662 0386 1499     		ldr	r1, [sp, #80]
+ 663 0388 1940     		ands	r1, r3
+ 664 038a 1598     		ldr	r0, [sp, #84]
+ 665 038c 149B     		ldr	r3, [sp, #80]
+ 666 038e 0343     		orrs	r3, r0
+ 667 0390 1398     		ldr	r0, [sp, #76]
+ 668 0392 0340     		ands	r3, r0
+ 669 0394 0B43     		orrs	r3, r1
+ 670 0396 D318     		adds	r3, r2, r3
+ 671 0398 169A     		ldr	r2, [sp, #88]
+ 672 039a D318     		adds	r3, r2, r3
+ 673 039c 1693     		str	r3, [sp, #88]
+ 674 039e 1A9B     		ldr	r3, [sp, #104]
+ 675 03a0 0622     		movs	r2, #6
+ 676 03a2 D341     		rors	r3, r3, r2
+ 677 03a4 1A00     		movs	r2, r3
+ 678 03a6 1A9B     		ldr	r3, [sp, #104]
+ 679 03a8 0B21     		movs	r1, #11
+ 680 03aa CB41     		rors	r3, r3, r1
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 15
+
+
+ 681 03ac 5A40     		eors	r2, r3
+ 682 03ae 1A9B     		ldr	r3, [sp, #104]
+ 683 03b0 1921     		movs	r1, #25
+ 684 03b2 CB41     		rors	r3, r3, r1
+ 685 03b4 5A40     		eors	r2, r3
+ 686 03b6 1999     		ldr	r1, [sp, #100]
+ 687 03b8 189B     		ldr	r3, [sp, #96]
+ 688 03ba 4B40     		eors	r3, r1
+ 689 03bc 1A99     		ldr	r1, [sp, #104]
+ 690 03be 1940     		ands	r1, r3
+ 691 03c0 189B     		ldr	r3, [sp, #96]
+ 692 03c2 4B40     		eors	r3, r1
+ 693 03c4 D218     		adds	r2, r2, r3
+ 694 03c6 1B9B     		ldr	r3, [sp, #108]
+ 695 03c8 191D     		adds	r1, r3, #4
+ 696 03ca 174B     		ldr	r3, .L39
+ 697 03cc 8900     		lsls	r1, r1, #2
+ 698 03ce CB58     		ldr	r3, [r1, r3]
+ 699 03d0 D218     		adds	r2, r2, r3
+ 700 03d2 1B9B     		ldr	r3, [sp, #108]
+ 701 03d4 002B     		cmp	r3, #0
+ 702 03d6 29D0     		beq	.L14
+ 703              		.loc 1 118 0 discriminator 17
+ 704 03d8 03AB     		add	r3, sp, #12
+ 705 03da 1969     		ldr	r1, [r3, #16]
+ 706 03dc 03AB     		add	r3, sp, #12
+ 707 03de 9B68     		ldr	r3, [r3, #8]
+ 708 03e0 1120     		movs	r0, #17
+ 709 03e2 C341     		rors	r3, r3, r0
+ 710 03e4 1800     		movs	r0, r3
+ 711 03e6 03AB     		add	r3, sp, #12
+ 712 03e8 9B68     		ldr	r3, [r3, #8]
+ 713 03ea 1324     		movs	r4, #19
+ 714 03ec E341     		rors	r3, r3, r4
+ 715 03ee 5840     		eors	r0, r3
+ 716 03f0 03AB     		add	r3, sp, #12
+ 717 03f2 9B68     		ldr	r3, [r3, #8]
+ 718 03f4 9B0A     		lsrs	r3, r3, #10
+ 719 03f6 5840     		eors	r0, r3
+ 720 03f8 03AB     		add	r3, sp, #12
+ 721 03fa 5B6B     		ldr	r3, [r3, #52]
+ 722 03fc C018     		adds	r0, r0, r3
+ 723 03fe 03AB     		add	r3, sp, #12
+ 724 0400 5B69     		ldr	r3, [r3, #20]
+ 725 0402 0724     		movs	r4, #7
+ 726 0404 E341     		rors	r3, r3, r4
+ 727 0406 1C00     		movs	r4, r3
+ 728 0408 03AB     		add	r3, sp, #12
+ 729 040a 5B69     		ldr	r3, [r3, #20]
+ 730 040c 1225     		movs	r5, #18
+ 731 040e EB41     		rors	r3, r3, r5
+ 732 0410 5C40     		eors	r4, r3
+ 733 0412 03AB     		add	r3, sp, #12
+ 734 0414 5B69     		ldr	r3, [r3, #20]
+ 735 0416 DB08     		lsrs	r3, r3, #3
+ 736 0418 6340     		eors	r3, r4
+ 737 041a C318     		adds	r3, r0, r3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 16
+
+
+ 738 041c C918     		adds	r1, r1, r3
+ 739 041e 03AB     		add	r3, sp, #12
+ 740 0420 1961     		str	r1, [r3, #16]
+ 741 0422 03AB     		add	r3, sp, #12
+ 742 0424 1B69     		ldr	r3, [r3, #16]
+ 743 0426 07E0     		b	.L15
+ 744              	.L40:
+ 745              		.align	2
+ 746              	.L39:
+ 747 0428 00000000 		.word	K
+ 748              	.L14:
+ 749              		.loc 1 118 0 discriminator 18
+ 750 042c 009B     		ldr	r3, [sp]
+ 751 042e 1969     		ldr	r1, [r3, #16]
+ 752 0430 03AB     		add	r3, sp, #12
+ 753 0432 1961     		str	r1, [r3, #16]
+ 754 0434 03AB     		add	r3, sp, #12
+ 755 0436 1B69     		ldr	r3, [r3, #16]
+ 756              	.L15:
+ 757              		.loc 1 118 0 discriminator 20
+ 758 0438 D318     		adds	r3, r2, r3
+ 759 043a 179A     		ldr	r2, [sp, #92]
+ 760 043c D318     		adds	r3, r2, r3
+ 761 043e 1793     		str	r3, [sp, #92]
+ 762 0440 139A     		ldr	r2, [sp, #76]
+ 763 0442 179B     		ldr	r3, [sp, #92]
+ 764 0444 D318     		adds	r3, r2, r3
+ 765 0446 1393     		str	r3, [sp, #76]
+ 766 0448 169B     		ldr	r3, [sp, #88]
+ 767 044a 0222     		movs	r2, #2
+ 768 044c D341     		rors	r3, r3, r2
+ 769 044e 1A00     		movs	r2, r3
+ 770 0450 169B     		ldr	r3, [sp, #88]
+ 771 0452 0D21     		movs	r1, #13
+ 772 0454 CB41     		rors	r3, r3, r1
+ 773 0456 5A40     		eors	r2, r3
+ 774 0458 169B     		ldr	r3, [sp, #88]
+ 775 045a 1621     		movs	r1, #22
+ 776 045c CB41     		rors	r3, r3, r1
+ 777 045e 5A40     		eors	r2, r3
+ 778 0460 169B     		ldr	r3, [sp, #88]
+ 779 0462 1599     		ldr	r1, [sp, #84]
+ 780 0464 1940     		ands	r1, r3
+ 781 0466 1698     		ldr	r0, [sp, #88]
+ 782 0468 159B     		ldr	r3, [sp, #84]
+ 783 046a 0343     		orrs	r3, r0
+ 784 046c 1498     		ldr	r0, [sp, #80]
+ 785 046e 0340     		ands	r3, r0
+ 786 0470 0B43     		orrs	r3, r1
+ 787 0472 D318     		adds	r3, r2, r3
+ 788 0474 179A     		ldr	r2, [sp, #92]
+ 789 0476 D318     		adds	r3, r2, r3
+ 790 0478 1793     		str	r3, [sp, #92]
+ 791 047a 139B     		ldr	r3, [sp, #76]
+ 792 047c 0622     		movs	r2, #6
+ 793 047e D341     		rors	r3, r3, r2
+ 794 0480 1A00     		movs	r2, r3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 17
+
+
+ 795 0482 139B     		ldr	r3, [sp, #76]
+ 796 0484 0B21     		movs	r1, #11
+ 797 0486 CB41     		rors	r3, r3, r1
+ 798 0488 5A40     		eors	r2, r3
+ 799 048a 139B     		ldr	r3, [sp, #76]
+ 800 048c 1921     		movs	r1, #25
+ 801 048e CB41     		rors	r3, r3, r1
+ 802 0490 5A40     		eors	r2, r3
+ 803 0492 1A99     		ldr	r1, [sp, #104]
+ 804 0494 199B     		ldr	r3, [sp, #100]
+ 805 0496 4B40     		eors	r3, r1
+ 806 0498 1399     		ldr	r1, [sp, #76]
+ 807 049a 1940     		ands	r1, r3
+ 808 049c 199B     		ldr	r3, [sp, #100]
+ 809 049e 4B40     		eors	r3, r1
+ 810 04a0 D218     		adds	r2, r2, r3
+ 811 04a2 1B9B     		ldr	r3, [sp, #108]
+ 812 04a4 591D     		adds	r1, r3, #5
+ 813 04a6 F04B     		ldr	r3, .L41
+ 814 04a8 8900     		lsls	r1, r1, #2
+ 815 04aa CB58     		ldr	r3, [r1, r3]
+ 816 04ac D218     		adds	r2, r2, r3
+ 817 04ae 1B9B     		ldr	r3, [sp, #108]
+ 818 04b0 002B     		cmp	r3, #0
+ 819 04b2 27D0     		beq	.L16
+ 820              		.loc 1 118 0 discriminator 21
+ 821 04b4 03AB     		add	r3, sp, #12
+ 822 04b6 5969     		ldr	r1, [r3, #20]
+ 823 04b8 03AB     		add	r3, sp, #12
+ 824 04ba DB68     		ldr	r3, [r3, #12]
+ 825 04bc 1120     		movs	r0, #17
+ 826 04be C341     		rors	r3, r3, r0
+ 827 04c0 1800     		movs	r0, r3
+ 828 04c2 03AB     		add	r3, sp, #12
+ 829 04c4 DB68     		ldr	r3, [r3, #12]
+ 830 04c6 1324     		movs	r4, #19
+ 831 04c8 E341     		rors	r3, r3, r4
+ 832 04ca 5840     		eors	r0, r3
+ 833 04cc 03AB     		add	r3, sp, #12
+ 834 04ce DB68     		ldr	r3, [r3, #12]
+ 835 04d0 9B0A     		lsrs	r3, r3, #10
+ 836 04d2 5840     		eors	r0, r3
+ 837 04d4 03AB     		add	r3, sp, #12
+ 838 04d6 9B6B     		ldr	r3, [r3, #56]
+ 839 04d8 C018     		adds	r0, r0, r3
+ 840 04da 03AB     		add	r3, sp, #12
+ 841 04dc 9B69     		ldr	r3, [r3, #24]
+ 842 04de 0724     		movs	r4, #7
+ 843 04e0 E341     		rors	r3, r3, r4
+ 844 04e2 1C00     		movs	r4, r3
+ 845 04e4 03AB     		add	r3, sp, #12
+ 846 04e6 9B69     		ldr	r3, [r3, #24]
+ 847 04e8 1225     		movs	r5, #18
+ 848 04ea EB41     		rors	r3, r3, r5
+ 849 04ec 5C40     		eors	r4, r3
+ 850 04ee 03AB     		add	r3, sp, #12
+ 851 04f0 9B69     		ldr	r3, [r3, #24]
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 18
+
+
+ 852 04f2 DB08     		lsrs	r3, r3, #3
+ 853 04f4 6340     		eors	r3, r4
+ 854 04f6 C318     		adds	r3, r0, r3
+ 855 04f8 C918     		adds	r1, r1, r3
+ 856 04fa 03AB     		add	r3, sp, #12
+ 857 04fc 5961     		str	r1, [r3, #20]
+ 858 04fe 03AB     		add	r3, sp, #12
+ 859 0500 5B69     		ldr	r3, [r3, #20]
+ 860 0502 05E0     		b	.L17
+ 861              	.L16:
+ 862              		.loc 1 118 0 discriminator 22
+ 863 0504 009B     		ldr	r3, [sp]
+ 864 0506 5969     		ldr	r1, [r3, #20]
+ 865 0508 03AB     		add	r3, sp, #12
+ 866 050a 5961     		str	r1, [r3, #20]
+ 867 050c 03AB     		add	r3, sp, #12
+ 868 050e 5B69     		ldr	r3, [r3, #20]
+ 869              	.L17:
+ 870              		.loc 1 118 0 discriminator 24
+ 871 0510 D318     		adds	r3, r2, r3
+ 872 0512 189A     		ldr	r2, [sp, #96]
+ 873 0514 D318     		adds	r3, r2, r3
+ 874 0516 1893     		str	r3, [sp, #96]
+ 875 0518 149A     		ldr	r2, [sp, #80]
+ 876 051a 189B     		ldr	r3, [sp, #96]
+ 877 051c D318     		adds	r3, r2, r3
+ 878 051e 1493     		str	r3, [sp, #80]
+ 879 0520 179B     		ldr	r3, [sp, #92]
+ 880 0522 0222     		movs	r2, #2
+ 881 0524 D341     		rors	r3, r3, r2
+ 882 0526 1A00     		movs	r2, r3
+ 883 0528 179B     		ldr	r3, [sp, #92]
+ 884 052a 0D21     		movs	r1, #13
+ 885 052c CB41     		rors	r3, r3, r1
+ 886 052e 5A40     		eors	r2, r3
+ 887 0530 179B     		ldr	r3, [sp, #92]
+ 888 0532 1621     		movs	r1, #22
+ 889 0534 CB41     		rors	r3, r3, r1
+ 890 0536 5A40     		eors	r2, r3
+ 891 0538 179B     		ldr	r3, [sp, #92]
+ 892 053a 1699     		ldr	r1, [sp, #88]
+ 893 053c 1940     		ands	r1, r3
+ 894 053e 1798     		ldr	r0, [sp, #92]
+ 895 0540 169B     		ldr	r3, [sp, #88]
+ 896 0542 0343     		orrs	r3, r0
+ 897 0544 1598     		ldr	r0, [sp, #84]
+ 898 0546 0340     		ands	r3, r0
+ 899 0548 0B43     		orrs	r3, r1
+ 900 054a D318     		adds	r3, r2, r3
+ 901 054c 189A     		ldr	r2, [sp, #96]
+ 902 054e D318     		adds	r3, r2, r3
+ 903 0550 1893     		str	r3, [sp, #96]
+ 904 0552 149B     		ldr	r3, [sp, #80]
+ 905 0554 0622     		movs	r2, #6
+ 906 0556 D341     		rors	r3, r3, r2
+ 907 0558 1A00     		movs	r2, r3
+ 908 055a 149B     		ldr	r3, [sp, #80]
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 19
+
+
+ 909 055c 0B21     		movs	r1, #11
+ 910 055e CB41     		rors	r3, r3, r1
+ 911 0560 5A40     		eors	r2, r3
+ 912 0562 149B     		ldr	r3, [sp, #80]
+ 913 0564 1921     		movs	r1, #25
+ 914 0566 CB41     		rors	r3, r3, r1
+ 915 0568 5A40     		eors	r2, r3
+ 916 056a 1399     		ldr	r1, [sp, #76]
+ 917 056c 1A9B     		ldr	r3, [sp, #104]
+ 918 056e 4B40     		eors	r3, r1
+ 919 0570 1499     		ldr	r1, [sp, #80]
+ 920 0572 1940     		ands	r1, r3
+ 921 0574 1A9B     		ldr	r3, [sp, #104]
+ 922 0576 4B40     		eors	r3, r1
+ 923 0578 D218     		adds	r2, r2, r3
+ 924 057a 1B9B     		ldr	r3, [sp, #108]
+ 925 057c 991D     		adds	r1, r3, #6
+ 926 057e BA4B     		ldr	r3, .L41
+ 927 0580 8900     		lsls	r1, r1, #2
+ 928 0582 CB58     		ldr	r3, [r1, r3]
+ 929 0584 D218     		adds	r2, r2, r3
+ 930 0586 1B9B     		ldr	r3, [sp, #108]
+ 931 0588 002B     		cmp	r3, #0
+ 932 058a 27D0     		beq	.L18
+ 933              		.loc 1 118 0 discriminator 25
+ 934 058c 03AB     		add	r3, sp, #12
+ 935 058e 9969     		ldr	r1, [r3, #24]
+ 936 0590 03AB     		add	r3, sp, #12
+ 937 0592 1B69     		ldr	r3, [r3, #16]
+ 938 0594 1120     		movs	r0, #17
+ 939 0596 C341     		rors	r3, r3, r0
+ 940 0598 1800     		movs	r0, r3
+ 941 059a 03AB     		add	r3, sp, #12
+ 942 059c 1B69     		ldr	r3, [r3, #16]
+ 943 059e 1324     		movs	r4, #19
+ 944 05a0 E341     		rors	r3, r3, r4
+ 945 05a2 5840     		eors	r0, r3
+ 946 05a4 03AB     		add	r3, sp, #12
+ 947 05a6 1B69     		ldr	r3, [r3, #16]
+ 948 05a8 9B0A     		lsrs	r3, r3, #10
+ 949 05aa 5840     		eors	r0, r3
+ 950 05ac 03AB     		add	r3, sp, #12
+ 951 05ae DB6B     		ldr	r3, [r3, #60]
+ 952 05b0 C018     		adds	r0, r0, r3
+ 953 05b2 03AB     		add	r3, sp, #12
+ 954 05b4 DB69     		ldr	r3, [r3, #28]
+ 955 05b6 0724     		movs	r4, #7
+ 956 05b8 E341     		rors	r3, r3, r4
+ 957 05ba 1C00     		movs	r4, r3
+ 958 05bc 03AB     		add	r3, sp, #12
+ 959 05be DB69     		ldr	r3, [r3, #28]
+ 960 05c0 1225     		movs	r5, #18
+ 961 05c2 EB41     		rors	r3, r3, r5
+ 962 05c4 5C40     		eors	r4, r3
+ 963 05c6 03AB     		add	r3, sp, #12
+ 964 05c8 DB69     		ldr	r3, [r3, #28]
+ 965 05ca DB08     		lsrs	r3, r3, #3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 20
+
+
+ 966 05cc 6340     		eors	r3, r4
+ 967 05ce C318     		adds	r3, r0, r3
+ 968 05d0 C918     		adds	r1, r1, r3
+ 969 05d2 03AB     		add	r3, sp, #12
+ 970 05d4 9961     		str	r1, [r3, #24]
+ 971 05d6 03AB     		add	r3, sp, #12
+ 972 05d8 9B69     		ldr	r3, [r3, #24]
+ 973 05da 05E0     		b	.L19
+ 974              	.L18:
+ 975              		.loc 1 118 0 discriminator 26
+ 976 05dc 009B     		ldr	r3, [sp]
+ 977 05de 9969     		ldr	r1, [r3, #24]
+ 978 05e0 03AB     		add	r3, sp, #12
+ 979 05e2 9961     		str	r1, [r3, #24]
+ 980 05e4 03AB     		add	r3, sp, #12
+ 981 05e6 9B69     		ldr	r3, [r3, #24]
+ 982              	.L19:
+ 983              		.loc 1 118 0 discriminator 28
+ 984 05e8 D318     		adds	r3, r2, r3
+ 985 05ea 199A     		ldr	r2, [sp, #100]
+ 986 05ec D318     		adds	r3, r2, r3
+ 987 05ee 1993     		str	r3, [sp, #100]
+ 988 05f0 159A     		ldr	r2, [sp, #84]
+ 989 05f2 199B     		ldr	r3, [sp, #100]
+ 990 05f4 D318     		adds	r3, r2, r3
+ 991 05f6 1593     		str	r3, [sp, #84]
+ 992 05f8 189B     		ldr	r3, [sp, #96]
+ 993 05fa 0222     		movs	r2, #2
+ 994 05fc D341     		rors	r3, r3, r2
+ 995 05fe 1A00     		movs	r2, r3
+ 996 0600 189B     		ldr	r3, [sp, #96]
+ 997 0602 0D21     		movs	r1, #13
+ 998 0604 CB41     		rors	r3, r3, r1
+ 999 0606 5A40     		eors	r2, r3
+ 1000 0608 189B     		ldr	r3, [sp, #96]
+ 1001 060a 1621     		movs	r1, #22
+ 1002 060c CB41     		rors	r3, r3, r1
+ 1003 060e 5A40     		eors	r2, r3
+ 1004 0610 189B     		ldr	r3, [sp, #96]
+ 1005 0612 1799     		ldr	r1, [sp, #92]
+ 1006 0614 1940     		ands	r1, r3
+ 1007 0616 1898     		ldr	r0, [sp, #96]
+ 1008 0618 179B     		ldr	r3, [sp, #92]
+ 1009 061a 0343     		orrs	r3, r0
+ 1010 061c 1698     		ldr	r0, [sp, #88]
+ 1011 061e 0340     		ands	r3, r0
+ 1012 0620 0B43     		orrs	r3, r1
+ 1013 0622 D318     		adds	r3, r2, r3
+ 1014 0624 199A     		ldr	r2, [sp, #100]
+ 1015 0626 D318     		adds	r3, r2, r3
+ 1016 0628 1993     		str	r3, [sp, #100]
+ 1017 062a 159B     		ldr	r3, [sp, #84]
+ 1018 062c 0622     		movs	r2, #6
+ 1019 062e D341     		rors	r3, r3, r2
+ 1020 0630 1A00     		movs	r2, r3
+ 1021 0632 159B     		ldr	r3, [sp, #84]
+ 1022 0634 0B21     		movs	r1, #11
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 21
+
+
+ 1023 0636 CB41     		rors	r3, r3, r1
+ 1024 0638 5A40     		eors	r2, r3
+ 1025 063a 159B     		ldr	r3, [sp, #84]
+ 1026 063c 1921     		movs	r1, #25
+ 1027 063e CB41     		rors	r3, r3, r1
+ 1028 0640 5A40     		eors	r2, r3
+ 1029 0642 1499     		ldr	r1, [sp, #80]
+ 1030 0644 139B     		ldr	r3, [sp, #76]
+ 1031 0646 4B40     		eors	r3, r1
+ 1032 0648 1599     		ldr	r1, [sp, #84]
+ 1033 064a 1940     		ands	r1, r3
+ 1034 064c 139B     		ldr	r3, [sp, #76]
+ 1035 064e 4B40     		eors	r3, r1
+ 1036 0650 D218     		adds	r2, r2, r3
+ 1037 0652 1B9B     		ldr	r3, [sp, #108]
+ 1038 0654 D91D     		adds	r1, r3, #7
+ 1039 0656 844B     		ldr	r3, .L41
+ 1040 0658 8900     		lsls	r1, r1, #2
+ 1041 065a CB58     		ldr	r3, [r1, r3]
+ 1042 065c D218     		adds	r2, r2, r3
+ 1043 065e 1B9B     		ldr	r3, [sp, #108]
+ 1044 0660 002B     		cmp	r3, #0
+ 1045 0662 27D0     		beq	.L20
+ 1046              		.loc 1 118 0 discriminator 29
+ 1047 0664 03AB     		add	r3, sp, #12
+ 1048 0666 D969     		ldr	r1, [r3, #28]
+ 1049 0668 03AB     		add	r3, sp, #12
+ 1050 066a 5B69     		ldr	r3, [r3, #20]
+ 1051 066c 1120     		movs	r0, #17
+ 1052 066e C341     		rors	r3, r3, r0
+ 1053 0670 1800     		movs	r0, r3
+ 1054 0672 03AB     		add	r3, sp, #12
+ 1055 0674 5B69     		ldr	r3, [r3, #20]
+ 1056 0676 1324     		movs	r4, #19
+ 1057 0678 E341     		rors	r3, r3, r4
+ 1058 067a 5840     		eors	r0, r3
+ 1059 067c 03AB     		add	r3, sp, #12
+ 1060 067e 5B69     		ldr	r3, [r3, #20]
+ 1061 0680 9B0A     		lsrs	r3, r3, #10
+ 1062 0682 5840     		eors	r0, r3
+ 1063 0684 03AB     		add	r3, sp, #12
+ 1064 0686 1B68     		ldr	r3, [r3]
+ 1065 0688 C018     		adds	r0, r0, r3
+ 1066 068a 03AB     		add	r3, sp, #12
+ 1067 068c 1B6A     		ldr	r3, [r3, #32]
+ 1068 068e 0724     		movs	r4, #7
+ 1069 0690 E341     		rors	r3, r3, r4
+ 1070 0692 1C00     		movs	r4, r3
+ 1071 0694 03AB     		add	r3, sp, #12
+ 1072 0696 1B6A     		ldr	r3, [r3, #32]
+ 1073 0698 1225     		movs	r5, #18
+ 1074 069a EB41     		rors	r3, r3, r5
+ 1075 069c 5C40     		eors	r4, r3
+ 1076 069e 03AB     		add	r3, sp, #12
+ 1077 06a0 1B6A     		ldr	r3, [r3, #32]
+ 1078 06a2 DB08     		lsrs	r3, r3, #3
+ 1079 06a4 6340     		eors	r3, r4
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 22
+
+
+ 1080 06a6 C318     		adds	r3, r0, r3
+ 1081 06a8 C918     		adds	r1, r1, r3
+ 1082 06aa 03AB     		add	r3, sp, #12
+ 1083 06ac D961     		str	r1, [r3, #28]
+ 1084 06ae 03AB     		add	r3, sp, #12
+ 1085 06b0 DB69     		ldr	r3, [r3, #28]
+ 1086 06b2 05E0     		b	.L21
+ 1087              	.L20:
+ 1088              		.loc 1 118 0 discriminator 30
+ 1089 06b4 009B     		ldr	r3, [sp]
+ 1090 06b6 D969     		ldr	r1, [r3, #28]
+ 1091 06b8 03AB     		add	r3, sp, #12
+ 1092 06ba D961     		str	r1, [r3, #28]
+ 1093 06bc 03AB     		add	r3, sp, #12
+ 1094 06be DB69     		ldr	r3, [r3, #28]
+ 1095              	.L21:
+ 1096              		.loc 1 118 0 discriminator 32
+ 1097 06c0 D318     		adds	r3, r2, r3
+ 1098 06c2 1A9A     		ldr	r2, [sp, #104]
+ 1099 06c4 D318     		adds	r3, r2, r3
+ 1100 06c6 1A93     		str	r3, [sp, #104]
+ 1101 06c8 169A     		ldr	r2, [sp, #88]
+ 1102 06ca 1A9B     		ldr	r3, [sp, #104]
+ 1103 06cc D318     		adds	r3, r2, r3
+ 1104 06ce 1693     		str	r3, [sp, #88]
+ 1105 06d0 199B     		ldr	r3, [sp, #100]
+ 1106 06d2 0222     		movs	r2, #2
+ 1107 06d4 D341     		rors	r3, r3, r2
+ 1108 06d6 1A00     		movs	r2, r3
+ 1109 06d8 199B     		ldr	r3, [sp, #100]
+ 1110 06da 0D21     		movs	r1, #13
+ 1111 06dc CB41     		rors	r3, r3, r1
+ 1112 06de 5A40     		eors	r2, r3
+ 1113 06e0 199B     		ldr	r3, [sp, #100]
+ 1114 06e2 1621     		movs	r1, #22
+ 1115 06e4 CB41     		rors	r3, r3, r1
+ 1116 06e6 5A40     		eors	r2, r3
+ 1117 06e8 199B     		ldr	r3, [sp, #100]
+ 1118 06ea 1899     		ldr	r1, [sp, #96]
+ 1119 06ec 1940     		ands	r1, r3
+ 1120 06ee 1998     		ldr	r0, [sp, #100]
+ 1121 06f0 189B     		ldr	r3, [sp, #96]
+ 1122 06f2 0343     		orrs	r3, r0
+ 1123 06f4 1798     		ldr	r0, [sp, #92]
+ 1124 06f6 0340     		ands	r3, r0
+ 1125 06f8 0B43     		orrs	r3, r1
+ 1126 06fa D318     		adds	r3, r2, r3
+ 1127 06fc 1A9A     		ldr	r2, [sp, #104]
+ 1128 06fe D318     		adds	r3, r2, r3
+ 1129 0700 1A93     		str	r3, [sp, #104]
+ 1130 0702 169B     		ldr	r3, [sp, #88]
+ 1131 0704 0622     		movs	r2, #6
+ 1132 0706 D341     		rors	r3, r3, r2
+ 1133 0708 1A00     		movs	r2, r3
+ 1134 070a 169B     		ldr	r3, [sp, #88]
+ 1135 070c 0B21     		movs	r1, #11
+ 1136 070e CB41     		rors	r3, r3, r1
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 23
+
+
+ 1137 0710 5A40     		eors	r2, r3
+ 1138 0712 169B     		ldr	r3, [sp, #88]
+ 1139 0714 1921     		movs	r1, #25
+ 1140 0716 CB41     		rors	r3, r3, r1
+ 1141 0718 5A40     		eors	r2, r3
+ 1142 071a 1599     		ldr	r1, [sp, #84]
+ 1143 071c 149B     		ldr	r3, [sp, #80]
+ 1144 071e 4B40     		eors	r3, r1
+ 1145 0720 1699     		ldr	r1, [sp, #88]
+ 1146 0722 1940     		ands	r1, r3
+ 1147 0724 149B     		ldr	r3, [sp, #80]
+ 1148 0726 4B40     		eors	r3, r1
+ 1149 0728 D218     		adds	r2, r2, r3
+ 1150 072a 1B9B     		ldr	r3, [sp, #108]
+ 1151 072c 0833     		adds	r3, r3, #8
+ 1152 072e 1900     		movs	r1, r3
+ 1153 0730 4D4B     		ldr	r3, .L41
+ 1154 0732 8900     		lsls	r1, r1, #2
+ 1155 0734 CB58     		ldr	r3, [r1, r3]
+ 1156 0736 D218     		adds	r2, r2, r3
+ 1157 0738 1B9B     		ldr	r3, [sp, #108]
+ 1158 073a 002B     		cmp	r3, #0
+ 1159 073c 27D0     		beq	.L22
+ 1160              		.loc 1 118 0 discriminator 33
+ 1161 073e 03AB     		add	r3, sp, #12
+ 1162 0740 196A     		ldr	r1, [r3, #32]
+ 1163 0742 03AB     		add	r3, sp, #12
+ 1164 0744 9B69     		ldr	r3, [r3, #24]
+ 1165 0746 1120     		movs	r0, #17
+ 1166 0748 C341     		rors	r3, r3, r0
+ 1167 074a 1800     		movs	r0, r3
+ 1168 074c 03AB     		add	r3, sp, #12
+ 1169 074e 9B69     		ldr	r3, [r3, #24]
+ 1170 0750 1324     		movs	r4, #19
+ 1171 0752 E341     		rors	r3, r3, r4
+ 1172 0754 5840     		eors	r0, r3
+ 1173 0756 03AB     		add	r3, sp, #12
+ 1174 0758 9B69     		ldr	r3, [r3, #24]
+ 1175 075a 9B0A     		lsrs	r3, r3, #10
+ 1176 075c 5840     		eors	r0, r3
+ 1177 075e 03AB     		add	r3, sp, #12
+ 1178 0760 5B68     		ldr	r3, [r3, #4]
+ 1179 0762 C018     		adds	r0, r0, r3
+ 1180 0764 03AB     		add	r3, sp, #12
+ 1181 0766 5B6A     		ldr	r3, [r3, #36]
+ 1182 0768 0724     		movs	r4, #7
+ 1183 076a E341     		rors	r3, r3, r4
+ 1184 076c 1C00     		movs	r4, r3
+ 1185 076e 03AB     		add	r3, sp, #12
+ 1186 0770 5B6A     		ldr	r3, [r3, #36]
+ 1187 0772 1225     		movs	r5, #18
+ 1188 0774 EB41     		rors	r3, r3, r5
+ 1189 0776 5C40     		eors	r4, r3
+ 1190 0778 03AB     		add	r3, sp, #12
+ 1191 077a 5B6A     		ldr	r3, [r3, #36]
+ 1192 077c DB08     		lsrs	r3, r3, #3
+ 1193 077e 6340     		eors	r3, r4
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 24
+
+
+ 1194 0780 C318     		adds	r3, r0, r3
+ 1195 0782 C918     		adds	r1, r1, r3
+ 1196 0784 03AB     		add	r3, sp, #12
+ 1197 0786 1962     		str	r1, [r3, #32]
+ 1198 0788 03AB     		add	r3, sp, #12
+ 1199 078a 1B6A     		ldr	r3, [r3, #32]
+ 1200 078c 05E0     		b	.L23
+ 1201              	.L22:
+ 1202              		.loc 1 118 0 discriminator 34
+ 1203 078e 009B     		ldr	r3, [sp]
+ 1204 0790 196A     		ldr	r1, [r3, #32]
+ 1205 0792 03AB     		add	r3, sp, #12
+ 1206 0794 1962     		str	r1, [r3, #32]
+ 1207 0796 03AB     		add	r3, sp, #12
+ 1208 0798 1B6A     		ldr	r3, [r3, #32]
+ 1209              	.L23:
+ 1210              		.loc 1 118 0 discriminator 36
+ 1211 079a D318     		adds	r3, r2, r3
+ 1212 079c 139A     		ldr	r2, [sp, #76]
+ 1213 079e D318     		adds	r3, r2, r3
+ 1214 07a0 1393     		str	r3, [sp, #76]
+ 1215 07a2 179A     		ldr	r2, [sp, #92]
+ 1216 07a4 139B     		ldr	r3, [sp, #76]
+ 1217 07a6 D318     		adds	r3, r2, r3
+ 1218 07a8 1793     		str	r3, [sp, #92]
+ 1219 07aa 1A9B     		ldr	r3, [sp, #104]
+ 1220 07ac 0222     		movs	r2, #2
+ 1221 07ae D341     		rors	r3, r3, r2
+ 1222 07b0 1A00     		movs	r2, r3
+ 1223 07b2 1A9B     		ldr	r3, [sp, #104]
+ 1224 07b4 0D21     		movs	r1, #13
+ 1225 07b6 CB41     		rors	r3, r3, r1
+ 1226 07b8 5A40     		eors	r2, r3
+ 1227 07ba 1A9B     		ldr	r3, [sp, #104]
+ 1228 07bc 1621     		movs	r1, #22
+ 1229 07be CB41     		rors	r3, r3, r1
+ 1230 07c0 5A40     		eors	r2, r3
+ 1231 07c2 1A9B     		ldr	r3, [sp, #104]
+ 1232 07c4 1999     		ldr	r1, [sp, #100]
+ 1233 07c6 1940     		ands	r1, r3
+ 1234 07c8 1A98     		ldr	r0, [sp, #104]
+ 1235 07ca 199B     		ldr	r3, [sp, #100]
+ 1236 07cc 0343     		orrs	r3, r0
+ 1237 07ce 1898     		ldr	r0, [sp, #96]
+ 1238 07d0 0340     		ands	r3, r0
+ 1239 07d2 0B43     		orrs	r3, r1
+ 1240 07d4 D318     		adds	r3, r2, r3
+ 1241 07d6 139A     		ldr	r2, [sp, #76]
+ 1242 07d8 D318     		adds	r3, r2, r3
+ 1243 07da 1393     		str	r3, [sp, #76]
+ 1244 07dc 179B     		ldr	r3, [sp, #92]
+ 1245 07de 0622     		movs	r2, #6
+ 1246 07e0 D341     		rors	r3, r3, r2
+ 1247 07e2 1A00     		movs	r2, r3
+ 1248 07e4 179B     		ldr	r3, [sp, #92]
+ 1249 07e6 0B21     		movs	r1, #11
+ 1250 07e8 CB41     		rors	r3, r3, r1
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 25
+
+
+ 1251 07ea 5A40     		eors	r2, r3
+ 1252 07ec 179B     		ldr	r3, [sp, #92]
+ 1253 07ee 1921     		movs	r1, #25
+ 1254 07f0 CB41     		rors	r3, r3, r1
+ 1255 07f2 5A40     		eors	r2, r3
+ 1256 07f4 1699     		ldr	r1, [sp, #88]
+ 1257 07f6 159B     		ldr	r3, [sp, #84]
+ 1258 07f8 4B40     		eors	r3, r1
+ 1259 07fa 1799     		ldr	r1, [sp, #92]
+ 1260 07fc 1940     		ands	r1, r3
+ 1261 07fe 159B     		ldr	r3, [sp, #84]
+ 1262 0800 4B40     		eors	r3, r1
+ 1263 0802 D218     		adds	r2, r2, r3
+ 1264 0804 1B9B     		ldr	r3, [sp, #108]
+ 1265 0806 0933     		adds	r3, r3, #9
+ 1266 0808 1900     		movs	r1, r3
+ 1267 080a 174B     		ldr	r3, .L41
+ 1268 080c 8900     		lsls	r1, r1, #2
+ 1269 080e CB58     		ldr	r3, [r1, r3]
+ 1270 0810 D218     		adds	r2, r2, r3
+ 1271 0812 1B9B     		ldr	r3, [sp, #108]
+ 1272 0814 002B     		cmp	r3, #0
+ 1273 0816 29D0     		beq	.L24
+ 1274              		.loc 1 118 0 discriminator 37
+ 1275 0818 03AB     		add	r3, sp, #12
+ 1276 081a 596A     		ldr	r1, [r3, #36]
+ 1277 081c 03AB     		add	r3, sp, #12
+ 1278 081e DB69     		ldr	r3, [r3, #28]
+ 1279 0820 1120     		movs	r0, #17
+ 1280 0822 C341     		rors	r3, r3, r0
+ 1281 0824 1800     		movs	r0, r3
+ 1282 0826 03AB     		add	r3, sp, #12
+ 1283 0828 DB69     		ldr	r3, [r3, #28]
+ 1284 082a 1324     		movs	r4, #19
+ 1285 082c E341     		rors	r3, r3, r4
+ 1286 082e 5840     		eors	r0, r3
+ 1287 0830 03AB     		add	r3, sp, #12
+ 1288 0832 DB69     		ldr	r3, [r3, #28]
+ 1289 0834 9B0A     		lsrs	r3, r3, #10
+ 1290 0836 5840     		eors	r0, r3
+ 1291 0838 03AB     		add	r3, sp, #12
+ 1292 083a 9B68     		ldr	r3, [r3, #8]
+ 1293 083c C018     		adds	r0, r0, r3
+ 1294 083e 03AB     		add	r3, sp, #12
+ 1295 0840 9B6A     		ldr	r3, [r3, #40]
+ 1296 0842 0724     		movs	r4, #7
+ 1297 0844 E341     		rors	r3, r3, r4
+ 1298 0846 1C00     		movs	r4, r3
+ 1299 0848 03AB     		add	r3, sp, #12
+ 1300 084a 9B6A     		ldr	r3, [r3, #40]
+ 1301 084c 1225     		movs	r5, #18
+ 1302 084e EB41     		rors	r3, r3, r5
+ 1303 0850 5C40     		eors	r4, r3
+ 1304 0852 03AB     		add	r3, sp, #12
+ 1305 0854 9B6A     		ldr	r3, [r3, #40]
+ 1306 0856 DB08     		lsrs	r3, r3, #3
+ 1307 0858 6340     		eors	r3, r4
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 26
+
+
+ 1308 085a C318     		adds	r3, r0, r3
+ 1309 085c C918     		adds	r1, r1, r3
+ 1310 085e 03AB     		add	r3, sp, #12
+ 1311 0860 5962     		str	r1, [r3, #36]
+ 1312 0862 03AB     		add	r3, sp, #12
+ 1313 0864 5B6A     		ldr	r3, [r3, #36]
+ 1314 0866 07E0     		b	.L25
+ 1315              	.L42:
+ 1316              		.align	2
+ 1317              	.L41:
+ 1318 0868 00000000 		.word	K
+ 1319              	.L24:
+ 1320              		.loc 1 118 0 discriminator 38
+ 1321 086c 009B     		ldr	r3, [sp]
+ 1322 086e 596A     		ldr	r1, [r3, #36]
+ 1323 0870 03AB     		add	r3, sp, #12
+ 1324 0872 5962     		str	r1, [r3, #36]
+ 1325 0874 03AB     		add	r3, sp, #12
+ 1326 0876 5B6A     		ldr	r3, [r3, #36]
+ 1327              	.L25:
+ 1328              		.loc 1 118 0 discriminator 40
+ 1329 0878 D318     		adds	r3, r2, r3
+ 1330 087a 149A     		ldr	r2, [sp, #80]
+ 1331 087c D318     		adds	r3, r2, r3
+ 1332 087e 1493     		str	r3, [sp, #80]
+ 1333 0880 189A     		ldr	r2, [sp, #96]
+ 1334 0882 149B     		ldr	r3, [sp, #80]
+ 1335 0884 D318     		adds	r3, r2, r3
+ 1336 0886 1893     		str	r3, [sp, #96]
+ 1337 0888 139B     		ldr	r3, [sp, #76]
+ 1338 088a 0222     		movs	r2, #2
+ 1339 088c D341     		rors	r3, r3, r2
+ 1340 088e 1A00     		movs	r2, r3
+ 1341 0890 139B     		ldr	r3, [sp, #76]
+ 1342 0892 0D21     		movs	r1, #13
+ 1343 0894 CB41     		rors	r3, r3, r1
+ 1344 0896 5A40     		eors	r2, r3
+ 1345 0898 139B     		ldr	r3, [sp, #76]
+ 1346 089a 1621     		movs	r1, #22
+ 1347 089c CB41     		rors	r3, r3, r1
+ 1348 089e 5A40     		eors	r2, r3
+ 1349 08a0 139B     		ldr	r3, [sp, #76]
+ 1350 08a2 1A99     		ldr	r1, [sp, #104]
+ 1351 08a4 1940     		ands	r1, r3
+ 1352 08a6 1398     		ldr	r0, [sp, #76]
+ 1353 08a8 1A9B     		ldr	r3, [sp, #104]
+ 1354 08aa 0343     		orrs	r3, r0
+ 1355 08ac 1998     		ldr	r0, [sp, #100]
+ 1356 08ae 0340     		ands	r3, r0
+ 1357 08b0 0B43     		orrs	r3, r1
+ 1358 08b2 D318     		adds	r3, r2, r3
+ 1359 08b4 149A     		ldr	r2, [sp, #80]
+ 1360 08b6 D318     		adds	r3, r2, r3
+ 1361 08b8 1493     		str	r3, [sp, #80]
+ 1362 08ba 189B     		ldr	r3, [sp, #96]
+ 1363 08bc 0622     		movs	r2, #6
+ 1364 08be D341     		rors	r3, r3, r2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 27
+
+
+ 1365 08c0 1A00     		movs	r2, r3
+ 1366 08c2 189B     		ldr	r3, [sp, #96]
+ 1367 08c4 0B21     		movs	r1, #11
+ 1368 08c6 CB41     		rors	r3, r3, r1
+ 1369 08c8 5A40     		eors	r2, r3
+ 1370 08ca 189B     		ldr	r3, [sp, #96]
+ 1371 08cc 1921     		movs	r1, #25
+ 1372 08ce CB41     		rors	r3, r3, r1
+ 1373 08d0 5A40     		eors	r2, r3
+ 1374 08d2 1799     		ldr	r1, [sp, #92]
+ 1375 08d4 169B     		ldr	r3, [sp, #88]
+ 1376 08d6 4B40     		eors	r3, r1
+ 1377 08d8 1899     		ldr	r1, [sp, #96]
+ 1378 08da 1940     		ands	r1, r3
+ 1379 08dc 169B     		ldr	r3, [sp, #88]
+ 1380 08de 4B40     		eors	r3, r1
+ 1381 08e0 D218     		adds	r2, r2, r3
+ 1382 08e2 1B9B     		ldr	r3, [sp, #108]
+ 1383 08e4 0A33     		adds	r3, r3, #10
+ 1384 08e6 1900     		movs	r1, r3
+ 1385 08e8 F14B     		ldr	r3, .L43
+ 1386 08ea 8900     		lsls	r1, r1, #2
+ 1387 08ec CB58     		ldr	r3, [r1, r3]
+ 1388 08ee D218     		adds	r2, r2, r3
+ 1389 08f0 1B9B     		ldr	r3, [sp, #108]
+ 1390 08f2 002B     		cmp	r3, #0
+ 1391 08f4 27D0     		beq	.L26
+ 1392              		.loc 1 118 0 discriminator 41
+ 1393 08f6 03AB     		add	r3, sp, #12
+ 1394 08f8 996A     		ldr	r1, [r3, #40]
+ 1395 08fa 03AB     		add	r3, sp, #12
+ 1396 08fc 1B6A     		ldr	r3, [r3, #32]
+ 1397 08fe 1120     		movs	r0, #17
+ 1398 0900 C341     		rors	r3, r3, r0
+ 1399 0902 1800     		movs	r0, r3
+ 1400 0904 03AB     		add	r3, sp, #12
+ 1401 0906 1B6A     		ldr	r3, [r3, #32]
+ 1402 0908 1324     		movs	r4, #19
+ 1403 090a E341     		rors	r3, r3, r4
+ 1404 090c 5840     		eors	r0, r3
+ 1405 090e 03AB     		add	r3, sp, #12
+ 1406 0910 1B6A     		ldr	r3, [r3, #32]
+ 1407 0912 9B0A     		lsrs	r3, r3, #10
+ 1408 0914 5840     		eors	r0, r3
+ 1409 0916 03AB     		add	r3, sp, #12
+ 1410 0918 DB68     		ldr	r3, [r3, #12]
+ 1411 091a C018     		adds	r0, r0, r3
+ 1412 091c 03AB     		add	r3, sp, #12
+ 1413 091e DB6A     		ldr	r3, [r3, #44]
+ 1414 0920 0724     		movs	r4, #7
+ 1415 0922 E341     		rors	r3, r3, r4
+ 1416 0924 1C00     		movs	r4, r3
+ 1417 0926 03AB     		add	r3, sp, #12
+ 1418 0928 DB6A     		ldr	r3, [r3, #44]
+ 1419 092a 1225     		movs	r5, #18
+ 1420 092c EB41     		rors	r3, r3, r5
+ 1421 092e 5C40     		eors	r4, r3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 28
+
+
+ 1422 0930 03AB     		add	r3, sp, #12
+ 1423 0932 DB6A     		ldr	r3, [r3, #44]
+ 1424 0934 DB08     		lsrs	r3, r3, #3
+ 1425 0936 6340     		eors	r3, r4
+ 1426 0938 C318     		adds	r3, r0, r3
+ 1427 093a C918     		adds	r1, r1, r3
+ 1428 093c 03AB     		add	r3, sp, #12
+ 1429 093e 9962     		str	r1, [r3, #40]
+ 1430 0940 03AB     		add	r3, sp, #12
+ 1431 0942 9B6A     		ldr	r3, [r3, #40]
+ 1432 0944 05E0     		b	.L27
+ 1433              	.L26:
+ 1434              		.loc 1 118 0 discriminator 42
+ 1435 0946 009B     		ldr	r3, [sp]
+ 1436 0948 996A     		ldr	r1, [r3, #40]
+ 1437 094a 03AB     		add	r3, sp, #12
+ 1438 094c 9962     		str	r1, [r3, #40]
+ 1439 094e 03AB     		add	r3, sp, #12
+ 1440 0950 9B6A     		ldr	r3, [r3, #40]
+ 1441              	.L27:
+ 1442              		.loc 1 118 0 discriminator 44
+ 1443 0952 D318     		adds	r3, r2, r3
+ 1444 0954 159A     		ldr	r2, [sp, #84]
+ 1445 0956 D318     		adds	r3, r2, r3
+ 1446 0958 1593     		str	r3, [sp, #84]
+ 1447 095a 199A     		ldr	r2, [sp, #100]
+ 1448 095c 159B     		ldr	r3, [sp, #84]
+ 1449 095e D318     		adds	r3, r2, r3
+ 1450 0960 1993     		str	r3, [sp, #100]
+ 1451 0962 149B     		ldr	r3, [sp, #80]
+ 1452 0964 0222     		movs	r2, #2
+ 1453 0966 D341     		rors	r3, r3, r2
+ 1454 0968 1A00     		movs	r2, r3
+ 1455 096a 149B     		ldr	r3, [sp, #80]
+ 1456 096c 0D21     		movs	r1, #13
+ 1457 096e CB41     		rors	r3, r3, r1
+ 1458 0970 5A40     		eors	r2, r3
+ 1459 0972 149B     		ldr	r3, [sp, #80]
+ 1460 0974 1621     		movs	r1, #22
+ 1461 0976 CB41     		rors	r3, r3, r1
+ 1462 0978 5A40     		eors	r2, r3
+ 1463 097a 149B     		ldr	r3, [sp, #80]
+ 1464 097c 1399     		ldr	r1, [sp, #76]
+ 1465 097e 1940     		ands	r1, r3
+ 1466 0980 1498     		ldr	r0, [sp, #80]
+ 1467 0982 139B     		ldr	r3, [sp, #76]
+ 1468 0984 0343     		orrs	r3, r0
+ 1469 0986 1A98     		ldr	r0, [sp, #104]
+ 1470 0988 0340     		ands	r3, r0
+ 1471 098a 0B43     		orrs	r3, r1
+ 1472 098c D318     		adds	r3, r2, r3
+ 1473 098e 159A     		ldr	r2, [sp, #84]
+ 1474 0990 D318     		adds	r3, r2, r3
+ 1475 0992 1593     		str	r3, [sp, #84]
+ 1476 0994 199B     		ldr	r3, [sp, #100]
+ 1477 0996 0622     		movs	r2, #6
+ 1478 0998 D341     		rors	r3, r3, r2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 29
+
+
+ 1479 099a 1A00     		movs	r2, r3
+ 1480 099c 199B     		ldr	r3, [sp, #100]
+ 1481 099e 0B21     		movs	r1, #11
+ 1482 09a0 CB41     		rors	r3, r3, r1
+ 1483 09a2 5A40     		eors	r2, r3
+ 1484 09a4 199B     		ldr	r3, [sp, #100]
+ 1485 09a6 1921     		movs	r1, #25
+ 1486 09a8 CB41     		rors	r3, r3, r1
+ 1487 09aa 5A40     		eors	r2, r3
+ 1488 09ac 1899     		ldr	r1, [sp, #96]
+ 1489 09ae 179B     		ldr	r3, [sp, #92]
+ 1490 09b0 4B40     		eors	r3, r1
+ 1491 09b2 1999     		ldr	r1, [sp, #100]
+ 1492 09b4 1940     		ands	r1, r3
+ 1493 09b6 179B     		ldr	r3, [sp, #92]
+ 1494 09b8 4B40     		eors	r3, r1
+ 1495 09ba D218     		adds	r2, r2, r3
+ 1496 09bc 1B9B     		ldr	r3, [sp, #108]
+ 1497 09be 0B33     		adds	r3, r3, #11
+ 1498 09c0 1900     		movs	r1, r3
+ 1499 09c2 BB4B     		ldr	r3, .L43
+ 1500 09c4 8900     		lsls	r1, r1, #2
+ 1501 09c6 CB58     		ldr	r3, [r1, r3]
+ 1502 09c8 D218     		adds	r2, r2, r3
+ 1503 09ca 1B9B     		ldr	r3, [sp, #108]
+ 1504 09cc 002B     		cmp	r3, #0
+ 1505 09ce 27D0     		beq	.L28
+ 1506              		.loc 1 118 0 discriminator 45
+ 1507 09d0 03AB     		add	r3, sp, #12
+ 1508 09d2 D96A     		ldr	r1, [r3, #44]
+ 1509 09d4 03AB     		add	r3, sp, #12
+ 1510 09d6 5B6A     		ldr	r3, [r3, #36]
+ 1511 09d8 1120     		movs	r0, #17
+ 1512 09da C341     		rors	r3, r3, r0
+ 1513 09dc 1800     		movs	r0, r3
+ 1514 09de 03AB     		add	r3, sp, #12
+ 1515 09e0 5B6A     		ldr	r3, [r3, #36]
+ 1516 09e2 1324     		movs	r4, #19
+ 1517 09e4 E341     		rors	r3, r3, r4
+ 1518 09e6 5840     		eors	r0, r3
+ 1519 09e8 03AB     		add	r3, sp, #12
+ 1520 09ea 5B6A     		ldr	r3, [r3, #36]
+ 1521 09ec 9B0A     		lsrs	r3, r3, #10
+ 1522 09ee 5840     		eors	r0, r3
+ 1523 09f0 03AB     		add	r3, sp, #12
+ 1524 09f2 1B69     		ldr	r3, [r3, #16]
+ 1525 09f4 C018     		adds	r0, r0, r3
+ 1526 09f6 03AB     		add	r3, sp, #12
+ 1527 09f8 1B6B     		ldr	r3, [r3, #48]
+ 1528 09fa 0724     		movs	r4, #7
+ 1529 09fc E341     		rors	r3, r3, r4
+ 1530 09fe 1C00     		movs	r4, r3
+ 1531 0a00 03AB     		add	r3, sp, #12
+ 1532 0a02 1B6B     		ldr	r3, [r3, #48]
+ 1533 0a04 1225     		movs	r5, #18
+ 1534 0a06 EB41     		rors	r3, r3, r5
+ 1535 0a08 5C40     		eors	r4, r3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 30
+
+
+ 1536 0a0a 03AB     		add	r3, sp, #12
+ 1537 0a0c 1B6B     		ldr	r3, [r3, #48]
+ 1538 0a0e DB08     		lsrs	r3, r3, #3
+ 1539 0a10 6340     		eors	r3, r4
+ 1540 0a12 C318     		adds	r3, r0, r3
+ 1541 0a14 C918     		adds	r1, r1, r3
+ 1542 0a16 03AB     		add	r3, sp, #12
+ 1543 0a18 D962     		str	r1, [r3, #44]
+ 1544 0a1a 03AB     		add	r3, sp, #12
+ 1545 0a1c DB6A     		ldr	r3, [r3, #44]
+ 1546 0a1e 05E0     		b	.L29
+ 1547              	.L28:
+ 1548              		.loc 1 118 0 discriminator 46
+ 1549 0a20 009B     		ldr	r3, [sp]
+ 1550 0a22 D96A     		ldr	r1, [r3, #44]
+ 1551 0a24 03AB     		add	r3, sp, #12
+ 1552 0a26 D962     		str	r1, [r3, #44]
+ 1553 0a28 03AB     		add	r3, sp, #12
+ 1554 0a2a DB6A     		ldr	r3, [r3, #44]
+ 1555              	.L29:
+ 1556              		.loc 1 118 0 discriminator 48
+ 1557 0a2c D318     		adds	r3, r2, r3
+ 1558 0a2e 169A     		ldr	r2, [sp, #88]
+ 1559 0a30 D318     		adds	r3, r2, r3
+ 1560 0a32 1693     		str	r3, [sp, #88]
+ 1561 0a34 1A9A     		ldr	r2, [sp, #104]
+ 1562 0a36 169B     		ldr	r3, [sp, #88]
+ 1563 0a38 D318     		adds	r3, r2, r3
+ 1564 0a3a 1A93     		str	r3, [sp, #104]
+ 1565 0a3c 159B     		ldr	r3, [sp, #84]
+ 1566 0a3e 0222     		movs	r2, #2
+ 1567 0a40 D341     		rors	r3, r3, r2
+ 1568 0a42 1A00     		movs	r2, r3
+ 1569 0a44 159B     		ldr	r3, [sp, #84]
+ 1570 0a46 0D21     		movs	r1, #13
+ 1571 0a48 CB41     		rors	r3, r3, r1
+ 1572 0a4a 5A40     		eors	r2, r3
+ 1573 0a4c 159B     		ldr	r3, [sp, #84]
+ 1574 0a4e 1621     		movs	r1, #22
+ 1575 0a50 CB41     		rors	r3, r3, r1
+ 1576 0a52 5A40     		eors	r2, r3
+ 1577 0a54 159B     		ldr	r3, [sp, #84]
+ 1578 0a56 1499     		ldr	r1, [sp, #80]
+ 1579 0a58 1940     		ands	r1, r3
+ 1580 0a5a 1598     		ldr	r0, [sp, #84]
+ 1581 0a5c 149B     		ldr	r3, [sp, #80]
+ 1582 0a5e 0343     		orrs	r3, r0
+ 1583 0a60 1398     		ldr	r0, [sp, #76]
+ 1584 0a62 0340     		ands	r3, r0
+ 1585 0a64 0B43     		orrs	r3, r1
+ 1586 0a66 D318     		adds	r3, r2, r3
+ 1587 0a68 169A     		ldr	r2, [sp, #88]
+ 1588 0a6a D318     		adds	r3, r2, r3
+ 1589 0a6c 1693     		str	r3, [sp, #88]
+ 1590 0a6e 1A9B     		ldr	r3, [sp, #104]
+ 1591 0a70 0622     		movs	r2, #6
+ 1592 0a72 D341     		rors	r3, r3, r2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 31
+
+
+ 1593 0a74 1A00     		movs	r2, r3
+ 1594 0a76 1A9B     		ldr	r3, [sp, #104]
+ 1595 0a78 0B21     		movs	r1, #11
+ 1596 0a7a CB41     		rors	r3, r3, r1
+ 1597 0a7c 5A40     		eors	r2, r3
+ 1598 0a7e 1A9B     		ldr	r3, [sp, #104]
+ 1599 0a80 1921     		movs	r1, #25
+ 1600 0a82 CB41     		rors	r3, r3, r1
+ 1601 0a84 5A40     		eors	r2, r3
+ 1602 0a86 1999     		ldr	r1, [sp, #100]
+ 1603 0a88 189B     		ldr	r3, [sp, #96]
+ 1604 0a8a 4B40     		eors	r3, r1
+ 1605 0a8c 1A99     		ldr	r1, [sp, #104]
+ 1606 0a8e 1940     		ands	r1, r3
+ 1607 0a90 189B     		ldr	r3, [sp, #96]
+ 1608 0a92 4B40     		eors	r3, r1
+ 1609 0a94 D218     		adds	r2, r2, r3
+ 1610 0a96 1B9B     		ldr	r3, [sp, #108]
+ 1611 0a98 0C33     		adds	r3, r3, #12
+ 1612 0a9a 1900     		movs	r1, r3
+ 1613 0a9c 844B     		ldr	r3, .L43
+ 1614 0a9e 8900     		lsls	r1, r1, #2
+ 1615 0aa0 CB58     		ldr	r3, [r1, r3]
+ 1616 0aa2 D218     		adds	r2, r2, r3
+ 1617 0aa4 1B9B     		ldr	r3, [sp, #108]
+ 1618 0aa6 002B     		cmp	r3, #0
+ 1619 0aa8 27D0     		beq	.L30
+ 1620              		.loc 1 118 0 discriminator 49
+ 1621 0aaa 03AB     		add	r3, sp, #12
+ 1622 0aac 196B     		ldr	r1, [r3, #48]
+ 1623 0aae 03AB     		add	r3, sp, #12
+ 1624 0ab0 9B6A     		ldr	r3, [r3, #40]
+ 1625 0ab2 1120     		movs	r0, #17
+ 1626 0ab4 C341     		rors	r3, r3, r0
+ 1627 0ab6 1800     		movs	r0, r3
+ 1628 0ab8 03AB     		add	r3, sp, #12
+ 1629 0aba 9B6A     		ldr	r3, [r3, #40]
+ 1630 0abc 1324     		movs	r4, #19
+ 1631 0abe E341     		rors	r3, r3, r4
+ 1632 0ac0 5840     		eors	r0, r3
+ 1633 0ac2 03AB     		add	r3, sp, #12
+ 1634 0ac4 9B6A     		ldr	r3, [r3, #40]
+ 1635 0ac6 9B0A     		lsrs	r3, r3, #10
+ 1636 0ac8 5840     		eors	r0, r3
+ 1637 0aca 03AB     		add	r3, sp, #12
+ 1638 0acc 5B69     		ldr	r3, [r3, #20]
+ 1639 0ace C018     		adds	r0, r0, r3
+ 1640 0ad0 03AB     		add	r3, sp, #12
+ 1641 0ad2 5B6B     		ldr	r3, [r3, #52]
+ 1642 0ad4 0724     		movs	r4, #7
+ 1643 0ad6 E341     		rors	r3, r3, r4
+ 1644 0ad8 1C00     		movs	r4, r3
+ 1645 0ada 03AB     		add	r3, sp, #12
+ 1646 0adc 5B6B     		ldr	r3, [r3, #52]
+ 1647 0ade 1225     		movs	r5, #18
+ 1648 0ae0 EB41     		rors	r3, r3, r5
+ 1649 0ae2 5C40     		eors	r4, r3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 32
+
+
+ 1650 0ae4 03AB     		add	r3, sp, #12
+ 1651 0ae6 5B6B     		ldr	r3, [r3, #52]
+ 1652 0ae8 DB08     		lsrs	r3, r3, #3
+ 1653 0aea 6340     		eors	r3, r4
+ 1654 0aec C318     		adds	r3, r0, r3
+ 1655 0aee C918     		adds	r1, r1, r3
+ 1656 0af0 03AB     		add	r3, sp, #12
+ 1657 0af2 1963     		str	r1, [r3, #48]
+ 1658 0af4 03AB     		add	r3, sp, #12
+ 1659 0af6 1B6B     		ldr	r3, [r3, #48]
+ 1660 0af8 05E0     		b	.L31
+ 1661              	.L30:
+ 1662              		.loc 1 118 0 discriminator 50
+ 1663 0afa 009B     		ldr	r3, [sp]
+ 1664 0afc 196B     		ldr	r1, [r3, #48]
+ 1665 0afe 03AB     		add	r3, sp, #12
+ 1666 0b00 1963     		str	r1, [r3, #48]
+ 1667 0b02 03AB     		add	r3, sp, #12
+ 1668 0b04 1B6B     		ldr	r3, [r3, #48]
+ 1669              	.L31:
+ 1670              		.loc 1 118 0 discriminator 52
+ 1671 0b06 D318     		adds	r3, r2, r3
+ 1672 0b08 179A     		ldr	r2, [sp, #92]
+ 1673 0b0a D318     		adds	r3, r2, r3
+ 1674 0b0c 1793     		str	r3, [sp, #92]
+ 1675 0b0e 139A     		ldr	r2, [sp, #76]
+ 1676 0b10 179B     		ldr	r3, [sp, #92]
+ 1677 0b12 D318     		adds	r3, r2, r3
+ 1678 0b14 1393     		str	r3, [sp, #76]
+ 1679 0b16 169B     		ldr	r3, [sp, #88]
+ 1680 0b18 0222     		movs	r2, #2
+ 1681 0b1a D341     		rors	r3, r3, r2
+ 1682 0b1c 1A00     		movs	r2, r3
+ 1683 0b1e 169B     		ldr	r3, [sp, #88]
+ 1684 0b20 0D21     		movs	r1, #13
+ 1685 0b22 CB41     		rors	r3, r3, r1
+ 1686 0b24 5A40     		eors	r2, r3
+ 1687 0b26 169B     		ldr	r3, [sp, #88]
+ 1688 0b28 1621     		movs	r1, #22
+ 1689 0b2a CB41     		rors	r3, r3, r1
+ 1690 0b2c 5A40     		eors	r2, r3
+ 1691 0b2e 169B     		ldr	r3, [sp, #88]
+ 1692 0b30 1599     		ldr	r1, [sp, #84]
+ 1693 0b32 1940     		ands	r1, r3
+ 1694 0b34 1698     		ldr	r0, [sp, #88]
+ 1695 0b36 159B     		ldr	r3, [sp, #84]
+ 1696 0b38 0343     		orrs	r3, r0
+ 1697 0b3a 1498     		ldr	r0, [sp, #80]
+ 1698 0b3c 0340     		ands	r3, r0
+ 1699 0b3e 0B43     		orrs	r3, r1
+ 1700 0b40 D318     		adds	r3, r2, r3
+ 1701 0b42 179A     		ldr	r2, [sp, #92]
+ 1702 0b44 D318     		adds	r3, r2, r3
+ 1703 0b46 1793     		str	r3, [sp, #92]
+ 1704 0b48 139B     		ldr	r3, [sp, #76]
+ 1705 0b4a 0622     		movs	r2, #6
+ 1706 0b4c D341     		rors	r3, r3, r2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 33
+
+
+ 1707 0b4e 1A00     		movs	r2, r3
+ 1708 0b50 139B     		ldr	r3, [sp, #76]
+ 1709 0b52 0B21     		movs	r1, #11
+ 1710 0b54 CB41     		rors	r3, r3, r1
+ 1711 0b56 5A40     		eors	r2, r3
+ 1712 0b58 139B     		ldr	r3, [sp, #76]
+ 1713 0b5a 1921     		movs	r1, #25
+ 1714 0b5c CB41     		rors	r3, r3, r1
+ 1715 0b5e 5A40     		eors	r2, r3
+ 1716 0b60 1A99     		ldr	r1, [sp, #104]
+ 1717 0b62 199B     		ldr	r3, [sp, #100]
+ 1718 0b64 4B40     		eors	r3, r1
+ 1719 0b66 1399     		ldr	r1, [sp, #76]
+ 1720 0b68 1940     		ands	r1, r3
+ 1721 0b6a 199B     		ldr	r3, [sp, #100]
+ 1722 0b6c 4B40     		eors	r3, r1
+ 1723 0b6e D218     		adds	r2, r2, r3
+ 1724 0b70 1B9B     		ldr	r3, [sp, #108]
+ 1725 0b72 0D33     		adds	r3, r3, #13
+ 1726 0b74 1900     		movs	r1, r3
+ 1727 0b76 4E4B     		ldr	r3, .L43
+ 1728 0b78 8900     		lsls	r1, r1, #2
+ 1729 0b7a CB58     		ldr	r3, [r1, r3]
+ 1730 0b7c D218     		adds	r2, r2, r3
+ 1731 0b7e 1B9B     		ldr	r3, [sp, #108]
+ 1732 0b80 002B     		cmp	r3, #0
+ 1733 0b82 27D0     		beq	.L32
+ 1734              		.loc 1 118 0 discriminator 53
+ 1735 0b84 03AB     		add	r3, sp, #12
+ 1736 0b86 596B     		ldr	r1, [r3, #52]
+ 1737 0b88 03AB     		add	r3, sp, #12
+ 1738 0b8a DB6A     		ldr	r3, [r3, #44]
+ 1739 0b8c 1120     		movs	r0, #17
+ 1740 0b8e C341     		rors	r3, r3, r0
+ 1741 0b90 1800     		movs	r0, r3
+ 1742 0b92 03AB     		add	r3, sp, #12
+ 1743 0b94 DB6A     		ldr	r3, [r3, #44]
+ 1744 0b96 1324     		movs	r4, #19
+ 1745 0b98 E341     		rors	r3, r3, r4
+ 1746 0b9a 5840     		eors	r0, r3
+ 1747 0b9c 03AB     		add	r3, sp, #12
+ 1748 0b9e DB6A     		ldr	r3, [r3, #44]
+ 1749 0ba0 9B0A     		lsrs	r3, r3, #10
+ 1750 0ba2 5840     		eors	r0, r3
+ 1751 0ba4 03AB     		add	r3, sp, #12
+ 1752 0ba6 9B69     		ldr	r3, [r3, #24]
+ 1753 0ba8 C018     		adds	r0, r0, r3
+ 1754 0baa 03AB     		add	r3, sp, #12
+ 1755 0bac 9B6B     		ldr	r3, [r3, #56]
+ 1756 0bae 0724     		movs	r4, #7
+ 1757 0bb0 E341     		rors	r3, r3, r4
+ 1758 0bb2 1C00     		movs	r4, r3
+ 1759 0bb4 03AB     		add	r3, sp, #12
+ 1760 0bb6 9B6B     		ldr	r3, [r3, #56]
+ 1761 0bb8 1225     		movs	r5, #18
+ 1762 0bba EB41     		rors	r3, r3, r5
+ 1763 0bbc 5C40     		eors	r4, r3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 34
+
+
+ 1764 0bbe 03AB     		add	r3, sp, #12
+ 1765 0bc0 9B6B     		ldr	r3, [r3, #56]
+ 1766 0bc2 DB08     		lsrs	r3, r3, #3
+ 1767 0bc4 6340     		eors	r3, r4
+ 1768 0bc6 C318     		adds	r3, r0, r3
+ 1769 0bc8 C918     		adds	r1, r1, r3
+ 1770 0bca 03AB     		add	r3, sp, #12
+ 1771 0bcc 5963     		str	r1, [r3, #52]
+ 1772 0bce 03AB     		add	r3, sp, #12
+ 1773 0bd0 5B6B     		ldr	r3, [r3, #52]
+ 1774 0bd2 05E0     		b	.L33
+ 1775              	.L32:
+ 1776              		.loc 1 118 0 discriminator 54
+ 1777 0bd4 009B     		ldr	r3, [sp]
+ 1778 0bd6 596B     		ldr	r1, [r3, #52]
+ 1779 0bd8 03AB     		add	r3, sp, #12
+ 1780 0bda 5963     		str	r1, [r3, #52]
+ 1781 0bdc 03AB     		add	r3, sp, #12
+ 1782 0bde 5B6B     		ldr	r3, [r3, #52]
+ 1783              	.L33:
+ 1784              		.loc 1 118 0 discriminator 56
+ 1785 0be0 D318     		adds	r3, r2, r3
+ 1786 0be2 189A     		ldr	r2, [sp, #96]
+ 1787 0be4 D318     		adds	r3, r2, r3
+ 1788 0be6 1893     		str	r3, [sp, #96]
+ 1789 0be8 149A     		ldr	r2, [sp, #80]
+ 1790 0bea 189B     		ldr	r3, [sp, #96]
+ 1791 0bec D318     		adds	r3, r2, r3
+ 1792 0bee 1493     		str	r3, [sp, #80]
+ 1793 0bf0 179B     		ldr	r3, [sp, #92]
+ 1794 0bf2 0222     		movs	r2, #2
+ 1795 0bf4 D341     		rors	r3, r3, r2
+ 1796 0bf6 1A00     		movs	r2, r3
+ 1797 0bf8 179B     		ldr	r3, [sp, #92]
+ 1798 0bfa 0D21     		movs	r1, #13
+ 1799 0bfc CB41     		rors	r3, r3, r1
+ 1800 0bfe 5A40     		eors	r2, r3
+ 1801 0c00 179B     		ldr	r3, [sp, #92]
+ 1802 0c02 1621     		movs	r1, #22
+ 1803 0c04 CB41     		rors	r3, r3, r1
+ 1804 0c06 5A40     		eors	r2, r3
+ 1805 0c08 179B     		ldr	r3, [sp, #92]
+ 1806 0c0a 1699     		ldr	r1, [sp, #88]
+ 1807 0c0c 1940     		ands	r1, r3
+ 1808 0c0e 1798     		ldr	r0, [sp, #92]
+ 1809 0c10 169B     		ldr	r3, [sp, #88]
+ 1810 0c12 0343     		orrs	r3, r0
+ 1811 0c14 1598     		ldr	r0, [sp, #84]
+ 1812 0c16 0340     		ands	r3, r0
+ 1813 0c18 0B43     		orrs	r3, r1
+ 1814 0c1a D318     		adds	r3, r2, r3
+ 1815 0c1c 189A     		ldr	r2, [sp, #96]
+ 1816 0c1e D318     		adds	r3, r2, r3
+ 1817 0c20 1893     		str	r3, [sp, #96]
+ 1818 0c22 149B     		ldr	r3, [sp, #80]
+ 1819 0c24 0622     		movs	r2, #6
+ 1820 0c26 D341     		rors	r3, r3, r2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 35
+
+
+ 1821 0c28 1A00     		movs	r2, r3
+ 1822 0c2a 149B     		ldr	r3, [sp, #80]
+ 1823 0c2c 0B21     		movs	r1, #11
+ 1824 0c2e CB41     		rors	r3, r3, r1
+ 1825 0c30 5A40     		eors	r2, r3
+ 1826 0c32 149B     		ldr	r3, [sp, #80]
+ 1827 0c34 1921     		movs	r1, #25
+ 1828 0c36 CB41     		rors	r3, r3, r1
+ 1829 0c38 5A40     		eors	r2, r3
+ 1830 0c3a 1399     		ldr	r1, [sp, #76]
+ 1831 0c3c 1A9B     		ldr	r3, [sp, #104]
+ 1832 0c3e 4B40     		eors	r3, r1
+ 1833 0c40 1499     		ldr	r1, [sp, #80]
+ 1834 0c42 1940     		ands	r1, r3
+ 1835 0c44 1A9B     		ldr	r3, [sp, #104]
+ 1836 0c46 4B40     		eors	r3, r1
+ 1837 0c48 D218     		adds	r2, r2, r3
+ 1838 0c4a 1B9B     		ldr	r3, [sp, #108]
+ 1839 0c4c 0E33     		adds	r3, r3, #14
+ 1840 0c4e 1900     		movs	r1, r3
+ 1841 0c50 174B     		ldr	r3, .L43
+ 1842 0c52 8900     		lsls	r1, r1, #2
+ 1843 0c54 CB58     		ldr	r3, [r1, r3]
+ 1844 0c56 D218     		adds	r2, r2, r3
+ 1845 0c58 1B9B     		ldr	r3, [sp, #108]
+ 1846 0c5a 002B     		cmp	r3, #0
+ 1847 0c5c 2AD0     		beq	.L34
+ 1848              		.loc 1 118 0 discriminator 57
+ 1849 0c5e 03AB     		add	r3, sp, #12
+ 1850 0c60 996B     		ldr	r1, [r3, #56]
+ 1851 0c62 03AB     		add	r3, sp, #12
+ 1852 0c64 1B6B     		ldr	r3, [r3, #48]
+ 1853 0c66 1120     		movs	r0, #17
+ 1854 0c68 C341     		rors	r3, r3, r0
+ 1855 0c6a 1800     		movs	r0, r3
+ 1856 0c6c 03AB     		add	r3, sp, #12
+ 1857 0c6e 1B6B     		ldr	r3, [r3, #48]
+ 1858 0c70 1324     		movs	r4, #19
+ 1859 0c72 E341     		rors	r3, r3, r4
+ 1860 0c74 5840     		eors	r0, r3
+ 1861 0c76 03AB     		add	r3, sp, #12
+ 1862 0c78 1B6B     		ldr	r3, [r3, #48]
+ 1863 0c7a 9B0A     		lsrs	r3, r3, #10
+ 1864 0c7c 5840     		eors	r0, r3
+ 1865 0c7e 03AB     		add	r3, sp, #12
+ 1866 0c80 DB69     		ldr	r3, [r3, #28]
+ 1867 0c82 C018     		adds	r0, r0, r3
+ 1868 0c84 03AB     		add	r3, sp, #12
+ 1869 0c86 DB6B     		ldr	r3, [r3, #60]
+ 1870 0c88 0724     		movs	r4, #7
+ 1871 0c8a E341     		rors	r3, r3, r4
+ 1872 0c8c 1C00     		movs	r4, r3
+ 1873 0c8e 03AB     		add	r3, sp, #12
+ 1874 0c90 DB6B     		ldr	r3, [r3, #60]
+ 1875 0c92 1225     		movs	r5, #18
+ 1876 0c94 EB41     		rors	r3, r3, r5
+ 1877 0c96 5C40     		eors	r4, r3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 36
+
+
+ 1878 0c98 03AB     		add	r3, sp, #12
+ 1879 0c9a DB6B     		ldr	r3, [r3, #60]
+ 1880 0c9c DB08     		lsrs	r3, r3, #3
+ 1881 0c9e 6340     		eors	r3, r4
+ 1882 0ca0 C318     		adds	r3, r0, r3
+ 1883 0ca2 C918     		adds	r1, r1, r3
+ 1884 0ca4 03AB     		add	r3, sp, #12
+ 1885 0ca6 9963     		str	r1, [r3, #56]
+ 1886 0ca8 03AB     		add	r3, sp, #12
+ 1887 0caa 9B6B     		ldr	r3, [r3, #56]
+ 1888 0cac 08E0     		b	.L35
+ 1889              	.L44:
+ 1890 0cae C046     		.align	2
+ 1891              	.L43:
+ 1892 0cb0 00000000 		.word	K
+ 1893              	.L34:
+ 1894              		.loc 1 118 0 discriminator 58
+ 1895 0cb4 009B     		ldr	r3, [sp]
+ 1896 0cb6 996B     		ldr	r1, [r3, #56]
+ 1897 0cb8 03AB     		add	r3, sp, #12
+ 1898 0cba 9963     		str	r1, [r3, #56]
+ 1899 0cbc 03AB     		add	r3, sp, #12
+ 1900 0cbe 9B6B     		ldr	r3, [r3, #56]
+ 1901              	.L35:
+ 1902              		.loc 1 118 0 discriminator 60
+ 1903 0cc0 D318     		adds	r3, r2, r3
+ 1904 0cc2 199A     		ldr	r2, [sp, #100]
+ 1905 0cc4 D318     		adds	r3, r2, r3
+ 1906 0cc6 1993     		str	r3, [sp, #100]
+ 1907 0cc8 159A     		ldr	r2, [sp, #84]
+ 1908 0cca 199B     		ldr	r3, [sp, #100]
+ 1909 0ccc D318     		adds	r3, r2, r3
+ 1910 0cce 1593     		str	r3, [sp, #84]
+ 1911 0cd0 189B     		ldr	r3, [sp, #96]
+ 1912 0cd2 0222     		movs	r2, #2
+ 1913 0cd4 D341     		rors	r3, r3, r2
+ 1914 0cd6 1A00     		movs	r2, r3
+ 1915 0cd8 189B     		ldr	r3, [sp, #96]
+ 1916 0cda 0D21     		movs	r1, #13
+ 1917 0cdc CB41     		rors	r3, r3, r1
+ 1918 0cde 5A40     		eors	r2, r3
+ 1919 0ce0 189B     		ldr	r3, [sp, #96]
+ 1920 0ce2 1621     		movs	r1, #22
+ 1921 0ce4 CB41     		rors	r3, r3, r1
+ 1922 0ce6 5A40     		eors	r2, r3
+ 1923 0ce8 189B     		ldr	r3, [sp, #96]
+ 1924 0cea 1799     		ldr	r1, [sp, #92]
+ 1925 0cec 1940     		ands	r1, r3
+ 1926 0cee 1898     		ldr	r0, [sp, #96]
+ 1927 0cf0 179B     		ldr	r3, [sp, #92]
+ 1928 0cf2 0343     		orrs	r3, r0
+ 1929 0cf4 1698     		ldr	r0, [sp, #88]
+ 1930 0cf6 0340     		ands	r3, r0
+ 1931 0cf8 0B43     		orrs	r3, r1
+ 1932 0cfa D318     		adds	r3, r2, r3
+ 1933 0cfc 199A     		ldr	r2, [sp, #100]
+ 1934 0cfe D318     		adds	r3, r2, r3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 37
+
+
+ 1935 0d00 1993     		str	r3, [sp, #100]
+ 1936 0d02 159B     		ldr	r3, [sp, #84]
+ 1937 0d04 0622     		movs	r2, #6
+ 1938 0d06 D341     		rors	r3, r3, r2
+ 1939 0d08 1A00     		movs	r2, r3
+ 1940 0d0a 159B     		ldr	r3, [sp, #84]
+ 1941 0d0c 0B21     		movs	r1, #11
+ 1942 0d0e CB41     		rors	r3, r3, r1
+ 1943 0d10 5A40     		eors	r2, r3
+ 1944 0d12 159B     		ldr	r3, [sp, #84]
+ 1945 0d14 1921     		movs	r1, #25
+ 1946 0d16 CB41     		rors	r3, r3, r1
+ 1947 0d18 5A40     		eors	r2, r3
+ 1948 0d1a 1499     		ldr	r1, [sp, #80]
+ 1949 0d1c 139B     		ldr	r3, [sp, #76]
+ 1950 0d1e 4B40     		eors	r3, r1
+ 1951 0d20 1599     		ldr	r1, [sp, #84]
+ 1952 0d22 1940     		ands	r1, r3
+ 1953 0d24 139B     		ldr	r3, [sp, #76]
+ 1954 0d26 4B40     		eors	r3, r1
+ 1955 0d28 D218     		adds	r2, r2, r3
+ 1956 0d2a 1B9B     		ldr	r3, [sp, #108]
+ 1957 0d2c 0F33     		adds	r3, r3, #15
+ 1958 0d2e 1900     		movs	r1, r3
+ 1959 0d30 4F4B     		ldr	r3, .L45
+ 1960 0d32 8900     		lsls	r1, r1, #2
+ 1961 0d34 CB58     		ldr	r3, [r1, r3]
+ 1962 0d36 D218     		adds	r2, r2, r3
+ 1963 0d38 1B9B     		ldr	r3, [sp, #108]
+ 1964 0d3a 002B     		cmp	r3, #0
+ 1965 0d3c 27D0     		beq	.L36
+ 1966              		.loc 1 118 0 discriminator 61
+ 1967 0d3e 03AB     		add	r3, sp, #12
+ 1968 0d40 D96B     		ldr	r1, [r3, #60]
+ 1969 0d42 03AB     		add	r3, sp, #12
+ 1970 0d44 5B6B     		ldr	r3, [r3, #52]
+ 1971 0d46 1120     		movs	r0, #17
+ 1972 0d48 C341     		rors	r3, r3, r0
+ 1973 0d4a 1800     		movs	r0, r3
+ 1974 0d4c 03AB     		add	r3, sp, #12
+ 1975 0d4e 5B6B     		ldr	r3, [r3, #52]
+ 1976 0d50 1324     		movs	r4, #19
+ 1977 0d52 E341     		rors	r3, r3, r4
+ 1978 0d54 5840     		eors	r0, r3
+ 1979 0d56 03AB     		add	r3, sp, #12
+ 1980 0d58 5B6B     		ldr	r3, [r3, #52]
+ 1981 0d5a 9B0A     		lsrs	r3, r3, #10
+ 1982 0d5c 5840     		eors	r0, r3
+ 1983 0d5e 03AB     		add	r3, sp, #12
+ 1984 0d60 1B6A     		ldr	r3, [r3, #32]
+ 1985 0d62 C018     		adds	r0, r0, r3
+ 1986 0d64 03AB     		add	r3, sp, #12
+ 1987 0d66 1B68     		ldr	r3, [r3]
+ 1988 0d68 0724     		movs	r4, #7
+ 1989 0d6a E341     		rors	r3, r3, r4
+ 1990 0d6c 1C00     		movs	r4, r3
+ 1991 0d6e 03AB     		add	r3, sp, #12
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 38
+
+
+ 1992 0d70 1B68     		ldr	r3, [r3]
+ 1993 0d72 1225     		movs	r5, #18
+ 1994 0d74 EB41     		rors	r3, r3, r5
+ 1995 0d76 5C40     		eors	r4, r3
+ 1996 0d78 03AB     		add	r3, sp, #12
+ 1997 0d7a 1B68     		ldr	r3, [r3]
+ 1998 0d7c DB08     		lsrs	r3, r3, #3
+ 1999 0d7e 6340     		eors	r3, r4
+ 2000 0d80 C318     		adds	r3, r0, r3
+ 2001 0d82 C918     		adds	r1, r1, r3
+ 2002 0d84 03AB     		add	r3, sp, #12
+ 2003 0d86 D963     		str	r1, [r3, #60]
+ 2004 0d88 03AB     		add	r3, sp, #12
+ 2005 0d8a DB6B     		ldr	r3, [r3, #60]
+ 2006 0d8c 05E0     		b	.L37
+ 2007              	.L36:
+ 2008              		.loc 1 118 0 discriminator 62
+ 2009 0d8e 009B     		ldr	r3, [sp]
+ 2010 0d90 D96B     		ldr	r1, [r3, #60]
+ 2011 0d92 03AB     		add	r3, sp, #12
+ 2012 0d94 D963     		str	r1, [r3, #60]
+ 2013 0d96 03AB     		add	r3, sp, #12
+ 2014 0d98 DB6B     		ldr	r3, [r3, #60]
+ 2015              	.L37:
+ 2016              		.loc 1 118 0 discriminator 64
+ 2017 0d9a D318     		adds	r3, r2, r3
+ 2018 0d9c 1A9A     		ldr	r2, [sp, #104]
+ 2019 0d9e D318     		adds	r3, r2, r3
+ 2020 0da0 1A93     		str	r3, [sp, #104]
+ 2021 0da2 169A     		ldr	r2, [sp, #88]
+ 2022 0da4 1A9B     		ldr	r3, [sp, #104]
+ 2023 0da6 D318     		adds	r3, r2, r3
+ 2024 0da8 1693     		str	r3, [sp, #88]
+ 2025 0daa 199B     		ldr	r3, [sp, #100]
+ 2026 0dac 0222     		movs	r2, #2
+ 2027 0dae D341     		rors	r3, r3, r2
+ 2028 0db0 1A00     		movs	r2, r3
+ 2029 0db2 199B     		ldr	r3, [sp, #100]
+ 2030 0db4 0D21     		movs	r1, #13
+ 2031 0db6 CB41     		rors	r3, r3, r1
+ 2032 0db8 5A40     		eors	r2, r3
+ 2033 0dba 199B     		ldr	r3, [sp, #100]
+ 2034 0dbc 1621     		movs	r1, #22
+ 2035 0dbe CB41     		rors	r3, r3, r1
+ 2036 0dc0 5A40     		eors	r2, r3
+ 2037 0dc2 199B     		ldr	r3, [sp, #100]
+ 2038 0dc4 1899     		ldr	r1, [sp, #96]
+ 2039 0dc6 1940     		ands	r1, r3
+ 2040 0dc8 1998     		ldr	r0, [sp, #100]
+ 2041 0dca 189B     		ldr	r3, [sp, #96]
+ 2042 0dcc 0343     		orrs	r3, r0
+ 2043 0dce 1798     		ldr	r0, [sp, #92]
+ 2044 0dd0 0340     		ands	r3, r0
+ 2045 0dd2 0B43     		orrs	r3, r1
+ 2046 0dd4 D318     		adds	r3, r2, r3
+ 2047 0dd6 1A9A     		ldr	r2, [sp, #104]
+ 2048 0dd8 D318     		adds	r3, r2, r3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 39
+
+
+ 2049 0dda 1A93     		str	r3, [sp, #104]
+ 115:sha256.c      ****   {
+ 2050              		.loc 1 115 0 is_stmt 1 discriminator 64
+ 2051 0ddc 1B9B     		ldr	r3, [sp, #108]
+ 2052 0dde 1033     		adds	r3, r3, #16
+ 2053 0de0 1B93     		str	r3, [sp, #108]
+ 2054              	.L5:
+ 115:sha256.c      ****   {
+ 2055              		.loc 1 115 0 is_stmt 0 discriminator 2
+ 2056 0de2 1B9B     		ldr	r3, [sp, #108]
+ 2057 0de4 3F2B     		cmp	r3, #63
+ 2058 0de6 01D8     		bhi	.LCB1945
+ 2059 0de8 FFF72AF9 		bl	.L38	@far jump
+ 2060              	.LCB1945:
+ 119:sha256.c      ****     #else
+ 120:sha256.c      ****     unsigned i;
+ 121:sha256.c      ****     for (i = 0; i < 16; i++) { R(i); }
+ 122:sha256.c      ****     #endif
+ 123:sha256.c      ****   }
+ 124:sha256.c      **** 
+ 125:sha256.c      ****   #ifdef _SHA256_UNROLL2
+ 126:sha256.c      ****   state[0] += a;
+ 2061              		.loc 1 126 0 is_stmt 1
+ 2062 0dec 019B     		ldr	r3, [sp, #4]
+ 2063 0dee 1A68     		ldr	r2, [r3]
+ 2064 0df0 1A9B     		ldr	r3, [sp, #104]
+ 2065 0df2 D218     		adds	r2, r2, r3
+ 2066 0df4 019B     		ldr	r3, [sp, #4]
+ 2067 0df6 1A60     		str	r2, [r3]
+ 127:sha256.c      ****   state[1] += b;
+ 2068              		.loc 1 127 0
+ 2069 0df8 019B     		ldr	r3, [sp, #4]
+ 2070 0dfa 0433     		adds	r3, r3, #4
+ 2071 0dfc 019A     		ldr	r2, [sp, #4]
+ 2072 0dfe 0432     		adds	r2, r2, #4
+ 2073 0e00 1168     		ldr	r1, [r2]
+ 2074 0e02 199A     		ldr	r2, [sp, #100]
+ 2075 0e04 8A18     		adds	r2, r1, r2
+ 2076 0e06 1A60     		str	r2, [r3]
+ 128:sha256.c      ****   state[2] += c;
+ 2077              		.loc 1 128 0
+ 2078 0e08 019B     		ldr	r3, [sp, #4]
+ 2079 0e0a 0833     		adds	r3, r3, #8
+ 2080 0e0c 019A     		ldr	r2, [sp, #4]
+ 2081 0e0e 0832     		adds	r2, r2, #8
+ 2082 0e10 1168     		ldr	r1, [r2]
+ 2083 0e12 189A     		ldr	r2, [sp, #96]
+ 2084 0e14 8A18     		adds	r2, r1, r2
+ 2085 0e16 1A60     		str	r2, [r3]
+ 129:sha256.c      ****   state[3] += d;
+ 2086              		.loc 1 129 0
+ 2087 0e18 019B     		ldr	r3, [sp, #4]
+ 2088 0e1a 0C33     		adds	r3, r3, #12
+ 2089 0e1c 019A     		ldr	r2, [sp, #4]
+ 2090 0e1e 0C32     		adds	r2, r2, #12
+ 2091 0e20 1168     		ldr	r1, [r2]
+ 2092 0e22 179A     		ldr	r2, [sp, #92]
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 40
+
+
+ 2093 0e24 8A18     		adds	r2, r1, r2
+ 2094 0e26 1A60     		str	r2, [r3]
+ 130:sha256.c      ****   state[4] += e;
+ 2095              		.loc 1 130 0
+ 2096 0e28 019B     		ldr	r3, [sp, #4]
+ 2097 0e2a 1033     		adds	r3, r3, #16
+ 2098 0e2c 019A     		ldr	r2, [sp, #4]
+ 2099 0e2e 1032     		adds	r2, r2, #16
+ 2100 0e30 1168     		ldr	r1, [r2]
+ 2101 0e32 169A     		ldr	r2, [sp, #88]
+ 2102 0e34 8A18     		adds	r2, r1, r2
+ 2103 0e36 1A60     		str	r2, [r3]
+ 131:sha256.c      ****   state[5] += f;
+ 2104              		.loc 1 131 0
+ 2105 0e38 019B     		ldr	r3, [sp, #4]
+ 2106 0e3a 1433     		adds	r3, r3, #20
+ 2107 0e3c 019A     		ldr	r2, [sp, #4]
+ 2108 0e3e 1432     		adds	r2, r2, #20
+ 2109 0e40 1168     		ldr	r1, [r2]
+ 2110 0e42 159A     		ldr	r2, [sp, #84]
+ 2111 0e44 8A18     		adds	r2, r1, r2
+ 2112 0e46 1A60     		str	r2, [r3]
+ 132:sha256.c      ****   state[6] += g;
+ 2113              		.loc 1 132 0
+ 2114 0e48 019B     		ldr	r3, [sp, #4]
+ 2115 0e4a 1833     		adds	r3, r3, #24
+ 2116 0e4c 019A     		ldr	r2, [sp, #4]
+ 2117 0e4e 1832     		adds	r2, r2, #24
+ 2118 0e50 1168     		ldr	r1, [r2]
+ 2119 0e52 149A     		ldr	r2, [sp, #80]
+ 2120 0e54 8A18     		adds	r2, r1, r2
+ 2121 0e56 1A60     		str	r2, [r3]
+ 133:sha256.c      ****   state[7] += h;
+ 2122              		.loc 1 133 0
+ 2123 0e58 019B     		ldr	r3, [sp, #4]
+ 2124 0e5a 1C33     		adds	r3, r3, #28
+ 2125 0e5c 019A     		ldr	r2, [sp, #4]
+ 2126 0e5e 1C32     		adds	r2, r2, #28
+ 2127 0e60 1168     		ldr	r1, [r2]
+ 2128 0e62 139A     		ldr	r2, [sp, #76]
+ 2129 0e64 8A18     		adds	r2, r1, r2
+ 2130 0e66 1A60     		str	r2, [r3]
+ 134:sha256.c      ****   #else
+ 135:sha256.c      ****   for (j = 0; j < 8; j++)
+ 136:sha256.c      ****     state[j] += T[j];
+ 137:sha256.c      ****   #endif
+ 138:sha256.c      **** 
+ 139:sha256.c      ****   /* Wipe variables */
+ 140:sha256.c      ****   /* memset(W, 0, sizeof(W)); */
+ 141:sha256.c      ****   /* memset(T, 0, sizeof(T)); */
+ 142:sha256.c      **** }
+ 2131              		.loc 1 142 0
+ 2132 0e68 C046     		nop
+ 2133 0e6a 1DB0     		add	sp, sp, #116
+ 2134              		@ sp needed
+ 2135 0e6c 30BD     		pop	{r4, r5, pc}
+ 2136              	.L46:
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 41
+
+
+ 2137 0e6e C046     		.align	2
+ 2138              	.L45:
+ 2139 0e70 00000000 		.word	K
+ 2140              		.cfi_endproc
+ 2141              	.LFE1:
+ 2142              		.size	sha256_transform, .-sha256_transform
+ 2143              		.section	.text.sha256_write_byte_block,"ax",%progbits
+ 2144              		.align	2
+ 2145              		.code	16
+ 2146              		.thumb_func
+ 2147              		.type	sha256_write_byte_block, %function
+ 2148              	sha256_write_byte_block:
+ 2149              	.LFB2:
+ 143:sha256.c      **** 
+ 144:sha256.c      **** #undef S0
+ 145:sha256.c      **** #undef S1
+ 146:sha256.c      **** #undef s0
+ 147:sha256.c      **** #undef s1
+ 148:sha256.c      **** 
+ 149:sha256.c      **** static void
+ 150:sha256.c      **** sha256_write_byte_block(sha256_t *p)
+ 151:sha256.c      **** {
+ 2150              		.loc 1 151 0
+ 2151              		.cfi_startproc
+ 2152              		@ args = 0, pretend = 0, frame = 80
+ 2153              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2154 0000 00B5     		push	{lr}
+ 2155              		.cfi_def_cfa_offset 4
+ 2156              		.cfi_offset 14, -4
+ 2157 0002 95B0     		sub	sp, sp, #84
+ 2158              		.cfi_def_cfa_offset 88
+ 2159 0004 0190     		str	r0, [sp, #4]
+ 152:sha256.c      ****   uint32_t data32[16];
+ 153:sha256.c      ****   unsigned i;
+ 154:sha256.c      ****   for (i = 0; i < 16; i++)
+ 2160              		.loc 1 154 0
+ 2161 0006 0023     		movs	r3, #0
+ 2162 0008 1393     		str	r3, [sp, #76]
+ 2163 000a 2BE0     		b	.L48
+ 2164              	.L49:
+ 155:sha256.c      ****     data32[i] =
+ 156:sha256.c      ****       ((uint32_t)(p->buffer[i * 4    ]) << 24) +
+ 2165              		.loc 1 156 0 discriminator 3
+ 2166 000c 139B     		ldr	r3, [sp, #76]
+ 2167 000e 9B00     		lsls	r3, r3, #2
+ 2168 0010 019A     		ldr	r2, [sp, #4]
+ 2169 0012 2821     		movs	r1, #40
+ 2170 0014 D318     		adds	r3, r2, r3
+ 2171 0016 5B18     		adds	r3, r3, r1
+ 2172 0018 1B78     		ldrb	r3, [r3]
+ 2173 001a 1A06     		lsls	r2, r3, #24
+ 157:sha256.c      ****       ((uint32_t)(p->buffer[i * 4 + 1]) << 16) +
+ 2174              		.loc 1 157 0 discriminator 3
+ 2175 001c 139B     		ldr	r3, [sp, #76]
+ 2176 001e 9B00     		lsls	r3, r3, #2
+ 2177 0020 0133     		adds	r3, r3, #1
+ 2178 0022 0199     		ldr	r1, [sp, #4]
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 42
+
+
+ 2179 0024 2820     		movs	r0, #40
+ 2180 0026 CB18     		adds	r3, r1, r3
+ 2181 0028 1B18     		adds	r3, r3, r0
+ 2182 002a 1B78     		ldrb	r3, [r3]
+ 2183 002c 1B04     		lsls	r3, r3, #16
+ 156:sha256.c      ****       ((uint32_t)(p->buffer[i * 4 + 1]) << 16) +
+ 2184              		.loc 1 156 0 discriminator 3
+ 2185 002e D218     		adds	r2, r2, r3
+ 158:sha256.c      ****       ((uint32_t)(p->buffer[i * 4 + 2]) <<  8) +
+ 2186              		.loc 1 158 0 discriminator 3
+ 2187 0030 139B     		ldr	r3, [sp, #76]
+ 2188 0032 9B00     		lsls	r3, r3, #2
+ 2189 0034 0233     		adds	r3, r3, #2
+ 2190 0036 0199     		ldr	r1, [sp, #4]
+ 2191 0038 2820     		movs	r0, #40
+ 2192 003a CB18     		adds	r3, r1, r3
+ 2193 003c 1B18     		adds	r3, r3, r0
+ 2194 003e 1B78     		ldrb	r3, [r3]
+ 2195 0040 1B02     		lsls	r3, r3, #8
+ 157:sha256.c      ****       ((uint32_t)(p->buffer[i * 4 + 1]) << 16) +
+ 2196              		.loc 1 157 0 discriminator 3
+ 2197 0042 D318     		adds	r3, r2, r3
+ 159:sha256.c      ****       ((uint32_t)(p->buffer[i * 4 + 3]));
+ 2198              		.loc 1 159 0 discriminator 3
+ 2199 0044 139A     		ldr	r2, [sp, #76]
+ 2200 0046 9200     		lsls	r2, r2, #2
+ 2201 0048 0332     		adds	r2, r2, #3
+ 2202 004a 0199     		ldr	r1, [sp, #4]
+ 2203 004c 2820     		movs	r0, #40
+ 2204 004e 8A18     		adds	r2, r1, r2
+ 2205 0050 1218     		adds	r2, r2, r0
+ 2206 0052 1278     		ldrb	r2, [r2]
+ 158:sha256.c      ****       ((uint32_t)(p->buffer[i * 4 + 2]) <<  8) +
+ 2207              		.loc 1 158 0 discriminator 3
+ 2208 0054 9918     		adds	r1, r3, r2
+ 155:sha256.c      ****       ((uint32_t)(p->buffer[i * 4    ]) << 24) +
+ 2209              		.loc 1 155 0 discriminator 3
+ 2210 0056 03AB     		add	r3, sp, #12
+ 2211 0058 139A     		ldr	r2, [sp, #76]
+ 2212 005a 9200     		lsls	r2, r2, #2
+ 2213 005c D150     		str	r1, [r2, r3]
+ 154:sha256.c      ****     data32[i] =
+ 2214              		.loc 1 154 0 discriminator 3
+ 2215 005e 139B     		ldr	r3, [sp, #76]
+ 2216 0060 0133     		adds	r3, r3, #1
+ 2217 0062 1393     		str	r3, [sp, #76]
+ 2218              	.L48:
+ 154:sha256.c      ****     data32[i] =
+ 2219              		.loc 1 154 0 is_stmt 0 discriminator 1
+ 2220 0064 139B     		ldr	r3, [sp, #76]
+ 2221 0066 0F2B     		cmp	r3, #15
+ 2222 0068 D0D9     		bls	.L49
+ 160:sha256.c      ****   sha256_transform(p->state, data32);
+ 2223              		.loc 1 160 0 is_stmt 1
+ 2224 006a 019B     		ldr	r3, [sp, #4]
+ 2225 006c 03AA     		add	r2, sp, #12
+ 2226 006e 1100     		movs	r1, r2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 43
+
+
+ 2227 0070 1800     		movs	r0, r3
+ 2228 0072 FFF7FEFF 		bl	sha256_transform
+ 161:sha256.c      **** }
+ 2229              		.loc 1 161 0
+ 2230 0076 C046     		nop
+ 2231 0078 15B0     		add	sp, sp, #84
+ 2232              		@ sp needed
+ 2233 007a 00BD     		pop	{pc}
+ 2234              		.cfi_endproc
+ 2235              	.LFE2:
+ 2236              		.size	sha256_write_byte_block, .-sha256_write_byte_block
+ 2237              		.section	.text.sha256_hash,"ax",%progbits
+ 2238              		.align	2
+ 2239              		.global	sha256_hash
+ 2240              		.code	16
+ 2241              		.thumb_func
+ 2242              		.type	sha256_hash, %function
+ 2243              	sha256_hash:
+ 2244              	.LFB3:
+ 162:sha256.c      **** 
+ 163:sha256.c      **** 
+ 164:sha256.c      **** void
+ 165:sha256.c      **** sha256_hash(unsigned char *buf, const unsigned char *data, size_t size)
+ 166:sha256.c      **** {
+ 2245              		.loc 1 166 0
+ 2246              		.cfi_startproc
+ 2247              		@ args = 0, pretend = 0, frame = 120
+ 2248              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2249 0000 00B5     		push	{lr}
+ 2250              		.cfi_def_cfa_offset 4
+ 2251              		.cfi_offset 14, -4
+ 2252 0002 9FB0     		sub	sp, sp, #124
+ 2253              		.cfi_def_cfa_offset 128
+ 2254 0004 0390     		str	r0, [sp, #12]
+ 2255 0006 0291     		str	r1, [sp, #8]
+ 2256 0008 0192     		str	r2, [sp, #4]
+ 167:sha256.c      ****   sha256_t hash;
+ 168:sha256.c      ****   sha256_init(&hash);
+ 2257              		.loc 1 168 0
+ 2258 000a 04AB     		add	r3, sp, #16
+ 2259 000c 1800     		movs	r0, r3
+ 2260 000e FFF7FEFF 		bl	sha256_init
+ 169:sha256.c      ****   sha256_update(&hash, data, size);
+ 2261              		.loc 1 169 0
+ 2262 0012 019A     		ldr	r2, [sp, #4]
+ 2263 0014 0299     		ldr	r1, [sp, #8]
+ 2264 0016 04AB     		add	r3, sp, #16
+ 2265 0018 1800     		movs	r0, r3
+ 2266 001a FFF7FEFF 		bl	sha256_update
+ 170:sha256.c      ****   sha256_final(&hash, buf);
+ 2267              		.loc 1 170 0
+ 2268 001e 039A     		ldr	r2, [sp, #12]
+ 2269 0020 04AB     		add	r3, sp, #16
+ 2270 0022 1100     		movs	r1, r2
+ 2271 0024 1800     		movs	r0, r3
+ 2272 0026 FFF7FEFF 		bl	sha256_final
+ 171:sha256.c      **** }
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 44
+
+
+ 2273              		.loc 1 171 0
+ 2274 002a C046     		nop
+ 2275 002c 1FB0     		add	sp, sp, #124
+ 2276              		@ sp needed
+ 2277 002e 00BD     		pop	{pc}
+ 2278              		.cfi_endproc
+ 2279              	.LFE3:
+ 2280              		.size	sha256_hash, .-sha256_hash
+ 2281              		.section	.text.sha256_update,"ax",%progbits
+ 2282              		.align	2
+ 2283              		.global	sha256_update
+ 2284              		.code	16
+ 2285              		.thumb_func
+ 2286              		.type	sha256_update, %function
+ 2287              	sha256_update:
+ 2288              	.LFB4:
+ 172:sha256.c      **** 
+ 173:sha256.c      **** 
+ 174:sha256.c      **** void
+ 175:sha256.c      **** sha256_update(sha256_t *p, const unsigned char *data, size_t size)
+ 176:sha256.c      **** {
+ 2289              		.loc 1 176 0
+ 2290              		.cfi_startproc
+ 2291              		@ args = 0, pretend = 0, frame = 24
+ 2292              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2293 0000 10B5     		push	{r4, lr}
+ 2294              		.cfi_def_cfa_offset 8
+ 2295              		.cfi_offset 4, -8
+ 2296              		.cfi_offset 14, -4
+ 2297 0002 86B0     		sub	sp, sp, #24
+ 2298              		.cfi_def_cfa_offset 32
+ 2299 0004 0390     		str	r0, [sp, #12]
+ 2300 0006 0291     		str	r1, [sp, #8]
+ 2301 0008 0192     		str	r2, [sp, #4]
+ 177:sha256.c      ****   uint32_t curBufferPos = (uint32_t)p->count & 0x3F;
+ 2302              		.loc 1 177 0
+ 2303 000a 039B     		ldr	r3, [sp, #12]
+ 2304 000c 5C6A     		ldr	r4, [r3, #36]
+ 2305 000e 1B6A     		ldr	r3, [r3, #32]
+ 2306 0010 1A00     		movs	r2, r3
+ 2307 0012 3F23     		movs	r3, #63
+ 2308 0014 1340     		ands	r3, r2
+ 2309 0016 0593     		str	r3, [sp, #20]
+ 178:sha256.c      ****   while (size > 0)
+ 2310              		.loc 1 178 0
+ 2311 0018 22E0     		b	.L52
+ 2312              	.L53:
+ 179:sha256.c      ****   {
+ 180:sha256.c      ****     p->buffer[curBufferPos++] = *data++;
+ 2313              		.loc 1 180 0
+ 2314 001a 059B     		ldr	r3, [sp, #20]
+ 2315 001c 5A1C     		adds	r2, r3, #1
+ 2316 001e 0592     		str	r2, [sp, #20]
+ 2317 0020 029A     		ldr	r2, [sp, #8]
+ 2318 0022 511C     		adds	r1, r2, #1
+ 2319 0024 0291     		str	r1, [sp, #8]
+ 2320 0026 1078     		ldrb	r0, [r2]
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 45
+
+
+ 2321 0028 039A     		ldr	r2, [sp, #12]
+ 2322 002a 2821     		movs	r1, #40
+ 2323 002c D318     		adds	r3, r2, r3
+ 2324 002e 5B18     		adds	r3, r3, r1
+ 2325 0030 021C     		adds	r2, r0, #0
+ 2326 0032 1A70     		strb	r2, [r3]
+ 181:sha256.c      ****     p->count++;
+ 2327              		.loc 1 181 0
+ 2328 0034 039B     		ldr	r3, [sp, #12]
+ 2329 0036 5C6A     		ldr	r4, [r3, #36]
+ 2330 0038 1B6A     		ldr	r3, [r3, #32]
+ 2331 003a 0121     		movs	r1, #1
+ 2332 003c 0022     		movs	r2, #0
+ 2333 003e 5B18     		adds	r3, r3, r1
+ 2334 0040 5441     		adcs	r4, r4, r2
+ 2335 0042 039A     		ldr	r2, [sp, #12]
+ 2336 0044 1362     		str	r3, [r2, #32]
+ 2337 0046 5462     		str	r4, [r2, #36]
+ 182:sha256.c      ****     size--;
+ 2338              		.loc 1 182 0
+ 2339 0048 019B     		ldr	r3, [sp, #4]
+ 2340 004a 013B     		subs	r3, r3, #1
+ 2341 004c 0193     		str	r3, [sp, #4]
+ 183:sha256.c      ****     if (curBufferPos == 64)
+ 2342              		.loc 1 183 0
+ 2343 004e 059B     		ldr	r3, [sp, #20]
+ 2344 0050 402B     		cmp	r3, #64
+ 2345 0052 05D1     		bne	.L52
+ 184:sha256.c      ****     {
+ 185:sha256.c      ****       curBufferPos = 0;
+ 2346              		.loc 1 185 0
+ 2347 0054 0023     		movs	r3, #0
+ 2348 0056 0593     		str	r3, [sp, #20]
+ 186:sha256.c      ****       sha256_write_byte_block(p);
+ 2349              		.loc 1 186 0
+ 2350 0058 039B     		ldr	r3, [sp, #12]
+ 2351 005a 1800     		movs	r0, r3
+ 2352 005c FFF7FEFF 		bl	sha256_write_byte_block
+ 2353              	.L52:
+ 178:sha256.c      ****   {
+ 2354              		.loc 1 178 0
+ 2355 0060 019B     		ldr	r3, [sp, #4]
+ 2356 0062 002B     		cmp	r3, #0
+ 2357 0064 D9D1     		bne	.L53
+ 187:sha256.c      ****     }
+ 188:sha256.c      ****   }
+ 189:sha256.c      **** }
+ 2358              		.loc 1 189 0
+ 2359 0066 C046     		nop
+ 2360 0068 06B0     		add	sp, sp, #24
+ 2361              		@ sp needed
+ 2362 006a 10BD     		pop	{r4, pc}
+ 2363              		.cfi_endproc
+ 2364              	.LFE4:
+ 2365              		.size	sha256_update, .-sha256_update
+ 2366              		.section	.text.sha256_final,"ax",%progbits
+ 2367              		.align	2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 46
+
+
+ 2368              		.global	sha256_final
+ 2369              		.code	16
+ 2370              		.thumb_func
+ 2371              		.type	sha256_final, %function
+ 2372              	sha256_final:
+ 2373              	.LFB5:
+ 190:sha256.c      **** 
+ 191:sha256.c      **** 
+ 192:sha256.c      **** void
+ 193:sha256.c      **** sha256_final(sha256_t *p, unsigned char *digest)
+ 194:sha256.c      **** {
+ 2374              		.loc 1 194 0
+ 2375              		.cfi_startproc
+ 2376              		@ args = 0, pretend = 0, frame = 24
+ 2377              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2378 0000 70B5     		push	{r4, r5, r6, lr}
+ 2379              		.cfi_def_cfa_offset 16
+ 2380              		.cfi_offset 4, -16
+ 2381              		.cfi_offset 5, -12
+ 2382              		.cfi_offset 6, -8
+ 2383              		.cfi_offset 14, -4
+ 2384 0002 86B0     		sub	sp, sp, #24
+ 2385              		.cfi_def_cfa_offset 40
+ 2386 0004 0190     		str	r0, [sp, #4]
+ 2387 0006 0091     		str	r1, [sp]
+ 195:sha256.c      ****   uint64_t lenInBits = (p->count << 3);
+ 2388              		.loc 1 195 0
+ 2389 0008 019B     		ldr	r3, [sp, #4]
+ 2390 000a 5C6A     		ldr	r4, [r3, #36]
+ 2391 000c 1B6A     		ldr	r3, [r3, #32]
+ 2392 000e 5A0F     		lsrs	r2, r3, #29
+ 2393 0010 E100     		lsls	r1, r4, #3
+ 2394 0012 0A43     		orrs	r2, r1
+ 2395 0014 0592     		str	r2, [sp, #20]
+ 2396 0016 DB00     		lsls	r3, r3, #3
+ 2397 0018 0493     		str	r3, [sp, #16]
+ 196:sha256.c      ****   uint32_t curBufferPos = (uint32_t)p->count & 0x3F;
+ 2398              		.loc 1 196 0
+ 2399 001a 019B     		ldr	r3, [sp, #4]
+ 2400 001c 5C6A     		ldr	r4, [r3, #36]
+ 2401 001e 1B6A     		ldr	r3, [r3, #32]
+ 2402 0020 1A00     		movs	r2, r3
+ 2403 0022 3F23     		movs	r3, #63
+ 2404 0024 1340     		ands	r3, r2
+ 2405 0026 0393     		str	r3, [sp, #12]
+ 197:sha256.c      ****   unsigned i;
+ 198:sha256.c      ****   p->buffer[curBufferPos++] = 0x80;
+ 2406              		.loc 1 198 0
+ 2407 0028 039B     		ldr	r3, [sp, #12]
+ 2408 002a 5A1C     		adds	r2, r3, #1
+ 2409 002c 0392     		str	r2, [sp, #12]
+ 2410 002e 019A     		ldr	r2, [sp, #4]
+ 2411 0030 2821     		movs	r1, #40
+ 2412 0032 D318     		adds	r3, r2, r3
+ 2413 0034 5B18     		adds	r3, r3, r1
+ 2414 0036 8022     		movs	r2, #128
+ 2415 0038 1A70     		strb	r2, [r3]
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 47
+
+
+ 199:sha256.c      ****   while (curBufferPos != (64 - 8))
+ 2416              		.loc 1 199 0
+ 2417 003a 13E0     		b	.L55
+ 2418              	.L57:
+ 200:sha256.c      ****   {
+ 201:sha256.c      ****     curBufferPos &= 0x3F;
+ 2419              		.loc 1 201 0
+ 2420 003c 039B     		ldr	r3, [sp, #12]
+ 2421 003e 3F22     		movs	r2, #63
+ 2422 0040 1340     		ands	r3, r2
+ 2423 0042 0393     		str	r3, [sp, #12]
+ 202:sha256.c      ****     if (curBufferPos == 0)
+ 2424              		.loc 1 202 0
+ 2425 0044 039B     		ldr	r3, [sp, #12]
+ 2426 0046 002B     		cmp	r3, #0
+ 2427 0048 03D1     		bne	.L56
+ 203:sha256.c      ****       sha256_write_byte_block(p);
+ 2428              		.loc 1 203 0
+ 2429 004a 019B     		ldr	r3, [sp, #4]
+ 2430 004c 1800     		movs	r0, r3
+ 2431 004e FFF7FEFF 		bl	sha256_write_byte_block
+ 2432              	.L56:
+ 204:sha256.c      ****     p->buffer[curBufferPos++] = 0;
+ 2433              		.loc 1 204 0
+ 2434 0052 039B     		ldr	r3, [sp, #12]
+ 2435 0054 5A1C     		adds	r2, r3, #1
+ 2436 0056 0392     		str	r2, [sp, #12]
+ 2437 0058 019A     		ldr	r2, [sp, #4]
+ 2438 005a 2821     		movs	r1, #40
+ 2439 005c D318     		adds	r3, r2, r3
+ 2440 005e 5B18     		adds	r3, r3, r1
+ 2441 0060 0022     		movs	r2, #0
+ 2442 0062 1A70     		strb	r2, [r3]
+ 2443              	.L55:
+ 199:sha256.c      ****   {
+ 2444              		.loc 1 199 0
+ 2445 0064 039B     		ldr	r3, [sp, #12]
+ 2446 0066 382B     		cmp	r3, #56
+ 2447 0068 E8D1     		bne	.L57
+ 205:sha256.c      ****   }
+ 206:sha256.c      ****   for (i = 0; i < 8; i++)
+ 2448              		.loc 1 206 0
+ 2449 006a 0023     		movs	r3, #0
+ 2450 006c 0293     		str	r3, [sp, #8]
+ 2451 006e 19E0     		b	.L58
+ 2452              	.L59:
+ 207:sha256.c      ****   {
+ 208:sha256.c      ****     p->buffer[curBufferPos++] = (unsigned char)(lenInBits >> 56);
+ 2453              		.loc 1 208 0 discriminator 3
+ 2454 0070 039B     		ldr	r3, [sp, #12]
+ 2455 0072 5A1C     		adds	r2, r3, #1
+ 2456 0074 0392     		str	r2, [sp, #12]
+ 2457 0076 059A     		ldr	r2, [sp, #20]
+ 2458 0078 150E     		lsrs	r5, r2, #24
+ 2459 007a 0022     		movs	r2, #0
+ 2460 007c 1600     		movs	r6, r2
+ 2461 007e E8B2     		uxtb	r0, r5
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 48
+
+
+ 2462 0080 019A     		ldr	r2, [sp, #4]
+ 2463 0082 2821     		movs	r1, #40
+ 2464 0084 D318     		adds	r3, r2, r3
+ 2465 0086 5B18     		adds	r3, r3, r1
+ 2466 0088 021C     		adds	r2, r0, #0
+ 2467 008a 1A70     		strb	r2, [r3]
+ 209:sha256.c      ****     lenInBits <<= 8;
+ 2468              		.loc 1 209 0 discriminator 3
+ 2469 008c 049B     		ldr	r3, [sp, #16]
+ 2470 008e 1B0E     		lsrs	r3, r3, #24
+ 2471 0090 059A     		ldr	r2, [sp, #20]
+ 2472 0092 1202     		lsls	r2, r2, #8
+ 2473 0094 1343     		orrs	r3, r2
+ 2474 0096 0593     		str	r3, [sp, #20]
+ 2475 0098 049B     		ldr	r3, [sp, #16]
+ 2476 009a 1B02     		lsls	r3, r3, #8
+ 2477 009c 0493     		str	r3, [sp, #16]
+ 206:sha256.c      ****   {
+ 2478              		.loc 1 206 0 discriminator 3
+ 2479 009e 029B     		ldr	r3, [sp, #8]
+ 2480 00a0 0133     		adds	r3, r3, #1
+ 2481 00a2 0293     		str	r3, [sp, #8]
+ 2482              	.L58:
+ 206:sha256.c      ****   {
+ 2483              		.loc 1 206 0 is_stmt 0 discriminator 1
+ 2484 00a4 029B     		ldr	r3, [sp, #8]
+ 2485 00a6 072B     		cmp	r3, #7
+ 2486 00a8 E2D9     		bls	.L59
+ 210:sha256.c      ****   }
+ 211:sha256.c      ****   sha256_write_byte_block(p);
+ 2487              		.loc 1 211 0 is_stmt 1
+ 2488 00aa 019B     		ldr	r3, [sp, #4]
+ 2489 00ac 1800     		movs	r0, r3
+ 2490 00ae FFF7FEFF 		bl	sha256_write_byte_block
+ 212:sha256.c      **** 
+ 213:sha256.c      ****   for (i = 0; i < 8; i++)
+ 2491              		.loc 1 213 0
+ 2492 00b2 0023     		movs	r3, #0
+ 2493 00b4 0293     		str	r3, [sp, #8]
+ 2494 00b6 29E0     		b	.L60
+ 2495              	.L61:
+ 214:sha256.c      ****   {
+ 215:sha256.c      ****     *digest++ = (unsigned char)(p->state[i] >> 24);
+ 2496              		.loc 1 215 0 discriminator 3
+ 2497 00b8 009B     		ldr	r3, [sp]
+ 2498 00ba 5A1C     		adds	r2, r3, #1
+ 2499 00bc 0092     		str	r2, [sp]
+ 2500 00be 019A     		ldr	r2, [sp, #4]
+ 2501 00c0 0299     		ldr	r1, [sp, #8]
+ 2502 00c2 8900     		lsls	r1, r1, #2
+ 2503 00c4 8A58     		ldr	r2, [r1, r2]
+ 2504 00c6 120E     		lsrs	r2, r2, #24
+ 2505 00c8 D2B2     		uxtb	r2, r2
+ 2506 00ca 1A70     		strb	r2, [r3]
+ 216:sha256.c      ****     *digest++ = (unsigned char)(p->state[i] >> 16);
+ 2507              		.loc 1 216 0 discriminator 3
+ 2508 00cc 009B     		ldr	r3, [sp]
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 49
+
+
+ 2509 00ce 5A1C     		adds	r2, r3, #1
+ 2510 00d0 0092     		str	r2, [sp]
+ 2511 00d2 019A     		ldr	r2, [sp, #4]
+ 2512 00d4 0299     		ldr	r1, [sp, #8]
+ 2513 00d6 8900     		lsls	r1, r1, #2
+ 2514 00d8 8A58     		ldr	r2, [r1, r2]
+ 2515 00da 120C     		lsrs	r2, r2, #16
+ 2516 00dc D2B2     		uxtb	r2, r2
+ 2517 00de 1A70     		strb	r2, [r3]
+ 217:sha256.c      ****     *digest++ = (unsigned char)(p->state[i] >> 8);
+ 2518              		.loc 1 217 0 discriminator 3
+ 2519 00e0 009B     		ldr	r3, [sp]
+ 2520 00e2 5A1C     		adds	r2, r3, #1
+ 2521 00e4 0092     		str	r2, [sp]
+ 2522 00e6 019A     		ldr	r2, [sp, #4]
+ 2523 00e8 0299     		ldr	r1, [sp, #8]
+ 2524 00ea 8900     		lsls	r1, r1, #2
+ 2525 00ec 8A58     		ldr	r2, [r1, r2]
+ 2526 00ee 120A     		lsrs	r2, r2, #8
+ 2527 00f0 D2B2     		uxtb	r2, r2
+ 2528 00f2 1A70     		strb	r2, [r3]
+ 218:sha256.c      ****     *digest++ = (unsigned char)(p->state[i]);
+ 2529              		.loc 1 218 0 discriminator 3
+ 2530 00f4 009B     		ldr	r3, [sp]
+ 2531 00f6 5A1C     		adds	r2, r3, #1
+ 2532 00f8 0092     		str	r2, [sp]
+ 2533 00fa 019A     		ldr	r2, [sp, #4]
+ 2534 00fc 0299     		ldr	r1, [sp, #8]
+ 2535 00fe 8900     		lsls	r1, r1, #2
+ 2536 0100 8A58     		ldr	r2, [r1, r2]
+ 2537 0102 D2B2     		uxtb	r2, r2
+ 2538 0104 1A70     		strb	r2, [r3]
+ 213:sha256.c      ****   {
+ 2539              		.loc 1 213 0 discriminator 3
+ 2540 0106 029B     		ldr	r3, [sp, #8]
+ 2541 0108 0133     		adds	r3, r3, #1
+ 2542 010a 0293     		str	r3, [sp, #8]
+ 2543              	.L60:
+ 213:sha256.c      ****   {
+ 2544              		.loc 1 213 0 is_stmt 0 discriminator 1
+ 2545 010c 029B     		ldr	r3, [sp, #8]
+ 2546 010e 072B     		cmp	r3, #7
+ 2547 0110 D2D9     		bls	.L61
+ 219:sha256.c      ****   }
+ 220:sha256.c      ****   sha256_init(p);
+ 2548              		.loc 1 220 0 is_stmt 1
+ 2549 0112 019B     		ldr	r3, [sp, #4]
+ 2550 0114 1800     		movs	r0, r3
+ 2551 0116 FFF7FEFF 		bl	sha256_init
+ 221:sha256.c      **** }
+ 2552              		.loc 1 221 0
+ 2553 011a C046     		nop
+ 2554 011c 06B0     		add	sp, sp, #24
+ 2555              		@ sp needed
+ 2556 011e 70BD     		pop	{r4, r5, r6, pc}
+ 2557              		.cfi_endproc
+ 2558              	.LFE5:
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 50
+
+
+ 2559              		.size	sha256_final, .-sha256_final
+ 2560              		.text
+ 2561              	.Letext0:
+ 2562              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 2563              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 2564              		.file 4 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 2565              		.file 5 "sha256.h"
+ 2566              		.section	.debug_info,"",%progbits
+ 2567              	.Ldebug_info0:
+ 2568 0000 6F030000 		.4byte	0x36f
+ 2569 0004 0400     		.2byte	0x4
+ 2570 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 2571 000a 04       		.byte	0x4
+ 2572 000b 01       		.uleb128 0x1
+ 2573 000c 4D000000 		.4byte	.LASF34
+ 2574 0010 0C       		.byte	0xc
+ 2575 0011 6B020000 		.4byte	.LASF35
+ 2576 0015 4F010000 		.4byte	.LASF36
+ 2577 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 2578 001d 00000000 		.4byte	0
+ 2579 0021 00000000 		.4byte	.Ldebug_line0
+ 2580 0025 02       		.uleb128 0x2
+ 2581 0026 01       		.byte	0x1
+ 2582 0027 06       		.byte	0x6
+ 2583 0028 90020000 		.4byte	.LASF0
+ 2584 002c 02       		.uleb128 0x2
+ 2585 002d 01       		.byte	0x1
+ 2586 002e 08       		.byte	0x8
+ 2587 002f 36010000 		.4byte	.LASF1
+ 2588 0033 02       		.uleb128 0x2
+ 2589 0034 02       		.byte	0x2
+ 2590 0035 05       		.byte	0x5
+ 2591 0036 4D020000 		.4byte	.LASF2
+ 2592 003a 02       		.uleb128 0x2
+ 2593 003b 02       		.byte	0x2
+ 2594 003c 07       		.byte	0x7
+ 2595 003d 02010000 		.4byte	.LASF3
+ 2596 0041 02       		.uleb128 0x2
+ 2597 0042 04       		.byte	0x4
+ 2598 0043 05       		.byte	0x5
+ 2599 0044 7B020000 		.4byte	.LASF4
+ 2600 0048 03       		.uleb128 0x3
+ 2601 0049 44010000 		.4byte	.LASF7
+ 2602 004d 02       		.byte	0x2
+ 2603 004e 41       		.byte	0x41
+ 2604 004f 53000000 		.4byte	0x53
+ 2605 0053 02       		.uleb128 0x2
+ 2606 0054 04       		.byte	0x4
+ 2607 0055 07       		.byte	0x7
+ 2608 0056 F0000000 		.4byte	.LASF5
+ 2609 005a 02       		.uleb128 0x2
+ 2610 005b 08       		.byte	0x8
+ 2611 005c 05       		.byte	0x5
+ 2612 005d 1D020000 		.4byte	.LASF6
+ 2613 0061 03       		.uleb128 0x3
+ 2614 0062 57020000 		.4byte	.LASF8
+ 2615 0066 02       		.byte	0x2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 51
+
+
+ 2616 0067 5B       		.byte	0x5b
+ 2617 0068 6C000000 		.4byte	0x6c
+ 2618 006c 02       		.uleb128 0x2
+ 2619 006d 08       		.byte	0x8
+ 2620 006e 07       		.byte	0x7
+ 2621 006f E0010000 		.4byte	.LASF9
+ 2622 0073 04       		.uleb128 0x4
+ 2623 0074 04       		.byte	0x4
+ 2624 0075 05       		.byte	0x5
+ 2625 0076 696E7400 		.ascii	"int\000"
+ 2626 007a 02       		.uleb128 0x2
+ 2627 007b 04       		.byte	0x4
+ 2628 007c 07       		.byte	0x7
+ 2629 007d D3010000 		.4byte	.LASF10
+ 2630 0081 03       		.uleb128 0x3
+ 2631 0082 15010000 		.4byte	.LASF11
+ 2632 0086 03       		.byte	0x3
+ 2633 0087 30       		.byte	0x30
+ 2634 0088 48000000 		.4byte	0x48
+ 2635 008c 03       		.uleb128 0x3
+ 2636 008d 21000000 		.4byte	.LASF12
+ 2637 0091 03       		.byte	0x3
+ 2638 0092 3C       		.byte	0x3c
+ 2639 0093 61000000 		.4byte	0x61
+ 2640 0097 03       		.uleb128 0x3
+ 2641 0098 07000000 		.4byte	.LASF13
+ 2642 009c 04       		.byte	0x4
+ 2643 009d D8       		.byte	0xd8
+ 2644 009e 7A000000 		.4byte	0x7a
+ 2645 00a2 02       		.uleb128 0x2
+ 2646 00a3 08       		.byte	0x8
+ 2647 00a4 04       		.byte	0x4
+ 2648 00a5 84020000 		.4byte	.LASF14
+ 2649 00a9 02       		.uleb128 0x2
+ 2650 00aa 04       		.byte	0x4
+ 2651 00ab 07       		.byte	0x7
+ 2652 00ac 14020000 		.4byte	.LASF15
+ 2653 00b0 02       		.uleb128 0x2
+ 2654 00b1 01       		.byte	0x1
+ 2655 00b2 08       		.byte	0x8
+ 2656 00b3 3C020000 		.4byte	.LASF16
+ 2657 00b7 05       		.uleb128 0x5
+ 2658 00b8 04       		.byte	0x4
+ 2659 00b9 2C000000 		.4byte	0x2c
+ 2660 00bd 06       		.uleb128 0x6
+ 2661 00be 62020000 		.4byte	.LASF20
+ 2662 00c2 68       		.byte	0x68
+ 2663 00c3 05       		.byte	0x5
+ 2664 00c4 0C       		.byte	0xc
+ 2665 00c5 EE000000 		.4byte	0xee
+ 2666 00c9 07       		.uleb128 0x7
+ 2667 00ca 0E000000 		.4byte	.LASF17
+ 2668 00ce 05       		.byte	0x5
+ 2669 00cf 0E       		.byte	0xe
+ 2670 00d0 EE000000 		.4byte	0xee
+ 2671 00d4 00       		.byte	0
+ 2672 00d5 07       		.uleb128 0x7
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 52
+
+
+ 2673 00d6 1B000000 		.4byte	.LASF18
+ 2674 00da 05       		.byte	0x5
+ 2675 00db 0F       		.byte	0xf
+ 2676 00dc 8C000000 		.4byte	0x8c
+ 2677 00e0 20       		.byte	0x20
+ 2678 00e1 07       		.uleb128 0x7
+ 2679 00e2 14000000 		.4byte	.LASF19
+ 2680 00e6 05       		.byte	0x5
+ 2681 00e7 10       		.byte	0x10
+ 2682 00e8 FE000000 		.4byte	0xfe
+ 2683 00ec 28       		.byte	0x28
+ 2684 00ed 00       		.byte	0
+ 2685 00ee 08       		.uleb128 0x8
+ 2686 00ef 81000000 		.4byte	0x81
+ 2687 00f3 FE000000 		.4byte	0xfe
+ 2688 00f7 09       		.uleb128 0x9
+ 2689 00f8 A9000000 		.4byte	0xa9
+ 2690 00fc 07       		.byte	0x7
+ 2691 00fd 00       		.byte	0
+ 2692 00fe 08       		.uleb128 0x8
+ 2693 00ff 2C000000 		.4byte	0x2c
+ 2694 0103 0E010000 		.4byte	0x10e
+ 2695 0107 09       		.uleb128 0x9
+ 2696 0108 A9000000 		.4byte	0xa9
+ 2697 010c 3F       		.byte	0x3f
+ 2698 010d 00       		.byte	0
+ 2699 010e 03       		.uleb128 0x3
+ 2700 010f 62020000 		.4byte	.LASF20
+ 2701 0113 05       		.byte	0x5
+ 2702 0114 11       		.byte	0x11
+ 2703 0115 BD000000 		.4byte	0xbd
+ 2704 0119 0A       		.uleb128 0xa
+ 2705 011a 3C000000 		.4byte	.LASF25
+ 2706 011e 01       		.byte	0x1
+ 2707 011f 0D       		.byte	0xd
+ 2708 0120 00000000 		.4byte	.LFB0
+ 2709 0124 68000000 		.4byte	.LFE0-.LFB0
+ 2710 0128 01       		.uleb128 0x1
+ 2711 0129 9C       		.byte	0x9c
+ 2712 012a 3B010000 		.4byte	0x13b
+ 2713 012e 0B       		.uleb128 0xb
+ 2714 012f 7000     		.ascii	"p\000"
+ 2715 0131 01       		.byte	0x1
+ 2716 0132 0D       		.byte	0xd
+ 2717 0133 3B010000 		.4byte	0x13b
+ 2718 0137 02       		.uleb128 0x2
+ 2719 0138 91       		.byte	0x91
+ 2720 0139 74       		.sleb128 -12
+ 2721 013a 00       		.byte	0
+ 2722 013b 05       		.uleb128 0x5
+ 2723 013c 04       		.byte	0x4
+ 2724 013d 0E010000 		.4byte	0x10e
+ 2725 0141 0C       		.uleb128 0xc
+ 2726 0142 2B020000 		.4byte	.LASF22
+ 2727 0146 01       		.byte	0x1
+ 2728 0147 5F       		.byte	0x5f
+ 2729 0148 00000000 		.4byte	.LFB1
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 53
+
+
+ 2730 014c 740E0000 		.4byte	.LFE1-.LFB1
+ 2731 0150 01       		.uleb128 0x1
+ 2732 0151 9C       		.byte	0x9c
+ 2733 0152 EE010000 		.4byte	0x1ee
+ 2734 0156 0D       		.uleb128 0xd
+ 2735 0157 0E000000 		.4byte	.LASF17
+ 2736 015b 01       		.byte	0x1
+ 2737 015c 5F       		.byte	0x5f
+ 2738 015d EE010000 		.4byte	0x1ee
+ 2739 0161 03       		.uleb128 0x3
+ 2740 0162 91       		.byte	0x91
+ 2741 0163 847F     		.sleb128 -124
+ 2742 0165 0D       		.uleb128 0xd
+ 2743 0166 37000000 		.4byte	.LASF21
+ 2744 016a 01       		.byte	0x1
+ 2745 016b 5F       		.byte	0x5f
+ 2746 016c F4010000 		.4byte	0x1f4
+ 2747 0170 03       		.uleb128 0x3
+ 2748 0171 91       		.byte	0x91
+ 2749 0172 807F     		.sleb128 -128
+ 2750 0174 0E       		.uleb128 0xe
+ 2751 0175 5700     		.ascii	"W\000"
+ 2752 0177 01       		.byte	0x1
+ 2753 0178 61       		.byte	0x61
+ 2754 0179 FF010000 		.4byte	0x1ff
+ 2755 017d 03       		.uleb128 0x3
+ 2756 017e 91       		.byte	0x91
+ 2757 017f 8C7F     		.sleb128 -116
+ 2758 0181 0E       		.uleb128 0xe
+ 2759 0182 6A00     		.ascii	"j\000"
+ 2760 0184 01       		.byte	0x1
+ 2761 0185 62       		.byte	0x62
+ 2762 0186 7A000000 		.4byte	0x7a
+ 2763 018a 02       		.uleb128 0x2
+ 2764 018b 91       		.byte	0x91
+ 2765 018c 6C       		.sleb128 -20
+ 2766 018d 0E       		.uleb128 0xe
+ 2767 018e 6100     		.ascii	"a\000"
+ 2768 0190 01       		.byte	0x1
+ 2769 0191 64       		.byte	0x64
+ 2770 0192 81000000 		.4byte	0x81
+ 2771 0196 02       		.uleb128 0x2
+ 2772 0197 91       		.byte	0x91
+ 2773 0198 68       		.sleb128 -24
+ 2774 0199 0E       		.uleb128 0xe
+ 2775 019a 6200     		.ascii	"b\000"
+ 2776 019c 01       		.byte	0x1
+ 2777 019d 64       		.byte	0x64
+ 2778 019e 81000000 		.4byte	0x81
+ 2779 01a2 02       		.uleb128 0x2
+ 2780 01a3 91       		.byte	0x91
+ 2781 01a4 64       		.sleb128 -28
+ 2782 01a5 0E       		.uleb128 0xe
+ 2783 01a6 6300     		.ascii	"c\000"
+ 2784 01a8 01       		.byte	0x1
+ 2785 01a9 64       		.byte	0x64
+ 2786 01aa 81000000 		.4byte	0x81
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 54
+
+
+ 2787 01ae 02       		.uleb128 0x2
+ 2788 01af 91       		.byte	0x91
+ 2789 01b0 60       		.sleb128 -32
+ 2790 01b1 0E       		.uleb128 0xe
+ 2791 01b2 6400     		.ascii	"d\000"
+ 2792 01b4 01       		.byte	0x1
+ 2793 01b5 64       		.byte	0x64
+ 2794 01b6 81000000 		.4byte	0x81
+ 2795 01ba 02       		.uleb128 0x2
+ 2796 01bb 91       		.byte	0x91
+ 2797 01bc 5C       		.sleb128 -36
+ 2798 01bd 0E       		.uleb128 0xe
+ 2799 01be 6500     		.ascii	"e\000"
+ 2800 01c0 01       		.byte	0x1
+ 2801 01c1 64       		.byte	0x64
+ 2802 01c2 81000000 		.4byte	0x81
+ 2803 01c6 02       		.uleb128 0x2
+ 2804 01c7 91       		.byte	0x91
+ 2805 01c8 58       		.sleb128 -40
+ 2806 01c9 0E       		.uleb128 0xe
+ 2807 01ca 6600     		.ascii	"f\000"
+ 2808 01cc 01       		.byte	0x1
+ 2809 01cd 64       		.byte	0x64
+ 2810 01ce 81000000 		.4byte	0x81
+ 2811 01d2 02       		.uleb128 0x2
+ 2812 01d3 91       		.byte	0x91
+ 2813 01d4 54       		.sleb128 -44
+ 2814 01d5 0E       		.uleb128 0xe
+ 2815 01d6 6700     		.ascii	"g\000"
+ 2816 01d8 01       		.byte	0x1
+ 2817 01d9 64       		.byte	0x64
+ 2818 01da 81000000 		.4byte	0x81
+ 2819 01de 02       		.uleb128 0x2
+ 2820 01df 91       		.byte	0x91
+ 2821 01e0 50       		.sleb128 -48
+ 2822 01e1 0E       		.uleb128 0xe
+ 2823 01e2 6800     		.ascii	"h\000"
+ 2824 01e4 01       		.byte	0x1
+ 2825 01e5 64       		.byte	0x64
+ 2826 01e6 81000000 		.4byte	0x81
+ 2827 01ea 02       		.uleb128 0x2
+ 2828 01eb 91       		.byte	0x91
+ 2829 01ec 4C       		.sleb128 -52
+ 2830 01ed 00       		.byte	0
+ 2831 01ee 05       		.uleb128 0x5
+ 2832 01ef 04       		.byte	0x4
+ 2833 01f0 81000000 		.4byte	0x81
+ 2834 01f4 05       		.uleb128 0x5
+ 2835 01f5 04       		.byte	0x4
+ 2836 01f6 FA010000 		.4byte	0x1fa
+ 2837 01fa 0F       		.uleb128 0xf
+ 2838 01fb 81000000 		.4byte	0x81
+ 2839 01ff 08       		.uleb128 0x8
+ 2840 0200 81000000 		.4byte	0x81
+ 2841 0204 0F020000 		.4byte	0x20f
+ 2842 0208 09       		.uleb128 0x9
+ 2843 0209 A9000000 		.4byte	0xa9
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 55
+
+
+ 2844 020d 0F       		.byte	0xf
+ 2845 020e 00       		.byte	0
+ 2846 020f 10       		.uleb128 0x10
+ 2847 0210 1E010000 		.4byte	.LASF23
+ 2848 0214 01       		.byte	0x1
+ 2849 0215 96       		.byte	0x96
+ 2850 0216 00000000 		.4byte	.LFB2
+ 2851 021a 7C000000 		.4byte	.LFE2-.LFB2
+ 2852 021e 01       		.uleb128 0x1
+ 2853 021f 9C       		.byte	0x9c
+ 2854 0220 4D020000 		.4byte	0x24d
+ 2855 0224 0B       		.uleb128 0xb
+ 2856 0225 7000     		.ascii	"p\000"
+ 2857 0227 01       		.byte	0x1
+ 2858 0228 96       		.byte	0x96
+ 2859 0229 3B010000 		.4byte	0x13b
+ 2860 022d 03       		.uleb128 0x3
+ 2861 022e 91       		.byte	0x91
+ 2862 022f AC7F     		.sleb128 -84
+ 2863 0231 11       		.uleb128 0x11
+ 2864 0232 00000000 		.4byte	.LASF24
+ 2865 0236 01       		.byte	0x1
+ 2866 0237 98       		.byte	0x98
+ 2867 0238 FF010000 		.4byte	0x1ff
+ 2868 023c 03       		.uleb128 0x3
+ 2869 023d 91       		.byte	0x91
+ 2870 023e B47F     		.sleb128 -76
+ 2871 0240 0E       		.uleb128 0xe
+ 2872 0241 6900     		.ascii	"i\000"
+ 2873 0243 01       		.byte	0x1
+ 2874 0244 99       		.byte	0x99
+ 2875 0245 7A000000 		.4byte	0x7a
+ 2876 0249 02       		.uleb128 0x2
+ 2877 024a 91       		.byte	0x91
+ 2878 024b 74       		.sleb128 -12
+ 2879 024c 00       		.byte	0
+ 2880 024d 12       		.uleb128 0x12
+ 2881 024e 41020000 		.4byte	.LASF26
+ 2882 0252 01       		.byte	0x1
+ 2883 0253 A5       		.byte	0xa5
+ 2884 0254 00000000 		.4byte	.LFB3
+ 2885 0258 30000000 		.4byte	.LFE3-.LFB3
+ 2886 025c 01       		.uleb128 0x1
+ 2887 025d 9C       		.byte	0x9c
+ 2888 025e 9F020000 		.4byte	0x29f
+ 2889 0262 0B       		.uleb128 0xb
+ 2890 0263 62756600 		.ascii	"buf\000"
+ 2891 0267 01       		.byte	0x1
+ 2892 0268 A5       		.byte	0xa5
+ 2893 0269 B7000000 		.4byte	0xb7
+ 2894 026d 03       		.uleb128 0x3
+ 2895 026e 91       		.byte	0x91
+ 2896 026f 8C7F     		.sleb128 -116
+ 2897 0271 0D       		.uleb128 0xd
+ 2898 0272 37000000 		.4byte	.LASF21
+ 2899 0276 01       		.byte	0x1
+ 2900 0277 A5       		.byte	0xa5
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 56
+
+
+ 2901 0278 9F020000 		.4byte	0x29f
+ 2902 027c 03       		.uleb128 0x3
+ 2903 027d 91       		.byte	0x91
+ 2904 027e 887F     		.sleb128 -120
+ 2905 0280 0D       		.uleb128 0xd
+ 2906 0281 48000000 		.4byte	.LASF27
+ 2907 0285 01       		.byte	0x1
+ 2908 0286 A5       		.byte	0xa5
+ 2909 0287 97000000 		.4byte	0x97
+ 2910 028b 03       		.uleb128 0x3
+ 2911 028c 91       		.byte	0x91
+ 2912 028d 847F     		.sleb128 -124
+ 2913 028f 11       		.uleb128 0x11
+ 2914 0290 05020000 		.4byte	.LASF28
+ 2915 0294 01       		.byte	0x1
+ 2916 0295 A7       		.byte	0xa7
+ 2917 0296 0E010000 		.4byte	0x10e
+ 2918 029a 03       		.uleb128 0x3
+ 2919 029b 91       		.byte	0x91
+ 2920 029c 907F     		.sleb128 -112
+ 2921 029e 00       		.byte	0
+ 2922 029f 05       		.uleb128 0x5
+ 2923 02a0 04       		.byte	0x4
+ 2924 02a1 A5020000 		.4byte	0x2a5
+ 2925 02a5 0F       		.uleb128 0xf
+ 2926 02a6 2C000000 		.4byte	0x2c
+ 2927 02aa 12       		.uleb128 0x12
+ 2928 02ab F7010000 		.4byte	.LASF29
+ 2929 02af 01       		.byte	0x1
+ 2930 02b0 AF       		.byte	0xaf
+ 2931 02b1 00000000 		.4byte	.LFB4
+ 2932 02b5 6C000000 		.4byte	.LFE4-.LFB4
+ 2933 02b9 01       		.uleb128 0x1
+ 2934 02ba 9C       		.byte	0x9c
+ 2935 02bb F6020000 		.4byte	0x2f6
+ 2936 02bf 0B       		.uleb128 0xb
+ 2937 02c0 7000     		.ascii	"p\000"
+ 2938 02c2 01       		.byte	0x1
+ 2939 02c3 AF       		.byte	0xaf
+ 2940 02c4 3B010000 		.4byte	0x13b
+ 2941 02c8 02       		.uleb128 0x2
+ 2942 02c9 91       		.byte	0x91
+ 2943 02ca 6C       		.sleb128 -20
+ 2944 02cb 0D       		.uleb128 0xd
+ 2945 02cc 37000000 		.4byte	.LASF21
+ 2946 02d0 01       		.byte	0x1
+ 2947 02d1 AF       		.byte	0xaf
+ 2948 02d2 9F020000 		.4byte	0x29f
+ 2949 02d6 02       		.uleb128 0x2
+ 2950 02d7 91       		.byte	0x91
+ 2951 02d8 68       		.sleb128 -24
+ 2952 02d9 0D       		.uleb128 0xd
+ 2953 02da 48000000 		.4byte	.LASF27
+ 2954 02de 01       		.byte	0x1
+ 2955 02df AF       		.byte	0xaf
+ 2956 02e0 97000000 		.4byte	0x97
+ 2957 02e4 02       		.uleb128 0x2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 57
+
+
+ 2958 02e5 91       		.byte	0x91
+ 2959 02e6 64       		.sleb128 -28
+ 2960 02e7 11       		.uleb128 0x11
+ 2961 02e8 9C020000 		.4byte	.LASF30
+ 2962 02ec 01       		.byte	0x1
+ 2963 02ed B1       		.byte	0xb1
+ 2964 02ee 81000000 		.4byte	0x81
+ 2965 02f2 02       		.uleb128 0x2
+ 2966 02f3 91       		.byte	0x91
+ 2967 02f4 74       		.sleb128 -12
+ 2968 02f5 00       		.byte	0
+ 2969 02f6 12       		.uleb128 0x12
+ 2970 02f7 2A000000 		.4byte	.LASF31
+ 2971 02fb 01       		.byte	0x1
+ 2972 02fc C1       		.byte	0xc1
+ 2973 02fd 00000000 		.4byte	.LFB5
+ 2974 0301 20010000 		.4byte	.LFE5-.LFB5
+ 2975 0305 01       		.uleb128 0x1
+ 2976 0306 9C       		.byte	0x9c
+ 2977 0307 4E030000 		.4byte	0x34e
+ 2978 030b 0B       		.uleb128 0xb
+ 2979 030c 7000     		.ascii	"p\000"
+ 2980 030e 01       		.byte	0x1
+ 2981 030f C1       		.byte	0xc1
+ 2982 0310 3B010000 		.4byte	0x13b
+ 2983 0314 02       		.uleb128 0x2
+ 2984 0315 91       		.byte	0x91
+ 2985 0316 5C       		.sleb128 -36
+ 2986 0317 0D       		.uleb128 0xd
+ 2987 0318 74020000 		.4byte	.LASF32
+ 2988 031c 01       		.byte	0x1
+ 2989 031d C1       		.byte	0xc1
+ 2990 031e B7000000 		.4byte	0xb7
+ 2991 0322 02       		.uleb128 0x2
+ 2992 0323 91       		.byte	0x91
+ 2993 0324 58       		.sleb128 -40
+ 2994 0325 11       		.uleb128 0x11
+ 2995 0326 0A020000 		.4byte	.LASF33
+ 2996 032a 01       		.byte	0x1
+ 2997 032b C3       		.byte	0xc3
+ 2998 032c 8C000000 		.4byte	0x8c
+ 2999 0330 02       		.uleb128 0x2
+ 3000 0331 91       		.byte	0x91
+ 3001 0332 68       		.sleb128 -24
+ 3002 0333 11       		.uleb128 0x11
+ 3003 0334 9C020000 		.4byte	.LASF30
+ 3004 0338 01       		.byte	0x1
+ 3005 0339 C4       		.byte	0xc4
+ 3006 033a 81000000 		.4byte	0x81
+ 3007 033e 02       		.uleb128 0x2
+ 3008 033f 91       		.byte	0x91
+ 3009 0340 64       		.sleb128 -28
+ 3010 0341 0E       		.uleb128 0xe
+ 3011 0342 6900     		.ascii	"i\000"
+ 3012 0344 01       		.byte	0x1
+ 3013 0345 C5       		.byte	0xc5
+ 3014 0346 7A000000 		.4byte	0x7a
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 58
+
+
+ 3015 034a 02       		.uleb128 0x2
+ 3016 034b 91       		.byte	0x91
+ 3017 034c 60       		.sleb128 -32
+ 3018 034d 00       		.byte	0
+ 3019 034e 08       		.uleb128 0x8
+ 3020 034f FA010000 		.4byte	0x1fa
+ 3021 0353 5E030000 		.4byte	0x35e
+ 3022 0357 09       		.uleb128 0x9
+ 3023 0358 A9000000 		.4byte	0xa9
+ 3024 035c 3F       		.byte	0x3f
+ 3025 035d 00       		.byte	0
+ 3026 035e 0E       		.uleb128 0xe
+ 3027 035f 4B00     		.ascii	"K\000"
+ 3028 0361 01       		.byte	0x1
+ 3029 0362 4B       		.byte	0x4b
+ 3030 0363 6D030000 		.4byte	0x36d
+ 3031 0367 05       		.uleb128 0x5
+ 3032 0368 03       		.byte	0x3
+ 3033 0369 00000000 		.4byte	K
+ 3034 036d 0F       		.uleb128 0xf
+ 3035 036e 4E030000 		.4byte	0x34e
+ 3036 0372 00       		.byte	0
+ 3037              		.section	.debug_abbrev,"",%progbits
+ 3038              	.Ldebug_abbrev0:
+ 3039 0000 01       		.uleb128 0x1
+ 3040 0001 11       		.uleb128 0x11
+ 3041 0002 01       		.byte	0x1
+ 3042 0003 25       		.uleb128 0x25
+ 3043 0004 0E       		.uleb128 0xe
+ 3044 0005 13       		.uleb128 0x13
+ 3045 0006 0B       		.uleb128 0xb
+ 3046 0007 03       		.uleb128 0x3
+ 3047 0008 0E       		.uleb128 0xe
+ 3048 0009 1B       		.uleb128 0x1b
+ 3049 000a 0E       		.uleb128 0xe
+ 3050 000b 55       		.uleb128 0x55
+ 3051 000c 17       		.uleb128 0x17
+ 3052 000d 11       		.uleb128 0x11
+ 3053 000e 01       		.uleb128 0x1
+ 3054 000f 10       		.uleb128 0x10
+ 3055 0010 17       		.uleb128 0x17
+ 3056 0011 00       		.byte	0
+ 3057 0012 00       		.byte	0
+ 3058 0013 02       		.uleb128 0x2
+ 3059 0014 24       		.uleb128 0x24
+ 3060 0015 00       		.byte	0
+ 3061 0016 0B       		.uleb128 0xb
+ 3062 0017 0B       		.uleb128 0xb
+ 3063 0018 3E       		.uleb128 0x3e
+ 3064 0019 0B       		.uleb128 0xb
+ 3065 001a 03       		.uleb128 0x3
+ 3066 001b 0E       		.uleb128 0xe
+ 3067 001c 00       		.byte	0
+ 3068 001d 00       		.byte	0
+ 3069 001e 03       		.uleb128 0x3
+ 3070 001f 16       		.uleb128 0x16
+ 3071 0020 00       		.byte	0
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 59
+
+
+ 3072 0021 03       		.uleb128 0x3
+ 3073 0022 0E       		.uleb128 0xe
+ 3074 0023 3A       		.uleb128 0x3a
+ 3075 0024 0B       		.uleb128 0xb
+ 3076 0025 3B       		.uleb128 0x3b
+ 3077 0026 0B       		.uleb128 0xb
+ 3078 0027 49       		.uleb128 0x49
+ 3079 0028 13       		.uleb128 0x13
+ 3080 0029 00       		.byte	0
+ 3081 002a 00       		.byte	0
+ 3082 002b 04       		.uleb128 0x4
+ 3083 002c 24       		.uleb128 0x24
+ 3084 002d 00       		.byte	0
+ 3085 002e 0B       		.uleb128 0xb
+ 3086 002f 0B       		.uleb128 0xb
+ 3087 0030 3E       		.uleb128 0x3e
+ 3088 0031 0B       		.uleb128 0xb
+ 3089 0032 03       		.uleb128 0x3
+ 3090 0033 08       		.uleb128 0x8
+ 3091 0034 00       		.byte	0
+ 3092 0035 00       		.byte	0
+ 3093 0036 05       		.uleb128 0x5
+ 3094 0037 0F       		.uleb128 0xf
+ 3095 0038 00       		.byte	0
+ 3096 0039 0B       		.uleb128 0xb
+ 3097 003a 0B       		.uleb128 0xb
+ 3098 003b 49       		.uleb128 0x49
+ 3099 003c 13       		.uleb128 0x13
+ 3100 003d 00       		.byte	0
+ 3101 003e 00       		.byte	0
+ 3102 003f 06       		.uleb128 0x6
+ 3103 0040 13       		.uleb128 0x13
+ 3104 0041 01       		.byte	0x1
+ 3105 0042 03       		.uleb128 0x3
+ 3106 0043 0E       		.uleb128 0xe
+ 3107 0044 0B       		.uleb128 0xb
+ 3108 0045 0B       		.uleb128 0xb
+ 3109 0046 3A       		.uleb128 0x3a
+ 3110 0047 0B       		.uleb128 0xb
+ 3111 0048 3B       		.uleb128 0x3b
+ 3112 0049 0B       		.uleb128 0xb
+ 3113 004a 01       		.uleb128 0x1
+ 3114 004b 13       		.uleb128 0x13
+ 3115 004c 00       		.byte	0
+ 3116 004d 00       		.byte	0
+ 3117 004e 07       		.uleb128 0x7
+ 3118 004f 0D       		.uleb128 0xd
+ 3119 0050 00       		.byte	0
+ 3120 0051 03       		.uleb128 0x3
+ 3121 0052 0E       		.uleb128 0xe
+ 3122 0053 3A       		.uleb128 0x3a
+ 3123 0054 0B       		.uleb128 0xb
+ 3124 0055 3B       		.uleb128 0x3b
+ 3125 0056 0B       		.uleb128 0xb
+ 3126 0057 49       		.uleb128 0x49
+ 3127 0058 13       		.uleb128 0x13
+ 3128 0059 38       		.uleb128 0x38
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 60
+
+
+ 3129 005a 0B       		.uleb128 0xb
+ 3130 005b 00       		.byte	0
+ 3131 005c 00       		.byte	0
+ 3132 005d 08       		.uleb128 0x8
+ 3133 005e 01       		.uleb128 0x1
+ 3134 005f 01       		.byte	0x1
+ 3135 0060 49       		.uleb128 0x49
+ 3136 0061 13       		.uleb128 0x13
+ 3137 0062 01       		.uleb128 0x1
+ 3138 0063 13       		.uleb128 0x13
+ 3139 0064 00       		.byte	0
+ 3140 0065 00       		.byte	0
+ 3141 0066 09       		.uleb128 0x9
+ 3142 0067 21       		.uleb128 0x21
+ 3143 0068 00       		.byte	0
+ 3144 0069 49       		.uleb128 0x49
+ 3145 006a 13       		.uleb128 0x13
+ 3146 006b 2F       		.uleb128 0x2f
+ 3147 006c 0B       		.uleb128 0xb
+ 3148 006d 00       		.byte	0
+ 3149 006e 00       		.byte	0
+ 3150 006f 0A       		.uleb128 0xa
+ 3151 0070 2E       		.uleb128 0x2e
+ 3152 0071 01       		.byte	0x1
+ 3153 0072 3F       		.uleb128 0x3f
+ 3154 0073 19       		.uleb128 0x19
+ 3155 0074 03       		.uleb128 0x3
+ 3156 0075 0E       		.uleb128 0xe
+ 3157 0076 3A       		.uleb128 0x3a
+ 3158 0077 0B       		.uleb128 0xb
+ 3159 0078 3B       		.uleb128 0x3b
+ 3160 0079 0B       		.uleb128 0xb
+ 3161 007a 27       		.uleb128 0x27
+ 3162 007b 19       		.uleb128 0x19
+ 3163 007c 11       		.uleb128 0x11
+ 3164 007d 01       		.uleb128 0x1
+ 3165 007e 12       		.uleb128 0x12
+ 3166 007f 06       		.uleb128 0x6
+ 3167 0080 40       		.uleb128 0x40
+ 3168 0081 18       		.uleb128 0x18
+ 3169 0082 9742     		.uleb128 0x2117
+ 3170 0084 19       		.uleb128 0x19
+ 3171 0085 01       		.uleb128 0x1
+ 3172 0086 13       		.uleb128 0x13
+ 3173 0087 00       		.byte	0
+ 3174 0088 00       		.byte	0
+ 3175 0089 0B       		.uleb128 0xb
+ 3176 008a 05       		.uleb128 0x5
+ 3177 008b 00       		.byte	0
+ 3178 008c 03       		.uleb128 0x3
+ 3179 008d 08       		.uleb128 0x8
+ 3180 008e 3A       		.uleb128 0x3a
+ 3181 008f 0B       		.uleb128 0xb
+ 3182 0090 3B       		.uleb128 0x3b
+ 3183 0091 0B       		.uleb128 0xb
+ 3184 0092 49       		.uleb128 0x49
+ 3185 0093 13       		.uleb128 0x13
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 61
+
+
+ 3186 0094 02       		.uleb128 0x2
+ 3187 0095 18       		.uleb128 0x18
+ 3188 0096 00       		.byte	0
+ 3189 0097 00       		.byte	0
+ 3190 0098 0C       		.uleb128 0xc
+ 3191 0099 2E       		.uleb128 0x2e
+ 3192 009a 01       		.byte	0x1
+ 3193 009b 03       		.uleb128 0x3
+ 3194 009c 0E       		.uleb128 0xe
+ 3195 009d 3A       		.uleb128 0x3a
+ 3196 009e 0B       		.uleb128 0xb
+ 3197 009f 3B       		.uleb128 0x3b
+ 3198 00a0 0B       		.uleb128 0xb
+ 3199 00a1 27       		.uleb128 0x27
+ 3200 00a2 19       		.uleb128 0x19
+ 3201 00a3 11       		.uleb128 0x11
+ 3202 00a4 01       		.uleb128 0x1
+ 3203 00a5 12       		.uleb128 0x12
+ 3204 00a6 06       		.uleb128 0x6
+ 3205 00a7 40       		.uleb128 0x40
+ 3206 00a8 18       		.uleb128 0x18
+ 3207 00a9 9742     		.uleb128 0x2117
+ 3208 00ab 19       		.uleb128 0x19
+ 3209 00ac 01       		.uleb128 0x1
+ 3210 00ad 13       		.uleb128 0x13
+ 3211 00ae 00       		.byte	0
+ 3212 00af 00       		.byte	0
+ 3213 00b0 0D       		.uleb128 0xd
+ 3214 00b1 05       		.uleb128 0x5
+ 3215 00b2 00       		.byte	0
+ 3216 00b3 03       		.uleb128 0x3
+ 3217 00b4 0E       		.uleb128 0xe
+ 3218 00b5 3A       		.uleb128 0x3a
+ 3219 00b6 0B       		.uleb128 0xb
+ 3220 00b7 3B       		.uleb128 0x3b
+ 3221 00b8 0B       		.uleb128 0xb
+ 3222 00b9 49       		.uleb128 0x49
+ 3223 00ba 13       		.uleb128 0x13
+ 3224 00bb 02       		.uleb128 0x2
+ 3225 00bc 18       		.uleb128 0x18
+ 3226 00bd 00       		.byte	0
+ 3227 00be 00       		.byte	0
+ 3228 00bf 0E       		.uleb128 0xe
+ 3229 00c0 34       		.uleb128 0x34
+ 3230 00c1 00       		.byte	0
+ 3231 00c2 03       		.uleb128 0x3
+ 3232 00c3 08       		.uleb128 0x8
+ 3233 00c4 3A       		.uleb128 0x3a
+ 3234 00c5 0B       		.uleb128 0xb
+ 3235 00c6 3B       		.uleb128 0x3b
+ 3236 00c7 0B       		.uleb128 0xb
+ 3237 00c8 49       		.uleb128 0x49
+ 3238 00c9 13       		.uleb128 0x13
+ 3239 00ca 02       		.uleb128 0x2
+ 3240 00cb 18       		.uleb128 0x18
+ 3241 00cc 00       		.byte	0
+ 3242 00cd 00       		.byte	0
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 62
+
+
+ 3243 00ce 0F       		.uleb128 0xf
+ 3244 00cf 26       		.uleb128 0x26
+ 3245 00d0 00       		.byte	0
+ 3246 00d1 49       		.uleb128 0x49
+ 3247 00d2 13       		.uleb128 0x13
+ 3248 00d3 00       		.byte	0
+ 3249 00d4 00       		.byte	0
+ 3250 00d5 10       		.uleb128 0x10
+ 3251 00d6 2E       		.uleb128 0x2e
+ 3252 00d7 01       		.byte	0x1
+ 3253 00d8 03       		.uleb128 0x3
+ 3254 00d9 0E       		.uleb128 0xe
+ 3255 00da 3A       		.uleb128 0x3a
+ 3256 00db 0B       		.uleb128 0xb
+ 3257 00dc 3B       		.uleb128 0x3b
+ 3258 00dd 0B       		.uleb128 0xb
+ 3259 00de 27       		.uleb128 0x27
+ 3260 00df 19       		.uleb128 0x19
+ 3261 00e0 11       		.uleb128 0x11
+ 3262 00e1 01       		.uleb128 0x1
+ 3263 00e2 12       		.uleb128 0x12
+ 3264 00e3 06       		.uleb128 0x6
+ 3265 00e4 40       		.uleb128 0x40
+ 3266 00e5 18       		.uleb128 0x18
+ 3267 00e6 9642     		.uleb128 0x2116
+ 3268 00e8 19       		.uleb128 0x19
+ 3269 00e9 01       		.uleb128 0x1
+ 3270 00ea 13       		.uleb128 0x13
+ 3271 00eb 00       		.byte	0
+ 3272 00ec 00       		.byte	0
+ 3273 00ed 11       		.uleb128 0x11
+ 3274 00ee 34       		.uleb128 0x34
+ 3275 00ef 00       		.byte	0
+ 3276 00f0 03       		.uleb128 0x3
+ 3277 00f1 0E       		.uleb128 0xe
+ 3278 00f2 3A       		.uleb128 0x3a
+ 3279 00f3 0B       		.uleb128 0xb
+ 3280 00f4 3B       		.uleb128 0x3b
+ 3281 00f5 0B       		.uleb128 0xb
+ 3282 00f6 49       		.uleb128 0x49
+ 3283 00f7 13       		.uleb128 0x13
+ 3284 00f8 02       		.uleb128 0x2
+ 3285 00f9 18       		.uleb128 0x18
+ 3286 00fa 00       		.byte	0
+ 3287 00fb 00       		.byte	0
+ 3288 00fc 12       		.uleb128 0x12
+ 3289 00fd 2E       		.uleb128 0x2e
+ 3290 00fe 01       		.byte	0x1
+ 3291 00ff 3F       		.uleb128 0x3f
+ 3292 0100 19       		.uleb128 0x19
+ 3293 0101 03       		.uleb128 0x3
+ 3294 0102 0E       		.uleb128 0xe
+ 3295 0103 3A       		.uleb128 0x3a
+ 3296 0104 0B       		.uleb128 0xb
+ 3297 0105 3B       		.uleb128 0x3b
+ 3298 0106 0B       		.uleb128 0xb
+ 3299 0107 27       		.uleb128 0x27
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 63
+
+
+ 3300 0108 19       		.uleb128 0x19
+ 3301 0109 11       		.uleb128 0x11
+ 3302 010a 01       		.uleb128 0x1
+ 3303 010b 12       		.uleb128 0x12
+ 3304 010c 06       		.uleb128 0x6
+ 3305 010d 40       		.uleb128 0x40
+ 3306 010e 18       		.uleb128 0x18
+ 3307 010f 9642     		.uleb128 0x2116
+ 3308 0111 19       		.uleb128 0x19
+ 3309 0112 01       		.uleb128 0x1
+ 3310 0113 13       		.uleb128 0x13
+ 3311 0114 00       		.byte	0
+ 3312 0115 00       		.byte	0
+ 3313 0116 00       		.byte	0
+ 3314              		.section	.debug_aranges,"",%progbits
+ 3315 0000 44000000 		.4byte	0x44
+ 3316 0004 0200     		.2byte	0x2
+ 3317 0006 00000000 		.4byte	.Ldebug_info0
+ 3318 000a 04       		.byte	0x4
+ 3319 000b 00       		.byte	0
+ 3320 000c 0000     		.2byte	0
+ 3321 000e 0000     		.2byte	0
+ 3322 0010 00000000 		.4byte	.LFB0
+ 3323 0014 68000000 		.4byte	.LFE0-.LFB0
+ 3324 0018 00000000 		.4byte	.LFB1
+ 3325 001c 740E0000 		.4byte	.LFE1-.LFB1
+ 3326 0020 00000000 		.4byte	.LFB2
+ 3327 0024 7C000000 		.4byte	.LFE2-.LFB2
+ 3328 0028 00000000 		.4byte	.LFB3
+ 3329 002c 30000000 		.4byte	.LFE3-.LFB3
+ 3330 0030 00000000 		.4byte	.LFB4
+ 3331 0034 6C000000 		.4byte	.LFE4-.LFB4
+ 3332 0038 00000000 		.4byte	.LFB5
+ 3333 003c 20010000 		.4byte	.LFE5-.LFB5
+ 3334 0040 00000000 		.4byte	0
+ 3335 0044 00000000 		.4byte	0
+ 3336              		.section	.debug_ranges,"",%progbits
+ 3337              	.Ldebug_ranges0:
+ 3338 0000 00000000 		.4byte	.LFB0
+ 3339 0004 68000000 		.4byte	.LFE0
+ 3340 0008 00000000 		.4byte	.LFB1
+ 3341 000c 740E0000 		.4byte	.LFE1
+ 3342 0010 00000000 		.4byte	.LFB2
+ 3343 0014 7C000000 		.4byte	.LFE2
+ 3344 0018 00000000 		.4byte	.LFB3
+ 3345 001c 30000000 		.4byte	.LFE3
+ 3346 0020 00000000 		.4byte	.LFB4
+ 3347 0024 6C000000 		.4byte	.LFE4
+ 3348 0028 00000000 		.4byte	.LFB5
+ 3349 002c 20010000 		.4byte	.LFE5
+ 3350 0030 00000000 		.4byte	0
+ 3351 0034 00000000 		.4byte	0
+ 3352              		.section	.debug_line,"",%progbits
+ 3353              	.Ldebug_line0:
+ 3354 0000 FB030000 		.section	.debug_str,"MS",%progbits,1
+ 3354      0200AA01 
+ 3354      00000201 
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 64
+
+
+ 3354      FB0E0D00 
+ 3354      01010101 
+ 3355              	.LASF24:
+ 3356 0000 64617461 		.ascii	"data32\000"
+ 3356      333200
+ 3357              	.LASF13:
+ 3358 0007 73697A65 		.ascii	"size_t\000"
+ 3358      5F7400
+ 3359              	.LASF17:
+ 3360 000e 73746174 		.ascii	"state\000"
+ 3360      6500
+ 3361              	.LASF19:
+ 3362 0014 62756666 		.ascii	"buffer\000"
+ 3362      657200
+ 3363              	.LASF18:
+ 3364 001b 636F756E 		.ascii	"count\000"
+ 3364      7400
+ 3365              	.LASF12:
+ 3366 0021 75696E74 		.ascii	"uint64_t\000"
+ 3366      36345F74 
+ 3366      00
+ 3367              	.LASF31:
+ 3368 002a 73686132 		.ascii	"sha256_final\000"
+ 3368      35365F66 
+ 3368      696E616C 
+ 3368      00
+ 3369              	.LASF21:
+ 3370 0037 64617461 		.ascii	"data\000"
+ 3370      00
+ 3371              	.LASF25:
+ 3372 003c 73686132 		.ascii	"sha256_init\000"
+ 3372      35365F69 
+ 3372      6E697400 
+ 3373              	.LASF27:
+ 3374 0048 73697A65 		.ascii	"size\000"
+ 3374      00
+ 3375              	.LASF34:
+ 3376 004d 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 3376      43313120 
+ 3376      352E342E 
+ 3376      31203230 
+ 3376      31363036 
+ 3377 0080 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 3377      20726576 
+ 3377      6973696F 
+ 3377      6E203233 
+ 3377      37373135 
+ 3378 00b3 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects -fomit-fram"
+ 3378      66756E63 
+ 3378      74696F6E 
+ 3378      2D736563 
+ 3378      74696F6E 
+ 3379 00e6 652D706F 		.ascii	"e-pointer\000"
+ 3379      696E7465 
+ 3379      7200
+ 3380              	.LASF5:
+ 3381 00f0 6C6F6E67 		.ascii	"long unsigned int\000"
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 65
+
+
+ 3381      20756E73 
+ 3381      69676E65 
+ 3381      6420696E 
+ 3381      7400
+ 3382              	.LASF3:
+ 3383 0102 73686F72 		.ascii	"short unsigned int\000"
+ 3383      7420756E 
+ 3383      7369676E 
+ 3383      65642069 
+ 3383      6E7400
+ 3384              	.LASF11:
+ 3385 0115 75696E74 		.ascii	"uint32_t\000"
+ 3385      33325F74 
+ 3385      00
+ 3386              	.LASF23:
+ 3387 011e 73686132 		.ascii	"sha256_write_byte_block\000"
+ 3387      35365F77 
+ 3387      72697465 
+ 3387      5F627974 
+ 3387      655F626C 
+ 3388              	.LASF1:
+ 3389 0136 756E7369 		.ascii	"unsigned char\000"
+ 3389      676E6564 
+ 3389      20636861 
+ 3389      7200
+ 3390              	.LASF7:
+ 3391 0144 5F5F7569 		.ascii	"__uint32_t\000"
+ 3391      6E743332 
+ 3391      5F7400
+ 3392              	.LASF36:
+ 3393 014f 443A5C44 		.ascii	"D:\\Dropbox\\5_kurs\\diploma\\led_lamp(for_diploma)"
+ 3393      726F7062 
+ 3393      6F785C35 
+ 3393      5F6B7572 
+ 3393      735C6469 
+ 3394 017e 5C424C45 		.ascii	"\\BLE_Dynamic_GATT_Service_Configuration\\BLE_Dynam"
+ 3394      5F44796E 
+ 3394      616D6963 
+ 3394      5F474154 
+ 3394      545F5365 
+ 3395 01af 69635F47 		.ascii	"ic_GATT_Service_Configuration.cydsn\000"
+ 3395      4154545F 
+ 3395      53657276 
+ 3395      6963655F 
+ 3395      436F6E66 
+ 3396              	.LASF10:
+ 3397 01d3 756E7369 		.ascii	"unsigned int\000"
+ 3397      676E6564 
+ 3397      20696E74 
+ 3397      00
+ 3398              	.LASF9:
+ 3399 01e0 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3399      206C6F6E 
+ 3399      6720756E 
+ 3399      7369676E 
+ 3399      65642069 
+ 3400              	.LASF29:
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 66
+
+
+ 3401 01f7 73686132 		.ascii	"sha256_update\000"
+ 3401      35365F75 
+ 3401      70646174 
+ 3401      6500
+ 3402              	.LASF28:
+ 3403 0205 68617368 		.ascii	"hash\000"
+ 3403      00
+ 3404              	.LASF33:
+ 3405 020a 6C656E49 		.ascii	"lenInBits\000"
+ 3405      6E426974 
+ 3405      7300
+ 3406              	.LASF15:
+ 3407 0214 73697A65 		.ascii	"sizetype\000"
+ 3407      74797065 
+ 3407      00
+ 3408              	.LASF6:
+ 3409 021d 6C6F6E67 		.ascii	"long long int\000"
+ 3409      206C6F6E 
+ 3409      6720696E 
+ 3409      7400
+ 3410              	.LASF22:
+ 3411 022b 73686132 		.ascii	"sha256_transform\000"
+ 3411      35365F74 
+ 3411      72616E73 
+ 3411      666F726D 
+ 3411      00
+ 3412              	.LASF16:
+ 3413 023c 63686172 		.ascii	"char\000"
+ 3413      00
+ 3414              	.LASF26:
+ 3415 0241 73686132 		.ascii	"sha256_hash\000"
+ 3415      35365F68 
+ 3415      61736800 
+ 3416              	.LASF2:
+ 3417 024d 73686F72 		.ascii	"short int\000"
+ 3417      7420696E 
+ 3417      7400
+ 3418              	.LASF8:
+ 3419 0257 5F5F7569 		.ascii	"__uint64_t\000"
+ 3419      6E743634 
+ 3419      5F7400
+ 3420              	.LASF20:
+ 3421 0262 73686132 		.ascii	"sha256_t\000"
+ 3421      35365F74 
+ 3421      00
+ 3422              	.LASF35:
+ 3423 026b 73686132 		.ascii	"sha256.c\000"
+ 3423      35362E63 
+ 3423      00
+ 3424              	.LASF32:
+ 3425 0274 64696765 		.ascii	"digest\000"
+ 3425      737400
+ 3426              	.LASF4:
+ 3427 027b 6C6F6E67 		.ascii	"long int\000"
+ 3427      20696E74 
+ 3427      00
+ 3428              	.LASF14:
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cclHdPgW.s 			page 67
+
+
+ 3429 0284 6C6F6E67 		.ascii	"long double\000"
+ 3429      20646F75 
+ 3429      626C6500 
+ 3430              	.LASF0:
+ 3431 0290 7369676E 		.ascii	"signed char\000"
+ 3431      65642063 
+ 3431      68617200 
+ 3432              	.LASF30:
+ 3433 029c 63757242 		.ascii	"curBufferPos\000"
+ 3433      75666665 
+ 3433      72506F73 
+ 3433      00
+ 3434              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

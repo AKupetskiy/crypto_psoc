@@ -1,0 +1,69 @@
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccjPU09n.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"hash_crypto.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              	.Letext0:
+  20              		.section	.debug_line,"",%progbits
+  21              	.Ldebug_line0:
+  22              		.section	.debug_str,"MS",%progbits,1
+  23              	.LASF0:
+  24 0000 68617368 		.ascii	"hash_crypto.c\000"
+  24      5F637279 
+  24      70746F2E 
+  24      6300
+  25              	.LASF1:
+  26 000e 443A5C44 		.ascii	"D:\\Dropbox\\5_kurs\\diploma\\led_lamp(for_diploma)"
+  26      726F7062 
+  26      6F785C35 
+  26      5F6B7572 
+  26      735C6469 
+  27 003d 5C424C45 		.ascii	"\\BLE_Dynamic_GATT_Service_Configuration\\BLE_Dynam"
+  27      5F44796E 
+  27      616D6963 
+  27      5F474154 
+  27      545F5365 
+  28 006e 69635F47 		.ascii	"ic_GATT_Service_Configuration.cydsn\000"
+  28      4154545F 
+  28      53657276 
+  28      6963655F 
+  28      436F6E66 
+  29              	.LASF2:
+  30 0092 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+  30      43313120 
+  30      352E342E 
+  30      31203230 
+  30      31363036 
+  31 00c5 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+  31      20726576 
+  31      6973696F 
+  31      6E203233 
+  31      37373135 
+  32 00f8 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects -fomit-fram"
+  32      66756E63 
+  32      74696F6E 
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccjPU09n.s 			page 2
+
+
+  32      2D736563 
+  32      74696F6E 
+  33 012b 652D706F 		.ascii	"e-pointer\000"
+  33      696E7465 
+  33      7200
+  34              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

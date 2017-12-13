@@ -1,0 +1,8 @@
+D:/Dropbox/5_kurs/diploma/led_lamp(for_diploma)/BLE_Dynamic_GATT_Service_Configuration/BLE_Dynamic_GATT_Service_Configuration.cydsn/CortexM0/ARM_GCC_541/Debug/CyBootAsmGnu.o : D:/Dropbox/5_kurs/diploma/led_lamp(for_diploma)/BLE_Dynamic_GATT_Service_Configuration/BLE_Dynamic_GATT_Service_Configuration.cydsn/Generated_Source/PSoC4/CyBootAsmGnu.s D:/Dropbox/5_kurs/diploma/led_lamp(for_diploma)/BLE_Dynamic_GATT_Service_Configuration/BLE_Dynamic_GATT_Service_Configuration.cydsn/Generated_Source/PSoC4/cydevicegnu_trm.inc D:/Dropbox/5_kurs/diploma/led_lamp(for_diploma)/BLE_Dynamic_GATT_Service_Configuration/BLE_Dynamic_GATT_Service_Configuration.cydsn/Generated_Source/PSoC4/cyfittergnu.inc 
+
+D:/Dropbox/5_kurs/diploma/led_lamp(for_diploma)/BLE_Dynamic_GATT_Service_Configuration/BLE_Dynamic_GATT_Service_Configuration.cydsn/Generated_Source/PSoC4/CyBootAsmGnu.s : 
+
+D:/Dropbox/5_kurs/diploma/led_lamp(for_diploma)/BLE_Dynamic_GATT_Service_Configuration/BLE_Dynamic_GATT_Service_Configuration.cydsn/Generated_Source/PSoC4/cydevicegnu_trm.inc : 
+
+D:/Dropbox/5_kurs/diploma/led_lamp(for_diploma)/BLE_Dynamic_GATT_Service_Configuration/BLE_Dynamic_GATT_Service_Configuration.cydsn/Generated_Source/PSoC4/cyfittergnu.inc : 
+

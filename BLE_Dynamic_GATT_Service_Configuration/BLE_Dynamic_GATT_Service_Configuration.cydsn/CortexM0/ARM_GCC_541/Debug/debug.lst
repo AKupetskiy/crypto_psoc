@@ -1,0 +1,630 @@
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cc9T3VN4.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"debug.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text._write,"ax",%progbits
+  20              		.align	2
+  21              		.global	_write
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	_write, %function
+  25              	_write:
+  26              	.LFB36:
+  27              		.file 1 "debug.c"
+   1:debug.c       **** /******************************************************************************
+   2:debug.c       **** * Project Name		: BLE_Dynamic_GATT_Service_Configuration
+   3:debug.c       **** * File Name			: debug.c
+   4:debug.c       **** * Version 			: 1.0
+   5:debug.c       **** * Device Used		: CY8C4247LQI-BL483
+   6:debug.c       **** * Hardware          : CY8CKIT-042-BLE
+   7:debug.c       **** * Software Used		: PSoC Creator 3.1 SP1
+   8:debug.c       **** * Compiler    		: ARM GCC 4.8.4
+   9:debug.c       **** * Owner				: mady@cypress.com
+  10:debug.c       **** * Description       : This file contains the printf to UART console mapper functions
+  11:debug.c       **** *
+  12:debug.c       **** ********************************************************************************
+  13:debug.c       **** * Copyright (2014-15), Cypress Semiconductor Corporation. All Rights Reserved.
+  14:debug.c       **** ********************************************************************************
+  15:debug.c       **** * This software is owned by Cypress Semiconductor Corporation (Cypress)
+  16:debug.c       **** * and is protected by and subject to worldwide patent protection (United
+  17:debug.c       **** * States and foreign), United States copyright laws and international treaty
+  18:debug.c       **** * provisions. Cypress hereby grants to licensee a personal, non-exclusive,
+  19:debug.c       **** * non-transferable license to copy, use, modify, create derivative works of,
+  20:debug.c       **** * and compile the Cypress Source Code and derivative works for the sole
+  21:debug.c       **** * purpose of creating custom software in support of licensee product to be
+  22:debug.c       **** * used only in conjunction with a Cypress integrated circuit as specified in
+  23:debug.c       **** * the applicable agreement. Any reproduction, modification, translation,
+  24:debug.c       **** * compilation, or representation of this software except as specified above 
+  25:debug.c       **** * is prohibited without the express written permission of Cypress.
+  26:debug.c       **** *
+  27:debug.c       **** * Disclaimer: CYPRESS MAKES NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, WITH 
+  28:debug.c       **** * REGARD TO THIS MATERIAL, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  29:debug.c       **** * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+  30:debug.c       **** * Cypress reserves the right to make changes without further notice to the 
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cc9T3VN4.s 			page 2
+
+
+  31:debug.c       **** * materials described herein. Cypress does not assume any liability arising out 
+  32:debug.c       **** * of the application or use of any product or circuit described herein. Cypress 
+  33:debug.c       **** * does not authorize its products for use as critical components in life-support 
+  34:debug.c       **** * systems where a malfunction or failure may reasonably be expected to result in 
+  35:debug.c       **** * significant injury to the user. The inclusion of Cypress' product in a life-
+  36:debug.c       **** * support systems application implies that the manufacturer assumes all risk of 
+  37:debug.c       **** * such use and in doing so indemnifies Cypress against all charges. 
+  38:debug.c       **** *
+  39:debug.c       **** * Use of this Software may be limited by and subject to the applicable Cypress
+  40:debug.c       **** * software license agreement. 
+  41:debug.c       **** *******************************************************************************/
+  42:debug.c       **** 
+  43:debug.c       **** #include <project.h>
+  44:debug.c       **** #include <stdio.h>
+  45:debug.c       **** 
+  46:debug.c       **** #if defined(__ARMCC_VERSION)
+  47:debug.c       **** 
+  48:debug.c       **** /* For MDK/RVDS compiler revise fputc function for printf functionality */
+  49:debug.c       **** struct __FILE
+  50:debug.c       **** {
+  51:debug.c       ****     int handle;
+  52:debug.c       **** };
+  53:debug.c       **** 
+  54:debug.c       **** enum
+  55:debug.c       **** {
+  56:debug.c       ****     STDIN_HANDLE,
+  57:debug.c       ****     STDOUT_HANDLE,
+  58:debug.c       ****     STDERR_HANDLE
+  59:debug.c       **** };
+  60:debug.c       **** 
+  61:debug.c       **** FILE __stdin = {STDIN_HANDLE};
+  62:debug.c       **** FILE __stdout = {STDOUT_HANDLE};
+  63:debug.c       **** FILE __stderr = {STDERR_HANDLE};
+  64:debug.c       **** 
+  65:debug.c       **** int fputc(int ch, FILE *file)
+  66:debug.c       **** {
+  67:debug.c       ****     int ret = EOF;
+  68:debug.c       **** 
+  69:debug.c       ****     switch( file->handle )
+  70:debug.c       ****     {
+  71:debug.c       ****         case STDOUT_HANDLE:
+  72:debug.c       ****             UART_DEB_UartPutChar(ch);
+  73:debug.c       ****             ret = ch ;
+  74:debug.c       ****             break ;
+  75:debug.c       **** 
+  76:debug.c       ****         case STDERR_HANDLE:
+  77:debug.c       ****             ret = ch ;
+  78:debug.c       ****             break ;
+  79:debug.c       **** 
+  80:debug.c       ****         default:
+  81:debug.c       ****             file = file;
+  82:debug.c       ****             break ;
+  83:debug.c       ****     }
+  84:debug.c       ****     return ret ;
+  85:debug.c       **** }
+  86:debug.c       **** 
+  87:debug.c       **** #elif defined (__ICCARM__)      /* IAR */
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cc9T3VN4.s 			page 3
+
+
+  88:debug.c       **** 
+  89:debug.c       **** /* For IAR compiler revise __write() function for printf functionality */
+  90:debug.c       **** size_t __write(int handle, const unsigned char * buffer, size_t size)
+  91:debug.c       **** {
+  92:debug.c       ****     size_t nChars = 0;
+  93:debug.c       **** 
+  94:debug.c       ****     if (buffer == 0)
+  95:debug.c       ****     {
+  96:debug.c       ****         /*
+  97:debug.c       ****          * This means that we should flush internal buffers.  Since we
+  98:debug.c       ****          * don't we just return.  (Remember, "handle" == -1 means that all
+  99:debug.c       ****          * handles should be flushed.)
+ 100:debug.c       ****          */
+ 101:debug.c       ****         return (0);
+ 102:debug.c       ****     }
+ 103:debug.c       **** 
+ 104:debug.c       ****     for (/* Empty */; size != 0; --size)
+ 105:debug.c       ****     {
+ 106:debug.c       ****         UART_DEB_UartPutChar(*buffer++);
+ 107:debug.c       ****         ++nChars;
+ 108:debug.c       ****     }
+ 109:debug.c       **** 
+ 110:debug.c       ****     return (nChars);
+ 111:debug.c       **** }
+ 112:debug.c       **** 
+ 113:debug.c       **** #else  /* (__GNUC__)  GCC */
+ 114:debug.c       **** 
+ 115:debug.c       **** /* For GCC compiler revise _write() function for printf functionality */
+ 116:debug.c       **** int _write(int file, char *ptr, int len)
+ 117:debug.c       **** {
+  28              		.loc 1 117 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 24
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 00B5     		push	{lr}
+  33              		.cfi_def_cfa_offset 4
+  34              		.cfi_offset 14, -4
+  35 0002 87B0     		sub	sp, sp, #28
+  36              		.cfi_def_cfa_offset 32
+  37 0004 0390     		str	r0, [sp, #12]
+  38 0006 0291     		str	r1, [sp, #8]
+  39 0008 0192     		str	r2, [sp, #4]
+ 118:debug.c       ****     int i;
+ 119:debug.c       ****     file = file;
+ 120:debug.c       ****     for (i = 0; i < len; i++)
+  40              		.loc 1 120 0
+  41 000a 0023     		movs	r3, #0
+  42 000c 0593     		str	r3, [sp, #20]
+  43 000e 09E0     		b	.L2
+  44              	.L3:
+ 121:debug.c       ****     {
+ 122:debug.c       ****         UART_UartPutChar(*ptr++);
+  45              		.loc 1 122 0 discriminator 3
+  46 0010 029B     		ldr	r3, [sp, #8]
+  47 0012 5A1C     		adds	r2, r3, #1
+  48 0014 0292     		str	r2, [sp, #8]
+  49 0016 1B78     		ldrb	r3, [r3]
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cc9T3VN4.s 			page 4
+
+
+  50 0018 1800     		movs	r0, r3
+  51 001a FFF7FEFF 		bl	UART_SpiUartWriteTxData
+ 120:debug.c       ****     {
+  52              		.loc 1 120 0 discriminator 3
+  53 001e 059B     		ldr	r3, [sp, #20]
+  54 0020 0133     		adds	r3, r3, #1
+  55 0022 0593     		str	r3, [sp, #20]
+  56              	.L2:
+ 120:debug.c       ****     {
+  57              		.loc 1 120 0 is_stmt 0 discriminator 1
+  58 0024 059A     		ldr	r2, [sp, #20]
+  59 0026 019B     		ldr	r3, [sp, #4]
+  60 0028 9A42     		cmp	r2, r3
+  61 002a F1DB     		blt	.L3
+ 123:debug.c       ****     }
+ 124:debug.c       ****     return len;
+  62              		.loc 1 124 0 is_stmt 1
+  63 002c 019B     		ldr	r3, [sp, #4]
+ 125:debug.c       **** }
+  64              		.loc 1 125 0
+  65 002e 1800     		movs	r0, r3
+  66 0030 07B0     		add	sp, sp, #28
+  67              		@ sp needed
+  68 0032 00BD     		pop	{pc}
+  69              		.cfi_endproc
+  70              	.LFE36:
+  71              		.size	_write, .-_write
+  72              		.text
+  73              	.Letext0:
+  74              		.file 2 "Generated_Source\\PSoC4/cytypes.h"
+  75              		.section	.debug_info,"",%progbits
+  76              	.Ldebug_info0:
+  77 0000 E9000000 		.4byte	0xe9
+  78 0004 0400     		.2byte	0x4
+  79 0006 00000000 		.4byte	.Ldebug_abbrev0
+  80 000a 04       		.byte	0x4
+  81 000b 01       		.uleb128 0x1
+  82 000c 4B000000 		.4byte	.LASF15
+  83 0010 0C       		.byte	0xc
+  84 0011 48010000 		.4byte	.LASF16
+  85 0015 60010000 		.4byte	.LASF17
+  86 0019 00000000 		.4byte	.Ldebug_ranges0+0
+  87 001d 00000000 		.4byte	0
+  88 0021 00000000 		.4byte	.Ldebug_line0
+  89 0025 02       		.uleb128 0x2
+  90 0026 01       		.byte	0x1
+  91 0027 06       		.byte	0x6
+  92 0028 3C010000 		.4byte	.LASF0
+  93 002c 02       		.uleb128 0x2
+  94 002d 01       		.byte	0x1
+  95 002e 08       		.byte	0x8
+  96 002f 01010000 		.4byte	.LASF1
+  97 0033 02       		.uleb128 0x2
+  98 0034 02       		.byte	0x2
+  99 0035 05       		.byte	0x5
+ 100 0036 56010000 		.4byte	.LASF2
+ 101 003a 02       		.uleb128 0x2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cc9T3VN4.s 			page 5
+
+
+ 102 003b 02       		.byte	0x2
+ 103 003c 07       		.byte	0x7
+ 104 003d 29010000 		.4byte	.LASF3
+ 105 0041 02       		.uleb128 0x2
+ 106 0042 04       		.byte	0x4
+ 107 0043 05       		.byte	0x5
+ 108 0044 14010000 		.4byte	.LASF4
+ 109 0048 02       		.uleb128 0x2
+ 110 0049 04       		.byte	0x4
+ 111 004a 07       		.byte	0x7
+ 112 004b 22000000 		.4byte	.LASF5
+ 113 004f 02       		.uleb128 0x2
+ 114 0050 08       		.byte	0x8
+ 115 0051 05       		.byte	0x5
+ 116 0052 00000000 		.4byte	.LASF6
+ 117 0056 02       		.uleb128 0x2
+ 118 0057 08       		.byte	0x8
+ 119 0058 07       		.byte	0x7
+ 120 0059 34000000 		.4byte	.LASF7
+ 121 005d 03       		.uleb128 0x3
+ 122 005e 04       		.byte	0x4
+ 123 005f 05       		.byte	0x5
+ 124 0060 696E7400 		.ascii	"int\000"
+ 125 0064 02       		.uleb128 0x2
+ 126 0065 04       		.byte	0x4
+ 127 0066 07       		.byte	0x7
+ 128 0067 15000000 		.4byte	.LASF8
+ 129 006b 04       		.uleb128 0x4
+ 130 006c 0E000000 		.4byte	.LASF18
+ 131 0070 02       		.byte	0x2
+ 132 0071 D401     		.2byte	0x1d4
+ 133 0073 48000000 		.4byte	0x48
+ 134 0077 02       		.uleb128 0x2
+ 135 0078 04       		.byte	0x4
+ 136 0079 04       		.byte	0x4
+ 137 007a 50010000 		.4byte	.LASF9
+ 138 007e 02       		.uleb128 0x2
+ 139 007f 08       		.byte	0x8
+ 140 0080 04       		.byte	0x4
+ 141 0081 22010000 		.4byte	.LASF10
+ 142 0085 02       		.uleb128 0x2
+ 143 0086 01       		.byte	0x1
+ 144 0087 08       		.byte	0x8
+ 145 0088 0F010000 		.4byte	.LASF11
+ 146 008c 02       		.uleb128 0x2
+ 147 008d 08       		.byte	0x8
+ 148 008e 04       		.byte	0x4
+ 149 008f EE000000 		.4byte	.LASF12
+ 150 0093 02       		.uleb128 0x2
+ 151 0094 04       		.byte	0x4
+ 152 0095 07       		.byte	0x7
+ 153 0096 E4010000 		.4byte	.LASF13
+ 154 009a 05       		.uleb128 0x5
+ 155 009b 04       		.byte	0x4
+ 156 009c 85000000 		.4byte	0x85
+ 157 00a0 06       		.uleb128 0x6
+ 158 00a1 FA000000 		.4byte	.LASF19
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cc9T3VN4.s 			page 6
+
+
+ 159 00a5 01       		.byte	0x1
+ 160 00a6 74       		.byte	0x74
+ 161 00a7 5D000000 		.4byte	0x5d
+ 162 00ab 00000000 		.4byte	.LFB36
+ 163 00af 34000000 		.4byte	.LFE36-.LFB36
+ 164 00b3 01       		.uleb128 0x1
+ 165 00b4 9C       		.byte	0x9c
+ 166 00b5 07       		.uleb128 0x7
+ 167 00b6 1D010000 		.4byte	.LASF14
+ 168 00ba 01       		.byte	0x1
+ 169 00bb 74       		.byte	0x74
+ 170 00bc 5D000000 		.4byte	0x5d
+ 171 00c0 02       		.uleb128 0x2
+ 172 00c1 91       		.byte	0x91
+ 173 00c2 6C       		.sleb128 -20
+ 174 00c3 08       		.uleb128 0x8
+ 175 00c4 70747200 		.ascii	"ptr\000"
+ 176 00c8 01       		.byte	0x1
+ 177 00c9 74       		.byte	0x74
+ 178 00ca 9A000000 		.4byte	0x9a
+ 179 00ce 02       		.uleb128 0x2
+ 180 00cf 91       		.byte	0x91
+ 181 00d0 68       		.sleb128 -24
+ 182 00d1 08       		.uleb128 0x8
+ 183 00d2 6C656E00 		.ascii	"len\000"
+ 184 00d6 01       		.byte	0x1
+ 185 00d7 74       		.byte	0x74
+ 186 00d8 5D000000 		.4byte	0x5d
+ 187 00dc 02       		.uleb128 0x2
+ 188 00dd 91       		.byte	0x91
+ 189 00de 64       		.sleb128 -28
+ 190 00df 09       		.uleb128 0x9
+ 191 00e0 6900     		.ascii	"i\000"
+ 192 00e2 01       		.byte	0x1
+ 193 00e3 76       		.byte	0x76
+ 194 00e4 5D000000 		.4byte	0x5d
+ 195 00e8 02       		.uleb128 0x2
+ 196 00e9 91       		.byte	0x91
+ 197 00ea 74       		.sleb128 -12
+ 198 00eb 00       		.byte	0
+ 199 00ec 00       		.byte	0
+ 200              		.section	.debug_abbrev,"",%progbits
+ 201              	.Ldebug_abbrev0:
+ 202 0000 01       		.uleb128 0x1
+ 203 0001 11       		.uleb128 0x11
+ 204 0002 01       		.byte	0x1
+ 205 0003 25       		.uleb128 0x25
+ 206 0004 0E       		.uleb128 0xe
+ 207 0005 13       		.uleb128 0x13
+ 208 0006 0B       		.uleb128 0xb
+ 209 0007 03       		.uleb128 0x3
+ 210 0008 0E       		.uleb128 0xe
+ 211 0009 1B       		.uleb128 0x1b
+ 212 000a 0E       		.uleb128 0xe
+ 213 000b 55       		.uleb128 0x55
+ 214 000c 17       		.uleb128 0x17
+ 215 000d 11       		.uleb128 0x11
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cc9T3VN4.s 			page 7
+
+
+ 216 000e 01       		.uleb128 0x1
+ 217 000f 10       		.uleb128 0x10
+ 218 0010 17       		.uleb128 0x17
+ 219 0011 00       		.byte	0
+ 220 0012 00       		.byte	0
+ 221 0013 02       		.uleb128 0x2
+ 222 0014 24       		.uleb128 0x24
+ 223 0015 00       		.byte	0
+ 224 0016 0B       		.uleb128 0xb
+ 225 0017 0B       		.uleb128 0xb
+ 226 0018 3E       		.uleb128 0x3e
+ 227 0019 0B       		.uleb128 0xb
+ 228 001a 03       		.uleb128 0x3
+ 229 001b 0E       		.uleb128 0xe
+ 230 001c 00       		.byte	0
+ 231 001d 00       		.byte	0
+ 232 001e 03       		.uleb128 0x3
+ 233 001f 24       		.uleb128 0x24
+ 234 0020 00       		.byte	0
+ 235 0021 0B       		.uleb128 0xb
+ 236 0022 0B       		.uleb128 0xb
+ 237 0023 3E       		.uleb128 0x3e
+ 238 0024 0B       		.uleb128 0xb
+ 239 0025 03       		.uleb128 0x3
+ 240 0026 08       		.uleb128 0x8
+ 241 0027 00       		.byte	0
+ 242 0028 00       		.byte	0
+ 243 0029 04       		.uleb128 0x4
+ 244 002a 16       		.uleb128 0x16
+ 245 002b 00       		.byte	0
+ 246 002c 03       		.uleb128 0x3
+ 247 002d 0E       		.uleb128 0xe
+ 248 002e 3A       		.uleb128 0x3a
+ 249 002f 0B       		.uleb128 0xb
+ 250 0030 3B       		.uleb128 0x3b
+ 251 0031 05       		.uleb128 0x5
+ 252 0032 49       		.uleb128 0x49
+ 253 0033 13       		.uleb128 0x13
+ 254 0034 00       		.byte	0
+ 255 0035 00       		.byte	0
+ 256 0036 05       		.uleb128 0x5
+ 257 0037 0F       		.uleb128 0xf
+ 258 0038 00       		.byte	0
+ 259 0039 0B       		.uleb128 0xb
+ 260 003a 0B       		.uleb128 0xb
+ 261 003b 49       		.uleb128 0x49
+ 262 003c 13       		.uleb128 0x13
+ 263 003d 00       		.byte	0
+ 264 003e 00       		.byte	0
+ 265 003f 06       		.uleb128 0x6
+ 266 0040 2E       		.uleb128 0x2e
+ 267 0041 01       		.byte	0x1
+ 268 0042 3F       		.uleb128 0x3f
+ 269 0043 19       		.uleb128 0x19
+ 270 0044 03       		.uleb128 0x3
+ 271 0045 0E       		.uleb128 0xe
+ 272 0046 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cc9T3VN4.s 			page 8
+
+
+ 273 0047 0B       		.uleb128 0xb
+ 274 0048 3B       		.uleb128 0x3b
+ 275 0049 0B       		.uleb128 0xb
+ 276 004a 27       		.uleb128 0x27
+ 277 004b 19       		.uleb128 0x19
+ 278 004c 49       		.uleb128 0x49
+ 279 004d 13       		.uleb128 0x13
+ 280 004e 11       		.uleb128 0x11
+ 281 004f 01       		.uleb128 0x1
+ 282 0050 12       		.uleb128 0x12
+ 283 0051 06       		.uleb128 0x6
+ 284 0052 40       		.uleb128 0x40
+ 285 0053 18       		.uleb128 0x18
+ 286 0054 9642     		.uleb128 0x2116
+ 287 0056 19       		.uleb128 0x19
+ 288 0057 00       		.byte	0
+ 289 0058 00       		.byte	0
+ 290 0059 07       		.uleb128 0x7
+ 291 005a 05       		.uleb128 0x5
+ 292 005b 00       		.byte	0
+ 293 005c 03       		.uleb128 0x3
+ 294 005d 0E       		.uleb128 0xe
+ 295 005e 3A       		.uleb128 0x3a
+ 296 005f 0B       		.uleb128 0xb
+ 297 0060 3B       		.uleb128 0x3b
+ 298 0061 0B       		.uleb128 0xb
+ 299 0062 49       		.uleb128 0x49
+ 300 0063 13       		.uleb128 0x13
+ 301 0064 02       		.uleb128 0x2
+ 302 0065 18       		.uleb128 0x18
+ 303 0066 00       		.byte	0
+ 304 0067 00       		.byte	0
+ 305 0068 08       		.uleb128 0x8
+ 306 0069 05       		.uleb128 0x5
+ 307 006a 00       		.byte	0
+ 308 006b 03       		.uleb128 0x3
+ 309 006c 08       		.uleb128 0x8
+ 310 006d 3A       		.uleb128 0x3a
+ 311 006e 0B       		.uleb128 0xb
+ 312 006f 3B       		.uleb128 0x3b
+ 313 0070 0B       		.uleb128 0xb
+ 314 0071 49       		.uleb128 0x49
+ 315 0072 13       		.uleb128 0x13
+ 316 0073 02       		.uleb128 0x2
+ 317 0074 18       		.uleb128 0x18
+ 318 0075 00       		.byte	0
+ 319 0076 00       		.byte	0
+ 320 0077 09       		.uleb128 0x9
+ 321 0078 34       		.uleb128 0x34
+ 322 0079 00       		.byte	0
+ 323 007a 03       		.uleb128 0x3
+ 324 007b 08       		.uleb128 0x8
+ 325 007c 3A       		.uleb128 0x3a
+ 326 007d 0B       		.uleb128 0xb
+ 327 007e 3B       		.uleb128 0x3b
+ 328 007f 0B       		.uleb128 0xb
+ 329 0080 49       		.uleb128 0x49
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cc9T3VN4.s 			page 9
+
+
+ 330 0081 13       		.uleb128 0x13
+ 331 0082 02       		.uleb128 0x2
+ 332 0083 18       		.uleb128 0x18
+ 333 0084 00       		.byte	0
+ 334 0085 00       		.byte	0
+ 335 0086 00       		.byte	0
+ 336              		.section	.debug_aranges,"",%progbits
+ 337 0000 1C000000 		.4byte	0x1c
+ 338 0004 0200     		.2byte	0x2
+ 339 0006 00000000 		.4byte	.Ldebug_info0
+ 340 000a 04       		.byte	0x4
+ 341 000b 00       		.byte	0
+ 342 000c 0000     		.2byte	0
+ 343 000e 0000     		.2byte	0
+ 344 0010 00000000 		.4byte	.LFB36
+ 345 0014 34000000 		.4byte	.LFE36-.LFB36
+ 346 0018 00000000 		.4byte	0
+ 347 001c 00000000 		.4byte	0
+ 348              		.section	.debug_ranges,"",%progbits
+ 349              	.Ldebug_ranges0:
+ 350 0000 00000000 		.4byte	.LFB36
+ 351 0004 34000000 		.4byte	.LFE36
+ 352 0008 00000000 		.4byte	0
+ 353 000c 00000000 		.4byte	0
+ 354              		.section	.debug_line,"",%progbits
+ 355              	.Ldebug_line0:
+ 356 0000 6C000000 		.section	.debug_str,"MS",%progbits,1
+ 356      02004200 
+ 356      00000201 
+ 356      FB0E0D00 
+ 356      01010101 
+ 357              	.LASF6:
+ 358 0000 6C6F6E67 		.ascii	"long long int\000"
+ 358      206C6F6E 
+ 358      6720696E 
+ 358      7400
+ 359              	.LASF18:
+ 360 000e 75696E74 		.ascii	"uint32\000"
+ 360      333200
+ 361              	.LASF8:
+ 362 0015 756E7369 		.ascii	"unsigned int\000"
+ 362      676E6564 
+ 362      20696E74 
+ 362      00
+ 363              	.LASF5:
+ 364 0022 6C6F6E67 		.ascii	"long unsigned int\000"
+ 364      20756E73 
+ 364      69676E65 
+ 364      6420696E 
+ 364      7400
+ 365              	.LASF7:
+ 366 0034 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 366      206C6F6E 
+ 366      6720756E 
+ 366      7369676E 
+ 366      65642069 
+ 367              	.LASF15:
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cc9T3VN4.s 			page 10
+
+
+ 368 004b 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 368      43313120 
+ 368      352E342E 
+ 368      31203230 
+ 368      31363036 
+ 369 007e 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 369      20726576 
+ 369      6973696F 
+ 369      6E203233 
+ 369      37373135 
+ 370 00b1 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects -fomit-fram"
+ 370      66756E63 
+ 370      74696F6E 
+ 370      2D736563 
+ 370      74696F6E 
+ 371 00e4 652D706F 		.ascii	"e-pointer\000"
+ 371      696E7465 
+ 371      7200
+ 372              	.LASF12:
+ 373 00ee 6C6F6E67 		.ascii	"long double\000"
+ 373      20646F75 
+ 373      626C6500 
+ 374              	.LASF19:
+ 375 00fa 5F777269 		.ascii	"_write\000"
+ 375      746500
+ 376              	.LASF1:
+ 377 0101 756E7369 		.ascii	"unsigned char\000"
+ 377      676E6564 
+ 377      20636861 
+ 377      7200
+ 378              	.LASF11:
+ 379 010f 63686172 		.ascii	"char\000"
+ 379      00
+ 380              	.LASF4:
+ 381 0114 6C6F6E67 		.ascii	"long int\000"
+ 381      20696E74 
+ 381      00
+ 382              	.LASF14:
+ 383 011d 66696C65 		.ascii	"file\000"
+ 383      00
+ 384              	.LASF10:
+ 385 0122 646F7562 		.ascii	"double\000"
+ 385      6C6500
+ 386              	.LASF3:
+ 387 0129 73686F72 		.ascii	"short unsigned int\000"
+ 387      7420756E 
+ 387      7369676E 
+ 387      65642069 
+ 387      6E7400
+ 388              	.LASF0:
+ 389 013c 7369676E 		.ascii	"signed char\000"
+ 389      65642063 
+ 389      68617200 
+ 390              	.LASF16:
+ 391 0148 64656275 		.ascii	"debug.c\000"
+ 391      672E6300 
+ 392              	.LASF9:
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cc9T3VN4.s 			page 11
+
+
+ 393 0150 666C6F61 		.ascii	"float\000"
+ 393      7400
+ 394              	.LASF2:
+ 395 0156 73686F72 		.ascii	"short int\000"
+ 395      7420696E 
+ 395      7400
+ 396              	.LASF17:
+ 397 0160 443A5C44 		.ascii	"D:\\Dropbox\\5_kurs\\diploma\\led_lamp(for_diploma)"
+ 397      726F7062 
+ 397      6F785C35 
+ 397      5F6B7572 
+ 397      735C6469 
+ 398 018f 5C424C45 		.ascii	"\\BLE_Dynamic_GATT_Service_Configuration\\BLE_Dynam"
+ 398      5F44796E 
+ 398      616D6963 
+ 398      5F474154 
+ 398      545F5365 
+ 399 01c0 69635F47 		.ascii	"ic_GATT_Service_Configuration.cydsn\000"
+ 399      4154545F 
+ 399      53657276 
+ 399      6963655F 
+ 399      436F6E66 
+ 400              	.LASF13:
+ 401 01e4 73697A65 		.ascii	"sizetype\000"
+ 401      74797065 
+ 401      00
+ 402              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,0 +1,1900 @@
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"BLE_bless_isr.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.BLE_bless_isr_Start,"ax",%progbits
+  20              		.align	2
+  21              		.global	BLE_bless_isr_Start
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	BLE_bless_isr_Start, %function
+  25              	BLE_bless_isr_Start:
+  26              	.LFB2:
+  27              		.file 1 "Generated_Source\\PSoC4\\BLE_bless_isr.c"
+   1:Generated_Source\PSoC4/BLE_bless_isr.c **** /*******************************************************************************
+   2:Generated_Source\PSoC4/BLE_bless_isr.c **** * File Name: BLE_bless_isr.c  
+   3:Generated_Source\PSoC4/BLE_bless_isr.c **** * Version 1.70
+   4:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+   5:Generated_Source\PSoC4/BLE_bless_isr.c **** *  Description:
+   6:Generated_Source\PSoC4/BLE_bless_isr.c **** *   API for controlling the state of an interrupt.
+   7:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+   8:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+   9:Generated_Source\PSoC4/BLE_bless_isr.c **** *  Note:
+  10:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+  11:Generated_Source\PSoC4/BLE_bless_isr.c **** ********************************************************************************
+  12:Generated_Source\PSoC4/BLE_bless_isr.c **** * Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  13:Generated_Source\PSoC4/BLE_bless_isr.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  14:Generated_Source\PSoC4/BLE_bless_isr.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  15:Generated_Source\PSoC4/BLE_bless_isr.c **** * the software package with which this file was provided.
+  16:Generated_Source\PSoC4/BLE_bless_isr.c **** *******************************************************************************/
+  17:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+  18:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+  19:Generated_Source\PSoC4/BLE_bless_isr.c **** #include <cydevice_trm.h>
+  20:Generated_Source\PSoC4/BLE_bless_isr.c **** #include <CyLib.h>
+  21:Generated_Source\PSoC4/BLE_bless_isr.c **** #include <BLE_bless_isr.h>
+  22:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+  23:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+  24:Generated_Source\PSoC4/BLE_bless_isr.c **** #if !defined(BLE_bless_isr__REMOVED) /* Check for removal by optimization */
+  25:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+  26:Generated_Source\PSoC4/BLE_bless_isr.c **** /*******************************************************************************
+  27:Generated_Source\PSoC4/BLE_bless_isr.c **** *  Place your includes, defines and code here 
+  28:Generated_Source\PSoC4/BLE_bless_isr.c **** ********************************************************************************/
+  29:Generated_Source\PSoC4/BLE_bless_isr.c **** /* `#START BLE_bless_isr_intc` */
+  30:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 2
+
+
+  31:Generated_Source\PSoC4/BLE_bless_isr.c **** /* `#END` */
+  32:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+  33:Generated_Source\PSoC4/BLE_bless_isr.c **** extern cyisraddress CyRamVectors[CYINT_IRQ_BASE + CY_NUM_INTERRUPTS];
+  34:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+  35:Generated_Source\PSoC4/BLE_bless_isr.c **** /* Declared in startup, used to set unused interrupts to. */
+  36:Generated_Source\PSoC4/BLE_bless_isr.c **** CY_ISR_PROTO(IntDefaultHandler);
+  37:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+  38:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+  39:Generated_Source\PSoC4/BLE_bless_isr.c **** /*******************************************************************************
+  40:Generated_Source\PSoC4/BLE_bless_isr.c **** * Function Name: BLE_bless_isr_Start
+  41:Generated_Source\PSoC4/BLE_bless_isr.c **** ********************************************************************************
+  42:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+  43:Generated_Source\PSoC4/BLE_bless_isr.c **** * Summary:
+  44:Generated_Source\PSoC4/BLE_bless_isr.c **** *  Set up the interrupt and enable it. This function disables the interrupt, 
+  45:Generated_Source\PSoC4/BLE_bless_isr.c **** *  sets the default interrupt vector, sets the priority from the value in the
+  46:Generated_Source\PSoC4/BLE_bless_isr.c **** *  Design Wide Resources Interrupt Editor, then enables the interrupt to the 
+  47:Generated_Source\PSoC4/BLE_bless_isr.c **** *  interrupt controller.
+  48:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+  49:Generated_Source\PSoC4/BLE_bless_isr.c **** * Parameters:  
+  50:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+  51:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+  52:Generated_Source\PSoC4/BLE_bless_isr.c **** * Return:
+  53:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+  54:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+  55:Generated_Source\PSoC4/BLE_bless_isr.c **** *******************************************************************************/
+  56:Generated_Source\PSoC4/BLE_bless_isr.c **** void BLE_bless_isr_Start(void)
+  57:Generated_Source\PSoC4/BLE_bless_isr.c **** {
+  28              		.loc 1 57 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 10B5     		push	{r4, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 4, -8
+  35              		.cfi_offset 14, -4
+  58:Generated_Source\PSoC4/BLE_bless_isr.c ****     /* For all we know the interrupt is active. */
+  59:Generated_Source\PSoC4/BLE_bless_isr.c ****     BLE_bless_isr_Disable();
+  36              		.loc 1 59 0
+  37 0002 FFF7FEFF 		bl	BLE_bless_isr_Disable
+  60:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+  61:Generated_Source\PSoC4/BLE_bless_isr.c ****     /* Set the ISR to point to the BLE_bless_isr Interrupt. */
+  62:Generated_Source\PSoC4/BLE_bless_isr.c ****     BLE_bless_isr_SetVector(&BLE_bless_isr_Interrupt);
+  38              		.loc 1 62 0
+  39 0006 054B     		ldr	r3, .L2
+  40 0008 1800     		movs	r0, r3
+  41 000a FFF7FEFF 		bl	BLE_bless_isr_SetVector
+  63:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+  64:Generated_Source\PSoC4/BLE_bless_isr.c ****     /* Set the priority. */
+  65:Generated_Source\PSoC4/BLE_bless_isr.c ****     BLE_bless_isr_SetPriority((uint8)BLE_bless_isr_INTC_PRIOR_NUMBER);
+  42              		.loc 1 65 0
+  43 000e 0020     		movs	r0, #0
+  44 0010 FFF7FEFF 		bl	BLE_bless_isr_SetPriority
+  66:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+  67:Generated_Source\PSoC4/BLE_bless_isr.c ****     /* Enable it. */
+  68:Generated_Source\PSoC4/BLE_bless_isr.c ****     BLE_bless_isr_Enable();
+  45              		.loc 1 68 0
+  46 0014 FFF7FEFF 		bl	BLE_bless_isr_Enable
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 3
+
+
+  69:Generated_Source\PSoC4/BLE_bless_isr.c **** }
+  47              		.loc 1 69 0
+  48 0018 C046     		nop
+  49              		@ sp needed
+  50 001a 10BD     		pop	{r4, pc}
+  51              	.L3:
+  52              		.align	2
+  53              	.L2:
+  54 001c 00000000 		.word	BLE_bless_isr_Interrupt
+  55              		.cfi_endproc
+  56              	.LFE2:
+  57              		.size	BLE_bless_isr_Start, .-BLE_bless_isr_Start
+  58              		.section	.text.BLE_bless_isr_StartEx,"ax",%progbits
+  59              		.align	2
+  60              		.global	BLE_bless_isr_StartEx
+  61              		.code	16
+  62              		.thumb_func
+  63              		.type	BLE_bless_isr_StartEx, %function
+  64              	BLE_bless_isr_StartEx:
+  65              	.LFB3:
+  70:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+  71:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+  72:Generated_Source\PSoC4/BLE_bless_isr.c **** /*******************************************************************************
+  73:Generated_Source\PSoC4/BLE_bless_isr.c **** * Function Name: BLE_bless_isr_StartEx
+  74:Generated_Source\PSoC4/BLE_bless_isr.c **** ********************************************************************************
+  75:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+  76:Generated_Source\PSoC4/BLE_bless_isr.c **** * Summary:
+  77:Generated_Source\PSoC4/BLE_bless_isr.c **** *  Sets up the interrupt and enables it. This function disables the interrupt,
+  78:Generated_Source\PSoC4/BLE_bless_isr.c **** *  sets the interrupt vector based on the address passed in, sets the priority 
+  79:Generated_Source\PSoC4/BLE_bless_isr.c **** *  from the value in the Design Wide Resources Interrupt Editor, then enables 
+  80:Generated_Source\PSoC4/BLE_bless_isr.c **** *  the interrupt to the interrupt controller.
+  81:Generated_Source\PSoC4/BLE_bless_isr.c **** *  
+  82:Generated_Source\PSoC4/BLE_bless_isr.c **** *  When defining ISR functions, the CY_ISR and CY_ISR_PROTO macros should be 
+  83:Generated_Source\PSoC4/BLE_bless_isr.c **** *  used to provide consistent definition across compilers:
+  84:Generated_Source\PSoC4/BLE_bless_isr.c **** *  
+  85:Generated_Source\PSoC4/BLE_bless_isr.c **** *  Function definition example:
+  86:Generated_Source\PSoC4/BLE_bless_isr.c **** *   CY_ISR(MyISR)
+  87:Generated_Source\PSoC4/BLE_bless_isr.c **** *   {
+  88:Generated_Source\PSoC4/BLE_bless_isr.c **** *   }
+  89:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Function prototype example:
+  90:Generated_Source\PSoC4/BLE_bless_isr.c **** *   CY_ISR_PROTO(MyISR);
+  91:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+  92:Generated_Source\PSoC4/BLE_bless_isr.c **** * Parameters:  
+  93:Generated_Source\PSoC4/BLE_bless_isr.c **** *   address: Address of the ISR to set in the interrupt vector table.
+  94:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+  95:Generated_Source\PSoC4/BLE_bless_isr.c **** * Return:
+  96:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+  97:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+  98:Generated_Source\PSoC4/BLE_bless_isr.c **** *******************************************************************************/
+  99:Generated_Source\PSoC4/BLE_bless_isr.c **** void BLE_bless_isr_StartEx(cyisraddress address)
+ 100:Generated_Source\PSoC4/BLE_bless_isr.c **** {
+  66              		.loc 1 100 0
+  67              		.cfi_startproc
+  68              		@ args = 0, pretend = 0, frame = 8
+  69              		@ frame_needed = 0, uses_anonymous_args = 0
+  70 0000 00B5     		push	{lr}
+  71              		.cfi_def_cfa_offset 4
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 4
+
+
+  72              		.cfi_offset 14, -4
+  73 0002 83B0     		sub	sp, sp, #12
+  74              		.cfi_def_cfa_offset 16
+  75 0004 0190     		str	r0, [sp, #4]
+ 101:Generated_Source\PSoC4/BLE_bless_isr.c ****     /* For all we know the interrupt is active. */
+ 102:Generated_Source\PSoC4/BLE_bless_isr.c ****     BLE_bless_isr_Disable();
+  76              		.loc 1 102 0
+  77 0006 FFF7FEFF 		bl	BLE_bless_isr_Disable
+ 103:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 104:Generated_Source\PSoC4/BLE_bless_isr.c ****     /* Set the ISR to point to the BLE_bless_isr Interrupt. */
+ 105:Generated_Source\PSoC4/BLE_bless_isr.c ****     BLE_bless_isr_SetVector(address);
+  78              		.loc 1 105 0
+  79 000a 019B     		ldr	r3, [sp, #4]
+  80 000c 1800     		movs	r0, r3
+  81 000e FFF7FEFF 		bl	BLE_bless_isr_SetVector
+ 106:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 107:Generated_Source\PSoC4/BLE_bless_isr.c ****     /* Set the priority. */
+ 108:Generated_Source\PSoC4/BLE_bless_isr.c ****     BLE_bless_isr_SetPriority((uint8)BLE_bless_isr_INTC_PRIOR_NUMBER);
+  82              		.loc 1 108 0
+  83 0012 0020     		movs	r0, #0
+  84 0014 FFF7FEFF 		bl	BLE_bless_isr_SetPriority
+ 109:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 110:Generated_Source\PSoC4/BLE_bless_isr.c ****     /* Enable it. */
+ 111:Generated_Source\PSoC4/BLE_bless_isr.c ****     BLE_bless_isr_Enable();
+  85              		.loc 1 111 0
+  86 0018 FFF7FEFF 		bl	BLE_bless_isr_Enable
+ 112:Generated_Source\PSoC4/BLE_bless_isr.c **** }
+  87              		.loc 1 112 0
+  88 001c C046     		nop
+  89 001e 03B0     		add	sp, sp, #12
+  90              		@ sp needed
+  91 0020 00BD     		pop	{pc}
+  92              		.cfi_endproc
+  93              	.LFE3:
+  94              		.size	BLE_bless_isr_StartEx, .-BLE_bless_isr_StartEx
+  95 0022 C046     		.section	.text.BLE_bless_isr_Stop,"ax",%progbits
+  96              		.align	2
+  97              		.global	BLE_bless_isr_Stop
+  98              		.code	16
+  99              		.thumb_func
+ 100              		.type	BLE_bless_isr_Stop, %function
+ 101              	BLE_bless_isr_Stop:
+ 102              	.LFB4:
+ 113:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 114:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 115:Generated_Source\PSoC4/BLE_bless_isr.c **** /*******************************************************************************
+ 116:Generated_Source\PSoC4/BLE_bless_isr.c **** * Function Name: BLE_bless_isr_Stop
+ 117:Generated_Source\PSoC4/BLE_bless_isr.c **** ********************************************************************************
+ 118:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 119:Generated_Source\PSoC4/BLE_bless_isr.c **** * Summary:
+ 120:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Disables and removes the interrupt.
+ 121:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 122:Generated_Source\PSoC4/BLE_bless_isr.c **** * Parameters:  
+ 123:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+ 124:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 125:Generated_Source\PSoC4/BLE_bless_isr.c **** * Return:
+ 126:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 5
+
+
+ 127:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 128:Generated_Source\PSoC4/BLE_bless_isr.c **** *******************************************************************************/
+ 129:Generated_Source\PSoC4/BLE_bless_isr.c **** void BLE_bless_isr_Stop(void)
+ 130:Generated_Source\PSoC4/BLE_bless_isr.c **** {
+ 103              		.loc 1 130 0
+ 104              		.cfi_startproc
+ 105              		@ args = 0, pretend = 0, frame = 0
+ 106              		@ frame_needed = 0, uses_anonymous_args = 0
+ 107 0000 10B5     		push	{r4, lr}
+ 108              		.cfi_def_cfa_offset 8
+ 109              		.cfi_offset 4, -8
+ 110              		.cfi_offset 14, -4
+ 131:Generated_Source\PSoC4/BLE_bless_isr.c ****     /* Disable this interrupt. */
+ 132:Generated_Source\PSoC4/BLE_bless_isr.c ****     BLE_bless_isr_Disable();
+ 111              		.loc 1 132 0
+ 112 0002 FFF7FEFF 		bl	BLE_bless_isr_Disable
+ 133:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 134:Generated_Source\PSoC4/BLE_bless_isr.c ****     /* Set the ISR to point to the passive one. */
+ 135:Generated_Source\PSoC4/BLE_bless_isr.c ****     BLE_bless_isr_SetVector(&IntDefaultHandler);
+ 113              		.loc 1 135 0
+ 114 0006 034B     		ldr	r3, .L6
+ 115 0008 1800     		movs	r0, r3
+ 116 000a FFF7FEFF 		bl	BLE_bless_isr_SetVector
+ 136:Generated_Source\PSoC4/BLE_bless_isr.c **** }
+ 117              		.loc 1 136 0
+ 118 000e C046     		nop
+ 119              		@ sp needed
+ 120 0010 10BD     		pop	{r4, pc}
+ 121              	.L7:
+ 122 0012 C046     		.align	2
+ 123              	.L6:
+ 124 0014 00000000 		.word	IntDefaultHandler
+ 125              		.cfi_endproc
+ 126              	.LFE4:
+ 127              		.size	BLE_bless_isr_Stop, .-BLE_bless_isr_Stop
+ 128              		.section	.text.BLE_bless_isr_Interrupt,"ax",%progbits
+ 129              		.align	2
+ 130              		.global	BLE_bless_isr_Interrupt
+ 131              		.code	16
+ 132              		.thumb_func
+ 133              		.type	BLE_bless_isr_Interrupt, %function
+ 134              	BLE_bless_isr_Interrupt:
+ 135              	.LFB5:
+ 137:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 138:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 139:Generated_Source\PSoC4/BLE_bless_isr.c **** /*******************************************************************************
+ 140:Generated_Source\PSoC4/BLE_bless_isr.c **** * Function Name: BLE_bless_isr_Interrupt
+ 141:Generated_Source\PSoC4/BLE_bless_isr.c **** ********************************************************************************
+ 142:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 143:Generated_Source\PSoC4/BLE_bless_isr.c **** * Summary:
+ 144:Generated_Source\PSoC4/BLE_bless_isr.c **** *   The default Interrupt Service Routine for BLE_bless_isr.
+ 145:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 146:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Add custom code between the START and END comments to keep the next version
+ 147:Generated_Source\PSoC4/BLE_bless_isr.c **** *   of this file from over-writing your code.
+ 148:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 149:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Note You may use either the default ISR by using this API, or you may define
+ 150:Generated_Source\PSoC4/BLE_bless_isr.c **** *   your own separate ISR through ISR_StartEx().
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 6
+
+
+ 151:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 152:Generated_Source\PSoC4/BLE_bless_isr.c **** * Parameters:  
+ 153:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+ 154:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 155:Generated_Source\PSoC4/BLE_bless_isr.c **** * Return:
+ 156:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+ 157:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 158:Generated_Source\PSoC4/BLE_bless_isr.c **** *******************************************************************************/
+ 159:Generated_Source\PSoC4/BLE_bless_isr.c **** CY_ISR(BLE_bless_isr_Interrupt)
+ 160:Generated_Source\PSoC4/BLE_bless_isr.c **** {
+ 136              		.loc 1 160 0
+ 137              		.cfi_startproc
+ 138              		@ args = 0, pretend = 0, frame = 0
+ 139              		@ frame_needed = 0, uses_anonymous_args = 0
+ 140              		@ link register save eliminated.
+ 161:Generated_Source\PSoC4/BLE_bless_isr.c ****     #ifdef BLE_bless_isr_INTERRUPT_INTERRUPT_CALLBACK
+ 162:Generated_Source\PSoC4/BLE_bless_isr.c ****         BLE_bless_isr_Interrupt_InterruptCallback();
+ 163:Generated_Source\PSoC4/BLE_bless_isr.c ****     #endif /* BLE_bless_isr_INTERRUPT_INTERRUPT_CALLBACK */ 
+ 164:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 165:Generated_Source\PSoC4/BLE_bless_isr.c ****     /*  Place your Interrupt code here. */
+ 166:Generated_Source\PSoC4/BLE_bless_isr.c ****     /* `#START BLE_bless_isr_Interrupt` */
+ 167:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 168:Generated_Source\PSoC4/BLE_bless_isr.c ****     /* `#END` */
+ 169:Generated_Source\PSoC4/BLE_bless_isr.c **** }
+ 141              		.loc 1 169 0
+ 142 0000 C046     		nop
+ 143              		@ sp needed
+ 144 0002 7047     		bx	lr
+ 145              		.cfi_endproc
+ 146              	.LFE5:
+ 147              		.size	BLE_bless_isr_Interrupt, .-BLE_bless_isr_Interrupt
+ 148              		.section	.text.BLE_bless_isr_SetVector,"ax",%progbits
+ 149              		.align	2
+ 150              		.global	BLE_bless_isr_SetVector
+ 151              		.code	16
+ 152              		.thumb_func
+ 153              		.type	BLE_bless_isr_SetVector, %function
+ 154              	BLE_bless_isr_SetVector:
+ 155              	.LFB6:
+ 170:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 171:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 172:Generated_Source\PSoC4/BLE_bless_isr.c **** /*******************************************************************************
+ 173:Generated_Source\PSoC4/BLE_bless_isr.c **** * Function Name: BLE_bless_isr_SetVector
+ 174:Generated_Source\PSoC4/BLE_bless_isr.c **** ********************************************************************************
+ 175:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 176:Generated_Source\PSoC4/BLE_bless_isr.c **** * Summary:
+ 177:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Change the ISR vector for the Interrupt. Note calling BLE_bless_isr_Start
+ 178:Generated_Source\PSoC4/BLE_bless_isr.c **** *   will override any effect this method would have had. To set the vector 
+ 179:Generated_Source\PSoC4/BLE_bless_isr.c **** *   before the component has been started use BLE_bless_isr_StartEx instead.
+ 180:Generated_Source\PSoC4/BLE_bless_isr.c **** * 
+ 181:Generated_Source\PSoC4/BLE_bless_isr.c **** *   When defining ISR functions, the CY_ISR and CY_ISR_PROTO macros should be 
+ 182:Generated_Source\PSoC4/BLE_bless_isr.c **** *   used to provide consistent definition across compilers:
+ 183:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 184:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Function definition example:
+ 185:Generated_Source\PSoC4/BLE_bless_isr.c **** *   CY_ISR(MyISR)
+ 186:Generated_Source\PSoC4/BLE_bless_isr.c **** *   {
+ 187:Generated_Source\PSoC4/BLE_bless_isr.c **** *   }
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 7
+
+
+ 188:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 189:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Function prototype example:
+ 190:Generated_Source\PSoC4/BLE_bless_isr.c **** *     CY_ISR_PROTO(MyISR);
+ 191:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 192:Generated_Source\PSoC4/BLE_bless_isr.c **** * Parameters:
+ 193:Generated_Source\PSoC4/BLE_bless_isr.c **** *   address: Address of the ISR to set in the interrupt vector table.
+ 194:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 195:Generated_Source\PSoC4/BLE_bless_isr.c **** * Return:
+ 196:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+ 197:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 198:Generated_Source\PSoC4/BLE_bless_isr.c **** *******************************************************************************/
+ 199:Generated_Source\PSoC4/BLE_bless_isr.c **** void BLE_bless_isr_SetVector(cyisraddress address)
+ 200:Generated_Source\PSoC4/BLE_bless_isr.c **** {
+ 156              		.loc 1 200 0
+ 157              		.cfi_startproc
+ 158              		@ args = 0, pretend = 0, frame = 8
+ 159              		@ frame_needed = 0, uses_anonymous_args = 0
+ 160              		@ link register save eliminated.
+ 161 0000 82B0     		sub	sp, sp, #8
+ 162              		.cfi_def_cfa_offset 8
+ 163 0002 0190     		str	r0, [sp, #4]
+ 201:Generated_Source\PSoC4/BLE_bless_isr.c ****     CyRamVectors[CYINT_IRQ_BASE + BLE_bless_isr__INTC_NUMBER] = address;
+ 164              		.loc 1 201 0
+ 165 0004 024B     		ldr	r3, .L10
+ 166 0006 019A     		ldr	r2, [sp, #4]
+ 167 0008 1A67     		str	r2, [r3, #112]
+ 202:Generated_Source\PSoC4/BLE_bless_isr.c **** }
+ 168              		.loc 1 202 0
+ 169 000a C046     		nop
+ 170 000c 02B0     		add	sp, sp, #8
+ 171              		@ sp needed
+ 172 000e 7047     		bx	lr
+ 173              	.L11:
+ 174              		.align	2
+ 175              	.L10:
+ 176 0010 00000000 		.word	CyRamVectors
+ 177              		.cfi_endproc
+ 178              	.LFE6:
+ 179              		.size	BLE_bless_isr_SetVector, .-BLE_bless_isr_SetVector
+ 180              		.section	.text.BLE_bless_isr_GetVector,"ax",%progbits
+ 181              		.align	2
+ 182              		.global	BLE_bless_isr_GetVector
+ 183              		.code	16
+ 184              		.thumb_func
+ 185              		.type	BLE_bless_isr_GetVector, %function
+ 186              	BLE_bless_isr_GetVector:
+ 187              	.LFB7:
+ 203:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 204:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 205:Generated_Source\PSoC4/BLE_bless_isr.c **** /*******************************************************************************
+ 206:Generated_Source\PSoC4/BLE_bless_isr.c **** * Function Name: BLE_bless_isr_GetVector
+ 207:Generated_Source\PSoC4/BLE_bless_isr.c **** ********************************************************************************
+ 208:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 209:Generated_Source\PSoC4/BLE_bless_isr.c **** * Summary:
+ 210:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Gets the "address" of the current ISR vector for the Interrupt.
+ 211:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 212:Generated_Source\PSoC4/BLE_bless_isr.c **** * Parameters:
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 8
+
+
+ 213:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+ 214:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 215:Generated_Source\PSoC4/BLE_bless_isr.c **** * Return:
+ 216:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Address of the ISR in the interrupt vector table.
+ 217:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 218:Generated_Source\PSoC4/BLE_bless_isr.c **** *******************************************************************************/
+ 219:Generated_Source\PSoC4/BLE_bless_isr.c **** cyisraddress BLE_bless_isr_GetVector(void)
+ 220:Generated_Source\PSoC4/BLE_bless_isr.c **** {
+ 188              		.loc 1 220 0
+ 189              		.cfi_startproc
+ 190              		@ args = 0, pretend = 0, frame = 0
+ 191              		@ frame_needed = 0, uses_anonymous_args = 0
+ 192              		@ link register save eliminated.
+ 221:Generated_Source\PSoC4/BLE_bless_isr.c ****     return CyRamVectors[CYINT_IRQ_BASE + BLE_bless_isr__INTC_NUMBER];
+ 193              		.loc 1 221 0
+ 194 0000 014B     		ldr	r3, .L14
+ 195 0002 1B6F     		ldr	r3, [r3, #112]
+ 222:Generated_Source\PSoC4/BLE_bless_isr.c **** }
+ 196              		.loc 1 222 0
+ 197 0004 1800     		movs	r0, r3
+ 198              		@ sp needed
+ 199 0006 7047     		bx	lr
+ 200              	.L15:
+ 201              		.align	2
+ 202              	.L14:
+ 203 0008 00000000 		.word	CyRamVectors
+ 204              		.cfi_endproc
+ 205              	.LFE7:
+ 206              		.size	BLE_bless_isr_GetVector, .-BLE_bless_isr_GetVector
+ 207              		.section	.text.BLE_bless_isr_SetPriority,"ax",%progbits
+ 208              		.align	2
+ 209              		.global	BLE_bless_isr_SetPriority
+ 210              		.code	16
+ 211              		.thumb_func
+ 212              		.type	BLE_bless_isr_SetPriority, %function
+ 213              	BLE_bless_isr_SetPriority:
+ 214              	.LFB8:
+ 223:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 224:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 225:Generated_Source\PSoC4/BLE_bless_isr.c **** /*******************************************************************************
+ 226:Generated_Source\PSoC4/BLE_bless_isr.c **** * Function Name: BLE_bless_isr_SetPriority
+ 227:Generated_Source\PSoC4/BLE_bless_isr.c **** ********************************************************************************
+ 228:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 229:Generated_Source\PSoC4/BLE_bless_isr.c **** * Summary:
+ 230:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Sets the Priority of the Interrupt. 
+ 231:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 232:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Note calling BLE_bless_isr_Start or BLE_bless_isr_StartEx will 
+ 233:Generated_Source\PSoC4/BLE_bless_isr.c **** *   override any effect this API would have had. This API should only be called
+ 234:Generated_Source\PSoC4/BLE_bless_isr.c **** *   after BLE_bless_isr_Start or BLE_bless_isr_StartEx has been called. 
+ 235:Generated_Source\PSoC4/BLE_bless_isr.c **** *   To set the initial priority for the component, use the Design-Wide Resources
+ 236:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Interrupt Editor.
+ 237:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 238:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Note This API has no effect on Non-maskable interrupt NMI).
+ 239:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 240:Generated_Source\PSoC4/BLE_bless_isr.c **** * Parameters:
+ 241:Generated_Source\PSoC4/BLE_bless_isr.c **** *   priority: Priority of the interrupt, 0 being the highest priority
+ 242:Generated_Source\PSoC4/BLE_bless_isr.c **** *             PSoC 3 and PSoC 5LP: Priority is from 0 to 7.
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 9
+
+
+ 243:Generated_Source\PSoC4/BLE_bless_isr.c **** *             PSoC 4: Priority is from 0 to 3.
+ 244:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 245:Generated_Source\PSoC4/BLE_bless_isr.c **** * Return:
+ 246:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+ 247:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 248:Generated_Source\PSoC4/BLE_bless_isr.c **** *******************************************************************************/
+ 249:Generated_Source\PSoC4/BLE_bless_isr.c **** void BLE_bless_isr_SetPriority(uint8 priority)
+ 250:Generated_Source\PSoC4/BLE_bless_isr.c **** {
+ 215              		.loc 1 250 0
+ 216              		.cfi_startproc
+ 217              		@ args = 0, pretend = 0, frame = 16
+ 218              		@ frame_needed = 0, uses_anonymous_args = 0
+ 219 0000 10B5     		push	{r4, lr}
+ 220              		.cfi_def_cfa_offset 8
+ 221              		.cfi_offset 4, -8
+ 222              		.cfi_offset 14, -4
+ 223 0002 84B0     		sub	sp, sp, #16
+ 224              		.cfi_def_cfa_offset 24
+ 225 0004 0200     		movs	r2, r0
+ 226 0006 6B46     		mov	r3, sp
+ 227 0008 0733     		adds	r3, r3, #7
+ 228 000a 1A70     		strb	r2, [r3]
+ 251:Generated_Source\PSoC4/BLE_bless_isr.c **** 	uint8 interruptState;
+ 252:Generated_Source\PSoC4/BLE_bless_isr.c ****     uint32 priorityOffset = ((BLE_bless_isr__INTC_NUMBER % 4u) * 8u) + 6u;
+ 229              		.loc 1 252 0
+ 230 000c 0623     		movs	r3, #6
+ 231 000e 0393     		str	r3, [sp, #12]
+ 253:Generated_Source\PSoC4/BLE_bless_isr.c ****     
+ 254:Generated_Source\PSoC4/BLE_bless_isr.c **** 	interruptState = CyEnterCriticalSection();
+ 232              		.loc 1 254 0
+ 233 0010 0B24     		movs	r4, #11
+ 234 0012 6C44     		add	r4, r4, sp
+ 235 0014 FFF7FEFF 		bl	CyEnterCriticalSection
+ 236 0018 0300     		movs	r3, r0
+ 237 001a 2370     		strb	r3, [r4]
+ 255:Generated_Source\PSoC4/BLE_bless_isr.c ****     *BLE_bless_isr_INTC_PRIOR = (*BLE_bless_isr_INTC_PRIOR & (uint32)(~BLE_bless_isr__INTC_PRIOR_MA
+ 238              		.loc 1 255 0
+ 239 001c 0B4B     		ldr	r3, .L17
+ 240 001e 0B4A     		ldr	r2, .L17
+ 241 0020 1268     		ldr	r2, [r2]
+ 242 0022 C021     		movs	r1, #192
+ 243 0024 8A43     		bics	r2, r1
+ 244 0026 1100     		movs	r1, r2
+ 256:Generated_Source\PSoC4/BLE_bless_isr.c ****                                     ((uint32)priority << priorityOffset);
+ 245              		.loc 1 256 0
+ 246 0028 6A46     		mov	r2, sp
+ 247 002a 0732     		adds	r2, r2, #7
+ 248 002c 1078     		ldrb	r0, [r2]
+ 249 002e 039A     		ldr	r2, [sp, #12]
+ 250 0030 9040     		lsls	r0, r0, r2
+ 251 0032 0200     		movs	r2, r0
+ 255:Generated_Source\PSoC4/BLE_bless_isr.c ****     *BLE_bless_isr_INTC_PRIOR = (*BLE_bless_isr_INTC_PRIOR & (uint32)(~BLE_bless_isr__INTC_PRIOR_MA
+ 252              		.loc 1 255 0
+ 253 0034 0A43     		orrs	r2, r1
+ 254 0036 1A60     		str	r2, [r3]
+ 257:Generated_Source\PSoC4/BLE_bless_isr.c **** 	CyExitCriticalSection(interruptState);
+ 255              		.loc 1 257 0
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 10
+
+
+ 256 0038 0B23     		movs	r3, #11
+ 257 003a 6B44     		add	r3, r3, sp
+ 258 003c 1B78     		ldrb	r3, [r3]
+ 259 003e 1800     		movs	r0, r3
+ 260 0040 FFF7FEFF 		bl	CyExitCriticalSection
+ 258:Generated_Source\PSoC4/BLE_bless_isr.c **** }
+ 261              		.loc 1 258 0
+ 262 0044 C046     		nop
+ 263 0046 04B0     		add	sp, sp, #16
+ 264              		@ sp needed
+ 265 0048 10BD     		pop	{r4, pc}
+ 266              	.L18:
+ 267 004a C046     		.align	2
+ 268              	.L17:
+ 269 004c 0CE400E0 		.word	-536812532
+ 270              		.cfi_endproc
+ 271              	.LFE8:
+ 272              		.size	BLE_bless_isr_SetPriority, .-BLE_bless_isr_SetPriority
+ 273              		.section	.text.BLE_bless_isr_GetPriority,"ax",%progbits
+ 274              		.align	2
+ 275              		.global	BLE_bless_isr_GetPriority
+ 276              		.code	16
+ 277              		.thumb_func
+ 278              		.type	BLE_bless_isr_GetPriority, %function
+ 279              	BLE_bless_isr_GetPriority:
+ 280              	.LFB9:
+ 259:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 260:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 261:Generated_Source\PSoC4/BLE_bless_isr.c **** /*******************************************************************************
+ 262:Generated_Source\PSoC4/BLE_bless_isr.c **** * Function Name: BLE_bless_isr_GetPriority
+ 263:Generated_Source\PSoC4/BLE_bless_isr.c **** ********************************************************************************
+ 264:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 265:Generated_Source\PSoC4/BLE_bless_isr.c **** * Summary:
+ 266:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Gets the Priority of the Interrupt.
+ 267:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 268:Generated_Source\PSoC4/BLE_bless_isr.c **** * Parameters:
+ 269:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+ 270:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 271:Generated_Source\PSoC4/BLE_bless_isr.c **** * Return:
+ 272:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Priority of the interrupt, 0 being the highest priority
+ 273:Generated_Source\PSoC4/BLE_bless_isr.c **** *    PSoC 3 and PSoC 5LP: Priority is from 0 to 7.
+ 274:Generated_Source\PSoC4/BLE_bless_isr.c **** *    PSoC 4: Priority is from 0 to 3.
+ 275:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 276:Generated_Source\PSoC4/BLE_bless_isr.c **** *******************************************************************************/
+ 277:Generated_Source\PSoC4/BLE_bless_isr.c **** uint8 BLE_bless_isr_GetPriority(void)
+ 278:Generated_Source\PSoC4/BLE_bless_isr.c **** {
+ 281              		.loc 1 278 0
+ 282              		.cfi_startproc
+ 283              		@ args = 0, pretend = 0, frame = 8
+ 284              		@ frame_needed = 0, uses_anonymous_args = 0
+ 285              		@ link register save eliminated.
+ 286 0000 82B0     		sub	sp, sp, #8
+ 287              		.cfi_def_cfa_offset 8
+ 279:Generated_Source\PSoC4/BLE_bless_isr.c ****     uint32 priority;
+ 280:Generated_Source\PSoC4/BLE_bless_isr.c **** 	uint32 priorityOffset = ((BLE_bless_isr__INTC_NUMBER % 4u) * 8u) + 6u;
+ 288              		.loc 1 280 0
+ 289 0002 0623     		movs	r3, #6
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 11
+
+
+ 290 0004 0193     		str	r3, [sp, #4]
+ 281:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 282:Generated_Source\PSoC4/BLE_bless_isr.c ****     priority = (*BLE_bless_isr_INTC_PRIOR & BLE_bless_isr__INTC_PRIOR_MASK) >> priorityOffset;
+ 291              		.loc 1 282 0
+ 292 0006 064B     		ldr	r3, .L21
+ 293 0008 1B68     		ldr	r3, [r3]
+ 294 000a C022     		movs	r2, #192
+ 295 000c 1A40     		ands	r2, r3
+ 296 000e 019B     		ldr	r3, [sp, #4]
+ 297 0010 DA40     		lsrs	r2, r2, r3
+ 298 0012 1300     		movs	r3, r2
+ 299 0014 0093     		str	r3, [sp]
+ 283:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 284:Generated_Source\PSoC4/BLE_bless_isr.c ****     return (uint8)priority;
+ 300              		.loc 1 284 0
+ 301 0016 009B     		ldr	r3, [sp]
+ 302 0018 DBB2     		uxtb	r3, r3
+ 285:Generated_Source\PSoC4/BLE_bless_isr.c **** }
+ 303              		.loc 1 285 0
+ 304 001a 1800     		movs	r0, r3
+ 305 001c 02B0     		add	sp, sp, #8
+ 306              		@ sp needed
+ 307 001e 7047     		bx	lr
+ 308              	.L22:
+ 309              		.align	2
+ 310              	.L21:
+ 311 0020 0CE400E0 		.word	-536812532
+ 312              		.cfi_endproc
+ 313              	.LFE9:
+ 314              		.size	BLE_bless_isr_GetPriority, .-BLE_bless_isr_GetPriority
+ 315              		.section	.text.BLE_bless_isr_Enable,"ax",%progbits
+ 316              		.align	2
+ 317              		.global	BLE_bless_isr_Enable
+ 318              		.code	16
+ 319              		.thumb_func
+ 320              		.type	BLE_bless_isr_Enable, %function
+ 321              	BLE_bless_isr_Enable:
+ 322              	.LFB10:
+ 286:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 287:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 288:Generated_Source\PSoC4/BLE_bless_isr.c **** /*******************************************************************************
+ 289:Generated_Source\PSoC4/BLE_bless_isr.c **** * Function Name: BLE_bless_isr_Enable
+ 290:Generated_Source\PSoC4/BLE_bless_isr.c **** ********************************************************************************
+ 291:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 292:Generated_Source\PSoC4/BLE_bless_isr.c **** * Summary:
+ 293:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Enables the interrupt to the interrupt controller. Do not call this function
+ 294:Generated_Source\PSoC4/BLE_bless_isr.c **** *   unless ISR_Start() has been called or the functionality of the ISR_Start() 
+ 295:Generated_Source\PSoC4/BLE_bless_isr.c **** *   function, which sets the vector and the priority, has been called.
+ 296:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 297:Generated_Source\PSoC4/BLE_bless_isr.c **** * Parameters:
+ 298:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+ 299:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 300:Generated_Source\PSoC4/BLE_bless_isr.c **** * Return:
+ 301:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+ 302:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 303:Generated_Source\PSoC4/BLE_bless_isr.c **** *******************************************************************************/
+ 304:Generated_Source\PSoC4/BLE_bless_isr.c **** void BLE_bless_isr_Enable(void)
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 12
+
+
+ 305:Generated_Source\PSoC4/BLE_bless_isr.c **** {
+ 323              		.loc 1 305 0
+ 324              		.cfi_startproc
+ 325              		@ args = 0, pretend = 0, frame = 0
+ 326              		@ frame_needed = 0, uses_anonymous_args = 0
+ 327              		@ link register save eliminated.
+ 306:Generated_Source\PSoC4/BLE_bless_isr.c ****     /* Enable the general interrupt. */
+ 307:Generated_Source\PSoC4/BLE_bless_isr.c ****     *BLE_bless_isr_INTC_SET_EN = BLE_bless_isr__INTC_MASK;
+ 328              		.loc 1 307 0
+ 329 0000 024B     		ldr	r3, .L24
+ 330 0002 8022     		movs	r2, #128
+ 331 0004 5201     		lsls	r2, r2, #5
+ 332 0006 1A60     		str	r2, [r3]
+ 308:Generated_Source\PSoC4/BLE_bless_isr.c **** }
+ 333              		.loc 1 308 0
+ 334 0008 C046     		nop
+ 335              		@ sp needed
+ 336 000a 7047     		bx	lr
+ 337              	.L25:
+ 338              		.align	2
+ 339              	.L24:
+ 340 000c 00E100E0 		.word	-536813312
+ 341              		.cfi_endproc
+ 342              	.LFE10:
+ 343              		.size	BLE_bless_isr_Enable, .-BLE_bless_isr_Enable
+ 344              		.section	.text.BLE_bless_isr_GetState,"ax",%progbits
+ 345              		.align	2
+ 346              		.global	BLE_bless_isr_GetState
+ 347              		.code	16
+ 348              		.thumb_func
+ 349              		.type	BLE_bless_isr_GetState, %function
+ 350              	BLE_bless_isr_GetState:
+ 351              	.LFB11:
+ 309:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 310:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 311:Generated_Source\PSoC4/BLE_bless_isr.c **** /*******************************************************************************
+ 312:Generated_Source\PSoC4/BLE_bless_isr.c **** * Function Name: BLE_bless_isr_GetState
+ 313:Generated_Source\PSoC4/BLE_bless_isr.c **** ********************************************************************************
+ 314:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 315:Generated_Source\PSoC4/BLE_bless_isr.c **** * Summary:
+ 316:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Gets the state (enabled, disabled) of the Interrupt.
+ 317:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 318:Generated_Source\PSoC4/BLE_bless_isr.c **** * Parameters:
+ 319:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+ 320:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 321:Generated_Source\PSoC4/BLE_bless_isr.c **** * Return:
+ 322:Generated_Source\PSoC4/BLE_bless_isr.c **** *   1 if enabled, 0 if disabled.
+ 323:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 324:Generated_Source\PSoC4/BLE_bless_isr.c **** *******************************************************************************/
+ 325:Generated_Source\PSoC4/BLE_bless_isr.c **** uint8 BLE_bless_isr_GetState(void)
+ 326:Generated_Source\PSoC4/BLE_bless_isr.c **** {
+ 352              		.loc 1 326 0
+ 353              		.cfi_startproc
+ 354              		@ args = 0, pretend = 0, frame = 0
+ 355              		@ frame_needed = 0, uses_anonymous_args = 0
+ 356              		@ link register save eliminated.
+ 327:Generated_Source\PSoC4/BLE_bless_isr.c ****     /* Get the state of the general interrupt. */
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 13
+
+
+ 328:Generated_Source\PSoC4/BLE_bless_isr.c ****     return ((*BLE_bless_isr_INTC_SET_EN & (uint32)BLE_bless_isr__INTC_MASK) != 0u) ? 1u:0u;
+ 357              		.loc 1 328 0
+ 358 0000 054B     		ldr	r3, .L30
+ 359 0002 1A68     		ldr	r2, [r3]
+ 360 0004 8023     		movs	r3, #128
+ 361 0006 5B01     		lsls	r3, r3, #5
+ 362 0008 1340     		ands	r3, r2
+ 363 000a 01D0     		beq	.L27
+ 364              		.loc 1 328 0 is_stmt 0 discriminator 1
+ 365 000c 0123     		movs	r3, #1
+ 366 000e 00E0     		b	.L28
+ 367              	.L27:
+ 368              		.loc 1 328 0 discriminator 2
+ 369 0010 0023     		movs	r3, #0
+ 370              	.L28:
+ 329:Generated_Source\PSoC4/BLE_bless_isr.c **** }
+ 371              		.loc 1 329 0 is_stmt 1 discriminator 4
+ 372 0012 1800     		movs	r0, r3
+ 373              		@ sp needed
+ 374 0014 7047     		bx	lr
+ 375              	.L31:
+ 376 0016 C046     		.align	2
+ 377              	.L30:
+ 378 0018 00E100E0 		.word	-536813312
+ 379              		.cfi_endproc
+ 380              	.LFE11:
+ 381              		.size	BLE_bless_isr_GetState, .-BLE_bless_isr_GetState
+ 382              		.section	.text.BLE_bless_isr_Disable,"ax",%progbits
+ 383              		.align	2
+ 384              		.global	BLE_bless_isr_Disable
+ 385              		.code	16
+ 386              		.thumb_func
+ 387              		.type	BLE_bless_isr_Disable, %function
+ 388              	BLE_bless_isr_Disable:
+ 389              	.LFB12:
+ 330:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 331:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 332:Generated_Source\PSoC4/BLE_bless_isr.c **** /*******************************************************************************
+ 333:Generated_Source\PSoC4/BLE_bless_isr.c **** * Function Name: BLE_bless_isr_Disable
+ 334:Generated_Source\PSoC4/BLE_bless_isr.c **** ********************************************************************************
+ 335:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 336:Generated_Source\PSoC4/BLE_bless_isr.c **** * Summary:
+ 337:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Disables the Interrupt in the interrupt controller.
+ 338:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 339:Generated_Source\PSoC4/BLE_bless_isr.c **** * Parameters:
+ 340:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+ 341:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 342:Generated_Source\PSoC4/BLE_bless_isr.c **** * Return:
+ 343:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+ 344:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 345:Generated_Source\PSoC4/BLE_bless_isr.c **** *******************************************************************************/
+ 346:Generated_Source\PSoC4/BLE_bless_isr.c **** void BLE_bless_isr_Disable(void)
+ 347:Generated_Source\PSoC4/BLE_bless_isr.c **** {
+ 390              		.loc 1 347 0
+ 391              		.cfi_startproc
+ 392              		@ args = 0, pretend = 0, frame = 0
+ 393              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 14
+
+
+ 394              		@ link register save eliminated.
+ 348:Generated_Source\PSoC4/BLE_bless_isr.c ****     /* Disable the general interrupt. */
+ 349:Generated_Source\PSoC4/BLE_bless_isr.c ****     *BLE_bless_isr_INTC_CLR_EN = BLE_bless_isr__INTC_MASK;
+ 395              		.loc 1 349 0
+ 396 0000 024B     		ldr	r3, .L33
+ 397 0002 8022     		movs	r2, #128
+ 398 0004 5201     		lsls	r2, r2, #5
+ 399 0006 1A60     		str	r2, [r3]
+ 350:Generated_Source\PSoC4/BLE_bless_isr.c **** }
+ 400              		.loc 1 350 0
+ 401 0008 C046     		nop
+ 402              		@ sp needed
+ 403 000a 7047     		bx	lr
+ 404              	.L34:
+ 405              		.align	2
+ 406              	.L33:
+ 407 000c 80E100E0 		.word	-536813184
+ 408              		.cfi_endproc
+ 409              	.LFE12:
+ 410              		.size	BLE_bless_isr_Disable, .-BLE_bless_isr_Disable
+ 411              		.section	.text.BLE_bless_isr_SetPending,"ax",%progbits
+ 412              		.align	2
+ 413              		.global	BLE_bless_isr_SetPending
+ 414              		.code	16
+ 415              		.thumb_func
+ 416              		.type	BLE_bless_isr_SetPending, %function
+ 417              	BLE_bless_isr_SetPending:
+ 418              	.LFB13:
+ 351:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 352:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 353:Generated_Source\PSoC4/BLE_bless_isr.c **** /*******************************************************************************
+ 354:Generated_Source\PSoC4/BLE_bless_isr.c **** * Function Name: BLE_bless_isr_SetPending
+ 355:Generated_Source\PSoC4/BLE_bless_isr.c **** ********************************************************************************
+ 356:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 357:Generated_Source\PSoC4/BLE_bless_isr.c **** * Summary:
+ 358:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Causes the Interrupt to enter the pending state, a software method of
+ 359:Generated_Source\PSoC4/BLE_bless_isr.c **** *   generating the interrupt.
+ 360:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 361:Generated_Source\PSoC4/BLE_bless_isr.c **** * Parameters:
+ 362:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+ 363:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 364:Generated_Source\PSoC4/BLE_bless_isr.c **** * Return:
+ 365:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+ 366:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 367:Generated_Source\PSoC4/BLE_bless_isr.c **** * Side Effects:
+ 368:Generated_Source\PSoC4/BLE_bless_isr.c **** *   If interrupts are enabled and the interrupt is set up properly, the ISR is
+ 369:Generated_Source\PSoC4/BLE_bless_isr.c **** *   entered (depending on the priority of this interrupt and other pending 
+ 370:Generated_Source\PSoC4/BLE_bless_isr.c **** *   interrupts).
+ 371:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 372:Generated_Source\PSoC4/BLE_bless_isr.c **** *******************************************************************************/
+ 373:Generated_Source\PSoC4/BLE_bless_isr.c **** void BLE_bless_isr_SetPending(void)
+ 374:Generated_Source\PSoC4/BLE_bless_isr.c **** {
+ 419              		.loc 1 374 0
+ 420              		.cfi_startproc
+ 421              		@ args = 0, pretend = 0, frame = 0
+ 422              		@ frame_needed = 0, uses_anonymous_args = 0
+ 423              		@ link register save eliminated.
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 15
+
+
+ 375:Generated_Source\PSoC4/BLE_bless_isr.c ****     *BLE_bless_isr_INTC_SET_PD = BLE_bless_isr__INTC_MASK;
+ 424              		.loc 1 375 0
+ 425 0000 024B     		ldr	r3, .L36
+ 426 0002 8022     		movs	r2, #128
+ 427 0004 5201     		lsls	r2, r2, #5
+ 428 0006 1A60     		str	r2, [r3]
+ 376:Generated_Source\PSoC4/BLE_bless_isr.c **** }
+ 429              		.loc 1 376 0
+ 430 0008 C046     		nop
+ 431              		@ sp needed
+ 432 000a 7047     		bx	lr
+ 433              	.L37:
+ 434              		.align	2
+ 435              	.L36:
+ 436 000c 00E200E0 		.word	-536813056
+ 437              		.cfi_endproc
+ 438              	.LFE13:
+ 439              		.size	BLE_bless_isr_SetPending, .-BLE_bless_isr_SetPending
+ 440              		.section	.text.BLE_bless_isr_ClearPending,"ax",%progbits
+ 441              		.align	2
+ 442              		.global	BLE_bless_isr_ClearPending
+ 443              		.code	16
+ 444              		.thumb_func
+ 445              		.type	BLE_bless_isr_ClearPending, %function
+ 446              	BLE_bless_isr_ClearPending:
+ 447              	.LFB14:
+ 377:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 378:Generated_Source\PSoC4/BLE_bless_isr.c **** 
+ 379:Generated_Source\PSoC4/BLE_bless_isr.c **** /*******************************************************************************
+ 380:Generated_Source\PSoC4/BLE_bless_isr.c **** * Function Name: BLE_bless_isr_ClearPending
+ 381:Generated_Source\PSoC4/BLE_bless_isr.c **** ********************************************************************************
+ 382:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 383:Generated_Source\PSoC4/BLE_bless_isr.c **** * Summary:
+ 384:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Clears a pending interrupt in the interrupt controller.
+ 385:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 386:Generated_Source\PSoC4/BLE_bless_isr.c **** *   Note Some interrupt sources are clear-on-read and require the block 
+ 387:Generated_Source\PSoC4/BLE_bless_isr.c **** *   interrupt/status register to be read/cleared with the appropriate block API 
+ 388:Generated_Source\PSoC4/BLE_bless_isr.c **** *   (GPIO, UART, and so on). Otherwise the ISR will continue to remain in 
+ 389:Generated_Source\PSoC4/BLE_bless_isr.c **** *   pending state even though the interrupt itself is cleared using this API.
+ 390:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 391:Generated_Source\PSoC4/BLE_bless_isr.c **** * Parameters:
+ 392:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+ 393:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 394:Generated_Source\PSoC4/BLE_bless_isr.c **** * Return:
+ 395:Generated_Source\PSoC4/BLE_bless_isr.c **** *   None
+ 396:Generated_Source\PSoC4/BLE_bless_isr.c **** *
+ 397:Generated_Source\PSoC4/BLE_bless_isr.c **** *******************************************************************************/
+ 398:Generated_Source\PSoC4/BLE_bless_isr.c **** void BLE_bless_isr_ClearPending(void)
+ 399:Generated_Source\PSoC4/BLE_bless_isr.c **** {
+ 448              		.loc 1 399 0
+ 449              		.cfi_startproc
+ 450              		@ args = 0, pretend = 0, frame = 0
+ 451              		@ frame_needed = 0, uses_anonymous_args = 0
+ 452              		@ link register save eliminated.
+ 400:Generated_Source\PSoC4/BLE_bless_isr.c ****     *BLE_bless_isr_INTC_CLR_PD = BLE_bless_isr__INTC_MASK;
+ 453              		.loc 1 400 0
+ 454 0000 024B     		ldr	r3, .L39
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 16
+
+
+ 455 0002 8022     		movs	r2, #128
+ 456 0004 5201     		lsls	r2, r2, #5
+ 457 0006 1A60     		str	r2, [r3]
+ 401:Generated_Source\PSoC4/BLE_bless_isr.c **** }
+ 458              		.loc 1 401 0
+ 459 0008 C046     		nop
+ 460              		@ sp needed
+ 461 000a 7047     		bx	lr
+ 462              	.L40:
+ 463              		.align	2
+ 464              	.L39:
+ 465 000c 80E200E0 		.word	-536812928
+ 466              		.cfi_endproc
+ 467              	.LFE14:
+ 468              		.size	BLE_bless_isr_ClearPending, .-BLE_bless_isr_ClearPending
+ 469              		.text
+ 470              	.Letext0:
+ 471              		.file 2 "Generated_Source\\PSoC4/cytypes.h"
+ 472              		.section	.debug_info,"",%progbits
+ 473              	.Ldebug_info0:
+ 474 0000 49020000 		.4byte	0x249
+ 475 0004 0400     		.2byte	0x4
+ 476 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 477 000a 04       		.byte	0x4
+ 478 000b 01       		.uleb128 0x1
+ 479 000c 31000000 		.4byte	.LASF34
+ 480 0010 0C       		.byte	0xc
+ 481 0011 40020000 		.4byte	.LASF35
+ 482 0015 89010000 		.4byte	.LASF36
+ 483 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 484 001d 00000000 		.4byte	0
+ 485 0021 00000000 		.4byte	.Ldebug_line0
+ 486 0025 02       		.uleb128 0x2
+ 487 0026 01       		.byte	0x1
+ 488 0027 06       		.byte	0x6
+ 489 0028 3A030000 		.4byte	.LASF0
+ 490 002c 02       		.uleb128 0x2
+ 491 002d 01       		.byte	0x1
+ 492 002e 08       		.byte	0x8
+ 493 002f 18010000 		.4byte	.LASF1
+ 494 0033 02       		.uleb128 0x2
+ 495 0034 02       		.byte	0x2
+ 496 0035 05       		.byte	0x5
+ 497 0036 DB020000 		.4byte	.LASF2
+ 498 003a 02       		.uleb128 0x2
+ 499 003b 02       		.byte	0x2
+ 500 003c 07       		.byte	0x7
+ 501 003d 5E030000 		.4byte	.LASF3
+ 502 0041 02       		.uleb128 0x2
+ 503 0042 04       		.byte	0x4
+ 504 0043 05       		.byte	0x5
+ 505 0044 1F030000 		.4byte	.LASF4
+ 506 0048 02       		.uleb128 0x2
+ 507 0049 04       		.byte	0x4
+ 508 004a 07       		.byte	0x7
+ 509 004b 4D010000 		.4byte	.LASF5
+ 510 004f 02       		.uleb128 0x2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 17
+
+
+ 511 0050 08       		.byte	0x8
+ 512 0051 05       		.byte	0x5
+ 513 0052 AE020000 		.4byte	.LASF6
+ 514 0056 02       		.uleb128 0x2
+ 515 0057 08       		.byte	0x8
+ 516 0058 07       		.byte	0x7
+ 517 0059 29020000 		.4byte	.LASF7
+ 518 005d 03       		.uleb128 0x3
+ 519 005e 04       		.byte	0x4
+ 520 005f 05       		.byte	0x5
+ 521 0060 696E7400 		.ascii	"int\000"
+ 522 0064 02       		.uleb128 0x2
+ 523 0065 04       		.byte	0x4
+ 524 0066 07       		.byte	0x7
+ 525 0067 14020000 		.4byte	.LASF8
+ 526 006b 04       		.uleb128 0x4
+ 527 006c 5F010000 		.4byte	.LASF9
+ 528 0070 02       		.byte	0x2
+ 529 0071 D201     		.2byte	0x1d2
+ 530 0073 2C000000 		.4byte	0x2c
+ 531 0077 04       		.uleb128 0x4
+ 532 0078 0D020000 		.4byte	.LASF10
+ 533 007c 02       		.byte	0x2
+ 534 007d D401     		.2byte	0x1d4
+ 535 007f 48000000 		.4byte	0x48
+ 536 0083 02       		.uleb128 0x2
+ 537 0084 04       		.byte	0x4
+ 538 0085 04       		.byte	0x4
+ 539 0086 FA000000 		.4byte	.LASF11
+ 540 008a 02       		.uleb128 0x2
+ 541 008b 08       		.byte	0x8
+ 542 008c 04       		.byte	0x4
+ 543 008d 6E010000 		.4byte	.LASF12
+ 544 0091 02       		.uleb128 0x2
+ 545 0092 01       		.byte	0x1
+ 546 0093 08       		.byte	0x8
+ 547 0094 D6020000 		.4byte	.LASF13
+ 548 0098 04       		.uleb128 0x4
+ 549 0099 28030000 		.4byte	.LASF14
+ 550 009d 02       		.byte	0x2
+ 551 009e 7E02     		.2byte	0x27e
+ 552 00a0 A4000000 		.4byte	0xa4
+ 553 00a4 05       		.uleb128 0x5
+ 554 00a5 77000000 		.4byte	0x77
+ 555 00a9 04       		.uleb128 0x4
+ 556 00aa 82020000 		.4byte	.LASF15
+ 557 00ae 02       		.byte	0x2
+ 558 00af 8E02     		.2byte	0x28e
+ 559 00b1 B5000000 		.4byte	0xb5
+ 560 00b5 06       		.uleb128 0x6
+ 561 00b6 04       		.byte	0x4
+ 562 00b7 BB000000 		.4byte	0xbb
+ 563 00bb 07       		.uleb128 0x7
+ 564 00bc 02       		.uleb128 0x2
+ 565 00bd 08       		.byte	0x8
+ 566 00be 04       		.byte	0x4
+ 567 00bf 2E030000 		.4byte	.LASF16
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 18
+
+
+ 568 00c3 02       		.uleb128 0x2
+ 569 00c4 04       		.byte	0x4
+ 570 00c5 07       		.byte	0x7
+ 571 00c6 8F020000 		.4byte	.LASF17
+ 572 00ca 08       		.uleb128 0x8
+ 573 00cb 75010000 		.4byte	.LASF18
+ 574 00cf 01       		.byte	0x1
+ 575 00d0 38       		.byte	0x38
+ 576 00d1 00000000 		.4byte	.LFB2
+ 577 00d5 20000000 		.4byte	.LFE2-.LFB2
+ 578 00d9 01       		.uleb128 0x1
+ 579 00da 9C       		.byte	0x9c
+ 580 00db 09       		.uleb128 0x9
+ 581 00dc 98020000 		.4byte	.LASF21
+ 582 00e0 01       		.byte	0x1
+ 583 00e1 63       		.byte	0x63
+ 584 00e2 00000000 		.4byte	.LFB3
+ 585 00e6 22000000 		.4byte	.LFE3-.LFB3
+ 586 00ea 01       		.uleb128 0x1
+ 587 00eb 9C       		.byte	0x9c
+ 588 00ec FF000000 		.4byte	0xff
+ 589 00f0 0A       		.uleb128 0xa
+ 590 00f1 21020000 		.4byte	.LASF23
+ 591 00f5 01       		.byte	0x1
+ 592 00f6 63       		.byte	0x63
+ 593 00f7 A9000000 		.4byte	0xa9
+ 594 00fb 02       		.uleb128 0x2
+ 595 00fc 91       		.byte	0x91
+ 596 00fd 74       		.sleb128 -12
+ 597 00fe 00       		.byte	0
+ 598 00ff 08       		.uleb128 0x8
+ 599 0100 71030000 		.4byte	.LASF19
+ 600 0104 01       		.byte	0x1
+ 601 0105 81       		.byte	0x81
+ 602 0106 00000000 		.4byte	.LFB4
+ 603 010a 18000000 		.4byte	.LFE4-.LFB4
+ 604 010e 01       		.uleb128 0x1
+ 605 010f 9C       		.byte	0x9c
+ 606 0110 0B       		.uleb128 0xb
+ 607 0111 26010000 		.4byte	.LASF20
+ 608 0115 01       		.byte	0x1
+ 609 0116 9F       		.byte	0x9f
+ 610 0117 00000000 		.4byte	.LFB5
+ 611 011b 04000000 		.4byte	.LFE5-.LFB5
+ 612 011f 01       		.uleb128 0x1
+ 613 0120 9C       		.byte	0x9c
+ 614 0121 0C       		.uleb128 0xc
+ 615 0122 46030000 		.4byte	.LASF22
+ 616 0126 01       		.byte	0x1
+ 617 0127 C7       		.byte	0xc7
+ 618 0128 00000000 		.4byte	.LFB6
+ 619 012c 14000000 		.4byte	.LFE6-.LFB6
+ 620 0130 01       		.uleb128 0x1
+ 621 0131 9C       		.byte	0x9c
+ 622 0132 45010000 		.4byte	0x145
+ 623 0136 0A       		.uleb128 0xa
+ 624 0137 21020000 		.4byte	.LASF23
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 19
+
+
+ 625 013b 01       		.byte	0x1
+ 626 013c C7       		.byte	0xc7
+ 627 013d A9000000 		.4byte	0xa9
+ 628 0141 02       		.uleb128 0x2
+ 629 0142 91       		.byte	0x91
+ 630 0143 7C       		.sleb128 -4
+ 631 0144 00       		.byte	0
+ 632 0145 0D       		.uleb128 0xd
+ 633 0146 00010000 		.4byte	.LASF29
+ 634 014a 01       		.byte	0x1
+ 635 014b DB       		.byte	0xdb
+ 636 014c A9000000 		.4byte	0xa9
+ 637 0150 00000000 		.4byte	.LFB7
+ 638 0154 0C000000 		.4byte	.LFE7-.LFB7
+ 639 0158 01       		.uleb128 0x1
+ 640 0159 9C       		.byte	0x9c
+ 641 015a 09       		.uleb128 0x9
+ 642 015b 00000000 		.4byte	.LASF24
+ 643 015f 01       		.byte	0x1
+ 644 0160 F9       		.byte	0xf9
+ 645 0161 00000000 		.4byte	.LFB8
+ 646 0165 50000000 		.4byte	.LFE8-.LFB8
+ 647 0169 01       		.uleb128 0x1
+ 648 016a 9C       		.byte	0x9c
+ 649 016b 9A010000 		.4byte	0x19a
+ 650 016f 0A       		.uleb128 0xa
+ 651 0170 65010000 		.4byte	.LASF25
+ 652 0174 01       		.byte	0x1
+ 653 0175 F9       		.byte	0xf9
+ 654 0176 6B000000 		.4byte	0x6b
+ 655 017a 02       		.uleb128 0x2
+ 656 017b 91       		.byte	0x91
+ 657 017c 6F       		.sleb128 -17
+ 658 017d 0E       		.uleb128 0xe
+ 659 017e 3E010000 		.4byte	.LASF26
+ 660 0182 01       		.byte	0x1
+ 661 0183 FB       		.byte	0xfb
+ 662 0184 6B000000 		.4byte	0x6b
+ 663 0188 02       		.uleb128 0x2
+ 664 0189 91       		.byte	0x91
+ 665 018a 73       		.sleb128 -13
+ 666 018b 0E       		.uleb128 0xe
+ 667 018c FA020000 		.4byte	.LASF27
+ 668 0190 01       		.byte	0x1
+ 669 0191 FC       		.byte	0xfc
+ 670 0192 77000000 		.4byte	0x77
+ 671 0196 02       		.uleb128 0x2
+ 672 0197 91       		.byte	0x91
+ 673 0198 74       		.sleb128 -12
+ 674 0199 00       		.byte	0
+ 675 019a 0F       		.uleb128 0xf
+ 676 019b BC020000 		.4byte	.LASF37
+ 677 019f 01       		.byte	0x1
+ 678 01a0 1501     		.2byte	0x115
+ 679 01a2 6B000000 		.4byte	0x6b
+ 680 01a6 00000000 		.4byte	.LFB9
+ 681 01aa 24000000 		.4byte	.LFE9-.LFB9
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 20
+
+
+ 682 01ae 01       		.uleb128 0x1
+ 683 01af 9C       		.byte	0x9c
+ 684 01b0 D3010000 		.4byte	0x1d3
+ 685 01b4 10       		.uleb128 0x10
+ 686 01b5 65010000 		.4byte	.LASF25
+ 687 01b9 01       		.byte	0x1
+ 688 01ba 1701     		.2byte	0x117
+ 689 01bc 77000000 		.4byte	0x77
+ 690 01c0 02       		.uleb128 0x2
+ 691 01c1 91       		.byte	0x91
+ 692 01c2 78       		.sleb128 -8
+ 693 01c3 10       		.uleb128 0x10
+ 694 01c4 FA020000 		.4byte	.LASF27
+ 695 01c8 01       		.byte	0x1
+ 696 01c9 1801     		.2byte	0x118
+ 697 01cb 77000000 		.4byte	0x77
+ 698 01cf 02       		.uleb128 0x2
+ 699 01d0 91       		.byte	0x91
+ 700 01d1 7C       		.sleb128 -4
+ 701 01d2 00       		.byte	0
+ 702 01d3 11       		.uleb128 0x11
+ 703 01d4 E5020000 		.4byte	.LASF28
+ 704 01d8 01       		.byte	0x1
+ 705 01d9 3001     		.2byte	0x130
+ 706 01db 00000000 		.4byte	.LFB10
+ 707 01df 10000000 		.4byte	.LFE10-.LFB10
+ 708 01e3 01       		.uleb128 0x1
+ 709 01e4 9C       		.byte	0x9c
+ 710 01e5 12       		.uleb128 0x12
+ 711 01e6 1A000000 		.4byte	.LASF30
+ 712 01ea 01       		.byte	0x1
+ 713 01eb 4501     		.2byte	0x145
+ 714 01ed 6B000000 		.4byte	0x6b
+ 715 01f1 00000000 		.4byte	.LFB11
+ 716 01f5 1C000000 		.4byte	.LFE11-.LFB11
+ 717 01f9 01       		.uleb128 0x1
+ 718 01fa 9C       		.byte	0x9c
+ 719 01fb 11       		.uleb128 0x11
+ 720 01fc 09030000 		.4byte	.LASF31
+ 721 0200 01       		.byte	0x1
+ 722 0201 5A01     		.2byte	0x15a
+ 723 0203 00000000 		.4byte	.LFB12
+ 724 0207 10000000 		.4byte	.LFE12-.LFB12
+ 725 020b 01       		.uleb128 0x1
+ 726 020c 9C       		.byte	0x9c
+ 727 020d 11       		.uleb128 0x11
+ 728 020e E1000000 		.4byte	.LASF32
+ 729 0212 01       		.byte	0x1
+ 730 0213 7501     		.2byte	0x175
+ 731 0215 00000000 		.4byte	.LFB13
+ 732 0219 10000000 		.4byte	.LFE13-.LFB13
+ 733 021d 01       		.uleb128 0x1
+ 734 021e 9C       		.byte	0x9c
+ 735 021f 11       		.uleb128 0x11
+ 736 0220 67020000 		.4byte	.LASF33
+ 737 0224 01       		.byte	0x1
+ 738 0225 8E01     		.2byte	0x18e
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 21
+
+
+ 739 0227 00000000 		.4byte	.LFB14
+ 740 022b 10000000 		.4byte	.LFE14-.LFB14
+ 741 022f 01       		.uleb128 0x1
+ 742 0230 9C       		.byte	0x9c
+ 743 0231 13       		.uleb128 0x13
+ 744 0232 A9000000 		.4byte	0xa9
+ 745 0236 41020000 		.4byte	0x241
+ 746 023a 14       		.uleb128 0x14
+ 747 023b C3000000 		.4byte	0xc3
+ 748 023f 2F       		.byte	0x2f
+ 749 0240 00       		.byte	0
+ 750 0241 15       		.uleb128 0x15
+ 751 0242 D4000000 		.4byte	.LASF38
+ 752 0246 01       		.byte	0x1
+ 753 0247 21       		.byte	0x21
+ 754 0248 31020000 		.4byte	0x231
+ 755 024c 00       		.byte	0
+ 756              		.section	.debug_abbrev,"",%progbits
+ 757              	.Ldebug_abbrev0:
+ 758 0000 01       		.uleb128 0x1
+ 759 0001 11       		.uleb128 0x11
+ 760 0002 01       		.byte	0x1
+ 761 0003 25       		.uleb128 0x25
+ 762 0004 0E       		.uleb128 0xe
+ 763 0005 13       		.uleb128 0x13
+ 764 0006 0B       		.uleb128 0xb
+ 765 0007 03       		.uleb128 0x3
+ 766 0008 0E       		.uleb128 0xe
+ 767 0009 1B       		.uleb128 0x1b
+ 768 000a 0E       		.uleb128 0xe
+ 769 000b 55       		.uleb128 0x55
+ 770 000c 17       		.uleb128 0x17
+ 771 000d 11       		.uleb128 0x11
+ 772 000e 01       		.uleb128 0x1
+ 773 000f 10       		.uleb128 0x10
+ 774 0010 17       		.uleb128 0x17
+ 775 0011 00       		.byte	0
+ 776 0012 00       		.byte	0
+ 777 0013 02       		.uleb128 0x2
+ 778 0014 24       		.uleb128 0x24
+ 779 0015 00       		.byte	0
+ 780 0016 0B       		.uleb128 0xb
+ 781 0017 0B       		.uleb128 0xb
+ 782 0018 3E       		.uleb128 0x3e
+ 783 0019 0B       		.uleb128 0xb
+ 784 001a 03       		.uleb128 0x3
+ 785 001b 0E       		.uleb128 0xe
+ 786 001c 00       		.byte	0
+ 787 001d 00       		.byte	0
+ 788 001e 03       		.uleb128 0x3
+ 789 001f 24       		.uleb128 0x24
+ 790 0020 00       		.byte	0
+ 791 0021 0B       		.uleb128 0xb
+ 792 0022 0B       		.uleb128 0xb
+ 793 0023 3E       		.uleb128 0x3e
+ 794 0024 0B       		.uleb128 0xb
+ 795 0025 03       		.uleb128 0x3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 22
+
+
+ 796 0026 08       		.uleb128 0x8
+ 797 0027 00       		.byte	0
+ 798 0028 00       		.byte	0
+ 799 0029 04       		.uleb128 0x4
+ 800 002a 16       		.uleb128 0x16
+ 801 002b 00       		.byte	0
+ 802 002c 03       		.uleb128 0x3
+ 803 002d 0E       		.uleb128 0xe
+ 804 002e 3A       		.uleb128 0x3a
+ 805 002f 0B       		.uleb128 0xb
+ 806 0030 3B       		.uleb128 0x3b
+ 807 0031 05       		.uleb128 0x5
+ 808 0032 49       		.uleb128 0x49
+ 809 0033 13       		.uleb128 0x13
+ 810 0034 00       		.byte	0
+ 811 0035 00       		.byte	0
+ 812 0036 05       		.uleb128 0x5
+ 813 0037 35       		.uleb128 0x35
+ 814 0038 00       		.byte	0
+ 815 0039 49       		.uleb128 0x49
+ 816 003a 13       		.uleb128 0x13
+ 817 003b 00       		.byte	0
+ 818 003c 00       		.byte	0
+ 819 003d 06       		.uleb128 0x6
+ 820 003e 0F       		.uleb128 0xf
+ 821 003f 00       		.byte	0
+ 822 0040 0B       		.uleb128 0xb
+ 823 0041 0B       		.uleb128 0xb
+ 824 0042 49       		.uleb128 0x49
+ 825 0043 13       		.uleb128 0x13
+ 826 0044 00       		.byte	0
+ 827 0045 00       		.byte	0
+ 828 0046 07       		.uleb128 0x7
+ 829 0047 15       		.uleb128 0x15
+ 830 0048 00       		.byte	0
+ 831 0049 27       		.uleb128 0x27
+ 832 004a 19       		.uleb128 0x19
+ 833 004b 00       		.byte	0
+ 834 004c 00       		.byte	0
+ 835 004d 08       		.uleb128 0x8
+ 836 004e 2E       		.uleb128 0x2e
+ 837 004f 00       		.byte	0
+ 838 0050 3F       		.uleb128 0x3f
+ 839 0051 19       		.uleb128 0x19
+ 840 0052 03       		.uleb128 0x3
+ 841 0053 0E       		.uleb128 0xe
+ 842 0054 3A       		.uleb128 0x3a
+ 843 0055 0B       		.uleb128 0xb
+ 844 0056 3B       		.uleb128 0x3b
+ 845 0057 0B       		.uleb128 0xb
+ 846 0058 27       		.uleb128 0x27
+ 847 0059 19       		.uleb128 0x19
+ 848 005a 11       		.uleb128 0x11
+ 849 005b 01       		.uleb128 0x1
+ 850 005c 12       		.uleb128 0x12
+ 851 005d 06       		.uleb128 0x6
+ 852 005e 40       		.uleb128 0x40
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 23
+
+
+ 853 005f 18       		.uleb128 0x18
+ 854 0060 9642     		.uleb128 0x2116
+ 855 0062 19       		.uleb128 0x19
+ 856 0063 00       		.byte	0
+ 857 0064 00       		.byte	0
+ 858 0065 09       		.uleb128 0x9
+ 859 0066 2E       		.uleb128 0x2e
+ 860 0067 01       		.byte	0x1
+ 861 0068 3F       		.uleb128 0x3f
+ 862 0069 19       		.uleb128 0x19
+ 863 006a 03       		.uleb128 0x3
+ 864 006b 0E       		.uleb128 0xe
+ 865 006c 3A       		.uleb128 0x3a
+ 866 006d 0B       		.uleb128 0xb
+ 867 006e 3B       		.uleb128 0x3b
+ 868 006f 0B       		.uleb128 0xb
+ 869 0070 27       		.uleb128 0x27
+ 870 0071 19       		.uleb128 0x19
+ 871 0072 11       		.uleb128 0x11
+ 872 0073 01       		.uleb128 0x1
+ 873 0074 12       		.uleb128 0x12
+ 874 0075 06       		.uleb128 0x6
+ 875 0076 40       		.uleb128 0x40
+ 876 0077 18       		.uleb128 0x18
+ 877 0078 9642     		.uleb128 0x2116
+ 878 007a 19       		.uleb128 0x19
+ 879 007b 01       		.uleb128 0x1
+ 880 007c 13       		.uleb128 0x13
+ 881 007d 00       		.byte	0
+ 882 007e 00       		.byte	0
+ 883 007f 0A       		.uleb128 0xa
+ 884 0080 05       		.uleb128 0x5
+ 885 0081 00       		.byte	0
+ 886 0082 03       		.uleb128 0x3
+ 887 0083 0E       		.uleb128 0xe
+ 888 0084 3A       		.uleb128 0x3a
+ 889 0085 0B       		.uleb128 0xb
+ 890 0086 3B       		.uleb128 0x3b
+ 891 0087 0B       		.uleb128 0xb
+ 892 0088 49       		.uleb128 0x49
+ 893 0089 13       		.uleb128 0x13
+ 894 008a 02       		.uleb128 0x2
+ 895 008b 18       		.uleb128 0x18
+ 896 008c 00       		.byte	0
+ 897 008d 00       		.byte	0
+ 898 008e 0B       		.uleb128 0xb
+ 899 008f 2E       		.uleb128 0x2e
+ 900 0090 00       		.byte	0
+ 901 0091 3F       		.uleb128 0x3f
+ 902 0092 19       		.uleb128 0x19
+ 903 0093 03       		.uleb128 0x3
+ 904 0094 0E       		.uleb128 0xe
+ 905 0095 3A       		.uleb128 0x3a
+ 906 0096 0B       		.uleb128 0xb
+ 907 0097 3B       		.uleb128 0x3b
+ 908 0098 0B       		.uleb128 0xb
+ 909 0099 27       		.uleb128 0x27
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 24
+
+
+ 910 009a 19       		.uleb128 0x19
+ 911 009b 11       		.uleb128 0x11
+ 912 009c 01       		.uleb128 0x1
+ 913 009d 12       		.uleb128 0x12
+ 914 009e 06       		.uleb128 0x6
+ 915 009f 40       		.uleb128 0x40
+ 916 00a0 18       		.uleb128 0x18
+ 917 00a1 9742     		.uleb128 0x2117
+ 918 00a3 19       		.uleb128 0x19
+ 919 00a4 00       		.byte	0
+ 920 00a5 00       		.byte	0
+ 921 00a6 0C       		.uleb128 0xc
+ 922 00a7 2E       		.uleb128 0x2e
+ 923 00a8 01       		.byte	0x1
+ 924 00a9 3F       		.uleb128 0x3f
+ 925 00aa 19       		.uleb128 0x19
+ 926 00ab 03       		.uleb128 0x3
+ 927 00ac 0E       		.uleb128 0xe
+ 928 00ad 3A       		.uleb128 0x3a
+ 929 00ae 0B       		.uleb128 0xb
+ 930 00af 3B       		.uleb128 0x3b
+ 931 00b0 0B       		.uleb128 0xb
+ 932 00b1 27       		.uleb128 0x27
+ 933 00b2 19       		.uleb128 0x19
+ 934 00b3 11       		.uleb128 0x11
+ 935 00b4 01       		.uleb128 0x1
+ 936 00b5 12       		.uleb128 0x12
+ 937 00b6 06       		.uleb128 0x6
+ 938 00b7 40       		.uleb128 0x40
+ 939 00b8 18       		.uleb128 0x18
+ 940 00b9 9742     		.uleb128 0x2117
+ 941 00bb 19       		.uleb128 0x19
+ 942 00bc 01       		.uleb128 0x1
+ 943 00bd 13       		.uleb128 0x13
+ 944 00be 00       		.byte	0
+ 945 00bf 00       		.byte	0
+ 946 00c0 0D       		.uleb128 0xd
+ 947 00c1 2E       		.uleb128 0x2e
+ 948 00c2 00       		.byte	0
+ 949 00c3 3F       		.uleb128 0x3f
+ 950 00c4 19       		.uleb128 0x19
+ 951 00c5 03       		.uleb128 0x3
+ 952 00c6 0E       		.uleb128 0xe
+ 953 00c7 3A       		.uleb128 0x3a
+ 954 00c8 0B       		.uleb128 0xb
+ 955 00c9 3B       		.uleb128 0x3b
+ 956 00ca 0B       		.uleb128 0xb
+ 957 00cb 27       		.uleb128 0x27
+ 958 00cc 19       		.uleb128 0x19
+ 959 00cd 49       		.uleb128 0x49
+ 960 00ce 13       		.uleb128 0x13
+ 961 00cf 11       		.uleb128 0x11
+ 962 00d0 01       		.uleb128 0x1
+ 963 00d1 12       		.uleb128 0x12
+ 964 00d2 06       		.uleb128 0x6
+ 965 00d3 40       		.uleb128 0x40
+ 966 00d4 18       		.uleb128 0x18
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 25
+
+
+ 967 00d5 9742     		.uleb128 0x2117
+ 968 00d7 19       		.uleb128 0x19
+ 969 00d8 00       		.byte	0
+ 970 00d9 00       		.byte	0
+ 971 00da 0E       		.uleb128 0xe
+ 972 00db 34       		.uleb128 0x34
+ 973 00dc 00       		.byte	0
+ 974 00dd 03       		.uleb128 0x3
+ 975 00de 0E       		.uleb128 0xe
+ 976 00df 3A       		.uleb128 0x3a
+ 977 00e0 0B       		.uleb128 0xb
+ 978 00e1 3B       		.uleb128 0x3b
+ 979 00e2 0B       		.uleb128 0xb
+ 980 00e3 49       		.uleb128 0x49
+ 981 00e4 13       		.uleb128 0x13
+ 982 00e5 02       		.uleb128 0x2
+ 983 00e6 18       		.uleb128 0x18
+ 984 00e7 00       		.byte	0
+ 985 00e8 00       		.byte	0
+ 986 00e9 0F       		.uleb128 0xf
+ 987 00ea 2E       		.uleb128 0x2e
+ 988 00eb 01       		.byte	0x1
+ 989 00ec 3F       		.uleb128 0x3f
+ 990 00ed 19       		.uleb128 0x19
+ 991 00ee 03       		.uleb128 0x3
+ 992 00ef 0E       		.uleb128 0xe
+ 993 00f0 3A       		.uleb128 0x3a
+ 994 00f1 0B       		.uleb128 0xb
+ 995 00f2 3B       		.uleb128 0x3b
+ 996 00f3 05       		.uleb128 0x5
+ 997 00f4 27       		.uleb128 0x27
+ 998 00f5 19       		.uleb128 0x19
+ 999 00f6 49       		.uleb128 0x49
+ 1000 00f7 13       		.uleb128 0x13
+ 1001 00f8 11       		.uleb128 0x11
+ 1002 00f9 01       		.uleb128 0x1
+ 1003 00fa 12       		.uleb128 0x12
+ 1004 00fb 06       		.uleb128 0x6
+ 1005 00fc 40       		.uleb128 0x40
+ 1006 00fd 18       		.uleb128 0x18
+ 1007 00fe 9742     		.uleb128 0x2117
+ 1008 0100 19       		.uleb128 0x19
+ 1009 0101 01       		.uleb128 0x1
+ 1010 0102 13       		.uleb128 0x13
+ 1011 0103 00       		.byte	0
+ 1012 0104 00       		.byte	0
+ 1013 0105 10       		.uleb128 0x10
+ 1014 0106 34       		.uleb128 0x34
+ 1015 0107 00       		.byte	0
+ 1016 0108 03       		.uleb128 0x3
+ 1017 0109 0E       		.uleb128 0xe
+ 1018 010a 3A       		.uleb128 0x3a
+ 1019 010b 0B       		.uleb128 0xb
+ 1020 010c 3B       		.uleb128 0x3b
+ 1021 010d 05       		.uleb128 0x5
+ 1022 010e 49       		.uleb128 0x49
+ 1023 010f 13       		.uleb128 0x13
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 26
+
+
+ 1024 0110 02       		.uleb128 0x2
+ 1025 0111 18       		.uleb128 0x18
+ 1026 0112 00       		.byte	0
+ 1027 0113 00       		.byte	0
+ 1028 0114 11       		.uleb128 0x11
+ 1029 0115 2E       		.uleb128 0x2e
+ 1030 0116 00       		.byte	0
+ 1031 0117 3F       		.uleb128 0x3f
+ 1032 0118 19       		.uleb128 0x19
+ 1033 0119 03       		.uleb128 0x3
+ 1034 011a 0E       		.uleb128 0xe
+ 1035 011b 3A       		.uleb128 0x3a
+ 1036 011c 0B       		.uleb128 0xb
+ 1037 011d 3B       		.uleb128 0x3b
+ 1038 011e 05       		.uleb128 0x5
+ 1039 011f 27       		.uleb128 0x27
+ 1040 0120 19       		.uleb128 0x19
+ 1041 0121 11       		.uleb128 0x11
+ 1042 0122 01       		.uleb128 0x1
+ 1043 0123 12       		.uleb128 0x12
+ 1044 0124 06       		.uleb128 0x6
+ 1045 0125 40       		.uleb128 0x40
+ 1046 0126 18       		.uleb128 0x18
+ 1047 0127 9742     		.uleb128 0x2117
+ 1048 0129 19       		.uleb128 0x19
+ 1049 012a 00       		.byte	0
+ 1050 012b 00       		.byte	0
+ 1051 012c 12       		.uleb128 0x12
+ 1052 012d 2E       		.uleb128 0x2e
+ 1053 012e 00       		.byte	0
+ 1054 012f 3F       		.uleb128 0x3f
+ 1055 0130 19       		.uleb128 0x19
+ 1056 0131 03       		.uleb128 0x3
+ 1057 0132 0E       		.uleb128 0xe
+ 1058 0133 3A       		.uleb128 0x3a
+ 1059 0134 0B       		.uleb128 0xb
+ 1060 0135 3B       		.uleb128 0x3b
+ 1061 0136 05       		.uleb128 0x5
+ 1062 0137 27       		.uleb128 0x27
+ 1063 0138 19       		.uleb128 0x19
+ 1064 0139 49       		.uleb128 0x49
+ 1065 013a 13       		.uleb128 0x13
+ 1066 013b 11       		.uleb128 0x11
+ 1067 013c 01       		.uleb128 0x1
+ 1068 013d 12       		.uleb128 0x12
+ 1069 013e 06       		.uleb128 0x6
+ 1070 013f 40       		.uleb128 0x40
+ 1071 0140 18       		.uleb128 0x18
+ 1072 0141 9742     		.uleb128 0x2117
+ 1073 0143 19       		.uleb128 0x19
+ 1074 0144 00       		.byte	0
+ 1075 0145 00       		.byte	0
+ 1076 0146 13       		.uleb128 0x13
+ 1077 0147 01       		.uleb128 0x1
+ 1078 0148 01       		.byte	0x1
+ 1079 0149 49       		.uleb128 0x49
+ 1080 014a 13       		.uleb128 0x13
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 27
+
+
+ 1081 014b 01       		.uleb128 0x1
+ 1082 014c 13       		.uleb128 0x13
+ 1083 014d 00       		.byte	0
+ 1084 014e 00       		.byte	0
+ 1085 014f 14       		.uleb128 0x14
+ 1086 0150 21       		.uleb128 0x21
+ 1087 0151 00       		.byte	0
+ 1088 0152 49       		.uleb128 0x49
+ 1089 0153 13       		.uleb128 0x13
+ 1090 0154 2F       		.uleb128 0x2f
+ 1091 0155 0B       		.uleb128 0xb
+ 1092 0156 00       		.byte	0
+ 1093 0157 00       		.byte	0
+ 1094 0158 15       		.uleb128 0x15
+ 1095 0159 34       		.uleb128 0x34
+ 1096 015a 00       		.byte	0
+ 1097 015b 03       		.uleb128 0x3
+ 1098 015c 0E       		.uleb128 0xe
+ 1099 015d 3A       		.uleb128 0x3a
+ 1100 015e 0B       		.uleb128 0xb
+ 1101 015f 3B       		.uleb128 0x3b
+ 1102 0160 0B       		.uleb128 0xb
+ 1103 0161 49       		.uleb128 0x49
+ 1104 0162 13       		.uleb128 0x13
+ 1105 0163 3F       		.uleb128 0x3f
+ 1106 0164 19       		.uleb128 0x19
+ 1107 0165 3C       		.uleb128 0x3c
+ 1108 0166 19       		.uleb128 0x19
+ 1109 0167 00       		.byte	0
+ 1110 0168 00       		.byte	0
+ 1111 0169 00       		.byte	0
+ 1112              		.section	.debug_aranges,"",%progbits
+ 1113 0000 7C000000 		.4byte	0x7c
+ 1114 0004 0200     		.2byte	0x2
+ 1115 0006 00000000 		.4byte	.Ldebug_info0
+ 1116 000a 04       		.byte	0x4
+ 1117 000b 00       		.byte	0
+ 1118 000c 0000     		.2byte	0
+ 1119 000e 0000     		.2byte	0
+ 1120 0010 00000000 		.4byte	.LFB2
+ 1121 0014 20000000 		.4byte	.LFE2-.LFB2
+ 1122 0018 00000000 		.4byte	.LFB3
+ 1123 001c 22000000 		.4byte	.LFE3-.LFB3
+ 1124 0020 00000000 		.4byte	.LFB4
+ 1125 0024 18000000 		.4byte	.LFE4-.LFB4
+ 1126 0028 00000000 		.4byte	.LFB5
+ 1127 002c 04000000 		.4byte	.LFE5-.LFB5
+ 1128 0030 00000000 		.4byte	.LFB6
+ 1129 0034 14000000 		.4byte	.LFE6-.LFB6
+ 1130 0038 00000000 		.4byte	.LFB7
+ 1131 003c 0C000000 		.4byte	.LFE7-.LFB7
+ 1132 0040 00000000 		.4byte	.LFB8
+ 1133 0044 50000000 		.4byte	.LFE8-.LFB8
+ 1134 0048 00000000 		.4byte	.LFB9
+ 1135 004c 24000000 		.4byte	.LFE9-.LFB9
+ 1136 0050 00000000 		.4byte	.LFB10
+ 1137 0054 10000000 		.4byte	.LFE10-.LFB10
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 28
+
+
+ 1138 0058 00000000 		.4byte	.LFB11
+ 1139 005c 1C000000 		.4byte	.LFE11-.LFB11
+ 1140 0060 00000000 		.4byte	.LFB12
+ 1141 0064 10000000 		.4byte	.LFE12-.LFB12
+ 1142 0068 00000000 		.4byte	.LFB13
+ 1143 006c 10000000 		.4byte	.LFE13-.LFB13
+ 1144 0070 00000000 		.4byte	.LFB14
+ 1145 0074 10000000 		.4byte	.LFE14-.LFB14
+ 1146 0078 00000000 		.4byte	0
+ 1147 007c 00000000 		.4byte	0
+ 1148              		.section	.debug_ranges,"",%progbits
+ 1149              	.Ldebug_ranges0:
+ 1150 0000 00000000 		.4byte	.LFB2
+ 1151 0004 20000000 		.4byte	.LFE2
+ 1152 0008 00000000 		.4byte	.LFB3
+ 1153 000c 22000000 		.4byte	.LFE3
+ 1154 0010 00000000 		.4byte	.LFB4
+ 1155 0014 18000000 		.4byte	.LFE4
+ 1156 0018 00000000 		.4byte	.LFB5
+ 1157 001c 04000000 		.4byte	.LFE5
+ 1158 0020 00000000 		.4byte	.LFB6
+ 1159 0024 14000000 		.4byte	.LFE6
+ 1160 0028 00000000 		.4byte	.LFB7
+ 1161 002c 0C000000 		.4byte	.LFE7
+ 1162 0030 00000000 		.4byte	.LFB8
+ 1163 0034 50000000 		.4byte	.LFE8
+ 1164 0038 00000000 		.4byte	.LFB9
+ 1165 003c 24000000 		.4byte	.LFE9
+ 1166 0040 00000000 		.4byte	.LFB10
+ 1167 0044 10000000 		.4byte	.LFE10
+ 1168 0048 00000000 		.4byte	.LFB11
+ 1169 004c 1C000000 		.4byte	.LFE11
+ 1170 0050 00000000 		.4byte	.LFB12
+ 1171 0054 10000000 		.4byte	.LFE12
+ 1172 0058 00000000 		.4byte	.LFB13
+ 1173 005c 10000000 		.4byte	.LFE13
+ 1174 0060 00000000 		.4byte	.LFB14
+ 1175 0064 10000000 		.4byte	.LFE14
+ 1176 0068 00000000 		.4byte	0
+ 1177 006c 00000000 		.4byte	0
+ 1178              		.section	.debug_line,"",%progbits
+ 1179              	.Ldebug_line0:
+ 1180 0000 58010000 		.section	.debug_str,"MS",%progbits,1
+ 1180      02004A00 
+ 1180      00000201 
+ 1180      FB0E0D00 
+ 1180      01010101 
+ 1181              	.LASF24:
+ 1182 0000 424C455F 		.ascii	"BLE_bless_isr_SetPriority\000"
+ 1182      626C6573 
+ 1182      735F6973 
+ 1182      725F5365 
+ 1182      74507269 
+ 1183              	.LASF30:
+ 1184 001a 424C455F 		.ascii	"BLE_bless_isr_GetState\000"
+ 1184      626C6573 
+ 1184      735F6973 
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 29
+
+
+ 1184      725F4765 
+ 1184      74537461 
+ 1185              	.LASF34:
+ 1186 0031 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1186      43313120 
+ 1186      352E342E 
+ 1186      31203230 
+ 1186      31363036 
+ 1187 0064 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1187      20726576 
+ 1187      6973696F 
+ 1187      6E203233 
+ 1187      37373135 
+ 1188 0097 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects -fomit-fram"
+ 1188      66756E63 
+ 1188      74696F6E 
+ 1188      2D736563 
+ 1188      74696F6E 
+ 1189 00ca 652D706F 		.ascii	"e-pointer\000"
+ 1189      696E7465 
+ 1189      7200
+ 1190              	.LASF38:
+ 1191 00d4 43795261 		.ascii	"CyRamVectors\000"
+ 1191      6D566563 
+ 1191      746F7273 
+ 1191      00
+ 1192              	.LASF32:
+ 1193 00e1 424C455F 		.ascii	"BLE_bless_isr_SetPending\000"
+ 1193      626C6573 
+ 1193      735F6973 
+ 1193      725F5365 
+ 1193      7450656E 
+ 1194              	.LASF11:
+ 1195 00fa 666C6F61 		.ascii	"float\000"
+ 1195      7400
+ 1196              	.LASF29:
+ 1197 0100 424C455F 		.ascii	"BLE_bless_isr_GetVector\000"
+ 1197      626C6573 
+ 1197      735F6973 
+ 1197      725F4765 
+ 1197      74566563 
+ 1198              	.LASF1:
+ 1199 0118 756E7369 		.ascii	"unsigned char\000"
+ 1199      676E6564 
+ 1199      20636861 
+ 1199      7200
+ 1200              	.LASF20:
+ 1201 0126 424C455F 		.ascii	"BLE_bless_isr_Interrupt\000"
+ 1201      626C6573 
+ 1201      735F6973 
+ 1201      725F496E 
+ 1201      74657272 
+ 1202              	.LASF26:
+ 1203 013e 696E7465 		.ascii	"interruptState\000"
+ 1203      72727570 
+ 1203      74537461 
+ 1203      746500
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 30
+
+
+ 1204              	.LASF5:
+ 1205 014d 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1205      20756E73 
+ 1205      69676E65 
+ 1205      6420696E 
+ 1205      7400
+ 1206              	.LASF9:
+ 1207 015f 75696E74 		.ascii	"uint8\000"
+ 1207      3800
+ 1208              	.LASF25:
+ 1209 0165 7072696F 		.ascii	"priority\000"
+ 1209      72697479 
+ 1209      00
+ 1210              	.LASF12:
+ 1211 016e 646F7562 		.ascii	"double\000"
+ 1211      6C6500
+ 1212              	.LASF18:
+ 1213 0175 424C455F 		.ascii	"BLE_bless_isr_Start\000"
+ 1213      626C6573 
+ 1213      735F6973 
+ 1213      725F5374 
+ 1213      61727400 
+ 1214              	.LASF36:
+ 1215 0189 443A5C44 		.ascii	"D:\\Dropbox\\5_kurs\\diploma\\led_lamp(for_diploma)"
+ 1215      726F7062 
+ 1215      6F785C35 
+ 1215      5F6B7572 
+ 1215      735C6469 
+ 1216 01b8 5C424C45 		.ascii	"\\BLE_Dynamic_GATT_Service_Configuration\\BLE_Dynam"
+ 1216      5F44796E 
+ 1216      616D6963 
+ 1216      5F474154 
+ 1216      545F5365 
+ 1217 01e9 69635F47 		.ascii	"ic_GATT_Service_Configuration.cydsn\000"
+ 1217      4154545F 
+ 1217      53657276 
+ 1217      6963655F 
+ 1217      436F6E66 
+ 1218              	.LASF10:
+ 1219 020d 75696E74 		.ascii	"uint32\000"
+ 1219      333200
+ 1220              	.LASF8:
+ 1221 0214 756E7369 		.ascii	"unsigned int\000"
+ 1221      676E6564 
+ 1221      20696E74 
+ 1221      00
+ 1222              	.LASF23:
+ 1223 0221 61646472 		.ascii	"address\000"
+ 1223      65737300 
+ 1224              	.LASF7:
+ 1225 0229 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1225      206C6F6E 
+ 1225      6720756E 
+ 1225      7369676E 
+ 1225      65642069 
+ 1226              	.LASF35:
+ 1227 0240 47656E65 		.ascii	"Generated_Source\\PSoC4\\BLE_bless_isr.c\000"
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 31
+
+
+ 1227      72617465 
+ 1227      645F536F 
+ 1227      75726365 
+ 1227      5C50536F 
+ 1228              	.LASF33:
+ 1229 0267 424C455F 		.ascii	"BLE_bless_isr_ClearPending\000"
+ 1229      626C6573 
+ 1229      735F6973 
+ 1229      725F436C 
+ 1229      65617250 
+ 1230              	.LASF15:
+ 1231 0282 63796973 		.ascii	"cyisraddress\000"
+ 1231      72616464 
+ 1231      72657373 
+ 1231      00
+ 1232              	.LASF17:
+ 1233 028f 73697A65 		.ascii	"sizetype\000"
+ 1233      74797065 
+ 1233      00
+ 1234              	.LASF21:
+ 1235 0298 424C455F 		.ascii	"BLE_bless_isr_StartEx\000"
+ 1235      626C6573 
+ 1235      735F6973 
+ 1235      725F5374 
+ 1235      61727445 
+ 1236              	.LASF6:
+ 1237 02ae 6C6F6E67 		.ascii	"long long int\000"
+ 1237      206C6F6E 
+ 1237      6720696E 
+ 1237      7400
+ 1238              	.LASF37:
+ 1239 02bc 424C455F 		.ascii	"BLE_bless_isr_GetPriority\000"
+ 1239      626C6573 
+ 1239      735F6973 
+ 1239      725F4765 
+ 1239      74507269 
+ 1240              	.LASF13:
+ 1241 02d6 63686172 		.ascii	"char\000"
+ 1241      00
+ 1242              	.LASF2:
+ 1243 02db 73686F72 		.ascii	"short int\000"
+ 1243      7420696E 
+ 1243      7400
+ 1244              	.LASF28:
+ 1245 02e5 424C455F 		.ascii	"BLE_bless_isr_Enable\000"
+ 1245      626C6573 
+ 1245      735F6973 
+ 1245      725F456E 
+ 1245      61626C65 
+ 1246              	.LASF27:
+ 1247 02fa 7072696F 		.ascii	"priorityOffset\000"
+ 1247      72697479 
+ 1247      4F666673 
+ 1247      657400
+ 1248              	.LASF31:
+ 1249 0309 424C455F 		.ascii	"BLE_bless_isr_Disable\000"
+ 1249      626C6573 
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccu14Wyk.s 			page 32
+
+
+ 1249      735F6973 
+ 1249      725F4469 
+ 1249      7361626C 
+ 1250              	.LASF4:
+ 1251 031f 6C6F6E67 		.ascii	"long int\000"
+ 1251      20696E74 
+ 1251      00
+ 1252              	.LASF14:
+ 1253 0328 72656733 		.ascii	"reg32\000"
+ 1253      3200
+ 1254              	.LASF16:
+ 1255 032e 6C6F6E67 		.ascii	"long double\000"
+ 1255      20646F75 
+ 1255      626C6500 
+ 1256              	.LASF0:
+ 1257 033a 7369676E 		.ascii	"signed char\000"
+ 1257      65642063 
+ 1257      68617200 
+ 1258              	.LASF22:
+ 1259 0346 424C455F 		.ascii	"BLE_bless_isr_SetVector\000"
+ 1259      626C6573 
+ 1259      735F6973 
+ 1259      725F5365 
+ 1259      74566563 
+ 1260              	.LASF3:
+ 1261 035e 73686F72 		.ascii	"short unsigned int\000"
+ 1261      7420756E 
+ 1261      7369676E 
+ 1261      65642069 
+ 1261      6E7400
+ 1262              	.LASF19:
+ 1263 0371 424C455F 		.ascii	"BLE_bless_isr_Stop\000"
+ 1263      626C6573 
+ 1263      735F6973 
+ 1263      725F5374 
+ 1263      6F7000
+ 1264              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

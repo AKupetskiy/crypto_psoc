@@ -1,0 +1,701 @@
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLETiz4.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"cyutils.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.CySetReg24,"ax",%progbits
+  20              		.align	2
+  21              		.global	CySetReg24
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	CySetReg24, %function
+  25              	CySetReg24:
+  26              	.LFB0:
+  27              		.file 1 "Generated_Source\\PSoC4\\cyutils.c"
+   1:Generated_Source\PSoC4/cyutils.c **** /***************************************************************************//**
+   2:Generated_Source\PSoC4/cyutils.c **** * \file cyutils.c
+   3:Generated_Source\PSoC4/cyutils.c **** * \version 5.60
+   4:Generated_Source\PSoC4/cyutils.c **** *
+   5:Generated_Source\PSoC4/cyutils.c **** * \brief Provides a function to handle 24-bit value writes.
+   6:Generated_Source\PSoC4/cyutils.c **** *
+   7:Generated_Source\PSoC4/cyutils.c **** ********************************************************************************
+   8:Generated_Source\PSoC4/cyutils.c **** * \copyright
+   9:Generated_Source\PSoC4/cyutils.c **** * Copyright 2008-2017, Cypress Semiconductor Corporation.  All rights reserved.
+  10:Generated_Source\PSoC4/cyutils.c **** * You may use this file only in accordance with the license, terms, conditions,
+  11:Generated_Source\PSoC4/cyutils.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  12:Generated_Source\PSoC4/cyutils.c **** * the software package with which this file was provided.
+  13:Generated_Source\PSoC4/cyutils.c **** *******************************************************************************/
+  14:Generated_Source\PSoC4/cyutils.c **** 
+  15:Generated_Source\PSoC4/cyutils.c **** #include "cytypes.h"
+  16:Generated_Source\PSoC4/cyutils.c **** 
+  17:Generated_Source\PSoC4/cyutils.c **** #if (!CY_PSOC3)
+  18:Generated_Source\PSoC4/cyutils.c **** 
+  19:Generated_Source\PSoC4/cyutils.c ****     /***************************************************************************
+  20:Generated_Source\PSoC4/cyutils.c ****     * Function Name: CySetReg24
+  21:Generated_Source\PSoC4/cyutils.c ****     ************************************************************************//**
+  22:Generated_Source\PSoC4/cyutils.c ****     *
+  23:Generated_Source\PSoC4/cyutils.c ****     * Writes a 24-bit value to the specified register.
+  24:Generated_Source\PSoC4/cyutils.c ****     *
+  25:Generated_Source\PSoC4/cyutils.c ****     * \param addr The address where data must be written.
+  26:Generated_Source\PSoC4/cyutils.c ****     * \param value The data that must be written.
+  27:Generated_Source\PSoC4/cyutils.c ****     *
+  28:Generated_Source\PSoC4/cyutils.c ****     * \reentrant No
+  29:Generated_Source\PSoC4/cyutils.c ****     *
+  30:Generated_Source\PSoC4/cyutils.c ****     ***************************************************************************/
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLETiz4.s 			page 2
+
+
+  31:Generated_Source\PSoC4/cyutils.c ****     void CySetReg24(uint32 volatile * addr, uint32 value)
+  32:Generated_Source\PSoC4/cyutils.c ****     {
+  28              		.loc 1 32 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 16
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 84B0     		sub	sp, sp, #16
+  34              		.cfi_def_cfa_offset 16
+  35 0002 0190     		str	r0, [sp, #4]
+  36 0004 0091     		str	r1, [sp]
+  33:Generated_Source\PSoC4/cyutils.c ****         uint8 volatile *tmpAddr;
+  34:Generated_Source\PSoC4/cyutils.c **** 
+  35:Generated_Source\PSoC4/cyutils.c ****         tmpAddr = (uint8 volatile *) addr;
+  37              		.loc 1 35 0
+  38 0006 019B     		ldr	r3, [sp, #4]
+  39 0008 0393     		str	r3, [sp, #12]
+  36:Generated_Source\PSoC4/cyutils.c **** 
+  37:Generated_Source\PSoC4/cyutils.c ****         tmpAddr[0u] = (uint8) value;
+  40              		.loc 1 37 0
+  41 000a 009B     		ldr	r3, [sp]
+  42 000c DAB2     		uxtb	r2, r3
+  43 000e 039B     		ldr	r3, [sp, #12]
+  44 0010 1A70     		strb	r2, [r3]
+  38:Generated_Source\PSoC4/cyutils.c ****         tmpAddr[1u] = (uint8) (value >> 8u);
+  45              		.loc 1 38 0
+  46 0012 039B     		ldr	r3, [sp, #12]
+  47 0014 0133     		adds	r3, r3, #1
+  48 0016 009A     		ldr	r2, [sp]
+  49 0018 120A     		lsrs	r2, r2, #8
+  50 001a D2B2     		uxtb	r2, r2
+  51 001c 1A70     		strb	r2, [r3]
+  39:Generated_Source\PSoC4/cyutils.c ****         tmpAddr[2u] = (uint8) (value >> 16u);
+  52              		.loc 1 39 0
+  53 001e 039B     		ldr	r3, [sp, #12]
+  54 0020 0233     		adds	r3, r3, #2
+  55 0022 009A     		ldr	r2, [sp]
+  56 0024 120C     		lsrs	r2, r2, #16
+  57 0026 D2B2     		uxtb	r2, r2
+  58 0028 1A70     		strb	r2, [r3]
+  40:Generated_Source\PSoC4/cyutils.c ****     }
+  59              		.loc 1 40 0
+  60 002a C046     		nop
+  61 002c 04B0     		add	sp, sp, #16
+  62              		@ sp needed
+  63 002e 7047     		bx	lr
+  64              		.cfi_endproc
+  65              	.LFE0:
+  66              		.size	CySetReg24, .-CySetReg24
+  67              		.section	.text.CyGetReg24,"ax",%progbits
+  68              		.align	2
+  69              		.global	CyGetReg24
+  70              		.code	16
+  71              		.thumb_func
+  72              		.type	CyGetReg24, %function
+  73              	CyGetReg24:
+  74              	.LFB1:
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLETiz4.s 			page 3
+
+
+  41:Generated_Source\PSoC4/cyutils.c **** 
+  42:Generated_Source\PSoC4/cyutils.c **** 
+  43:Generated_Source\PSoC4/cyutils.c ****     #if(CY_PSOC4)
+  44:Generated_Source\PSoC4/cyutils.c **** 
+  45:Generated_Source\PSoC4/cyutils.c ****         /***************************************************************************
+  46:Generated_Source\PSoC4/cyutils.c ****         * Function Name: CyGetReg24
+  47:Generated_Source\PSoC4/cyutils.c ****         ************************************************************************//**
+  48:Generated_Source\PSoC4/cyutils.c ****         *
+  49:Generated_Source\PSoC4/cyutils.c ****         * Reads the 24-bit value from the specified register.
+  50:Generated_Source\PSoC4/cyutils.c ****         *
+  51:Generated_Source\PSoC4/cyutils.c ****         * \param addr The address where data must be read.
+  52:Generated_Source\PSoC4/cyutils.c ****         *
+  53:Generated_Source\PSoC4/cyutils.c ****         * \reentrant No
+  54:Generated_Source\PSoC4/cyutils.c ****         *
+  55:Generated_Source\PSoC4/cyutils.c ****         ***************************************************************************/
+  56:Generated_Source\PSoC4/cyutils.c ****         uint32 CyGetReg24(uint32 const volatile * addr)
+  57:Generated_Source\PSoC4/cyutils.c ****         {
+  75              		.loc 1 57 0
+  76              		.cfi_startproc
+  77              		@ args = 0, pretend = 0, frame = 16
+  78              		@ frame_needed = 0, uses_anonymous_args = 0
+  79              		@ link register save eliminated.
+  80 0000 84B0     		sub	sp, sp, #16
+  81              		.cfi_def_cfa_offset 16
+  82 0002 0190     		str	r0, [sp, #4]
+  58:Generated_Source\PSoC4/cyutils.c ****             uint8 const volatile *tmpAddr;
+  59:Generated_Source\PSoC4/cyutils.c ****             uint32 value;
+  60:Generated_Source\PSoC4/cyutils.c **** 
+  61:Generated_Source\PSoC4/cyutils.c ****             tmpAddr = (uint8 const volatile *) addr;
+  83              		.loc 1 61 0
+  84 0004 019B     		ldr	r3, [sp, #4]
+  85 0006 0393     		str	r3, [sp, #12]
+  62:Generated_Source\PSoC4/cyutils.c **** 
+  63:Generated_Source\PSoC4/cyutils.c ****             value  =  (uint32) tmpAddr[0u];
+  86              		.loc 1 63 0
+  87 0008 039B     		ldr	r3, [sp, #12]
+  88 000a 1B78     		ldrb	r3, [r3]
+  89 000c DBB2     		uxtb	r3, r3
+  90 000e 0293     		str	r3, [sp, #8]
+  64:Generated_Source\PSoC4/cyutils.c ****             value |= ((uint32) tmpAddr[1u] << 8u );
+  91              		.loc 1 64 0
+  92 0010 039B     		ldr	r3, [sp, #12]
+  93 0012 0133     		adds	r3, r3, #1
+  94 0014 1B78     		ldrb	r3, [r3]
+  95 0016 DBB2     		uxtb	r3, r3
+  96 0018 1B02     		lsls	r3, r3, #8
+  97 001a 029A     		ldr	r2, [sp, #8]
+  98 001c 1343     		orrs	r3, r2
+  99 001e 0293     		str	r3, [sp, #8]
+  65:Generated_Source\PSoC4/cyutils.c ****             value |= ((uint32) tmpAddr[2u] << 16u);
+ 100              		.loc 1 65 0
+ 101 0020 039B     		ldr	r3, [sp, #12]
+ 102 0022 0233     		adds	r3, r3, #2
+ 103 0024 1B78     		ldrb	r3, [r3]
+ 104 0026 DBB2     		uxtb	r3, r3
+ 105 0028 1B04     		lsls	r3, r3, #16
+ 106 002a 029A     		ldr	r2, [sp, #8]
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLETiz4.s 			page 4
+
+
+ 107 002c 1343     		orrs	r3, r2
+ 108 002e 0293     		str	r3, [sp, #8]
+  66:Generated_Source\PSoC4/cyutils.c **** 
+  67:Generated_Source\PSoC4/cyutils.c ****             return(value);
+ 109              		.loc 1 67 0
+ 110 0030 029B     		ldr	r3, [sp, #8]
+  68:Generated_Source\PSoC4/cyutils.c ****         }
+ 111              		.loc 1 68 0
+ 112 0032 1800     		movs	r0, r3
+ 113 0034 04B0     		add	sp, sp, #16
+ 114              		@ sp needed
+ 115 0036 7047     		bx	lr
+ 116              		.cfi_endproc
+ 117              	.LFE1:
+ 118              		.size	CyGetReg24, .-CyGetReg24
+ 119              		.text
+ 120              	.Letext0:
+ 121              		.file 2 "Generated_Source\\PSoC4\\cytypes.h"
+ 122              		.section	.debug_info,"",%progbits
+ 123              	.Ldebug_info0:
+ 124 0000 45010000 		.4byte	0x145
+ 125 0004 0400     		.2byte	0x4
+ 126 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 127 000a 04       		.byte	0x4
+ 128 000b 01       		.uleb128 0x1
+ 129 000c 00000000 		.4byte	.LASF17
+ 130 0010 0C       		.byte	0xc
+ 131 0011 BB010000 		.4byte	.LASF18
+ 132 0015 0C010000 		.4byte	.LASF19
+ 133 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 134 001d 00000000 		.4byte	0
+ 135 0021 00000000 		.4byte	.Ldebug_line0
+ 136 0025 02       		.uleb128 0x2
+ 137 0026 01       		.byte	0x1
+ 138 0027 06       		.byte	0x6
+ 139 0028 08020000 		.4byte	.LASF0
+ 140 002c 02       		.uleb128 0x2
+ 141 002d 01       		.byte	0x1
+ 142 002e 08       		.byte	0x8
+ 143 002f CA000000 		.4byte	.LASF1
+ 144 0033 02       		.uleb128 0x2
+ 145 0034 02       		.byte	0x2
+ 146 0035 05       		.byte	0x5
+ 147 0036 EF010000 		.4byte	.LASF2
+ 148 003a 02       		.uleb128 0x2
+ 149 003b 02       		.byte	0x2
+ 150 003c 07       		.byte	0x7
+ 151 003d F2000000 		.4byte	.LASF3
+ 152 0041 02       		.uleb128 0x2
+ 153 0042 04       		.byte	0x4
+ 154 0043 05       		.byte	0x5
+ 155 0044 FF010000 		.4byte	.LASF4
+ 156 0048 02       		.uleb128 0x2
+ 157 0049 04       		.byte	0x4
+ 158 004a 07       		.byte	0x7
+ 159 004b E0000000 		.4byte	.LASF5
+ 160 004f 02       		.uleb128 0x2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLETiz4.s 			page 5
+
+
+ 161 0050 08       		.byte	0x8
+ 162 0051 05       		.byte	0x5
+ 163 0052 DC010000 		.4byte	.LASF6
+ 164 0056 02       		.uleb128 0x2
+ 165 0057 08       		.byte	0x8
+ 166 0058 07       		.byte	0x7
+ 167 0059 A4010000 		.4byte	.LASF7
+ 168 005d 03       		.uleb128 0x3
+ 169 005e 04       		.byte	0x4
+ 170 005f 05       		.byte	0x5
+ 171 0060 696E7400 		.ascii	"int\000"
+ 172 0064 02       		.uleb128 0x2
+ 173 0065 04       		.byte	0x4
+ 174 0066 07       		.byte	0x7
+ 175 0067 97010000 		.4byte	.LASF8
+ 176 006b 04       		.uleb128 0x4
+ 177 006c F9010000 		.4byte	.LASF9
+ 178 0070 02       		.byte	0x2
+ 179 0071 D201     		.2byte	0x1d2
+ 180 0073 2C000000 		.4byte	0x2c
+ 181 0077 04       		.uleb128 0x4
+ 182 0078 90010000 		.4byte	.LASF10
+ 183 007c 02       		.byte	0x2
+ 184 007d D401     		.2byte	0x1d4
+ 185 007f 48000000 		.4byte	0x48
+ 186 0083 02       		.uleb128 0x2
+ 187 0084 04       		.byte	0x4
+ 188 0085 04       		.byte	0x4
+ 189 0086 C4000000 		.4byte	.LASF11
+ 190 008a 02       		.uleb128 0x2
+ 191 008b 08       		.byte	0x8
+ 192 008c 04       		.byte	0x4
+ 193 008d 05010000 		.4byte	.LASF12
+ 194 0091 02       		.uleb128 0x2
+ 195 0092 01       		.byte	0x1
+ 196 0093 08       		.byte	0x8
+ 197 0094 EA010000 		.4byte	.LASF13
+ 198 0098 05       		.uleb128 0x5
+ 199 0099 6B000000 		.4byte	0x6b
+ 200 009d 05       		.uleb128 0x5
+ 201 009e 77000000 		.4byte	0x77
+ 202 00a2 06       		.uleb128 0x6
+ 203 00a3 B4000000 		.4byte	.LASF20
+ 204 00a7 01       		.byte	0x1
+ 205 00a8 1F       		.byte	0x1f
+ 206 00a9 00000000 		.4byte	.LFB0
+ 207 00ad 30000000 		.4byte	.LFE0-.LFB0
+ 208 00b1 01       		.uleb128 0x1
+ 209 00b2 9C       		.byte	0x9c
+ 210 00b3 E2000000 		.4byte	0xe2
+ 211 00b7 07       		.uleb128 0x7
+ 212 00b8 BF000000 		.4byte	.LASF14
+ 213 00bc 01       		.byte	0x1
+ 214 00bd 1F       		.byte	0x1f
+ 215 00be E2000000 		.4byte	0xe2
+ 216 00c2 02       		.uleb128 0x2
+ 217 00c3 91       		.byte	0x91
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLETiz4.s 			page 6
+
+
+ 218 00c4 74       		.sleb128 -12
+ 219 00c5 07       		.uleb128 0x7
+ 220 00c6 A3000000 		.4byte	.LASF15
+ 221 00ca 01       		.byte	0x1
+ 222 00cb 1F       		.byte	0x1f
+ 223 00cc 77000000 		.4byte	0x77
+ 224 00d0 02       		.uleb128 0x2
+ 225 00d1 91       		.byte	0x91
+ 226 00d2 70       		.sleb128 -16
+ 227 00d3 08       		.uleb128 0x8
+ 228 00d4 D8000000 		.4byte	.LASF16
+ 229 00d8 01       		.byte	0x1
+ 230 00d9 21       		.byte	0x21
+ 231 00da E8000000 		.4byte	0xe8
+ 232 00de 02       		.uleb128 0x2
+ 233 00df 91       		.byte	0x91
+ 234 00e0 7C       		.sleb128 -4
+ 235 00e1 00       		.byte	0
+ 236 00e2 09       		.uleb128 0x9
+ 237 00e3 04       		.byte	0x4
+ 238 00e4 9D000000 		.4byte	0x9d
+ 239 00e8 09       		.uleb128 0x9
+ 240 00e9 04       		.byte	0x4
+ 241 00ea 98000000 		.4byte	0x98
+ 242 00ee 0A       		.uleb128 0xa
+ 243 00ef A9000000 		.4byte	.LASF21
+ 244 00f3 01       		.byte	0x1
+ 245 00f4 38       		.byte	0x38
+ 246 00f5 77000000 		.4byte	0x77
+ 247 00f9 00000000 		.4byte	.LFB1
+ 248 00fd 38000000 		.4byte	.LFE1-.LFB1
+ 249 0101 01       		.uleb128 0x1
+ 250 0102 9C       		.byte	0x9c
+ 251 0103 32010000 		.4byte	0x132
+ 252 0107 07       		.uleb128 0x7
+ 253 0108 BF000000 		.4byte	.LASF14
+ 254 010c 01       		.byte	0x1
+ 255 010d 38       		.byte	0x38
+ 256 010e 32010000 		.4byte	0x132
+ 257 0112 02       		.uleb128 0x2
+ 258 0113 91       		.byte	0x91
+ 259 0114 74       		.sleb128 -12
+ 260 0115 08       		.uleb128 0x8
+ 261 0116 D8000000 		.4byte	.LASF16
+ 262 011a 01       		.byte	0x1
+ 263 011b 3A       		.byte	0x3a
+ 264 011c 3D010000 		.4byte	0x13d
+ 265 0120 02       		.uleb128 0x2
+ 266 0121 91       		.byte	0x91
+ 267 0122 7C       		.sleb128 -4
+ 268 0123 08       		.uleb128 0x8
+ 269 0124 A3000000 		.4byte	.LASF15
+ 270 0128 01       		.byte	0x1
+ 271 0129 3B       		.byte	0x3b
+ 272 012a 77000000 		.4byte	0x77
+ 273 012e 02       		.uleb128 0x2
+ 274 012f 91       		.byte	0x91
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLETiz4.s 			page 7
+
+
+ 275 0130 78       		.sleb128 -8
+ 276 0131 00       		.byte	0
+ 277 0132 09       		.uleb128 0x9
+ 278 0133 04       		.byte	0x4
+ 279 0134 38010000 		.4byte	0x138
+ 280 0138 0B       		.uleb128 0xb
+ 281 0139 9D000000 		.4byte	0x9d
+ 282 013d 09       		.uleb128 0x9
+ 283 013e 04       		.byte	0x4
+ 284 013f 43010000 		.4byte	0x143
+ 285 0143 0B       		.uleb128 0xb
+ 286 0144 98000000 		.4byte	0x98
+ 287 0148 00       		.byte	0
+ 288              		.section	.debug_abbrev,"",%progbits
+ 289              	.Ldebug_abbrev0:
+ 290 0000 01       		.uleb128 0x1
+ 291 0001 11       		.uleb128 0x11
+ 292 0002 01       		.byte	0x1
+ 293 0003 25       		.uleb128 0x25
+ 294 0004 0E       		.uleb128 0xe
+ 295 0005 13       		.uleb128 0x13
+ 296 0006 0B       		.uleb128 0xb
+ 297 0007 03       		.uleb128 0x3
+ 298 0008 0E       		.uleb128 0xe
+ 299 0009 1B       		.uleb128 0x1b
+ 300 000a 0E       		.uleb128 0xe
+ 301 000b 55       		.uleb128 0x55
+ 302 000c 17       		.uleb128 0x17
+ 303 000d 11       		.uleb128 0x11
+ 304 000e 01       		.uleb128 0x1
+ 305 000f 10       		.uleb128 0x10
+ 306 0010 17       		.uleb128 0x17
+ 307 0011 00       		.byte	0
+ 308 0012 00       		.byte	0
+ 309 0013 02       		.uleb128 0x2
+ 310 0014 24       		.uleb128 0x24
+ 311 0015 00       		.byte	0
+ 312 0016 0B       		.uleb128 0xb
+ 313 0017 0B       		.uleb128 0xb
+ 314 0018 3E       		.uleb128 0x3e
+ 315 0019 0B       		.uleb128 0xb
+ 316 001a 03       		.uleb128 0x3
+ 317 001b 0E       		.uleb128 0xe
+ 318 001c 00       		.byte	0
+ 319 001d 00       		.byte	0
+ 320 001e 03       		.uleb128 0x3
+ 321 001f 24       		.uleb128 0x24
+ 322 0020 00       		.byte	0
+ 323 0021 0B       		.uleb128 0xb
+ 324 0022 0B       		.uleb128 0xb
+ 325 0023 3E       		.uleb128 0x3e
+ 326 0024 0B       		.uleb128 0xb
+ 327 0025 03       		.uleb128 0x3
+ 328 0026 08       		.uleb128 0x8
+ 329 0027 00       		.byte	0
+ 330 0028 00       		.byte	0
+ 331 0029 04       		.uleb128 0x4
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLETiz4.s 			page 8
+
+
+ 332 002a 16       		.uleb128 0x16
+ 333 002b 00       		.byte	0
+ 334 002c 03       		.uleb128 0x3
+ 335 002d 0E       		.uleb128 0xe
+ 336 002e 3A       		.uleb128 0x3a
+ 337 002f 0B       		.uleb128 0xb
+ 338 0030 3B       		.uleb128 0x3b
+ 339 0031 05       		.uleb128 0x5
+ 340 0032 49       		.uleb128 0x49
+ 341 0033 13       		.uleb128 0x13
+ 342 0034 00       		.byte	0
+ 343 0035 00       		.byte	0
+ 344 0036 05       		.uleb128 0x5
+ 345 0037 35       		.uleb128 0x35
+ 346 0038 00       		.byte	0
+ 347 0039 49       		.uleb128 0x49
+ 348 003a 13       		.uleb128 0x13
+ 349 003b 00       		.byte	0
+ 350 003c 00       		.byte	0
+ 351 003d 06       		.uleb128 0x6
+ 352 003e 2E       		.uleb128 0x2e
+ 353 003f 01       		.byte	0x1
+ 354 0040 3F       		.uleb128 0x3f
+ 355 0041 19       		.uleb128 0x19
+ 356 0042 03       		.uleb128 0x3
+ 357 0043 0E       		.uleb128 0xe
+ 358 0044 3A       		.uleb128 0x3a
+ 359 0045 0B       		.uleb128 0xb
+ 360 0046 3B       		.uleb128 0x3b
+ 361 0047 0B       		.uleb128 0xb
+ 362 0048 27       		.uleb128 0x27
+ 363 0049 19       		.uleb128 0x19
+ 364 004a 11       		.uleb128 0x11
+ 365 004b 01       		.uleb128 0x1
+ 366 004c 12       		.uleb128 0x12
+ 367 004d 06       		.uleb128 0x6
+ 368 004e 40       		.uleb128 0x40
+ 369 004f 18       		.uleb128 0x18
+ 370 0050 9742     		.uleb128 0x2117
+ 371 0052 19       		.uleb128 0x19
+ 372 0053 01       		.uleb128 0x1
+ 373 0054 13       		.uleb128 0x13
+ 374 0055 00       		.byte	0
+ 375 0056 00       		.byte	0
+ 376 0057 07       		.uleb128 0x7
+ 377 0058 05       		.uleb128 0x5
+ 378 0059 00       		.byte	0
+ 379 005a 03       		.uleb128 0x3
+ 380 005b 0E       		.uleb128 0xe
+ 381 005c 3A       		.uleb128 0x3a
+ 382 005d 0B       		.uleb128 0xb
+ 383 005e 3B       		.uleb128 0x3b
+ 384 005f 0B       		.uleb128 0xb
+ 385 0060 49       		.uleb128 0x49
+ 386 0061 13       		.uleb128 0x13
+ 387 0062 02       		.uleb128 0x2
+ 388 0063 18       		.uleb128 0x18
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLETiz4.s 			page 9
+
+
+ 389 0064 00       		.byte	0
+ 390 0065 00       		.byte	0
+ 391 0066 08       		.uleb128 0x8
+ 392 0067 34       		.uleb128 0x34
+ 393 0068 00       		.byte	0
+ 394 0069 03       		.uleb128 0x3
+ 395 006a 0E       		.uleb128 0xe
+ 396 006b 3A       		.uleb128 0x3a
+ 397 006c 0B       		.uleb128 0xb
+ 398 006d 3B       		.uleb128 0x3b
+ 399 006e 0B       		.uleb128 0xb
+ 400 006f 49       		.uleb128 0x49
+ 401 0070 13       		.uleb128 0x13
+ 402 0071 02       		.uleb128 0x2
+ 403 0072 18       		.uleb128 0x18
+ 404 0073 00       		.byte	0
+ 405 0074 00       		.byte	0
+ 406 0075 09       		.uleb128 0x9
+ 407 0076 0F       		.uleb128 0xf
+ 408 0077 00       		.byte	0
+ 409 0078 0B       		.uleb128 0xb
+ 410 0079 0B       		.uleb128 0xb
+ 411 007a 49       		.uleb128 0x49
+ 412 007b 13       		.uleb128 0x13
+ 413 007c 00       		.byte	0
+ 414 007d 00       		.byte	0
+ 415 007e 0A       		.uleb128 0xa
+ 416 007f 2E       		.uleb128 0x2e
+ 417 0080 01       		.byte	0x1
+ 418 0081 3F       		.uleb128 0x3f
+ 419 0082 19       		.uleb128 0x19
+ 420 0083 03       		.uleb128 0x3
+ 421 0084 0E       		.uleb128 0xe
+ 422 0085 3A       		.uleb128 0x3a
+ 423 0086 0B       		.uleb128 0xb
+ 424 0087 3B       		.uleb128 0x3b
+ 425 0088 0B       		.uleb128 0xb
+ 426 0089 27       		.uleb128 0x27
+ 427 008a 19       		.uleb128 0x19
+ 428 008b 49       		.uleb128 0x49
+ 429 008c 13       		.uleb128 0x13
+ 430 008d 11       		.uleb128 0x11
+ 431 008e 01       		.uleb128 0x1
+ 432 008f 12       		.uleb128 0x12
+ 433 0090 06       		.uleb128 0x6
+ 434 0091 40       		.uleb128 0x40
+ 435 0092 18       		.uleb128 0x18
+ 436 0093 9742     		.uleb128 0x2117
+ 437 0095 19       		.uleb128 0x19
+ 438 0096 01       		.uleb128 0x1
+ 439 0097 13       		.uleb128 0x13
+ 440 0098 00       		.byte	0
+ 441 0099 00       		.byte	0
+ 442 009a 0B       		.uleb128 0xb
+ 443 009b 26       		.uleb128 0x26
+ 444 009c 00       		.byte	0
+ 445 009d 49       		.uleb128 0x49
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLETiz4.s 			page 10
+
+
+ 446 009e 13       		.uleb128 0x13
+ 447 009f 00       		.byte	0
+ 448 00a0 00       		.byte	0
+ 449 00a1 00       		.byte	0
+ 450              		.section	.debug_aranges,"",%progbits
+ 451 0000 24000000 		.4byte	0x24
+ 452 0004 0200     		.2byte	0x2
+ 453 0006 00000000 		.4byte	.Ldebug_info0
+ 454 000a 04       		.byte	0x4
+ 455 000b 00       		.byte	0
+ 456 000c 0000     		.2byte	0
+ 457 000e 0000     		.2byte	0
+ 458 0010 00000000 		.4byte	.LFB0
+ 459 0014 30000000 		.4byte	.LFE0-.LFB0
+ 460 0018 00000000 		.4byte	.LFB1
+ 461 001c 38000000 		.4byte	.LFE1-.LFB1
+ 462 0020 00000000 		.4byte	0
+ 463 0024 00000000 		.4byte	0
+ 464              		.section	.debug_ranges,"",%progbits
+ 465              	.Ldebug_ranges0:
+ 466 0000 00000000 		.4byte	.LFB0
+ 467 0004 30000000 		.4byte	.LFE0
+ 468 0008 00000000 		.4byte	.LFB1
+ 469 000c 38000000 		.4byte	.LFE1
+ 470 0010 00000000 		.4byte	0
+ 471 0014 00000000 		.4byte	0
+ 472              		.section	.debug_line,"",%progbits
+ 473              	.Ldebug_line0:
+ 474 0000 73000000 		.section	.debug_str,"MS",%progbits,1
+ 474      02004400 
+ 474      00000201 
+ 474      FB0E0D00 
+ 474      01010101 
+ 475              	.LASF17:
+ 476 0000 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 476      43313120 
+ 476      352E342E 
+ 476      31203230 
+ 476      31363036 
+ 477 0033 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 477      20726576 
+ 477      6973696F 
+ 477      6E203233 
+ 477      37373135 
+ 478 0066 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects -fomit-fram"
+ 478      66756E63 
+ 478      74696F6E 
+ 478      2D736563 
+ 478      74696F6E 
+ 479 0099 652D706F 		.ascii	"e-pointer\000"
+ 479      696E7465 
+ 479      7200
+ 480              	.LASF15:
+ 481 00a3 76616C75 		.ascii	"value\000"
+ 481      6500
+ 482              	.LASF21:
+ 483 00a9 43794765 		.ascii	"CyGetReg24\000"
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLETiz4.s 			page 11
+
+
+ 483      74526567 
+ 483      323400
+ 484              	.LASF20:
+ 485 00b4 43795365 		.ascii	"CySetReg24\000"
+ 485      74526567 
+ 485      323400
+ 486              	.LASF14:
+ 487 00bf 61646472 		.ascii	"addr\000"
+ 487      00
+ 488              	.LASF11:
+ 489 00c4 666C6F61 		.ascii	"float\000"
+ 489      7400
+ 490              	.LASF1:
+ 491 00ca 756E7369 		.ascii	"unsigned char\000"
+ 491      676E6564 
+ 491      20636861 
+ 491      7200
+ 492              	.LASF16:
+ 493 00d8 746D7041 		.ascii	"tmpAddr\000"
+ 493      64647200 
+ 494              	.LASF5:
+ 495 00e0 6C6F6E67 		.ascii	"long unsigned int\000"
+ 495      20756E73 
+ 495      69676E65 
+ 495      6420696E 
+ 495      7400
+ 496              	.LASF3:
+ 497 00f2 73686F72 		.ascii	"short unsigned int\000"
+ 497      7420756E 
+ 497      7369676E 
+ 497      65642069 
+ 497      6E7400
+ 498              	.LASF12:
+ 499 0105 646F7562 		.ascii	"double\000"
+ 499      6C6500
+ 500              	.LASF19:
+ 501 010c 443A5C44 		.ascii	"D:\\Dropbox\\5_kurs\\diploma\\led_lamp(for_diploma)"
+ 501      726F7062 
+ 501      6F785C35 
+ 501      5F6B7572 
+ 501      735C6469 
+ 502 013b 5C424C45 		.ascii	"\\BLE_Dynamic_GATT_Service_Configuration\\BLE_Dynam"
+ 502      5F44796E 
+ 502      616D6963 
+ 502      5F474154 
+ 502      545F5365 
+ 503 016c 69635F47 		.ascii	"ic_GATT_Service_Configuration.cydsn\000"
+ 503      4154545F 
+ 503      53657276 
+ 503      6963655F 
+ 503      436F6E66 
+ 504              	.LASF10:
+ 505 0190 75696E74 		.ascii	"uint32\000"
+ 505      333200
+ 506              	.LASF8:
+ 507 0197 756E7369 		.ascii	"unsigned int\000"
+ 507      676E6564 
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLETiz4.s 			page 12
+
+
+ 507      20696E74 
+ 507      00
+ 508              	.LASF7:
+ 509 01a4 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 509      206C6F6E 
+ 509      6720756E 
+ 509      7369676E 
+ 509      65642069 
+ 510              	.LASF18:
+ 511 01bb 47656E65 		.ascii	"Generated_Source\\PSoC4\\cyutils.c\000"
+ 511      72617465 
+ 511      645F536F 
+ 511      75726365 
+ 511      5C50536F 
+ 512              	.LASF6:
+ 513 01dc 6C6F6E67 		.ascii	"long long int\000"
+ 513      206C6F6E 
+ 513      6720696E 
+ 513      7400
+ 514              	.LASF13:
+ 515 01ea 63686172 		.ascii	"char\000"
+ 515      00
+ 516              	.LASF2:
+ 517 01ef 73686F72 		.ascii	"short int\000"
+ 517      7420696E 
+ 517      7400
+ 518              	.LASF9:
+ 519 01f9 75696E74 		.ascii	"uint8\000"
+ 519      3800
+ 520              	.LASF4:
+ 521 01ff 6C6F6E67 		.ascii	"long int\000"
+ 521      20696E74 
+ 521      00
+ 522              	.LASF0:
+ 523 0208 7369676E 		.ascii	"signed char\000"
+ 523      65642063 
+ 523      68617200 
+ 524              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

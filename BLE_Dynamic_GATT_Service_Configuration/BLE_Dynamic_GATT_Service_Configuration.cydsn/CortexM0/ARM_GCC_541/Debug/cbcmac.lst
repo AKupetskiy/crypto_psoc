@@ -1,0 +1,1689 @@
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"cbcmac.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.mem_clean,"ax",%progbits
+  20              		.align	2
+  21              		.code	16
+  22              		.thumb_func
+  23              		.type	mem_clean, %function
+  24              	mem_clean:
+  25              	.LFB0:
+  26              		.file 1 "handy.h"
+   1:handy.h       **** #ifndef HANDY_H
+   2:handy.h       **** #define HANDY_H
+   3:handy.h       **** 
+   4:handy.h       **** #include <stddef.h>
+   5:handy.h       **** #include <stdint.h>
+   6:handy.h       **** #include <string.h>
+   7:handy.h       **** 
+   8:handy.h       **** /*
+   9:handy.h       ****  * Handy CPP defines and C inline functions.
+  10:handy.h       ****  */
+  11:handy.h       **** 
+  12:handy.h       **** /* Evaluates to the number of items in array-type variable arr. */
+  13:handy.h       **** #define ARRAYCOUNT(arr) (sizeof arr / sizeof arr[0])
+  14:handy.h       **** 
+  15:handy.h       **** /* Normal MIN/MAX macros.  Evaluate argument expressions only once. */
+  16:handy.h       **** #ifndef MIN
+  17:handy.h       ****   #define MIN(x, y) \
+  18:handy.h       ****     ({ typeof (x) __x = (x); \
+  19:handy.h       ****        typeof (y) __y = (y); \
+  20:handy.h       ****        __x < __y ? __x : __y; })
+  21:handy.h       **** #endif
+  22:handy.h       **** #ifndef MAX
+  23:handy.h       ****   #define MAX(x, y) \
+  24:handy.h       ****     ({ typeof (x) __x = (x); \
+  25:handy.h       ****        typeof (y) __y = (y); \
+  26:handy.h       ****        __x > __y ? __x : __y; })
+  27:handy.h       **** #endif
+  28:handy.h       **** 
+  29:handy.h       **** /* Swap two values.  Uses GCC type inference magic. */
+  30:handy.h       **** #ifndef SWAP
+  31:handy.h       ****   #define SWAP(x, y) \
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 2
+
+
+  32:handy.h       ****     do { \
+  33:handy.h       ****       typeof (x) __tmp = (x); \
+  34:handy.h       ****       (x) = (y); \
+  35:handy.h       ****       (y) = __tmp; \
+  36:handy.h       ****     } while (0)
+  37:handy.h       **** #endif
+  38:handy.h       **** 
+  39:handy.h       **** /** Stringify its argument. */
+  40:handy.h       **** #define STRINGIFY(x) STRINGIFY_(x)
+  41:handy.h       **** #define STRINGIFY_(x) #x
+  42:handy.h       **** 
+  43:handy.h       **** /* Error handling macros.
+  44:handy.h       ****  *
+  45:handy.h       ****  * These expect a zero = success, non-zero = error convention.
+  46:handy.h       ****  */
+  47:handy.h       **** 
+  48:handy.h       **** /** Error: return. 
+  49:handy.h       ****  *  
+  50:handy.h       ****  *  If the expression fails, return the error from this function. */
+  51:handy.h       **** #define ER(expr) do { typeof (expr) err_ = (expr); if (err_) return err_; } while (0)
+  52:handy.h       **** 
+  53:handy.h       **** /** Error: goto.
+  54:handy.h       ****  *
+  55:handy.h       ****  *  If the expression fails, goto x_err.  Assumes defn of label
+  56:handy.h       ****  *  x_err and 'error_type err'. */
+  57:handy.h       **** #define EG(expr) do { err = (expr); if (err) goto x_err; } while (0)
+  58:handy.h       **** 
+  59:handy.h       **** /** Like memset(ptr, 0, len), but not allowed to be removed by
+  60:handy.h       ****  *  compilers. */
+  61:handy.h       **** static inline void mem_clean(volatile void *v, size_t len)
+  62:handy.h       **** {
+  27              		.loc 1 62 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 8
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 00B5     		push	{lr}
+  32              		.cfi_def_cfa_offset 4
+  33              		.cfi_offset 14, -4
+  34 0002 83B0     		sub	sp, sp, #12
+  35              		.cfi_def_cfa_offset 16
+  36 0004 0190     		str	r0, [sp, #4]
+  37 0006 0091     		str	r1, [sp]
+  63:handy.h       ****   if (len)
+  38              		.loc 1 63 0
+  39 0008 009B     		ldr	r3, [sp]
+  40 000a 002B     		cmp	r3, #0
+  41 000c 07D0     		beq	.L3
+  64:handy.h       ****   {
+  65:handy.h       ****     memset((void *) v, 0, len);
+  42              		.loc 1 65 0
+  43 000e 009A     		ldr	r2, [sp]
+  44 0010 019B     		ldr	r3, [sp, #4]
+  45 0012 0021     		movs	r1, #0
+  46 0014 1800     		movs	r0, r3
+  47 0016 FFF7FEFF 		bl	memset
+  66:handy.h       ****     (void) *((volatile uint8_t *) v);
+  48              		.loc 1 66 0
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 3
+
+
+  49 001a 019B     		ldr	r3, [sp, #4]
+  50 001c 1B78     		ldrb	r3, [r3]
+  51              	.L3:
+  67:handy.h       ****   }
+  68:handy.h       **** }
+  52              		.loc 1 68 0
+  53 001e C046     		nop
+  54 0020 03B0     		add	sp, sp, #12
+  55              		@ sp needed
+  56 0022 00BD     		pop	{pc}
+  57              		.cfi_endproc
+  58              	.LFE0:
+  59              		.size	mem_clean, .-mem_clean
+  60              		.section	.text.cf_cbcmac_stream_init,"ax",%progbits
+  61              		.align	2
+  62              		.global	cf_cbcmac_stream_init
+  63              		.code	16
+  64              		.thumb_func
+  65              		.type	cf_cbcmac_stream_init, %function
+  66              	cf_cbcmac_stream_init:
+  67              	.LFB27:
+  68              		.file 2 "cbcmac.c"
+   1:cbcmac.c      **** /*
+   2:cbcmac.c      ****  * cifra - embedded cryptography library
+   3:cbcmac.c      ****  * Written in 2014 by Joseph Birr-Pixton <jpixton@gmail.com>
+   4:cbcmac.c      ****  *
+   5:cbcmac.c      ****  * To the extent possible under law, the author(s) have dedicated all
+   6:cbcmac.c      ****  * copyright and related and neighboring rights to this software to the
+   7:cbcmac.c      ****  * public domain worldwide. This software is distributed without any
+   8:cbcmac.c      ****  * warranty.
+   9:cbcmac.c      ****  *
+  10:cbcmac.c      ****  * You should have received a copy of the CC0 Public Domain Dedication
+  11:cbcmac.c      ****  * along with this software. If not, see
+  12:cbcmac.c      ****  * <http://creativecommons.org/publicdomain/zero/1.0/>.
+  13:cbcmac.c      ****  */
+  14:cbcmac.c      **** 
+  15:cbcmac.c      **** #include "handy.h"
+  16:cbcmac.c      **** #include "prp.h"
+  17:cbcmac.c      **** #include "modes.h"
+  18:cbcmac.c      **** #include "bitops.h"
+  19:cbcmac.c      **** #include "blockwise.h"
+  20:cbcmac.c      **** #include "gf128.h"
+  21:cbcmac.c      **** #include "tassert.h"
+  22:cbcmac.c      **** 
+  23:cbcmac.c      **** #include <string.h>
+  24:cbcmac.c      **** 
+  25:cbcmac.c      **** void cf_cbcmac_stream_init(cf_cbcmac_stream *ctx, const cf_prp *prp, void *prpctx)
+  26:cbcmac.c      **** {
+  69              		.loc 2 26 0
+  70              		.cfi_startproc
+  71              		@ args = 0, pretend = 0, frame = 16
+  72              		@ frame_needed = 0, uses_anonymous_args = 0
+  73 0000 00B5     		push	{lr}
+  74              		.cfi_def_cfa_offset 4
+  75              		.cfi_offset 14, -4
+  76 0002 85B0     		sub	sp, sp, #20
+  77              		.cfi_def_cfa_offset 24
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 4
+
+
+  78 0004 0390     		str	r0, [sp, #12]
+  79 0006 0291     		str	r1, [sp, #8]
+  80 0008 0192     		str	r2, [sp, #4]
+  27:cbcmac.c      ****   memset(ctx, 0, sizeof *ctx);
+  81              		.loc 2 27 0
+  82 000a 039B     		ldr	r3, [sp, #12]
+  83 000c 3422     		movs	r2, #52
+  84 000e 0021     		movs	r1, #0
+  85 0010 1800     		movs	r0, r3
+  86 0012 FFF7FEFF 		bl	memset
+  28:cbcmac.c      ****   ctx->prp = prp;
+  87              		.loc 2 28 0
+  88 0016 039B     		ldr	r3, [sp, #12]
+  89 0018 029A     		ldr	r2, [sp, #8]
+  90 001a 1A60     		str	r2, [r3]
+  29:cbcmac.c      ****   ctx->prpctx = prpctx;
+  91              		.loc 2 29 0
+  92 001c 039B     		ldr	r3, [sp, #12]
+  93 001e 019A     		ldr	r2, [sp, #4]
+  94 0020 5A60     		str	r2, [r3, #4]
+  30:cbcmac.c      ****   cf_cbcmac_stream_reset(ctx);
+  95              		.loc 2 30 0
+  96 0022 039B     		ldr	r3, [sp, #12]
+  97 0024 1800     		movs	r0, r3
+  98 0026 FFF7FEFF 		bl	cf_cbcmac_stream_reset
+  31:cbcmac.c      **** }
+  99              		.loc 2 31 0
+ 100 002a C046     		nop
+ 101 002c 05B0     		add	sp, sp, #20
+ 102              		@ sp needed
+ 103 002e 00BD     		pop	{pc}
+ 104              		.cfi_endproc
+ 105              	.LFE27:
+ 106              		.size	cf_cbcmac_stream_init, .-cf_cbcmac_stream_init
+ 107              		.section	.text.cf_cbcmac_stream_reset,"ax",%progbits
+ 108              		.align	2
+ 109              		.global	cf_cbcmac_stream_reset
+ 110              		.code	16
+ 111              		.thumb_func
+ 112              		.type	cf_cbcmac_stream_reset, %function
+ 113              	cf_cbcmac_stream_reset:
+ 114              	.LFB28:
+  32:cbcmac.c      **** 
+  33:cbcmac.c      **** void cf_cbcmac_stream_reset(cf_cbcmac_stream *ctx)
+  34:cbcmac.c      **** {
+ 115              		.loc 2 34 0
+ 116              		.cfi_startproc
+ 117              		@ args = 0, pretend = 0, frame = 24
+ 118              		@ frame_needed = 0, uses_anonymous_args = 0
+ 119 0000 00B5     		push	{lr}
+ 120              		.cfi_def_cfa_offset 4
+ 121              		.cfi_offset 14, -4
+ 122 0002 87B0     		sub	sp, sp, #28
+ 123              		.cfi_def_cfa_offset 32
+ 124 0004 0190     		str	r0, [sp, #4]
+  35:cbcmac.c      ****   uint8_t iv_zero[CF_MAXBLOCK] = { 0 };
+ 125              		.loc 2 35 0
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 5
+
+
+ 126 0006 02AB     		add	r3, sp, #8
+ 127 0008 1800     		movs	r0, r3
+ 128 000a 1023     		movs	r3, #16
+ 129 000c 1A00     		movs	r2, r3
+ 130 000e 0021     		movs	r1, #0
+ 131 0010 FFF7FEFF 		bl	memset
+  36:cbcmac.c      ****   cf_cbc_init(&ctx->cbc, ctx->prp, ctx->prpctx, iv_zero);
+ 132              		.loc 2 36 0
+ 133 0014 019B     		ldr	r3, [sp, #4]
+ 134 0016 0833     		adds	r3, r3, #8
+ 135 0018 1800     		movs	r0, r3
+ 136 001a 019B     		ldr	r3, [sp, #4]
+ 137 001c 1968     		ldr	r1, [r3]
+ 138 001e 019B     		ldr	r3, [sp, #4]
+ 139 0020 5A68     		ldr	r2, [r3, #4]
+ 140 0022 02AB     		add	r3, sp, #8
+ 141 0024 FFF7FEFF 		bl	cf_cbc_init
+  37:cbcmac.c      ****   mem_clean(ctx->buffer, sizeof ctx->buffer);
+ 142              		.loc 2 37 0
+ 143 0028 019B     		ldr	r3, [sp, #4]
+ 144 002a 2033     		adds	r3, r3, #32
+ 145 002c 1021     		movs	r1, #16
+ 146 002e 1800     		movs	r0, r3
+ 147 0030 FFF7FEFF 		bl	mem_clean
+  38:cbcmac.c      ****   ctx->used = 0;
+ 148              		.loc 2 38 0
+ 149 0034 019B     		ldr	r3, [sp, #4]
+ 150 0036 0022     		movs	r2, #0
+ 151 0038 1A63     		str	r2, [r3, #48]
+  39:cbcmac.c      **** }
+ 152              		.loc 2 39 0
+ 153 003a C046     		nop
+ 154 003c 07B0     		add	sp, sp, #28
+ 155              		@ sp needed
+ 156 003e 00BD     		pop	{pc}
+ 157              		.cfi_endproc
+ 158              	.LFE28:
+ 159              		.size	cf_cbcmac_stream_reset, .-cf_cbcmac_stream_reset
+ 160              		.section	.text.cbcmac_process,"ax",%progbits
+ 161              		.align	2
+ 162              		.code	16
+ 163              		.thumb_func
+ 164              		.type	cbcmac_process, %function
+ 165              	cbcmac_process:
+ 166              	.LFB29:
+  40:cbcmac.c      **** 
+  41:cbcmac.c      **** static void cbcmac_process(void *vctx, const uint8_t *block)
+  42:cbcmac.c      **** {
+ 167              		.loc 2 42 0
+ 168              		.cfi_startproc
+ 169              		@ args = 0, pretend = 0, frame = 32
+ 170              		@ frame_needed = 0, uses_anonymous_args = 0
+ 171 0000 00B5     		push	{lr}
+ 172              		.cfi_def_cfa_offset 4
+ 173              		.cfi_offset 14, -4
+ 174 0002 89B0     		sub	sp, sp, #36
+ 175              		.cfi_def_cfa_offset 40
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 6
+
+
+ 176 0004 0190     		str	r0, [sp, #4]
+ 177 0006 0091     		str	r1, [sp]
+  43:cbcmac.c      ****   cf_cbcmac_stream *ctx = vctx;
+ 178              		.loc 2 43 0
+ 179 0008 019B     		ldr	r3, [sp, #4]
+ 180 000a 0793     		str	r3, [sp, #28]
+  44:cbcmac.c      ****   uint8_t output[CF_MAXBLOCK];
+  45:cbcmac.c      ****   cf_cbc_encrypt(&ctx->cbc, block, output, 1);
+ 181              		.loc 2 45 0
+ 182 000c 079B     		ldr	r3, [sp, #28]
+ 183 000e 0833     		adds	r3, r3, #8
+ 184 0010 1800     		movs	r0, r3
+ 185 0012 03AA     		add	r2, sp, #12
+ 186 0014 0099     		ldr	r1, [sp]
+ 187 0016 0123     		movs	r3, #1
+ 188 0018 FFF7FEFF 		bl	cf_cbc_encrypt
+  46:cbcmac.c      **** }
+ 189              		.loc 2 46 0
+ 190 001c C046     		nop
+ 191 001e 09B0     		add	sp, sp, #36
+ 192              		@ sp needed
+ 193 0020 00BD     		pop	{pc}
+ 194              		.cfi_endproc
+ 195              	.LFE29:
+ 196              		.size	cbcmac_process, .-cbcmac_process
+ 197 0022 C046     		.section	.text.cf_cbcmac_stream_update,"ax",%progbits
+ 198              		.align	2
+ 199              		.global	cf_cbcmac_stream_update
+ 200              		.code	16
+ 201              		.thumb_func
+ 202              		.type	cf_cbcmac_stream_update, %function
+ 203              	cf_cbcmac_stream_update:
+ 204              	.LFB30:
+  47:cbcmac.c      **** 
+  48:cbcmac.c      **** void cf_cbcmac_stream_update(cf_cbcmac_stream *ctx, const uint8_t *data, size_t len)
+  49:cbcmac.c      **** {
+ 205              		.loc 2 49 0
+ 206              		.cfi_startproc
+ 207              		@ args = 0, pretend = 0, frame = 16
+ 208              		@ frame_needed = 0, uses_anonymous_args = 0
+ 209 0000 10B5     		push	{r4, lr}
+ 210              		.cfi_def_cfa_offset 8
+ 211              		.cfi_offset 4, -8
+ 212              		.cfi_offset 14, -4
+ 213 0002 88B0     		sub	sp, sp, #32
+ 214              		.cfi_def_cfa_offset 40
+ 215 0004 0790     		str	r0, [sp, #28]
+ 216 0006 0691     		str	r1, [sp, #24]
+ 217 0008 0592     		str	r2, [sp, #20]
+  50:cbcmac.c      ****   cf_blockwise_accumulate(ctx->buffer, &ctx->used, ctx->prp->blocksz,
+ 218              		.loc 2 50 0
+ 219 000a 079B     		ldr	r3, [sp, #28]
+ 220 000c 2033     		adds	r3, r3, #32
+ 221 000e 1800     		movs	r0, r3
+ 222 0010 079B     		ldr	r3, [sp, #28]
+ 223 0012 3033     		adds	r3, r3, #48
+ 224 0014 1900     		movs	r1, r3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 7
+
+
+ 225 0016 079B     		ldr	r3, [sp, #28]
+ 226 0018 1B68     		ldr	r3, [r3]
+ 227 001a 1A68     		ldr	r2, [r3]
+ 228 001c 069C     		ldr	r4, [sp, #24]
+ 229 001e 079B     		ldr	r3, [sp, #28]
+ 230 0020 0293     		str	r3, [sp, #8]
+ 231 0022 054B     		ldr	r3, .L8
+ 232 0024 0193     		str	r3, [sp, #4]
+ 233 0026 059B     		ldr	r3, [sp, #20]
+ 234 0028 0093     		str	r3, [sp]
+ 235 002a 2300     		movs	r3, r4
+ 236 002c FFF7FEFF 		bl	cf_blockwise_accumulate
+  51:cbcmac.c      ****                           data, len,
+  52:cbcmac.c      ****                           cbcmac_process,
+  53:cbcmac.c      ****                           ctx);
+  54:cbcmac.c      **** }
+ 237              		.loc 2 54 0
+ 238 0030 C046     		nop
+ 239 0032 08B0     		add	sp, sp, #32
+ 240              		@ sp needed
+ 241 0034 10BD     		pop	{r4, pc}
+ 242              	.L9:
+ 243 0036 C046     		.align	2
+ 244              	.L8:
+ 245 0038 00000000 		.word	cbcmac_process
+ 246              		.cfi_endproc
+ 247              	.LFE30:
+ 248              		.size	cf_cbcmac_stream_update, .-cf_cbcmac_stream_update
+ 249              		.section	.text.cf_cbcmac_stream_finish_block_zero,"ax",%progbits
+ 250              		.align	2
+ 251              		.global	cf_cbcmac_stream_finish_block_zero
+ 252              		.code	16
+ 253              		.thumb_func
+ 254              		.type	cf_cbcmac_stream_finish_block_zero, %function
+ 255              	cf_cbcmac_stream_finish_block_zero:
+ 256              	.LFB31:
+  55:cbcmac.c      **** 
+  56:cbcmac.c      **** void cf_cbcmac_stream_finish_block_zero(cf_cbcmac_stream *ctx)
+  57:cbcmac.c      **** {
+ 257              		.loc 2 57 0
+ 258              		.cfi_startproc
+ 259              		@ args = 0, pretend = 0, frame = 8
+ 260              		@ frame_needed = 0, uses_anonymous_args = 0
+ 261 0000 00B5     		push	{lr}
+ 262              		.cfi_def_cfa_offset 4
+ 263              		.cfi_offset 14, -4
+ 264 0002 83B0     		sub	sp, sp, #12
+ 265              		.cfi_def_cfa_offset 16
+ 266 0004 0190     		str	r0, [sp, #4]
+  58:cbcmac.c      ****   if (ctx->used == 0)
+ 267              		.loc 2 58 0
+ 268 0006 019B     		ldr	r3, [sp, #4]
+ 269 0008 1B6B     		ldr	r3, [r3, #48]
+ 270 000a 002B     		cmp	r3, #0
+ 271 000c 1BD0     		beq	.L13
+  59:cbcmac.c      ****     return;
+  60:cbcmac.c      **** 
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 8
+
+
+  61:cbcmac.c      ****   memset(ctx->buffer + ctx->used, 0, ctx->prp->blocksz - ctx->used);
+ 272              		.loc 2 61 0
+ 273 000e 019B     		ldr	r3, [sp, #4]
+ 274 0010 2033     		adds	r3, r3, #32
+ 275 0012 1A00     		movs	r2, r3
+ 276 0014 019B     		ldr	r3, [sp, #4]
+ 277 0016 1B6B     		ldr	r3, [r3, #48]
+ 278 0018 D018     		adds	r0, r2, r3
+ 279 001a 019B     		ldr	r3, [sp, #4]
+ 280 001c 1B68     		ldr	r3, [r3]
+ 281 001e 1A68     		ldr	r2, [r3]
+ 282 0020 019B     		ldr	r3, [sp, #4]
+ 283 0022 1B6B     		ldr	r3, [r3, #48]
+ 284 0024 D31A     		subs	r3, r2, r3
+ 285 0026 1A00     		movs	r2, r3
+ 286 0028 0021     		movs	r1, #0
+ 287 002a FFF7FEFF 		bl	memset
+  62:cbcmac.c      ****   cbcmac_process(ctx, ctx->buffer);
+ 288              		.loc 2 62 0
+ 289 002e 019B     		ldr	r3, [sp, #4]
+ 290 0030 2033     		adds	r3, r3, #32
+ 291 0032 1A00     		movs	r2, r3
+ 292 0034 019B     		ldr	r3, [sp, #4]
+ 293 0036 1100     		movs	r1, r2
+ 294 0038 1800     		movs	r0, r3
+ 295 003a FFF7FEFF 		bl	cbcmac_process
+  63:cbcmac.c      ****   ctx->used = 0;
+ 296              		.loc 2 63 0
+ 297 003e 019B     		ldr	r3, [sp, #4]
+ 298 0040 0022     		movs	r2, #0
+ 299 0042 1A63     		str	r2, [r3, #48]
+ 300 0044 00E0     		b	.L10
+ 301              	.L13:
+  59:cbcmac.c      ****     return;
+ 302              		.loc 2 59 0
+ 303 0046 C046     		nop
+ 304              	.L10:
+  64:cbcmac.c      **** }
+ 305              		.loc 2 64 0
+ 306 0048 03B0     		add	sp, sp, #12
+ 307              		@ sp needed
+ 308 004a 00BD     		pop	{pc}
+ 309              		.cfi_endproc
+ 310              	.LFE31:
+ 311              		.size	cf_cbcmac_stream_finish_block_zero, .-cf_cbcmac_stream_finish_block_zero
+ 312              		.section	.text.cf_cbcmac_stream_nopad_final,"ax",%progbits
+ 313              		.align	2
+ 314              		.global	cf_cbcmac_stream_nopad_final
+ 315              		.code	16
+ 316              		.thumb_func
+ 317              		.type	cf_cbcmac_stream_nopad_final, %function
+ 318              	cf_cbcmac_stream_nopad_final:
+ 319              	.LFB32:
+  65:cbcmac.c      **** 
+  66:cbcmac.c      **** void cf_cbcmac_stream_nopad_final(cf_cbcmac_stream *ctx, uint8_t out[CF_MAXBLOCK])
+  67:cbcmac.c      **** {
+ 320              		.loc 2 67 0
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 9
+
+
+ 321              		.cfi_startproc
+ 322              		@ args = 0, pretend = 0, frame = 8
+ 323              		@ frame_needed = 0, uses_anonymous_args = 0
+ 324 0000 00B5     		push	{lr}
+ 325              		.cfi_def_cfa_offset 4
+ 326              		.cfi_offset 14, -4
+ 327 0002 83B0     		sub	sp, sp, #12
+ 328              		.cfi_def_cfa_offset 16
+ 329 0004 0190     		str	r0, [sp, #4]
+ 330 0006 0091     		str	r1, [sp]
+  68:cbcmac.c      ****   assert(ctx->used == 0);
+ 331              		.loc 2 68 0
+ 332 0008 019B     		ldr	r3, [sp, #4]
+ 333 000a 1B6B     		ldr	r3, [r3, #48]
+ 334 000c 002B     		cmp	r3, #0
+ 335 000e 01D0     		beq	.L15
+ 336              		.loc 2 68 0 is_stmt 0 discriminator 1
+ 337 0010 FFF7FEFF 		bl	abort
+ 338              	.L15:
+  69:cbcmac.c      ****   memcpy(out, ctx->cbc.block, ctx->prp->blocksz);
+ 339              		.loc 2 69 0 is_stmt 1
+ 340 0014 019B     		ldr	r3, [sp, #4]
+ 341 0016 1033     		adds	r3, r3, #16
+ 342 0018 1900     		movs	r1, r3
+ 343 001a 019B     		ldr	r3, [sp, #4]
+ 344 001c 1B68     		ldr	r3, [r3]
+ 345 001e 1A68     		ldr	r2, [r3]
+ 346 0020 009B     		ldr	r3, [sp]
+ 347 0022 1800     		movs	r0, r3
+ 348 0024 FFF7FEFF 		bl	memcpy
+  70:cbcmac.c      **** }
+ 349              		.loc 2 70 0
+ 350 0028 C046     		nop
+ 351 002a 03B0     		add	sp, sp, #12
+ 352              		@ sp needed
+ 353 002c 00BD     		pop	{pc}
+ 354              		.cfi_endproc
+ 355              	.LFE32:
+ 356              		.size	cf_cbcmac_stream_nopad_final, .-cf_cbcmac_stream_nopad_final
+ 357 002e C046     		.section	.text.cf_cbcmac_stream_pad_final,"ax",%progbits
+ 358              		.align	2
+ 359              		.global	cf_cbcmac_stream_pad_final
+ 360              		.code	16
+ 361              		.thumb_func
+ 362              		.type	cf_cbcmac_stream_pad_final, %function
+ 363              	cf_cbcmac_stream_pad_final:
+ 364              	.LFB33:
+  71:cbcmac.c      **** 
+  72:cbcmac.c      **** void cf_cbcmac_stream_pad_final(cf_cbcmac_stream *ctx, uint8_t out[CF_MAXBLOCK])
+  73:cbcmac.c      **** {
+ 365              		.loc 2 73 0
+ 366              		.cfi_startproc
+ 367              		@ args = 0, pretend = 0, frame = 16
+ 368              		@ frame_needed = 0, uses_anonymous_args = 0
+ 369 0000 30B5     		push	{r4, r5, lr}
+ 370              		.cfi_def_cfa_offset 12
+ 371              		.cfi_offset 4, -12
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 10
+
+
+ 372              		.cfi_offset 5, -8
+ 373              		.cfi_offset 14, -4
+ 374 0002 89B0     		sub	sp, sp, #36
+ 375              		.cfi_def_cfa_offset 48
+ 376 0004 0590     		str	r0, [sp, #20]
+ 377 0006 0491     		str	r1, [sp, #16]
+  74:cbcmac.c      ****   uint8_t npad = ctx->prp->blocksz - ctx->used;
+ 378              		.loc 2 74 0
+ 379 0008 059B     		ldr	r3, [sp, #20]
+ 380 000a 1B68     		ldr	r3, [r3]
+ 381 000c 1B68     		ldr	r3, [r3]
+ 382 000e D9B2     		uxtb	r1, r3
+ 383 0010 059B     		ldr	r3, [sp, #20]
+ 384 0012 1B6B     		ldr	r3, [r3, #48]
+ 385 0014 DAB2     		uxtb	r2, r3
+ 386 0016 1F23     		movs	r3, #31
+ 387 0018 6B44     		add	r3, r3, sp
+ 388 001a 8A1A     		subs	r2, r1, r2
+ 389 001c 1A70     		strb	r2, [r3]
+  75:cbcmac.c      ****   cf_blockwise_acc_byte(ctx->buffer, &ctx->used, ctx->prp->blocksz,
+ 390              		.loc 2 75 0
+ 391 001e 059B     		ldr	r3, [sp, #20]
+ 392 0020 2033     		adds	r3, r3, #32
+ 393 0022 1800     		movs	r0, r3
+ 394 0024 059B     		ldr	r3, [sp, #20]
+ 395 0026 3033     		adds	r3, r3, #48
+ 396 0028 1900     		movs	r1, r3
+ 397 002a 059B     		ldr	r3, [sp, #20]
+ 398 002c 1B68     		ldr	r3, [r3]
+ 399 002e 1C68     		ldr	r4, [r3]
+ 400 0030 1F23     		movs	r3, #31
+ 401 0032 6B44     		add	r3, r3, sp
+ 402 0034 1B78     		ldrb	r3, [r3]
+ 403 0036 1F22     		movs	r2, #31
+ 404 0038 6A44     		add	r2, r2, sp
+ 405 003a 1578     		ldrb	r5, [r2]
+ 406 003c 059A     		ldr	r2, [sp, #20]
+ 407 003e 0292     		str	r2, [sp, #8]
+ 408 0040 074A     		ldr	r2, .L17
+ 409 0042 0192     		str	r2, [sp, #4]
+ 410 0044 0093     		str	r3, [sp]
+ 411 0046 2B00     		movs	r3, r5
+ 412 0048 2200     		movs	r2, r4
+ 413 004a FFF7FEFF 		bl	cf_blockwise_acc_byte
+  76:cbcmac.c      ****                         npad, npad,
+  77:cbcmac.c      ****                         cbcmac_process, ctx);
+  78:cbcmac.c      ****   cf_cbcmac_stream_nopad_final(ctx, out);
+ 414              		.loc 2 78 0
+ 415 004e 049A     		ldr	r2, [sp, #16]
+ 416 0050 059B     		ldr	r3, [sp, #20]
+ 417 0052 1100     		movs	r1, r2
+ 418 0054 1800     		movs	r0, r3
+ 419 0056 FFF7FEFF 		bl	cf_cbcmac_stream_nopad_final
+  79:cbcmac.c      **** }
+ 420              		.loc 2 79 0
+ 421 005a C046     		nop
+ 422 005c 09B0     		add	sp, sp, #36
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 11
+
+
+ 423              		@ sp needed
+ 424 005e 30BD     		pop	{r4, r5, pc}
+ 425              	.L18:
+ 426              		.align	2
+ 427              	.L17:
+ 428 0060 00000000 		.word	cbcmac_process
+ 429              		.cfi_endproc
+ 430              	.LFE33:
+ 431              		.size	cf_cbcmac_stream_pad_final, .-cf_cbcmac_stream_pad_final
+ 432              		.text
+ 433              	.Letext0:
+ 434              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 435              		.file 4 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 436              		.file 5 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 437              		.file 6 "prp.h"
+ 438              		.file 7 "modes.h"
+ 439              		.section	.debug_info,"",%progbits
+ 440              	.Ldebug_info0:
+ 441 0000 81030000 		.4byte	0x381
+ 442 0004 0400     		.2byte	0x4
+ 443 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 444 000a 04       		.byte	0x4
+ 445 000b 01       		.uleb128 0x1
+ 446 000c 0A000000 		.4byte	.LASF38
+ 447 0010 0C       		.byte	0xc
+ 448 0011 4A010000 		.4byte	.LASF39
+ 449 0015 5A010000 		.4byte	.LASF40
+ 450 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 451 001d 00000000 		.4byte	0
+ 452 0021 00000000 		.4byte	.Ldebug_line0
+ 453 0025 02       		.uleb128 0x2
+ 454 0026 04       		.byte	0x4
+ 455 0027 05       		.byte	0x5
+ 456 0028 696E7400 		.ascii	"int\000"
+ 457 002c 03       		.uleb128 0x3
+ 458 002d 53010000 		.4byte	.LASF4
+ 459 0031 03       		.byte	0x3
+ 460 0032 D8       		.byte	0xd8
+ 461 0033 37000000 		.4byte	0x37
+ 462 0037 04       		.uleb128 0x4
+ 463 0038 04       		.byte	0x4
+ 464 0039 07       		.byte	0x7
+ 465 003a EB010000 		.4byte	.LASF0
+ 466 003e 04       		.uleb128 0x4
+ 467 003f 08       		.byte	0x8
+ 468 0040 05       		.byte	0x5
+ 469 0041 66020000 		.4byte	.LASF1
+ 470 0045 04       		.uleb128 0x4
+ 471 0046 08       		.byte	0x8
+ 472 0047 04       		.byte	0x4
+ 473 0048 E6020000 		.4byte	.LASF2
+ 474 004c 04       		.uleb128 0x4
+ 475 004d 01       		.byte	0x1
+ 476 004e 06       		.byte	0x6
+ 477 004f F2020000 		.4byte	.LASF3
+ 478 0053 03       		.uleb128 0x3
+ 479 0054 00000000 		.4byte	.LASF5
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 12
+
+
+ 480 0058 04       		.byte	0x4
+ 481 0059 1D       		.byte	0x1d
+ 482 005a 5E000000 		.4byte	0x5e
+ 483 005e 04       		.uleb128 0x4
+ 484 005f 01       		.byte	0x1
+ 485 0060 08       		.byte	0x8
+ 486 0061 23010000 		.4byte	.LASF6
+ 487 0065 04       		.uleb128 0x4
+ 488 0066 02       		.byte	0x2
+ 489 0067 05       		.byte	0x5
+ 490 0068 BF020000 		.4byte	.LASF7
+ 491 006c 04       		.uleb128 0x4
+ 492 006d 02       		.byte	0x2
+ 493 006e 07       		.byte	0x7
+ 494 006f C1000000 		.4byte	.LASF8
+ 495 0073 04       		.uleb128 0x4
+ 496 0074 04       		.byte	0x4
+ 497 0075 05       		.byte	0x5
+ 498 0076 D5020000 		.4byte	.LASF9
+ 499 007a 04       		.uleb128 0x4
+ 500 007b 04       		.byte	0x4
+ 501 007c 07       		.byte	0x7
+ 502 007d 38010000 		.4byte	.LASF10
+ 503 0081 04       		.uleb128 0x4
+ 504 0082 08       		.byte	0x8
+ 505 0083 07       		.byte	0x7
+ 506 0084 F6000000 		.4byte	.LASF11
+ 507 0088 03       		.uleb128 0x3
+ 508 0089 04020000 		.4byte	.LASF12
+ 509 008d 05       		.byte	0x5
+ 510 008e 18       		.byte	0x18
+ 511 008f 53000000 		.4byte	0x53
+ 512 0093 04       		.uleb128 0x4
+ 513 0094 04       		.byte	0x4
+ 514 0095 07       		.byte	0x7
+ 515 0096 56020000 		.4byte	.LASF13
+ 516 009a 05       		.uleb128 0x5
+ 517 009b 04       		.byte	0x4
+ 518 009c 04       		.uleb128 0x4
+ 519 009d 01       		.byte	0x1
+ 520 009e 08       		.byte	0x8
+ 521 009f 74020000 		.4byte	.LASF14
+ 522 00a3 03       		.uleb128 0x3
+ 523 00a4 DE010000 		.4byte	.LASF15
+ 524 00a8 06       		.byte	0x6
+ 525 00a9 26       		.byte	0x26
+ 526 00aa AE000000 		.4byte	0xae
+ 527 00ae 06       		.uleb128 0x6
+ 528 00af 04       		.byte	0x4
+ 529 00b0 B4000000 		.4byte	0xb4
+ 530 00b4 07       		.uleb128 0x7
+ 531 00b5 C9000000 		.4byte	0xc9
+ 532 00b9 08       		.uleb128 0x8
+ 533 00ba 9A000000 		.4byte	0x9a
+ 534 00be 08       		.uleb128 0x8
+ 535 00bf C9000000 		.4byte	0xc9
+ 536 00c3 08       		.uleb128 0x8
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 13
+
+
+ 537 00c4 D4000000 		.4byte	0xd4
+ 538 00c8 00       		.byte	0
+ 539 00c9 06       		.uleb128 0x6
+ 540 00ca 04       		.byte	0x4
+ 541 00cb CF000000 		.4byte	0xcf
+ 542 00cf 09       		.uleb128 0x9
+ 543 00d0 88000000 		.4byte	0x88
+ 544 00d4 06       		.uleb128 0x6
+ 545 00d5 04       		.byte	0x4
+ 546 00d6 88000000 		.4byte	0x88
+ 547 00da 0A       		.uleb128 0xa
+ 548 00db 0C       		.byte	0xc
+ 549 00dc 06       		.byte	0x6
+ 550 00dd 34       		.byte	0x34
+ 551 00de 07010000 		.4byte	0x107
+ 552 00e2 0B       		.uleb128 0xb
+ 553 00e3 94020000 		.4byte	.LASF16
+ 554 00e7 06       		.byte	0x6
+ 555 00e8 36       		.byte	0x36
+ 556 00e9 2C000000 		.4byte	0x2c
+ 557 00ed 00       		.byte	0
+ 558 00ee 0B       		.uleb128 0xb
+ 559 00ef B9000000 		.4byte	.LASF17
+ 560 00f3 06       		.byte	0x6
+ 561 00f4 37       		.byte	0x37
+ 562 00f5 A3000000 		.4byte	0xa3
+ 563 00f9 04       		.byte	0x4
+ 564 00fa 0B       		.uleb128 0xb
+ 565 00fb D9000000 		.4byte	.LASF18
+ 566 00ff 06       		.byte	0x6
+ 567 0100 38       		.byte	0x38
+ 568 0101 A3000000 		.4byte	0xa3
+ 569 0105 08       		.byte	0x8
+ 570 0106 00       		.byte	0
+ 571 0107 03       		.uleb128 0x3
+ 572 0108 31010000 		.4byte	.LASF19
+ 573 010c 06       		.byte	0x6
+ 574 010d 39       		.byte	0x39
+ 575 010e DA000000 		.4byte	0xda
+ 576 0112 0A       		.uleb128 0xa
+ 577 0113 18       		.byte	0x18
+ 578 0114 07       		.byte	0x7
+ 579 0115 35       		.byte	0x35
+ 580 0116 3F010000 		.4byte	0x13f
+ 581 011a 0C       		.uleb128 0xc
+ 582 011b 70727000 		.ascii	"prp\000"
+ 583 011f 07       		.byte	0x7
+ 584 0120 37       		.byte	0x37
+ 585 0121 3F010000 		.4byte	0x13f
+ 586 0125 00       		.byte	0
+ 587 0126 0B       		.uleb128 0xb
+ 588 0127 F8010000 		.4byte	.LASF20
+ 589 012b 07       		.byte	0x7
+ 590 012c 38       		.byte	0x38
+ 591 012d 9A000000 		.4byte	0x9a
+ 592 0131 04       		.byte	0x4
+ 593 0132 0B       		.uleb128 0xb
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 14
+
+
+ 594 0133 F0000000 		.4byte	.LASF21
+ 595 0137 07       		.byte	0x7
+ 596 0138 39       		.byte	0x39
+ 597 0139 4A010000 		.4byte	0x14a
+ 598 013d 08       		.byte	0x8
+ 599 013e 00       		.byte	0
+ 600 013f 06       		.uleb128 0x6
+ 601 0140 04       		.byte	0x4
+ 602 0141 45010000 		.4byte	0x145
+ 603 0145 09       		.uleb128 0x9
+ 604 0146 07010000 		.4byte	0x107
+ 605 014a 0D       		.uleb128 0xd
+ 606 014b 88000000 		.4byte	0x88
+ 607 014f 5A010000 		.4byte	0x15a
+ 608 0153 0E       		.uleb128 0xe
+ 609 0154 93000000 		.4byte	0x93
+ 610 0158 0F       		.byte	0xf
+ 611 0159 00       		.byte	0
+ 612 015a 03       		.uleb128 0x3
+ 613 015b 5F020000 		.4byte	.LASF22
+ 614 015f 07       		.byte	0x7
+ 615 0160 3A       		.byte	0x3a
+ 616 0161 12010000 		.4byte	0x112
+ 617 0165 0A       		.uleb128 0xa
+ 618 0166 34       		.byte	0x34
+ 619 0167 07       		.byte	0x7
+ 620 0168 B1       		.byte	0xb1
+ 621 0169 AA010000 		.4byte	0x1aa
+ 622 016d 0C       		.uleb128 0xc
+ 623 016e 70727000 		.ascii	"prp\000"
+ 624 0172 07       		.byte	0x7
+ 625 0173 B3       		.byte	0xb3
+ 626 0174 3F010000 		.4byte	0x13f
+ 627 0178 00       		.byte	0
+ 628 0179 0B       		.uleb128 0xb
+ 629 017a F8010000 		.4byte	.LASF20
+ 630 017e 07       		.byte	0x7
+ 631 017f B4       		.byte	0xb4
+ 632 0180 9A000000 		.4byte	0x9a
+ 633 0184 04       		.byte	0x4
+ 634 0185 0C       		.uleb128 0xc
+ 635 0186 63626300 		.ascii	"cbc\000"
+ 636 018a 07       		.byte	0x7
+ 637 018b B5       		.byte	0xb5
+ 638 018c 5A010000 		.4byte	0x15a
+ 639 0190 08       		.byte	0x8
+ 640 0191 0B       		.uleb128 0xb
+ 641 0192 AD000000 		.4byte	.LASF23
+ 642 0196 07       		.byte	0x7
+ 643 0197 B6       		.byte	0xb6
+ 644 0198 4A010000 		.4byte	0x14a
+ 645 019c 20       		.byte	0x20
+ 646 019d 0B       		.uleb128 0xb
+ 647 019e B4000000 		.4byte	.LASF24
+ 648 01a2 07       		.byte	0x7
+ 649 01a3 B7       		.byte	0xb7
+ 650 01a4 2C000000 		.4byte	0x2c
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 15
+
+
+ 651 01a8 30       		.byte	0x30
+ 652 01a9 00       		.byte	0
+ 653 01aa 03       		.uleb128 0x3
+ 654 01ab 23020000 		.4byte	.LASF25
+ 655 01af 07       		.byte	0x7
+ 656 01b0 B8       		.byte	0xb8
+ 657 01b1 65010000 		.4byte	0x165
+ 658 01b5 0F       		.uleb128 0xf
+ 659 01b6 4C020000 		.4byte	.LASF28
+ 660 01ba 01       		.byte	0x1
+ 661 01bb 3D       		.byte	0x3d
+ 662 01bc 00000000 		.4byte	.LFB0
+ 663 01c0 24000000 		.4byte	.LFE0-.LFB0
+ 664 01c4 01       		.uleb128 0x1
+ 665 01c5 9C       		.byte	0x9c
+ 666 01c6 E5010000 		.4byte	0x1e5
+ 667 01ca 10       		.uleb128 0x10
+ 668 01cb 7600     		.ascii	"v\000"
+ 669 01cd 01       		.byte	0x1
+ 670 01ce 3D       		.byte	0x3d
+ 671 01cf E5010000 		.4byte	0x1e5
+ 672 01d3 02       		.uleb128 0x2
+ 673 01d4 91       		.byte	0x91
+ 674 01d5 74       		.sleb128 -12
+ 675 01d6 10       		.uleb128 0x10
+ 676 01d7 6C656E00 		.ascii	"len\000"
+ 677 01db 01       		.byte	0x1
+ 678 01dc 3D       		.byte	0x3d
+ 679 01dd 2C000000 		.4byte	0x2c
+ 680 01e1 02       		.uleb128 0x2
+ 681 01e2 91       		.byte	0x91
+ 682 01e3 70       		.sleb128 -16
+ 683 01e4 00       		.byte	0
+ 684 01e5 06       		.uleb128 0x6
+ 685 01e6 04       		.byte	0x4
+ 686 01e7 EB010000 		.4byte	0x1eb
+ 687 01eb 11       		.uleb128 0x11
+ 688 01ec 12       		.uleb128 0x12
+ 689 01ed 0D010000 		.4byte	.LASF26
+ 690 01f1 02       		.byte	0x2
+ 691 01f2 19       		.byte	0x19
+ 692 01f3 00000000 		.4byte	.LFB27
+ 693 01f7 30000000 		.4byte	.LFE27-.LFB27
+ 694 01fb 01       		.uleb128 0x1
+ 695 01fc 9C       		.byte	0x9c
+ 696 01fd 2C020000 		.4byte	0x22c
+ 697 0201 10       		.uleb128 0x10
+ 698 0202 63747800 		.ascii	"ctx\000"
+ 699 0206 02       		.byte	0x2
+ 700 0207 19       		.byte	0x19
+ 701 0208 2C020000 		.4byte	0x22c
+ 702 020c 02       		.uleb128 0x2
+ 703 020d 91       		.byte	0x91
+ 704 020e 74       		.sleb128 -12
+ 705 020f 10       		.uleb128 0x10
+ 706 0210 70727000 		.ascii	"prp\000"
+ 707 0214 02       		.byte	0x2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 16
+
+
+ 708 0215 19       		.byte	0x19
+ 709 0216 3F010000 		.4byte	0x13f
+ 710 021a 02       		.uleb128 0x2
+ 711 021b 91       		.byte	0x91
+ 712 021c 70       		.sleb128 -16
+ 713 021d 13       		.uleb128 0x13
+ 714 021e F8010000 		.4byte	.LASF20
+ 715 0222 02       		.byte	0x2
+ 716 0223 19       		.byte	0x19
+ 717 0224 9A000000 		.4byte	0x9a
+ 718 0228 02       		.uleb128 0x2
+ 719 0229 91       		.byte	0x91
+ 720 022a 6C       		.sleb128 -20
+ 721 022b 00       		.byte	0
+ 722 022c 06       		.uleb128 0x6
+ 723 022d 04       		.byte	0x4
+ 724 022e AA010000 		.4byte	0x1aa
+ 725 0232 12       		.uleb128 0x12
+ 726 0233 0C020000 		.4byte	.LASF27
+ 727 0237 02       		.byte	0x2
+ 728 0238 21       		.byte	0x21
+ 729 0239 00000000 		.4byte	.LFB28
+ 730 023d 40000000 		.4byte	.LFE28-.LFB28
+ 731 0241 01       		.uleb128 0x1
+ 732 0242 9C       		.byte	0x9c
+ 733 0243 64020000 		.4byte	0x264
+ 734 0247 10       		.uleb128 0x10
+ 735 0248 63747800 		.ascii	"ctx\000"
+ 736 024c 02       		.byte	0x2
+ 737 024d 21       		.byte	0x21
+ 738 024e 2C020000 		.4byte	0x22c
+ 739 0252 02       		.uleb128 0x2
+ 740 0253 91       		.byte	0x91
+ 741 0254 64       		.sleb128 -28
+ 742 0255 14       		.uleb128 0x14
+ 743 0256 DE020000 		.4byte	.LASF31
+ 744 025a 02       		.byte	0x2
+ 745 025b 23       		.byte	0x23
+ 746 025c 4A010000 		.4byte	0x14a
+ 747 0260 02       		.uleb128 0x2
+ 748 0261 91       		.byte	0x91
+ 749 0262 68       		.sleb128 -24
+ 750 0263 00       		.byte	0
+ 751 0264 0F       		.uleb128 0xf
+ 752 0265 E1000000 		.4byte	.LASF29
+ 753 0269 02       		.byte	0x2
+ 754 026a 29       		.byte	0x29
+ 755 026b 00000000 		.4byte	.LFB29
+ 756 026f 22000000 		.4byte	.LFE29-.LFB29
+ 757 0273 01       		.uleb128 0x1
+ 758 0274 9C       		.byte	0x9c
+ 759 0275 B2020000 		.4byte	0x2b2
+ 760 0279 13       		.uleb128 0x13
+ 761 027a D0020000 		.4byte	.LASF30
+ 762 027e 02       		.byte	0x2
+ 763 027f 29       		.byte	0x29
+ 764 0280 9A000000 		.4byte	0x9a
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 17
+
+
+ 765 0284 02       		.uleb128 0x2
+ 766 0285 91       		.byte	0x91
+ 767 0286 5C       		.sleb128 -36
+ 768 0287 13       		.uleb128 0x13
+ 769 0288 F0000000 		.4byte	.LASF21
+ 770 028c 02       		.byte	0x2
+ 771 028d 29       		.byte	0x29
+ 772 028e C9000000 		.4byte	0xc9
+ 773 0292 02       		.uleb128 0x2
+ 774 0293 91       		.byte	0x91
+ 775 0294 58       		.sleb128 -40
+ 776 0295 15       		.uleb128 0x15
+ 777 0296 63747800 		.ascii	"ctx\000"
+ 778 029a 02       		.byte	0x2
+ 779 029b 2B       		.byte	0x2b
+ 780 029c 2C020000 		.4byte	0x22c
+ 781 02a0 02       		.uleb128 0x2
+ 782 02a1 91       		.byte	0x91
+ 783 02a2 74       		.sleb128 -12
+ 784 02a3 14       		.uleb128 0x14
+ 785 02a4 C9020000 		.4byte	.LASF32
+ 786 02a8 02       		.byte	0x2
+ 787 02a9 2C       		.byte	0x2c
+ 788 02aa 4A010000 		.4byte	0x14a
+ 789 02ae 02       		.uleb128 0x2
+ 790 02af 91       		.byte	0x91
+ 791 02b0 64       		.sleb128 -28
+ 792 02b1 00       		.byte	0
+ 793 02b2 12       		.uleb128 0x12
+ 794 02b3 34020000 		.4byte	.LASF33
+ 795 02b7 02       		.byte	0x2
+ 796 02b8 30       		.byte	0x30
+ 797 02b9 00000000 		.4byte	.LFB30
+ 798 02bd 3C000000 		.4byte	.LFE30-.LFB30
+ 799 02c1 01       		.uleb128 0x1
+ 800 02c2 9C       		.byte	0x9c
+ 801 02c3 F2020000 		.4byte	0x2f2
+ 802 02c7 10       		.uleb128 0x10
+ 803 02c8 63747800 		.ascii	"ctx\000"
+ 804 02cc 02       		.byte	0x2
+ 805 02cd 30       		.byte	0x30
+ 806 02ce 2C020000 		.4byte	0x22c
+ 807 02d2 02       		.uleb128 0x2
+ 808 02d3 91       		.byte	0x91
+ 809 02d4 74       		.sleb128 -12
+ 810 02d5 13       		.uleb128 0x13
+ 811 02d6 D4000000 		.4byte	.LASF34
+ 812 02da 02       		.byte	0x2
+ 813 02db 30       		.byte	0x30
+ 814 02dc C9000000 		.4byte	0xc9
+ 815 02e0 02       		.uleb128 0x2
+ 816 02e1 91       		.byte	0x91
+ 817 02e2 70       		.sleb128 -16
+ 818 02e3 10       		.uleb128 0x10
+ 819 02e4 6C656E00 		.ascii	"len\000"
+ 820 02e8 02       		.byte	0x2
+ 821 02e9 30       		.byte	0x30
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 18
+
+
+ 822 02ea 2C000000 		.4byte	0x2c
+ 823 02ee 02       		.uleb128 0x2
+ 824 02ef 91       		.byte	0x91
+ 825 02f0 6C       		.sleb128 -20
+ 826 02f1 00       		.byte	0
+ 827 02f2 12       		.uleb128 0x12
+ 828 02f3 9C020000 		.4byte	.LASF35
+ 829 02f7 02       		.byte	0x2
+ 830 02f8 38       		.byte	0x38
+ 831 02f9 00000000 		.4byte	.LFB31
+ 832 02fd 4C000000 		.4byte	.LFE31-.LFB31
+ 833 0301 01       		.uleb128 0x1
+ 834 0302 9C       		.byte	0x9c
+ 835 0303 16030000 		.4byte	0x316
+ 836 0307 10       		.uleb128 0x10
+ 837 0308 63747800 		.ascii	"ctx\000"
+ 838 030c 02       		.byte	0x2
+ 839 030d 38       		.byte	0x38
+ 840 030e 2C020000 		.4byte	0x22c
+ 841 0312 02       		.uleb128 0x2
+ 842 0313 91       		.byte	0x91
+ 843 0314 74       		.sleb128 -12
+ 844 0315 00       		.byte	0
+ 845 0316 12       		.uleb128 0x12
+ 846 0317 FE020000 		.4byte	.LASF36
+ 847 031b 02       		.byte	0x2
+ 848 031c 42       		.byte	0x42
+ 849 031d 00000000 		.4byte	.LFB32
+ 850 0321 2E000000 		.4byte	.LFE32-.LFB32
+ 851 0325 01       		.uleb128 0x1
+ 852 0326 9C       		.byte	0x9c
+ 853 0327 48030000 		.4byte	0x348
+ 854 032b 10       		.uleb128 0x10
+ 855 032c 63747800 		.ascii	"ctx\000"
+ 856 0330 02       		.byte	0x2
+ 857 0331 42       		.byte	0x42
+ 858 0332 2C020000 		.4byte	0x22c
+ 859 0336 02       		.uleb128 0x2
+ 860 0337 91       		.byte	0x91
+ 861 0338 74       		.sleb128 -12
+ 862 0339 10       		.uleb128 0x10
+ 863 033a 6F757400 		.ascii	"out\000"
+ 864 033e 02       		.byte	0x2
+ 865 033f 42       		.byte	0x42
+ 866 0340 D4000000 		.4byte	0xd4
+ 867 0344 02       		.uleb128 0x2
+ 868 0345 91       		.byte	0x91
+ 869 0346 70       		.sleb128 -16
+ 870 0347 00       		.byte	0
+ 871 0348 16       		.uleb128 0x16
+ 872 0349 79020000 		.4byte	.LASF41
+ 873 034d 02       		.byte	0x2
+ 874 034e 48       		.byte	0x48
+ 875 034f 00000000 		.4byte	.LFB33
+ 876 0353 64000000 		.4byte	.LFE33-.LFB33
+ 877 0357 01       		.uleb128 0x1
+ 878 0358 9C       		.byte	0x9c
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 19
+
+
+ 879 0359 10       		.uleb128 0x10
+ 880 035a 63747800 		.ascii	"ctx\000"
+ 881 035e 02       		.byte	0x2
+ 882 035f 48       		.byte	0x48
+ 883 0360 2C020000 		.4byte	0x22c
+ 884 0364 02       		.uleb128 0x2
+ 885 0365 91       		.byte	0x91
+ 886 0366 64       		.sleb128 -28
+ 887 0367 10       		.uleb128 0x10
+ 888 0368 6F757400 		.ascii	"out\000"
+ 889 036c 02       		.byte	0x2
+ 890 036d 48       		.byte	0x48
+ 891 036e D4000000 		.4byte	0xd4
+ 892 0372 02       		.uleb128 0x2
+ 893 0373 91       		.byte	0x91
+ 894 0374 60       		.sleb128 -32
+ 895 0375 14       		.uleb128 0x14
+ 896 0376 FF010000 		.4byte	.LASF37
+ 897 037a 02       		.byte	0x2
+ 898 037b 4A       		.byte	0x4a
+ 899 037c 88000000 		.4byte	0x88
+ 900 0380 02       		.uleb128 0x2
+ 901 0381 91       		.byte	0x91
+ 902 0382 6F       		.sleb128 -17
+ 903 0383 00       		.byte	0
+ 904 0384 00       		.byte	0
+ 905              		.section	.debug_abbrev,"",%progbits
+ 906              	.Ldebug_abbrev0:
+ 907 0000 01       		.uleb128 0x1
+ 908 0001 11       		.uleb128 0x11
+ 909 0002 01       		.byte	0x1
+ 910 0003 25       		.uleb128 0x25
+ 911 0004 0E       		.uleb128 0xe
+ 912 0005 13       		.uleb128 0x13
+ 913 0006 0B       		.uleb128 0xb
+ 914 0007 03       		.uleb128 0x3
+ 915 0008 0E       		.uleb128 0xe
+ 916 0009 1B       		.uleb128 0x1b
+ 917 000a 0E       		.uleb128 0xe
+ 918 000b 55       		.uleb128 0x55
+ 919 000c 17       		.uleb128 0x17
+ 920 000d 11       		.uleb128 0x11
+ 921 000e 01       		.uleb128 0x1
+ 922 000f 10       		.uleb128 0x10
+ 923 0010 17       		.uleb128 0x17
+ 924 0011 00       		.byte	0
+ 925 0012 00       		.byte	0
+ 926 0013 02       		.uleb128 0x2
+ 927 0014 24       		.uleb128 0x24
+ 928 0015 00       		.byte	0
+ 929 0016 0B       		.uleb128 0xb
+ 930 0017 0B       		.uleb128 0xb
+ 931 0018 3E       		.uleb128 0x3e
+ 932 0019 0B       		.uleb128 0xb
+ 933 001a 03       		.uleb128 0x3
+ 934 001b 08       		.uleb128 0x8
+ 935 001c 00       		.byte	0
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 20
+
+
+ 936 001d 00       		.byte	0
+ 937 001e 03       		.uleb128 0x3
+ 938 001f 16       		.uleb128 0x16
+ 939 0020 00       		.byte	0
+ 940 0021 03       		.uleb128 0x3
+ 941 0022 0E       		.uleb128 0xe
+ 942 0023 3A       		.uleb128 0x3a
+ 943 0024 0B       		.uleb128 0xb
+ 944 0025 3B       		.uleb128 0x3b
+ 945 0026 0B       		.uleb128 0xb
+ 946 0027 49       		.uleb128 0x49
+ 947 0028 13       		.uleb128 0x13
+ 948 0029 00       		.byte	0
+ 949 002a 00       		.byte	0
+ 950 002b 04       		.uleb128 0x4
+ 951 002c 24       		.uleb128 0x24
+ 952 002d 00       		.byte	0
+ 953 002e 0B       		.uleb128 0xb
+ 954 002f 0B       		.uleb128 0xb
+ 955 0030 3E       		.uleb128 0x3e
+ 956 0031 0B       		.uleb128 0xb
+ 957 0032 03       		.uleb128 0x3
+ 958 0033 0E       		.uleb128 0xe
+ 959 0034 00       		.byte	0
+ 960 0035 00       		.byte	0
+ 961 0036 05       		.uleb128 0x5
+ 962 0037 0F       		.uleb128 0xf
+ 963 0038 00       		.byte	0
+ 964 0039 0B       		.uleb128 0xb
+ 965 003a 0B       		.uleb128 0xb
+ 966 003b 00       		.byte	0
+ 967 003c 00       		.byte	0
+ 968 003d 06       		.uleb128 0x6
+ 969 003e 0F       		.uleb128 0xf
+ 970 003f 00       		.byte	0
+ 971 0040 0B       		.uleb128 0xb
+ 972 0041 0B       		.uleb128 0xb
+ 973 0042 49       		.uleb128 0x49
+ 974 0043 13       		.uleb128 0x13
+ 975 0044 00       		.byte	0
+ 976 0045 00       		.byte	0
+ 977 0046 07       		.uleb128 0x7
+ 978 0047 15       		.uleb128 0x15
+ 979 0048 01       		.byte	0x1
+ 980 0049 27       		.uleb128 0x27
+ 981 004a 19       		.uleb128 0x19
+ 982 004b 01       		.uleb128 0x1
+ 983 004c 13       		.uleb128 0x13
+ 984 004d 00       		.byte	0
+ 985 004e 00       		.byte	0
+ 986 004f 08       		.uleb128 0x8
+ 987 0050 05       		.uleb128 0x5
+ 988 0051 00       		.byte	0
+ 989 0052 49       		.uleb128 0x49
+ 990 0053 13       		.uleb128 0x13
+ 991 0054 00       		.byte	0
+ 992 0055 00       		.byte	0
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 21
+
+
+ 993 0056 09       		.uleb128 0x9
+ 994 0057 26       		.uleb128 0x26
+ 995 0058 00       		.byte	0
+ 996 0059 49       		.uleb128 0x49
+ 997 005a 13       		.uleb128 0x13
+ 998 005b 00       		.byte	0
+ 999 005c 00       		.byte	0
+ 1000 005d 0A       		.uleb128 0xa
+ 1001 005e 13       		.uleb128 0x13
+ 1002 005f 01       		.byte	0x1
+ 1003 0060 0B       		.uleb128 0xb
+ 1004 0061 0B       		.uleb128 0xb
+ 1005 0062 3A       		.uleb128 0x3a
+ 1006 0063 0B       		.uleb128 0xb
+ 1007 0064 3B       		.uleb128 0x3b
+ 1008 0065 0B       		.uleb128 0xb
+ 1009 0066 01       		.uleb128 0x1
+ 1010 0067 13       		.uleb128 0x13
+ 1011 0068 00       		.byte	0
+ 1012 0069 00       		.byte	0
+ 1013 006a 0B       		.uleb128 0xb
+ 1014 006b 0D       		.uleb128 0xd
+ 1015 006c 00       		.byte	0
+ 1016 006d 03       		.uleb128 0x3
+ 1017 006e 0E       		.uleb128 0xe
+ 1018 006f 3A       		.uleb128 0x3a
+ 1019 0070 0B       		.uleb128 0xb
+ 1020 0071 3B       		.uleb128 0x3b
+ 1021 0072 0B       		.uleb128 0xb
+ 1022 0073 49       		.uleb128 0x49
+ 1023 0074 13       		.uleb128 0x13
+ 1024 0075 38       		.uleb128 0x38
+ 1025 0076 0B       		.uleb128 0xb
+ 1026 0077 00       		.byte	0
+ 1027 0078 00       		.byte	0
+ 1028 0079 0C       		.uleb128 0xc
+ 1029 007a 0D       		.uleb128 0xd
+ 1030 007b 00       		.byte	0
+ 1031 007c 03       		.uleb128 0x3
+ 1032 007d 08       		.uleb128 0x8
+ 1033 007e 3A       		.uleb128 0x3a
+ 1034 007f 0B       		.uleb128 0xb
+ 1035 0080 3B       		.uleb128 0x3b
+ 1036 0081 0B       		.uleb128 0xb
+ 1037 0082 49       		.uleb128 0x49
+ 1038 0083 13       		.uleb128 0x13
+ 1039 0084 38       		.uleb128 0x38
+ 1040 0085 0B       		.uleb128 0xb
+ 1041 0086 00       		.byte	0
+ 1042 0087 00       		.byte	0
+ 1043 0088 0D       		.uleb128 0xd
+ 1044 0089 01       		.uleb128 0x1
+ 1045 008a 01       		.byte	0x1
+ 1046 008b 49       		.uleb128 0x49
+ 1047 008c 13       		.uleb128 0x13
+ 1048 008d 01       		.uleb128 0x1
+ 1049 008e 13       		.uleb128 0x13
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 22
+
+
+ 1050 008f 00       		.byte	0
+ 1051 0090 00       		.byte	0
+ 1052 0091 0E       		.uleb128 0xe
+ 1053 0092 21       		.uleb128 0x21
+ 1054 0093 00       		.byte	0
+ 1055 0094 49       		.uleb128 0x49
+ 1056 0095 13       		.uleb128 0x13
+ 1057 0096 2F       		.uleb128 0x2f
+ 1058 0097 0B       		.uleb128 0xb
+ 1059 0098 00       		.byte	0
+ 1060 0099 00       		.byte	0
+ 1061 009a 0F       		.uleb128 0xf
+ 1062 009b 2E       		.uleb128 0x2e
+ 1063 009c 01       		.byte	0x1
+ 1064 009d 03       		.uleb128 0x3
+ 1065 009e 0E       		.uleb128 0xe
+ 1066 009f 3A       		.uleb128 0x3a
+ 1067 00a0 0B       		.uleb128 0xb
+ 1068 00a1 3B       		.uleb128 0x3b
+ 1069 00a2 0B       		.uleb128 0xb
+ 1070 00a3 27       		.uleb128 0x27
+ 1071 00a4 19       		.uleb128 0x19
+ 1072 00a5 11       		.uleb128 0x11
+ 1073 00a6 01       		.uleb128 0x1
+ 1074 00a7 12       		.uleb128 0x12
+ 1075 00a8 06       		.uleb128 0x6
+ 1076 00a9 40       		.uleb128 0x40
+ 1077 00aa 18       		.uleb128 0x18
+ 1078 00ab 9642     		.uleb128 0x2116
+ 1079 00ad 19       		.uleb128 0x19
+ 1080 00ae 01       		.uleb128 0x1
+ 1081 00af 13       		.uleb128 0x13
+ 1082 00b0 00       		.byte	0
+ 1083 00b1 00       		.byte	0
+ 1084 00b2 10       		.uleb128 0x10
+ 1085 00b3 05       		.uleb128 0x5
+ 1086 00b4 00       		.byte	0
+ 1087 00b5 03       		.uleb128 0x3
+ 1088 00b6 08       		.uleb128 0x8
+ 1089 00b7 3A       		.uleb128 0x3a
+ 1090 00b8 0B       		.uleb128 0xb
+ 1091 00b9 3B       		.uleb128 0x3b
+ 1092 00ba 0B       		.uleb128 0xb
+ 1093 00bb 49       		.uleb128 0x49
+ 1094 00bc 13       		.uleb128 0x13
+ 1095 00bd 02       		.uleb128 0x2
+ 1096 00be 18       		.uleb128 0x18
+ 1097 00bf 00       		.byte	0
+ 1098 00c0 00       		.byte	0
+ 1099 00c1 11       		.uleb128 0x11
+ 1100 00c2 35       		.uleb128 0x35
+ 1101 00c3 00       		.byte	0
+ 1102 00c4 00       		.byte	0
+ 1103 00c5 00       		.byte	0
+ 1104 00c6 12       		.uleb128 0x12
+ 1105 00c7 2E       		.uleb128 0x2e
+ 1106 00c8 01       		.byte	0x1
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 23
+
+
+ 1107 00c9 3F       		.uleb128 0x3f
+ 1108 00ca 19       		.uleb128 0x19
+ 1109 00cb 03       		.uleb128 0x3
+ 1110 00cc 0E       		.uleb128 0xe
+ 1111 00cd 3A       		.uleb128 0x3a
+ 1112 00ce 0B       		.uleb128 0xb
+ 1113 00cf 3B       		.uleb128 0x3b
+ 1114 00d0 0B       		.uleb128 0xb
+ 1115 00d1 27       		.uleb128 0x27
+ 1116 00d2 19       		.uleb128 0x19
+ 1117 00d3 11       		.uleb128 0x11
+ 1118 00d4 01       		.uleb128 0x1
+ 1119 00d5 12       		.uleb128 0x12
+ 1120 00d6 06       		.uleb128 0x6
+ 1121 00d7 40       		.uleb128 0x40
+ 1122 00d8 18       		.uleb128 0x18
+ 1123 00d9 9642     		.uleb128 0x2116
+ 1124 00db 19       		.uleb128 0x19
+ 1125 00dc 01       		.uleb128 0x1
+ 1126 00dd 13       		.uleb128 0x13
+ 1127 00de 00       		.byte	0
+ 1128 00df 00       		.byte	0
+ 1129 00e0 13       		.uleb128 0x13
+ 1130 00e1 05       		.uleb128 0x5
+ 1131 00e2 00       		.byte	0
+ 1132 00e3 03       		.uleb128 0x3
+ 1133 00e4 0E       		.uleb128 0xe
+ 1134 00e5 3A       		.uleb128 0x3a
+ 1135 00e6 0B       		.uleb128 0xb
+ 1136 00e7 3B       		.uleb128 0x3b
+ 1137 00e8 0B       		.uleb128 0xb
+ 1138 00e9 49       		.uleb128 0x49
+ 1139 00ea 13       		.uleb128 0x13
+ 1140 00eb 02       		.uleb128 0x2
+ 1141 00ec 18       		.uleb128 0x18
+ 1142 00ed 00       		.byte	0
+ 1143 00ee 00       		.byte	0
+ 1144 00ef 14       		.uleb128 0x14
+ 1145 00f0 34       		.uleb128 0x34
+ 1146 00f1 00       		.byte	0
+ 1147 00f2 03       		.uleb128 0x3
+ 1148 00f3 0E       		.uleb128 0xe
+ 1149 00f4 3A       		.uleb128 0x3a
+ 1150 00f5 0B       		.uleb128 0xb
+ 1151 00f6 3B       		.uleb128 0x3b
+ 1152 00f7 0B       		.uleb128 0xb
+ 1153 00f8 49       		.uleb128 0x49
+ 1154 00f9 13       		.uleb128 0x13
+ 1155 00fa 02       		.uleb128 0x2
+ 1156 00fb 18       		.uleb128 0x18
+ 1157 00fc 00       		.byte	0
+ 1158 00fd 00       		.byte	0
+ 1159 00fe 15       		.uleb128 0x15
+ 1160 00ff 34       		.uleb128 0x34
+ 1161 0100 00       		.byte	0
+ 1162 0101 03       		.uleb128 0x3
+ 1163 0102 08       		.uleb128 0x8
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 24
+
+
+ 1164 0103 3A       		.uleb128 0x3a
+ 1165 0104 0B       		.uleb128 0xb
+ 1166 0105 3B       		.uleb128 0x3b
+ 1167 0106 0B       		.uleb128 0xb
+ 1168 0107 49       		.uleb128 0x49
+ 1169 0108 13       		.uleb128 0x13
+ 1170 0109 02       		.uleb128 0x2
+ 1171 010a 18       		.uleb128 0x18
+ 1172 010b 00       		.byte	0
+ 1173 010c 00       		.byte	0
+ 1174 010d 16       		.uleb128 0x16
+ 1175 010e 2E       		.uleb128 0x2e
+ 1176 010f 01       		.byte	0x1
+ 1177 0110 3F       		.uleb128 0x3f
+ 1178 0111 19       		.uleb128 0x19
+ 1179 0112 03       		.uleb128 0x3
+ 1180 0113 0E       		.uleb128 0xe
+ 1181 0114 3A       		.uleb128 0x3a
+ 1182 0115 0B       		.uleb128 0xb
+ 1183 0116 3B       		.uleb128 0x3b
+ 1184 0117 0B       		.uleb128 0xb
+ 1185 0118 27       		.uleb128 0x27
+ 1186 0119 19       		.uleb128 0x19
+ 1187 011a 11       		.uleb128 0x11
+ 1188 011b 01       		.uleb128 0x1
+ 1189 011c 12       		.uleb128 0x12
+ 1190 011d 06       		.uleb128 0x6
+ 1191 011e 40       		.uleb128 0x40
+ 1192 011f 18       		.uleb128 0x18
+ 1193 0120 9642     		.uleb128 0x2116
+ 1194 0122 19       		.uleb128 0x19
+ 1195 0123 00       		.byte	0
+ 1196 0124 00       		.byte	0
+ 1197 0125 00       		.byte	0
+ 1198              		.section	.debug_aranges,"",%progbits
+ 1199 0000 54000000 		.4byte	0x54
+ 1200 0004 0200     		.2byte	0x2
+ 1201 0006 00000000 		.4byte	.Ldebug_info0
+ 1202 000a 04       		.byte	0x4
+ 1203 000b 00       		.byte	0
+ 1204 000c 0000     		.2byte	0
+ 1205 000e 0000     		.2byte	0
+ 1206 0010 00000000 		.4byte	.LFB0
+ 1207 0014 24000000 		.4byte	.LFE0-.LFB0
+ 1208 0018 00000000 		.4byte	.LFB27
+ 1209 001c 30000000 		.4byte	.LFE27-.LFB27
+ 1210 0020 00000000 		.4byte	.LFB28
+ 1211 0024 40000000 		.4byte	.LFE28-.LFB28
+ 1212 0028 00000000 		.4byte	.LFB29
+ 1213 002c 22000000 		.4byte	.LFE29-.LFB29
+ 1214 0030 00000000 		.4byte	.LFB30
+ 1215 0034 3C000000 		.4byte	.LFE30-.LFB30
+ 1216 0038 00000000 		.4byte	.LFB31
+ 1217 003c 4C000000 		.4byte	.LFE31-.LFB31
+ 1218 0040 00000000 		.4byte	.LFB32
+ 1219 0044 2E000000 		.4byte	.LFE32-.LFB32
+ 1220 0048 00000000 		.4byte	.LFB33
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 25
+
+
+ 1221 004c 64000000 		.4byte	.LFE33-.LFB33
+ 1222 0050 00000000 		.4byte	0
+ 1223 0054 00000000 		.4byte	0
+ 1224              		.section	.debug_ranges,"",%progbits
+ 1225              	.Ldebug_ranges0:
+ 1226 0000 00000000 		.4byte	.LFB0
+ 1227 0004 24000000 		.4byte	.LFE0
+ 1228 0008 00000000 		.4byte	.LFB27
+ 1229 000c 30000000 		.4byte	.LFE27
+ 1230 0010 00000000 		.4byte	.LFB28
+ 1231 0014 40000000 		.4byte	.LFE28
+ 1232 0018 00000000 		.4byte	.LFB29
+ 1233 001c 22000000 		.4byte	.LFE29
+ 1234 0020 00000000 		.4byte	.LFB30
+ 1235 0024 3C000000 		.4byte	.LFE30
+ 1236 0028 00000000 		.4byte	.LFB31
+ 1237 002c 4C000000 		.4byte	.LFE31
+ 1238 0030 00000000 		.4byte	.LFB32
+ 1239 0034 2E000000 		.4byte	.LFE32
+ 1240 0038 00000000 		.4byte	.LFB33
+ 1241 003c 64000000 		.4byte	.LFE33
+ 1242 0040 00000000 		.4byte	0
+ 1243 0044 00000000 		.4byte	0
+ 1244              		.section	.debug_line,"",%progbits
+ 1245              	.Ldebug_line0:
+ 1246 0000 74020000 		.section	.debug_str,"MS",%progbits,1
+ 1246      0200BD01 
+ 1246      00000201 
+ 1246      FB0E0D00 
+ 1246      01010101 
+ 1247              	.LASF5:
+ 1248 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 1248      6E74385F 
+ 1248      7400
+ 1249              	.LASF38:
+ 1250 000a 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1250      43313120 
+ 1250      352E342E 
+ 1250      31203230 
+ 1250      31363036 
+ 1251 003d 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1251      20726576 
+ 1251      6973696F 
+ 1251      6E203233 
+ 1251      37373135 
+ 1252 0070 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects -fomit-fram"
+ 1252      66756E63 
+ 1252      74696F6E 
+ 1252      2D736563 
+ 1252      74696F6E 
+ 1253 00a3 652D706F 		.ascii	"e-pointer\000"
+ 1253      696E7465 
+ 1253      7200
+ 1254              	.LASF23:
+ 1255 00ad 62756666 		.ascii	"buffer\000"
+ 1255      657200
+ 1256              	.LASF24:
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 26
+
+
+ 1257 00b4 75736564 		.ascii	"used\000"
+ 1257      00
+ 1258              	.LASF17:
+ 1259 00b9 656E6372 		.ascii	"encrypt\000"
+ 1259      79707400 
+ 1260              	.LASF8:
+ 1261 00c1 73686F72 		.ascii	"short unsigned int\000"
+ 1261      7420756E 
+ 1261      7369676E 
+ 1261      65642069 
+ 1261      6E7400
+ 1262              	.LASF34:
+ 1263 00d4 64617461 		.ascii	"data\000"
+ 1263      00
+ 1264              	.LASF18:
+ 1265 00d9 64656372 		.ascii	"decrypt\000"
+ 1265      79707400 
+ 1266              	.LASF29:
+ 1267 00e1 6362636D 		.ascii	"cbcmac_process\000"
+ 1267      61635F70 
+ 1267      726F6365 
+ 1267      737300
+ 1268              	.LASF21:
+ 1269 00f0 626C6F63 		.ascii	"block\000"
+ 1269      6B00
+ 1270              	.LASF11:
+ 1271 00f6 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1271      206C6F6E 
+ 1271      6720756E 
+ 1271      7369676E 
+ 1271      65642069 
+ 1272              	.LASF26:
+ 1273 010d 63665F63 		.ascii	"cf_cbcmac_stream_init\000"
+ 1273      62636D61 
+ 1273      635F7374 
+ 1273      7265616D 
+ 1273      5F696E69 
+ 1274              	.LASF6:
+ 1275 0123 756E7369 		.ascii	"unsigned char\000"
+ 1275      676E6564 
+ 1275      20636861 
+ 1275      7200
+ 1276              	.LASF19:
+ 1277 0131 63665F70 		.ascii	"cf_prp\000"
+ 1277      727000
+ 1278              	.LASF10:
+ 1279 0138 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1279      20756E73 
+ 1279      69676E65 
+ 1279      6420696E 
+ 1279      7400
+ 1280              	.LASF39:
+ 1281 014a 6362636D 		.ascii	"cbcmac.c\000"
+ 1281      61632E63 
+ 1281      00
+ 1282              	.LASF4:
+ 1283 0153 73697A65 		.ascii	"size_t\000"
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 27
+
+
+ 1283      5F7400
+ 1284              	.LASF40:
+ 1285 015a 443A5C44 		.ascii	"D:\\Dropbox\\5_kurs\\diploma\\led_lamp(for_diploma)"
+ 1285      726F7062 
+ 1285      6F785C35 
+ 1285      5F6B7572 
+ 1285      735C6469 
+ 1286 0189 5C424C45 		.ascii	"\\BLE_Dynamic_GATT_Service_Configuration\\BLE_Dynam"
+ 1286      5F44796E 
+ 1286      616D6963 
+ 1286      5F474154 
+ 1286      545F5365 
+ 1287 01ba 69635F47 		.ascii	"ic_GATT_Service_Configuration.cydsn\000"
+ 1287      4154545F 
+ 1287      53657276 
+ 1287      6963655F 
+ 1287      436F6E66 
+ 1288              	.LASF15:
+ 1289 01de 63665F70 		.ascii	"cf_prp_block\000"
+ 1289      72705F62 
+ 1289      6C6F636B 
+ 1289      00
+ 1290              	.LASF0:
+ 1291 01eb 756E7369 		.ascii	"unsigned int\000"
+ 1291      676E6564 
+ 1291      20696E74 
+ 1291      00
+ 1292              	.LASF20:
+ 1293 01f8 70727063 		.ascii	"prpctx\000"
+ 1293      747800
+ 1294              	.LASF37:
+ 1295 01ff 6E706164 		.ascii	"npad\000"
+ 1295      00
+ 1296              	.LASF12:
+ 1297 0204 75696E74 		.ascii	"uint8_t\000"
+ 1297      385F7400 
+ 1298              	.LASF27:
+ 1299 020c 63665F63 		.ascii	"cf_cbcmac_stream_reset\000"
+ 1299      62636D61 
+ 1299      635F7374 
+ 1299      7265616D 
+ 1299      5F726573 
+ 1300              	.LASF25:
+ 1301 0223 63665F63 		.ascii	"cf_cbcmac_stream\000"
+ 1301      62636D61 
+ 1301      635F7374 
+ 1301      7265616D 
+ 1301      00
+ 1302              	.LASF33:
+ 1303 0234 63665F63 		.ascii	"cf_cbcmac_stream_update\000"
+ 1303      62636D61 
+ 1303      635F7374 
+ 1303      7265616D 
+ 1303      5F757064 
+ 1304              	.LASF28:
+ 1305 024c 6D656D5F 		.ascii	"mem_clean\000"
+ 1305      636C6561 
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 28
+
+
+ 1305      6E00
+ 1306              	.LASF13:
+ 1307 0256 73697A65 		.ascii	"sizetype\000"
+ 1307      74797065 
+ 1307      00
+ 1308              	.LASF22:
+ 1309 025f 63665F63 		.ascii	"cf_cbc\000"
+ 1309      626300
+ 1310              	.LASF1:
+ 1311 0266 6C6F6E67 		.ascii	"long long int\000"
+ 1311      206C6F6E 
+ 1311      6720696E 
+ 1311      7400
+ 1312              	.LASF14:
+ 1313 0274 63686172 		.ascii	"char\000"
+ 1313      00
+ 1314              	.LASF41:
+ 1315 0279 63665F63 		.ascii	"cf_cbcmac_stream_pad_final\000"
+ 1315      62636D61 
+ 1315      635F7374 
+ 1315      7265616D 
+ 1315      5F706164 
+ 1316              	.LASF16:
+ 1317 0294 626C6F63 		.ascii	"blocksz\000"
+ 1317      6B737A00 
+ 1318              	.LASF35:
+ 1319 029c 63665F63 		.ascii	"cf_cbcmac_stream_finish_block_zero\000"
+ 1319      62636D61 
+ 1319      635F7374 
+ 1319      7265616D 
+ 1319      5F66696E 
+ 1320              	.LASF7:
+ 1321 02bf 73686F72 		.ascii	"short int\000"
+ 1321      7420696E 
+ 1321      7400
+ 1322              	.LASF32:
+ 1323 02c9 6F757470 		.ascii	"output\000"
+ 1323      757400
+ 1324              	.LASF30:
+ 1325 02d0 76637478 		.ascii	"vctx\000"
+ 1325      00
+ 1326              	.LASF9:
+ 1327 02d5 6C6F6E67 		.ascii	"long int\000"
+ 1327      20696E74 
+ 1327      00
+ 1328              	.LASF31:
+ 1329 02de 69765F7A 		.ascii	"iv_zero\000"
+ 1329      65726F00 
+ 1330              	.LASF2:
+ 1331 02e6 6C6F6E67 		.ascii	"long double\000"
+ 1331      20646F75 
+ 1331      626C6500 
+ 1332              	.LASF3:
+ 1333 02f2 7369676E 		.ascii	"signed char\000"
+ 1333      65642063 
+ 1333      68617200 
+ 1334              	.LASF36:
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\cchpGMzn.s 			page 29
+
+
+ 1335 02fe 63665F63 		.ascii	"cf_cbcmac_stream_nopad_final\000"
+ 1335      62636D61 
+ 1335      635F7374 
+ 1335      7265616D 
+ 1335      5F6E6F70 
+ 1336              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

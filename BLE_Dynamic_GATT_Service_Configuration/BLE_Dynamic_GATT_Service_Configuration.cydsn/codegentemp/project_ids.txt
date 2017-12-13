@@ -1,0 +1,6 @@
+D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\BLE_Dynamic_GATT_Service_Configuration.cyprj|2a2a3e72-eaa0-49d7-bd70-bfc3dfdd047d
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|fce74b3a-b0d9-4a53-a221-04abc39e3693
+C:\Users\andrew\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Downloads ( 4.1).cyprj|2158c196-1a79-4d8d-be7d-ea4027c7971a
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|8b6af9a6-9df9-4dbe-8815-ba481dd52ba4
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|34c8279c-d122-442c-8811-b890a775d1aa
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|3a23957d-492b-4633-a8c2-07b32ade8ce7
