@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
   28:Generated_Source\PSoC4/BLUE_LED.c **** #else
   29:Generated_Source\PSoC4/BLUE_LED.c ****     #if (CY_PSOC4_4200L)
   30:Generated_Source\PSoC4/BLUE_LED.c ****         #define BLUE_LED_SetP4PinDriveMode(shift, mode)  \
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 2
 
 
   31:Generated_Source\PSoC4/BLUE_LED.c ****         do { \
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
   74:Generated_Source\PSoC4/BLUE_LED.c **** 		BLUE_LED_SetP4PinDriveMode(BLUE_LED__0__SHIFT, mode);
   39              		.loc 1 74 0
   40 000a 074B     		ldr	r3, .L2
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 3
 
 
   41 000c 064A     		ldr	r2, .L2
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
   98:Generated_Source\PSoC4/BLUE_LED.c **** *  None 
   99:Generated_Source\PSoC4/BLUE_LED.c **** *
  100:Generated_Source\PSoC4/BLUE_LED.c **** * \sideeffect
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 4
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 4
 
 
  101:Generated_Source\PSoC4/BLUE_LED.c **** *  If you use read-modify-write operations that are not atomic; the Interrupt 
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  116:Generated_Source\PSoC4/BLUE_LED.c **** }
  111              		.loc 1 116 0
  112 003c C046     		nop
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 5
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 5
 
 
  113 003e 04B0     		add	sp, sp, #16
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  144 000c 1800     		movs	r0, r3
  145              		@ sp needed
  146 000e 7047     		bx	lr
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 6
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 6
 
 
  147              	.L10:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  167:Generated_Source\PSoC4/BLUE_LED.c **** }
  174              		.loc 1 167 0
  175 000c 1800     		movs	r0, r3
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 7
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 7
 
 
  176              		@ sp needed
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  205:Generated_Source\PSoC4/BLUE_LED.c **** *  \snippet BLUE_LED_SUT.c usage_BLUE_LED_SetInterruptMode
  206:Generated_Source\PSoC4/BLUE_LED.c **** *******************************************************************************/
  207:Generated_Source\PSoC4/BLUE_LED.c **** void BLUE_LED_SetInterruptMode(uint16 position, uint16 mode)
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 8
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 8
 
 
  208:Generated_Source\PSoC4/BLUE_LED.c **** {
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  241              		.section	.text.BLUE_LED_ClearInterrupt,"ax",%progbits
  242              		.align	2
  243              		.global	BLUE_LED_ClearInterrupt
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 9
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 9
 
 
  244              		.code	16
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  271              		.loc 1 240 0
  272 001c 6B46     		mov	r3, sp
  273 001e 0733     		adds	r3, r3, #7
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 10
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 10
 
 
  274 0020 1B78     		ldrb	r3, [r3]
@@ -569,46 +569,46 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  298 000b 01       		.uleb128 0x1
  299 000c 06000000 		.4byte	.LASF28
  300 0010 0C       		.byte	0xc
- 301 0011 4F020000 		.4byte	.LASF29
- 302 0015 52010000 		.4byte	.LASF30
+ 301 0011 57020000 		.4byte	.LASF29
+ 302 0015 C9000000 		.4byte	.LASF30
  303 0019 00000000 		.4byte	.Ldebug_ranges0+0
  304 001d 00000000 		.4byte	0
  305 0021 00000000 		.4byte	.Ldebug_line0
  306 0025 02       		.uleb128 0x2
  307 0026 01       		.byte	0x1
  308 0027 06       		.byte	0x6
- 309 0028 80020000 		.4byte	.LASF0
+ 309 0028 88020000 		.4byte	.LASF0
  310 002c 02       		.uleb128 0x2
  311 002d 01       		.byte	0x1
  312 002e 08       		.byte	0x8
- 313 002f F6000000 		.4byte	.LASF1
+ 313 002f 82010000 		.4byte	.LASF1
  314 0033 02       		.uleb128 0x2
  315 0034 02       		.byte	0x2
  316 0035 05       		.byte	0x5
- 317 0036 45020000 		.4byte	.LASF2
+ 317 0036 4D020000 		.4byte	.LASF2
  318 003a 02       		.uleb128 0x2
  319 003b 02       		.byte	0x2
  320 003c 07       		.byte	0x7
- 321 003d 1C010000 		.4byte	.LASF3
+ 321 003d A8010000 		.4byte	.LASF3
  322 0041 02       		.uleb128 0x2
  323 0042 04       		.byte	0x4
  324 0043 05       		.byte	0x5
- 325 0044 77020000 		.4byte	.LASF4
+ 325 0044 7F020000 		.4byte	.LASF4
  326 0048 02       		.uleb128 0x2
  327 0049 04       		.byte	0x4
  328 004a 07       		.byte	0x7
- 329 004b 0A010000 		.4byte	.LASF5
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 11
+ 329 004b 96010000 		.4byte	.LASF5
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 11
 
 
  330 004f 02       		.uleb128 0x2
  331 0050 08       		.byte	0x8
  332 0051 05       		.byte	0x5
- 333 0052 25020000 		.4byte	.LASF6
+ 333 0052 2D020000 		.4byte	.LASF6
  334 0056 02       		.uleb128 0x2
  335 0057 08       		.byte	0x8
  336 0058 07       		.byte	0x7
- 337 0059 09020000 		.4byte	.LASF7
+ 337 0059 11020000 		.4byte	.LASF7
  338 005d 03       		.uleb128 0x3
  339 005e 04       		.byte	0x4
  340 005f 05       		.byte	0x5
@@ -616,34 +616,34 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  342 0064 02       		.uleb128 0x2
  343 0065 04       		.byte	0x4
  344 0066 07       		.byte	0x7
- 345 0067 FC010000 		.4byte	.LASF8
+ 345 0067 04020000 		.4byte	.LASF8
  346 006b 04       		.uleb128 0x4
- 347 006c 71020000 		.4byte	.LASF9
+ 347 006c 79020000 		.4byte	.LASF9
  348 0070 02       		.byte	0x2
  349 0071 D201     		.2byte	0x1d2
  350 0073 2C000000 		.4byte	0x2c
  351 0077 04       		.uleb128 0x4
- 352 0078 4B010000 		.4byte	.LASF10
+ 352 0078 D7010000 		.4byte	.LASF10
  353 007c 02       		.byte	0x2
  354 007d D301     		.2byte	0x1d3
  355 007f 3A000000 		.4byte	0x3a
  356 0083 04       		.uleb128 0x4
- 357 0084 DF010000 		.4byte	.LASF11
+ 357 0084 E7010000 		.4byte	.LASF11
  358 0088 02       		.byte	0x2
  359 0089 D401     		.2byte	0x1d4
  360 008b 48000000 		.4byte	0x48
  361 008f 02       		.uleb128 0x2
  362 0090 04       		.byte	0x4
  363 0091 04       		.byte	0x4
- 364 0092 F0000000 		.4byte	.LASF12
+ 364 0092 7C010000 		.4byte	.LASF12
  365 0096 02       		.uleb128 0x2
  366 0097 08       		.byte	0x8
  367 0098 04       		.byte	0x4
- 368 0099 44010000 		.4byte	.LASF13
+ 368 0099 D0010000 		.4byte	.LASF13
  369 009d 02       		.uleb128 0x2
  370 009e 01       		.byte	0x1
  371 009f 08       		.byte	0x8
- 372 00a0 40020000 		.4byte	.LASF14
+ 372 00a0 48020000 		.4byte	.LASF14
  373 00a4 04       		.uleb128 0x4
  374 00a5 00000000 		.4byte	.LASF15
  375 00a9 02       		.byte	0x2
@@ -652,19 +652,19 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  378 00b0 05       		.uleb128 0x5
  379 00b1 83000000 		.4byte	0x83
  380 00b5 06       		.uleb128 0x6
- 381 00b6 8C020000 		.4byte	.LASF16
+ 381 00b6 94020000 		.4byte	.LASF16
  382 00ba 01       		.byte	0x1
  383 00bb 48       		.byte	0x48
  384 00bc 00000000 		.4byte	.LFB0
  385 00c0 30000000 		.4byte	.LFE0-.LFB0
  386 00c4 01       		.uleb128 0x1
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 12
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 12
 
 
  387 00c5 9C       		.byte	0x9c
  388 00c6 D9000000 		.4byte	0xd9
  389 00ca 07       		.uleb128 0x7
- 390 00cb 20020000 		.4byte	.LASF18
+ 390 00cb 28020000 		.4byte	.LASF18
  391 00cf 01       		.byte	0x1
  392 00d0 48       		.byte	0x48
  393 00d1 6B000000 		.4byte	0x6b
@@ -673,7 +673,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  396 00d7 7F       		.sleb128 -1
  397 00d8 00       		.byte	0
  398 00d9 06       		.uleb128 0x6
- 399 00da C9000000 		.4byte	.LASF17
+ 399 00da 55010000 		.4byte	.LASF17
  400 00de 01       		.byte	0x1
  401 00df 6F       		.byte	0x6f
  402 00e0 00000000 		.4byte	.LFB1
@@ -690,7 +690,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  413 00fa 91       		.byte	0x91
  414 00fb 77       		.sleb128 -9
  415 00fc 08       		.uleb128 0x8
- 416 00fd 04010000 		.4byte	.LASF24
+ 416 00fd 90010000 		.4byte	.LASF24
  417 0101 01       		.byte	0x1
  418 0102 71       		.byte	0x71
  419 0103 6B000000 		.4byte	0x6b
@@ -699,7 +699,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  422 0109 7F       		.sleb128 -1
  423 010a 00       		.byte	0
  424 010b 09       		.uleb128 0x9
- 425 010c E6010000 		.4byte	.LASF20
+ 425 010c EE010000 		.4byte	.LASF20
  426 0110 01       		.byte	0x1
  427 0111 88       		.byte	0x88
  428 0112 6B000000 		.4byte	0x6b
@@ -708,7 +708,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  431 011e 01       		.uleb128 0x1
  432 011f 9C       		.byte	0x9c
  433 0120 09       		.uleb128 0x9
- 434 0121 2F010000 		.4byte	.LASF21
+ 434 0121 BB010000 		.4byte	.LASF21
  435 0125 01       		.byte	0x1
  436 0126 A4       		.byte	0xa4
  437 0127 6B000000 		.4byte	0x6b
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  441 0134 9C       		.byte	0x9c
  442 0135 06       		.uleb128 0x6
  443 0136 AF000000 		.4byte	.LASF22
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 13
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 13
 
 
  444 013a 01       		.byte	0x1
@@ -729,7 +729,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  449 0145 9C       		.byte	0x9c
  450 0146 75010000 		.4byte	0x175
  451 014a 07       		.uleb128 0x7
- 452 014b D6010000 		.4byte	.LASF23
+ 452 014b DE010000 		.4byte	.LASF23
  453 014f 01       		.byte	0x1
  454 0150 CF       		.byte	0xcf
  455 0151 77000000 		.4byte	0x77
@@ -737,7 +737,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  457 0156 91       		.byte	0x91
  458 0157 76       		.sleb128 -10
  459 0158 07       		.uleb128 0x7
- 460 0159 20020000 		.4byte	.LASF18
+ 460 0159 28020000 		.4byte	.LASF18
  461 015d 01       		.byte	0x1
  462 015e CF       		.byte	0xcf
  463 015f 77000000 		.4byte	0x77
@@ -745,7 +745,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  465 0164 91       		.byte	0x91
  466 0165 74       		.sleb128 -12
  467 0166 08       		.uleb128 0x8
- 468 0167 F4010000 		.4byte	.LASF25
+ 468 0167 FC010000 		.4byte	.LASF25
  469 016b 01       		.byte	0x1
  470 016c D1       		.byte	0xd1
  471 016d 83000000 		.4byte	0x83
@@ -754,7 +754,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  474 0173 7C       		.sleb128 -4
  475 0174 00       		.byte	0
  476 0175 0A       		.uleb128 0xa
- 477 0176 D8000000 		.4byte	.LASF26
+ 477 0176 64010000 		.4byte	.LASF26
  478 017a 01       		.byte	0x1
  479 017b EC       		.byte	0xec
  480 017c 6B000000 		.4byte	0x6b
@@ -763,7 +763,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  483 0188 01       		.uleb128 0x1
  484 0189 9C       		.byte	0x9c
  485 018a 08       		.uleb128 0x8
- 486 018b 33020000 		.4byte	.LASF27
+ 486 018b 3B020000 		.4byte	.LASF27
  487 018f 01       		.byte	0x1
  488 0190 EE       		.byte	0xee
  489 0191 6B000000 		.4byte	0x6b
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  498 0001 11       		.uleb128 0x11
  499 0002 01       		.byte	0x1
  500 0003 25       		.uleb128 0x25
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 14
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 14
 
 
  501 0004 0E       		.uleb128 0xe
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  555 003a 13       		.uleb128 0x13
  556 003b 00       		.byte	0
  557 003c 00       		.byte	0
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 15
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 15
 
 
  558 003d 06       		.uleb128 0x6
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  612 0074 00       		.byte	0
  613 0075 09       		.uleb128 0x9
  614 0076 2E       		.uleb128 0x2e
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 16
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 16
 
 
  615 0077 00       		.byte	0
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  669 000b 00       		.byte	0
  670 000c 0000     		.2byte	0
  671 000e 0000     		.2byte	0
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 17
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 17
 
 
  672 0010 00000000 		.4byte	.LFB0
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  710      2D736563 
  710      74696F6E 
  711 009f 652D706F 		.ascii	"e-pointer\000"
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 18
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 18
 
 
  711      696E7465 
@@ -1032,139 +1032,139 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 1
  715      5F536574 
  715      496E7465 
  715      72727570 
- 716              	.LASF17:
- 717 00c9 424C5545 		.ascii	"BLUE_LED_Write\000"
- 717      5F4C4544 
- 717      5F577269 
- 717      746500
- 718              	.LASF26:
- 719 00d8 424C5545 		.ascii	"BLUE_LED_ClearInterrupt\000"
- 719      5F4C4544 
- 719      5F436C65 
- 719      6172496E 
- 719      74657272 
- 720              	.LASF12:
- 721 00f0 666C6F61 		.ascii	"float\000"
- 721      7400
- 722              	.LASF1:
- 723 00f6 756E7369 		.ascii	"unsigned char\000"
- 723      676E6564 
- 723      20636861 
- 723      7200
- 724              	.LASF24:
- 725 0104 64725661 		.ascii	"drVal\000"
- 725      6C00
- 726              	.LASF5:
- 727 010a 6C6F6E67 		.ascii	"long unsigned int\000"
- 727      20756E73 
- 727      69676E65 
- 727      6420696E 
- 727      7400
- 728              	.LASF3:
- 729 011c 73686F72 		.ascii	"short unsigned int\000"
- 729      7420756E 
- 729      7369676E 
- 729      65642069 
- 729      6E7400
- 730              	.LASF21:
- 731 012f 424C5545 		.ascii	"BLUE_LED_ReadDataReg\000"
- 731      5F4C4544 
- 731      5F526561 
- 731      64446174 
- 731      61526567 
- 732              	.LASF13:
- 733 0144 646F7562 		.ascii	"double\000"
- 733      6C6500
- 734              	.LASF10:
- 735 014b 75696E74 		.ascii	"uint16\000"
- 735      313600
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 19
+ 716              	.LASF30:
+ 717 00c9 443A5C44 		.ascii	"D:\\Dropbox\\6_kurs\\diploma\\crypto_miscocontrolle"
+ 717      726F7062 
+ 717      6F785C36 
+ 717      5F6B7572 
+ 717      735C6469 
+ 718 00f8 725F5354 		.ascii	"r_STABLE\\BLE_Dynamic_GATT_Service_Configuration\\B"
+ 718      41424C45 
+ 718      5C424C45 
+ 718      5F44796E 
+ 718      616D6963 
+ 719 0129 4C455F44 		.ascii	"LE_Dynamic_GATT_Service_Configuration.cydsn\000"
+ 719      796E616D 
+ 719      69635F47 
+ 719      4154545F 
+ 719      53657276 
+ 720              	.LASF17:
+ 721 0155 424C5545 		.ascii	"BLUE_LED_Write\000"
+ 721      5F4C4544 
+ 721      5F577269 
+ 721      746500
+ 722              	.LASF26:
+ 723 0164 424C5545 		.ascii	"BLUE_LED_ClearInterrupt\000"
+ 723      5F4C4544 
+ 723      5F436C65 
+ 723      6172496E 
+ 723      74657272 
+ 724              	.LASF12:
+ 725 017c 666C6F61 		.ascii	"float\000"
+ 725      7400
+ 726              	.LASF1:
+ 727 0182 756E7369 		.ascii	"unsigned char\000"
+ 727      676E6564 
+ 727      20636861 
+ 727      7200
+ 728              	.LASF24:
+ 729 0190 64725661 		.ascii	"drVal\000"
+ 729      6C00
+ 730              	.LASF5:
+ 731 0196 6C6F6E67 		.ascii	"long unsigned int\000"
+ 731      20756E73 
+ 731      69676E65 
+ 731      6420696E 
+ 731      7400
+ 732              	.LASF3:
+ 733 01a8 73686F72 		.ascii	"short unsigned int\000"
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 19
 
 
- 736              	.LASF30:
- 737 0152 443A5C44 		.ascii	"D:\\Dropbox\\5_kurs\\diploma\\led_lamp(for_diploma)"
- 737      726F7062 
- 737      6F785C35 
- 737      5F6B7572 
- 737      735C6469 
- 738 0181 5C424C45 		.ascii	"\\BLE_Dynamic_GATT_Service_Configuration\\BLE_Dynam"
- 738      5F44796E 
- 738      616D6963 
- 738      5F474154 
- 738      545F5365 
- 739 01b2 69635F47 		.ascii	"ic_GATT_Service_Configuration.cydsn\000"
- 739      4154545F 
- 739      53657276 
- 739      6963655F 
- 739      436F6E66 
+ 733      7420756E 
+ 733      7369676E 
+ 733      65642069 
+ 733      6E7400
+ 734              	.LASF21:
+ 735 01bb 424C5545 		.ascii	"BLUE_LED_ReadDataReg\000"
+ 735      5F4C4544 
+ 735      5F526561 
+ 735      64446174 
+ 735      61526567 
+ 736              	.LASF13:
+ 737 01d0 646F7562 		.ascii	"double\000"
+ 737      6C6500
+ 738              	.LASF10:
+ 739 01d7 75696E74 		.ascii	"uint16\000"
+ 739      313600
  740              	.LASF23:
- 741 01d6 706F7369 		.ascii	"position\000"
+ 741 01de 706F7369 		.ascii	"position\000"
  741      74696F6E 
  741      00
  742              	.LASF11:
- 743 01df 75696E74 		.ascii	"uint32\000"
+ 743 01e7 75696E74 		.ascii	"uint32\000"
  743      333200
  744              	.LASF20:
- 745 01e6 424C5545 		.ascii	"BLUE_LED_Read\000"
+ 745 01ee 424C5545 		.ascii	"BLUE_LED_Read\000"
  745      5F4C4544 
  745      5F526561 
  745      6400
  746              	.LASF25:
- 747 01f4 696E7472 		.ascii	"intrCfg\000"
+ 747 01fc 696E7472 		.ascii	"intrCfg\000"
  747      43666700 
  748              	.LASF8:
- 749 01fc 756E7369 		.ascii	"unsigned int\000"
+ 749 0204 756E7369 		.ascii	"unsigned int\000"
  749      676E6564 
  749      20696E74 
  749      00
  750              	.LASF7:
- 751 0209 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 751 0211 6C6F6E67 		.ascii	"long long unsigned int\000"
  751      206C6F6E 
  751      6720756E 
  751      7369676E 
  751      65642069 
  752              	.LASF18:
- 753 0220 6D6F6465 		.ascii	"mode\000"
+ 753 0228 6D6F6465 		.ascii	"mode\000"
  753      00
  754              	.LASF6:
- 755 0225 6C6F6E67 		.ascii	"long long int\000"
+ 755 022d 6C6F6E67 		.ascii	"long long int\000"
  755      206C6F6E 
  755      6720696E 
  755      7400
  756              	.LASF27:
- 757 0233 6D61736B 		.ascii	"maskedStatus\000"
+ 757 023b 6D61736B 		.ascii	"maskedStatus\000"
  757      65645374 
  757      61747573 
  757      00
  758              	.LASF14:
- 759 0240 63686172 		.ascii	"char\000"
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxb9KIG.s 			page 20
+ 759 0248 63686172 		.ascii	"char\000"
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccRBS4IJ.s 			page 20
 
 
  759      00
  760              	.LASF2:
- 761 0245 73686F72 		.ascii	"short int\000"
+ 761 024d 73686F72 		.ascii	"short int\000"
  761      7420696E 
  761      7400
  762              	.LASF29:
- 763 024f 47656E65 		.ascii	"Generated_Source\\PSoC4\\BLUE_LED.c\000"
+ 763 0257 47656E65 		.ascii	"Generated_Source\\PSoC4\\BLUE_LED.c\000"
  763      72617465 
  763      645F536F 
  763      75726365 
  763      5C50536F 
  764              	.LASF9:
- 765 0271 75696E74 		.ascii	"uint8\000"
+ 765 0279 75696E74 		.ascii	"uint8\000"
  765      3800
  766              	.LASF4:
- 767 0277 6C6F6E67 		.ascii	"long int\000"
+ 767 027f 6C6F6E67 		.ascii	"long int\000"
  767      20696E74 
  767      00
  768              	.LASF0:
- 769 0280 7369676E 		.ascii	"signed char\000"
+ 769 0288 7369676E 		.ascii	"signed char\000"
  769      65642063 
  769      68617200 
  770              	.LASF16:
- 771 028c 424C5545 		.ascii	"BLUE_LED_SetDriveMode\000"
+ 771 0294 424C5545 		.ascii	"BLUE_LED_SetDriveMode\000"
  771      5F4C4544 
  771      5F536574 
  771      44726976 

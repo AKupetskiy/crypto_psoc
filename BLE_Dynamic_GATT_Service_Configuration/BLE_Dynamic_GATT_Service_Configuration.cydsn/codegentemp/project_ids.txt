@@ -1,6 +1,6 @@
-D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\BLE_Dynamic_GATT_Service_Configuration.cyprj|2a2a3e72-eaa0-49d7-bd70-bfc3dfdd047d
-C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|fce74b3a-b0d9-4a53-a221-04abc39e3693
-C:\Users\andrew\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Downloads ( 4.1).cyprj|2158c196-1a79-4d8d-be7d-ea4027c7971a
-C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|8b6af9a6-9df9-4dbe-8815-ba481dd52ba4
-C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|34c8279c-d122-442c-8811-b890a775d1aa
-C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|3a23957d-492b-4633-a8c2-07b32ade8ce7
+D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\BLE_Dynamic_GATT_Service_Configuration.cyprj|38ee5f49-26d3-42e0-9857-e7faad45ccad
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|1e5b667e-4e60-4909-b3a8-ddcb50f99510
+C:\Users\andrew\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Downloads ( 4.1).cyprj|d9419a8b-abf9-4b90-aa89-722109bf51a2
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|1824ab03-51e2-4786-82e1-22fb876b045d
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|41da95a8-021f-4531-bba1-d52a61fb2148
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|137ab7c3-91ad-43d8-9394-a7054616523e

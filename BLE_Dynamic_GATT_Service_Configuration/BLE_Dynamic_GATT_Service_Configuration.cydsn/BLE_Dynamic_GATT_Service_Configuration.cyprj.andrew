@@ -132,6 +132,19 @@
 <file name=".\main.c" />
 <file name=".\prp.h" />
 <file name=".\uECC.h" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\ak_aes_crypto.o">
+<dep name=".\aes.h" />
+<dep name=".\ak_aes_crypto.c" />
+<dep name=".\ak_aes_crypto.h" />
+<dep name=".\handy.h" />
+<dep name=".\modes.h" />
+<dep name=".\prp.h" />
+<dep name=".\tassert.h" />
+</file>
+<file name=".\ak_aes_crypto.c" />
+<file name=".\handy.h" />
+<file name=".\modes.h" />
+<file name=".\tassert.h" />
 <file name=".\CortexM0\ARM_GCC_541\Debug\BLE_gatt.o">
 <dep name=".\Generated_Source\PSoC4\BLE.h" />
 <dep name=".\Generated_Source\PSoC4\BLE_Stack.h" />
@@ -624,19 +637,6 @@
 <file name=".\aes.c" />
 <file name=".\bitops.h" />
 <file name=".\cf_config.h" />
-<file name=".\handy.h" />
-<file name=".\tassert.h" />
-<file name=".\CortexM0\ARM_GCC_541\Debug\ak_aes_crypto.o">
-<dep name=".\aes.h" />
-<dep name=".\ak_aes_crypto.c" />
-<dep name=".\ak_aes_crypto.h" />
-<dep name=".\handy.h" />
-<dep name=".\modes.h" />
-<dep name=".\prp.h" />
-<dep name=".\tassert.h" />
-</file>
-<file name=".\ak_aes_crypto.c" />
-<file name=".\modes.h" />
 <file name=".\CortexM0\ARM_GCC_541\Debug\blockwise.o">
 <dep name=".\bitops.h" />
 <dep name=".\blockwise.c" />
@@ -1400,7 +1400,7 @@
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\warp\lib\common\stdlogic\mod_genv.vif</v>
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\warp\lib\common\stdlogic\rtlpkg.vif</v>
 </warp_dep>
-<deps_time v="131573977000828939" />
+<deps_time v="131578969828419834" />
 <top_block v="TopDesign" />
 <last_generation v="28" />
 <pdl_path v="" />
@@ -1410,7 +1410,7 @@
 <dataGuid v="769d31ea-68b1-4f0c-b90a-7c10a43ee563">
 <CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563 type_name="CyDesigner.Common.ProjMgmt.Model.CyLinkCustomData" version="1">
 <link_deps_times>
-<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0" v="131573990890830922" />
+<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0" v="131579044365434131" />
 </link_deps_times>
 </CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563>
 </dataGuid>

@@ -1,5 +1,5 @@
 -- Project:   D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\BLE_Dynamic_GATT_Service_Configuration.cyprj
--- Generated: 12/10/2017 18:41:26
+-- Generated: 12/16/2017 13:23:00
 -- PSoC Creator  4.1 Update 1
 
 ENTITY BLE_Dynamic_GATT_Service_Configuration IS

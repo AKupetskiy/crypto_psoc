@@ -27,6 +27,8 @@ uint8_t *remotePublicKey;
 uint8_t *localPrivateKey;
 uint8_t *localPublicKey;
 
+static int failEncryptCount;
+
 /***************************************
 *        Function declarations
 ***************************************/
@@ -37,8 +39,12 @@ void startRoutine();
 void setupECCDependencies();
 void clearLocalKeys();
 void clearSecret();
+void clearAES();
+
 unsigned sendPublicKey(uint8_t *localPublicKey);
 unsigned sendSignature(uint8_t *signature);
+void sendDataAck(int decrypted);
+void disconnectFromCentral();
 
 static int RNG(uint8_t *dest, unsigned size) {
   // Use the least-significant bits from the ADC for an unconnected pin (or connected to a source of 
@@ -75,8 +81,11 @@ unsigned sendPublicKey(uint8_t *localPublicKey) {
 	
 	CyBle_GattsWriteAttributeValue(&publicKeyHandle, FALSE, &cyBle_connHandle, FALSE);
     
-    printf("sent local public key. ");
+    CyBle_GattsWriteRsp(cyBle_connHandle);
     
+    printf("sent local public key. ");
+   
+  
     return 1;
 } 
 
@@ -89,9 +98,42 @@ unsigned sendSignature(uint8_t *signature) {
 	
 	CyBle_GattsWriteAttributeValue(&signatureHandle, FALSE, &cyBle_connHandle, FALSE);
     
+    CyBle_GattsWriteRsp(cyBle_connHandle);
+    
     printf("sent local signature. ");
     
     return 1;
+}
+
+void sendDataAck(int decrypted) {
+    CYBLE_GATT_HANDLE_VALUE_PAIR_T signatureHandle;
+        
+	signatureHandle.attrHandle = CYBLE_CRYPTO_ENCRYPTED_DATA_CONTROL_CHAR_HANDLE;
+    
+    uint8_t *value;
+    
+    if (decrypted == 1) {
+        value = "FFFF";
+    } else {
+        value = "FFF0";
+    }
+    
+	signatureHandle.value.val = value;
+	signatureHandle.value.len = 5;
+	
+	CyBle_GattsWriteAttributeValue(&signatureHandle, FALSE, &cyBle_connHandle, FALSE);
+    
+    CyBle_GattsWriteRsp(cyBle_connHandle);
+    
+    printf("sent local signature. ");
+}
+
+void disconnectFromCentral() {
+    failEncryptCount = 0;
+    
+    printf("failed to encrypt messages count more than 5, exiting..\r\n");
+    
+    CyBle_GapDisconnect(cyBle_connHandle.bdHandle);
 }
 
 /*******************************************************************************
@@ -112,6 +154,7 @@ int main()
 {
     /* Enable the Global Interrupts */
     CyGlobalIntEnable;
+    failEncryptCount = 0;
 
     /* Start CYBLE component and register generic event handler */
     CyBle_Start(StackEventHandler);
@@ -127,10 +170,12 @@ int main()
 void setupECCDependencies() {
     uECC_set_rng(&RNG);
     
-    sharedSecret = (uint8_t *)malloc(32 * sizeof(uint8_t));
+ 
     remotePublicKey = (uint8_t *)malloc(33 * sizeof(uint8_t));
     localPrivateKey = (uint8_t *)malloc(32 * sizeof(uint8_t));
     localPublicKey = (uint8_t *)malloc(33 * sizeof(uint8_t));
+    
+    sharedSecret = (uint8_t *)malloc(32 * sizeof(uint8_t));
     
     aes_ccm_ctx = (ak_aes_context *)malloc(sizeof(ak_aes_context));
 }
@@ -143,7 +188,11 @@ void clearLocalKeys() {
 
 void clearSecret() {
     free(sharedSecret);
-    free(aes_ccm_ctx);
+}
+
+void clearAES() {
+    ak_aes_finish(aes_ccm_ctx);
+    free(aes_ccm_ctx);   
 }
 
 void startRoutine()
@@ -191,7 +240,7 @@ void startRoutine()
 //				}
 //			} 
             /* Enter E for restarting bt advertisement */
-			if ((command == 'R') || (command == 'r') || (command == 'D') || (command == 'd'))
+			if ((command == 'R') || (command == 'r'))
 			{
                 if (CyBle_GetState() != CYBLE_STATE_ADVERTISING) {
                     CYBLE_API_RESULT_T apiResult = CYBLE_ERROR_OK;
@@ -205,6 +254,10 @@ void startRoutine()
                         printf ("\r\nRestarting advertisement..\r\n");
                     }
                 }
+            }
+            if ((command == 'D') || (command == 'd'))
+			{
+                disconnectFromCentral();
             }
 		}
 	}
@@ -387,6 +440,8 @@ void StackEventHandler(uint32 event, void *eventParam)
                 
                 if (generateKeyPair(localPublicKey,localPrivateKey)) {
                     sendPublicKey(localPublicKey);
+                } else {
+                     printf("cannot generate key pair.");
                 }
             }
             
@@ -401,6 +456,8 @@ void StackEventHandler(uint32 event, void *eventParam)
                     clearLocalKeys();
                     
                     ak_aes_init(aes_ccm_ctx,sharedSecret,32);
+                } else {
+                    printf("failed to verify remote signature");   
                 }
             }
             
@@ -412,18 +469,28 @@ void StackEventHandler(uint32 event, void *eventParam)
                 if (!ak_aes_unpack_and_decrypt(aes_ccm_ctx,wrReqParam->handleValPair.value.val,wrReqParam->handleValPair.value.len,message)) {
                     UART_UartPutString ("message = ");
                     UART_UartPutString (message );
-                    UART_UartPutString ("\n");
+                    UART_UartPutString ("\r\n");
+                    
+                    sendDataAck(1);
+                    
+                    failEncryptCount = 0;
                 } else {
-                    UART_UartPutString ("cannot unpack message");
+                    UART_UartPutString ("cannot unpack message\r\n");
+                    sendDataAck(0);
+                    ++failEncryptCount;
                 }
                 
-                printf("counter value = %d \n",aes_ccm_ctx->counter);
+                printf("counter value = %d \r\n",aes_ccm_ctx->counter);
                 
                 free(message);
+                
+                if (failEncryptCount >= 5) {
+                    disconnectFromCentral();   
+                }
             }
             
 			/* Send the response to the write request received. */
-			CyBle_GattsWriteRsp(cyBle_connHandle);
+			//CyBle_GattsWriteRsp(cyBle_connHandle);
 			break;
             
         case CYBLE_EVT_GATT_DISCONNECT_IND:
@@ -434,6 +501,7 @@ void StackEventHandler(uint32 event, void *eventParam)
                 
                 clearLocalKeys();
                 clearSecret();
+                clearAES();
             }
             break;
             

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
   29:handy.h       **** /* Swap two values.  Uses GCC type inference magic. */
   30:handy.h       **** #ifndef SWAP
   31:handy.h       ****   #define SWAP(x, y) \
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 2
 
 
   32:handy.h       ****     do { \
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
   47 0016 FFF7FEFF 		bl	memset
   66:handy.h       ****     (void) *((volatile uint8_t *) v);
   48              		.loc 1 66 0
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 3
 
 
   49 001a 019B     		ldr	r3, [sp, #4]
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
   81 000a 0093     		str	r3, [sp]
   21:chash.c       ****   cf_chash_ctx ctx;
   22:chash.c       ****   assert(h);
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 4
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 4
 
 
   82              		.loc 2 22 0
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
  131              	.Ldebug_info0:
  132 0000 92020000 		.4byte	0x292
  133 0004 0400     		.2byte	0x4
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 5
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 5
 
 
  134 0006 00000000 		.4byte	.Ldebug_abbrev0
@@ -246,8 +246,8 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
  136 000b 01       		.uleb128 0x1
  137 000c 0A000000 		.4byte	.LASF31
  138 0010 0C       		.byte	0xc
- 139 0011 92020000 		.4byte	.LASF32
- 140 0015 C2010000 		.4byte	.LASF33
+ 139 0011 9A020000 		.4byte	.LASF32
+ 140 0015 ED010000 		.4byte	.LASF33
  141 0019 00000000 		.4byte	.Ldebug_ranges0+0
  142 001d 00000000 		.4byte	0
  143 0021 00000000 		.4byte	.Ldebug_line0
@@ -256,26 +256,26 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
  146 0027 05       		.byte	0x5
  147 0028 696E7400 		.ascii	"int\000"
  148 002c 03       		.uleb128 0x3
- 149 002d 18010000 		.4byte	.LASF4
+ 149 002d 0E010000 		.4byte	.LASF4
  150 0031 03       		.byte	0x3
  151 0032 D8       		.byte	0xd8
  152 0033 37000000 		.4byte	0x37
  153 0037 04       		.uleb128 0x4
  154 0038 04       		.byte	0x4
  155 0039 07       		.byte	0x7
- 156 003a 3D010000 		.4byte	.LASF0
+ 156 003a 33010000 		.4byte	.LASF0
  157 003e 04       		.uleb128 0x4
  158 003f 08       		.byte	0x8
  159 0040 05       		.byte	0x5
- 160 0041 97010000 		.4byte	.LASF1
+ 160 0041 8D010000 		.4byte	.LASF1
  161 0045 04       		.uleb128 0x4
  162 0046 08       		.byte	0x8
  163 0047 04       		.byte	0x4
- 164 0048 71020000 		.4byte	.LASF2
+ 164 0048 79020000 		.4byte	.LASF2
  165 004c 04       		.uleb128 0x4
  166 004d 01       		.byte	0x1
  167 004e 06       		.byte	0x6
- 168 004f 7D020000 		.4byte	.LASF3
+ 168 004f 85020000 		.4byte	.LASF3
  169 0053 03       		.uleb128 0x3
  170 0054 00000000 		.4byte	.LASF5
  171 0058 04       		.byte	0x4
@@ -284,67 +284,67 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
  174 005e 04       		.uleb128 0x4
  175 005f 01       		.byte	0x1
  176 0060 08       		.byte	0x8
- 177 0061 E5000000 		.4byte	.LASF6
+ 177 0061 DB000000 		.4byte	.LASF6
  178 0065 04       		.uleb128 0x4
  179 0066 02       		.byte	0x2
  180 0067 05       		.byte	0x5
- 181 0068 AD000000 		.4byte	.LASF7
+ 181 0068 B8010000 		.4byte	.LASF7
  182 006c 03       		.uleb128 0x3
- 183 006d 1F010000 		.4byte	.LASF8
+ 183 006d 15010000 		.4byte	.LASF8
  184 0071 04       		.byte	0x4
  185 0072 2B       		.byte	0x2b
  186 0073 77000000 		.4byte	0x77
  187 0077 04       		.uleb128 0x4
  188 0078 02       		.byte	0x2
  189 0079 07       		.byte	0x7
- 190 007a 05010000 		.4byte	.LASF9
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 6
+ 190 007a FB000000 		.4byte	.LASF9
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 6
 
 
  191 007e 04       		.uleb128 0x4
  192 007f 04       		.byte	0x4
  193 0080 05       		.byte	0x5
- 194 0081 68020000 		.4byte	.LASF10
+ 194 0081 E4010000 		.4byte	.LASF10
  195 0085 03       		.uleb128 0x3
- 196 0086 2A010000 		.4byte	.LASF11
+ 196 0086 20010000 		.4byte	.LASF11
  197 008a 04       		.byte	0x4
  198 008b 41       		.byte	0x41
  199 008c 90000000 		.4byte	0x90
  200 0090 04       		.uleb128 0x4
  201 0091 04       		.byte	0x4
  202 0092 07       		.byte	0x7
- 203 0093 F3000000 		.4byte	.LASF12
+ 203 0093 E9000000 		.4byte	.LASF12
  204 0097 03       		.uleb128 0x3
- 205 0098 46020000 		.4byte	.LASF13
+ 205 0098 C2010000 		.4byte	.LASF13
  206 009c 04       		.byte	0x4
  207 009d 5B       		.byte	0x5b
  208 009e A2000000 		.4byte	0xa2
  209 00a2 04       		.uleb128 0x4
  210 00a3 08       		.byte	0x8
  211 00a4 07       		.byte	0x7
- 212 00a5 4A010000 		.4byte	.LASF14
+ 212 00a5 40010000 		.4byte	.LASF14
  213 00a9 03       		.uleb128 0x3
- 214 00aa 61010000 		.4byte	.LASF15
+ 214 00aa 57010000 		.4byte	.LASF15
  215 00ae 05       		.byte	0x5
  216 00af 18       		.byte	0x18
  217 00b0 53000000 		.4byte	0x53
  218 00b4 03       		.uleb128 0x3
- 219 00b5 51020000 		.4byte	.LASF16
+ 219 00b5 CD010000 		.4byte	.LASF16
  220 00b9 05       		.byte	0x5
  221 00ba 24       		.byte	0x24
  222 00bb 6C000000 		.4byte	0x6c
  223 00bf 03       		.uleb128 0x3
- 224 00c0 89020000 		.4byte	.LASF17
+ 224 00c0 91020000 		.4byte	.LASF17
  225 00c4 05       		.byte	0x5
  226 00c5 30       		.byte	0x30
  227 00c6 85000000 		.4byte	0x85
  228 00ca 03       		.uleb128 0x3
- 229 00cb BC000000 		.4byte	.LASF18
+ 229 00cb B2000000 		.4byte	.LASF18
  230 00cf 05       		.byte	0x5
  231 00d0 3C       		.byte	0x3c
  232 00d1 97000000 		.4byte	0x97
  233 00d5 03       		.uleb128 0x3
- 234 00d6 76010000 		.4byte	.LASF19
+ 234 00d6 6C010000 		.4byte	.LASF19
  235 00da 06       		.byte	0x6
  236 00db 26       		.byte	0x26
  237 00dc E0000000 		.4byte	0xe0
@@ -358,11 +358,11 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
  245 00f0 00       		.byte	0
  246 00f1 08       		.uleb128 0x8
  247 00f2 04       		.byte	0x4
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 7
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 7
 
 
  248 00f3 03       		.uleb128 0x3
- 249 00f4 AA010000 		.4byte	.LASF20
+ 249 00f4 A0010000 		.4byte	.LASF20
  250 00f8 06       		.byte	0x6
  251 00f9 33       		.byte	0x33
  252 00fa FE000000 		.4byte	0xfe
@@ -383,7 +383,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
  267 011b 1F010000 		.4byte	0x11f
  268 011f 09       		.uleb128 0x9
  269 0120 03       		.uleb128 0x3
- 270 0121 D5000000 		.4byte	.LASF21
+ 270 0121 CB000000 		.4byte	.LASF21
  271 0125 06       		.byte	0x6
  272 0126 45       		.byte	0x45
  273 0127 2B010000 		.4byte	0x12b
@@ -406,41 +406,41 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
  290 014a 5A       		.byte	0x5a
  291 014b 8C010000 		.4byte	0x18c
  292 014f 0B       		.uleb128 0xb
- 293 0150 5A020000 		.4byte	.LASF22
+ 293 0150 D6010000 		.4byte	.LASF22
  294 0154 06       		.byte	0x6
  295 0155 5C       		.byte	0x5c
  296 0156 2C000000 		.4byte	0x2c
  297 015a 00       		.byte	0
  298 015b 0B       		.uleb128 0xb
- 299 015c BA010000 		.4byte	.LASF23
+ 299 015c B0010000 		.4byte	.LASF23
  300 0160 06       		.byte	0x6
  301 0161 5D       		.byte	0x5d
  302 0162 2C000000 		.4byte	0x2c
  303 0166 04       		.byte	0x4
  304 0167 0B       		.uleb128 0xb
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 8
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 8
 
 
- 305 0168 B7000000 		.4byte	.LASF24
+ 305 0168 AD000000 		.4byte	.LASF24
  306 016c 06       		.byte	0x6
  307 016d 5F       		.byte	0x5f
  308 016e D5000000 		.4byte	0xd5
  309 0172 08       		.byte	0x8
  310 0173 0B       		.uleb128 0xb
- 311 0174 C5000000 		.4byte	.LASF25
+ 311 0174 BB000000 		.4byte	.LASF25
  312 0178 06       		.byte	0x6
  313 0179 60       		.byte	0x60
  314 017a F3000000 		.4byte	0xf3
  315 017e 0C       		.byte	0xc
  316 017f 0B       		.uleb128 0xb
- 317 0180 61020000 		.4byte	.LASF26
+ 317 0180 DD010000 		.4byte	.LASF26
  318 0184 06       		.byte	0x6
  319 0185 61       		.byte	0x61
  320 0186 20010000 		.4byte	0x120
  321 018a 10       		.byte	0x10
  322 018b 00       		.byte	0
  323 018c 03       		.uleb128 0x3
- 324 018d CC000000 		.4byte	.LASF27
+ 324 018d C2000000 		.4byte	.LASF27
  325 0191 06       		.byte	0x6
  326 0192 62       		.byte	0x62
  327 0193 47010000 		.4byte	0x147
@@ -478,23 +478,23 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
  359 01db 6701     		.2byte	0x167
  360 01dd 00       		.byte	0
  361 01de 04       		.uleb128 0x4
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 9
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 9
 
 
  362 01df 04       		.byte	0x4
  363 01e0 07       		.byte	0x7
- 364 01e1 8E010000 		.4byte	.LASF28
+ 364 01e1 84010000 		.4byte	.LASF28
  365 01e5 03       		.uleb128 0x3
- 366 01e6 69010000 		.4byte	.LASF29
+ 366 01e6 5F010000 		.4byte	.LASF29
  367 01ea 06       		.byte	0x6
  368 01eb 7A       		.byte	0x7a
  369 01ec 97010000 		.4byte	0x197
  370 01f0 04       		.uleb128 0x4
  371 01f1 01       		.byte	0x1
  372 01f2 08       		.byte	0x8
- 373 01f3 A5010000 		.4byte	.LASF30
+ 373 01f3 9B010000 		.4byte	.LASF30
  374 01f7 10       		.uleb128 0x10
- 375 01f8 84010000 		.4byte	.LASF34
+ 375 01f8 7A010000 		.4byte	.LASF34
  376 01fc 01       		.byte	0x1
  377 01fd 3D       		.byte	0x3d
  378 01fe 00000000 		.4byte	.LFB0
@@ -524,7 +524,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
  402 0229 2D020000 		.4byte	0x22d
  403 022d 12       		.uleb128 0x12
  404 022e 13       		.uleb128 0x13
- 405 022f 35010000 		.4byte	.LASF35
+ 405 022f 2B010000 		.4byte	.LASF35
  406 0233 02       		.byte	0x2
  407 0234 13       		.byte	0x13
  408 0235 00000000 		.4byte	.LFB2
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
  416 0247 13       		.byte	0x13
  417 0248 8A020000 		.4byte	0x28a
  418 024c 03       		.uleb128 0x3
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 10
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 10
 
 
  419 024d 91       		.byte	0x91
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
  473 000b 55       		.uleb128 0x55
  474 000c 17       		.uleb128 0x17
  475 000d 11       		.uleb128 0x11
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 11
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 11
 
 
  476 000e 01       		.uleb128 0x1
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
  530 0044 01       		.uleb128 0x1
  531 0045 13       		.uleb128 0x13
  532 0046 00       		.byte	0
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 12
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 12
 
 
  533 0047 00       		.byte	0
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
  587 007d 0B       		.uleb128 0xb
  588 007e 3B       		.uleb128 0x3b
  589 007f 0B       		.uleb128 0xb
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 13
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 13
 
 
  590 0080 01       		.uleb128 0x1
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
  644 00b7 01       		.uleb128 0x1
  645 00b8 13       		.uleb128 0x13
  646 00b9 00       		.byte	0
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 14
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 14
 
 
  647 00ba 00       		.byte	0
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
  701 00f1 0B       		.uleb128 0xb
  702 00f2 49       		.uleb128 0x49
  703 00f3 13       		.uleb128 0x13
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 15
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 15
 
 
  704 00f4 02       		.uleb128 0x2
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
  745      6E203233 
  745      37373135 
  746 0070 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects -fomit-fram"
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 16
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 16
 
 
  746      66756E63 
@@ -908,161 +908,161 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 1
  747 00a3 652D706F 		.ascii	"e-pointer\000"
  747      696E7465 
  747      7200
- 748              	.LASF7:
- 749 00ad 73686F72 		.ascii	"short int\000"
- 749      7420696E 
- 749      7400
- 750              	.LASF24:
- 751 00b7 696E6974 		.ascii	"init\000"
+ 748              	.LASF24:
+ 749 00ad 696E6974 		.ascii	"init\000"
+ 749      00
+ 750              	.LASF18:
+ 751 00b2 75696E74 		.ascii	"uint64_t\000"
+ 751      36345F74 
  751      00
- 752              	.LASF18:
- 753 00bc 75696E74 		.ascii	"uint64_t\000"
- 753      36345F74 
- 753      00
- 754              	.LASF25:
- 755 00c5 75706461 		.ascii	"update\000"
- 755      746500
- 756              	.LASF27:
- 757 00cc 63665F63 		.ascii	"cf_chash\000"
+ 752              	.LASF25:
+ 753 00bb 75706461 		.ascii	"update\000"
+ 753      746500
+ 754              	.LASF27:
+ 755 00c2 63665F63 		.ascii	"cf_chash\000"
+ 755      68617368 
+ 755      00
+ 756              	.LASF21:
+ 757 00cb 63665F63 		.ascii	"cf_chash_digest\000"
  757      68617368 
- 757      00
- 758              	.LASF21:
- 759 00d5 63665F63 		.ascii	"cf_chash_digest\000"
- 759      68617368 
- 759      5F646967 
- 759      65737400 
- 760              	.LASF6:
- 761 00e5 756E7369 		.ascii	"unsigned char\000"
- 761      676E6564 
- 761      20636861 
- 761      7200
- 762              	.LASF12:
- 763 00f3 6C6F6E67 		.ascii	"long unsigned int\000"
- 763      20756E73 
- 763      69676E65 
- 763      6420696E 
- 763      7400
- 764              	.LASF9:
- 765 0105 73686F72 		.ascii	"short unsigned int\000"
- 765      7420756E 
- 765      7369676E 
- 765      65642069 
- 765      6E7400
- 766              	.LASF4:
- 767 0118 73697A65 		.ascii	"size_t\000"
+ 757      5F646967 
+ 757      65737400 
+ 758              	.LASF6:
+ 759 00db 756E7369 		.ascii	"unsigned char\000"
+ 759      676E6564 
+ 759      20636861 
+ 759      7200
+ 760              	.LASF12:
+ 761 00e9 6C6F6E67 		.ascii	"long unsigned int\000"
+ 761      20756E73 
+ 761      69676E65 
+ 761      6420696E 
+ 761      7400
+ 762              	.LASF9:
+ 763 00fb 73686F72 		.ascii	"short unsigned int\000"
+ 763      7420756E 
+ 763      7369676E 
+ 763      65642069 
+ 763      6E7400
+ 764              	.LASF4:
+ 765 010e 73697A65 		.ascii	"size_t\000"
+ 765      5F7400
+ 766              	.LASF8:
+ 767 0115 5F5F7569 		.ascii	"__uint16_t\000"
+ 767      6E743136 
  767      5F7400
- 768              	.LASF8:
- 769 011f 5F5F7569 		.ascii	"__uint16_t\000"
- 769      6E743136 
+ 768              	.LASF11:
+ 769 0120 5F5F7569 		.ascii	"__uint32_t\000"
+ 769      6E743332 
  769      5F7400
- 770              	.LASF11:
- 771 012a 5F5F7569 		.ascii	"__uint32_t\000"
- 771      6E743332 
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 17
+ 770              	.LASF35:
+ 771 012b 63665F68 		.ascii	"cf_hash\000"
+ 771      61736800 
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 17
 
 
- 771      5F7400
- 772              	.LASF35:
- 773 0135 63665F68 		.ascii	"cf_hash\000"
- 773      61736800 
- 774              	.LASF0:
- 775 013d 756E7369 		.ascii	"unsigned int\000"
- 775      676E6564 
- 775      20696E74 
- 775      00
- 776              	.LASF14:
- 777 014a 6C6F6E67 		.ascii	"long long unsigned int\000"
- 777      206C6F6E 
- 777      6720756E 
- 777      7369676E 
- 777      65642069 
- 778              	.LASF15:
- 779 0161 75696E74 		.ascii	"uint8_t\000"
- 779      385F7400 
- 780              	.LASF29:
- 781 0169 63665F63 		.ascii	"cf_chash_ctx\000"
+ 772              	.LASF0:
+ 773 0133 756E7369 		.ascii	"unsigned int\000"
+ 773      676E6564 
+ 773      20696E74 
+ 773      00
+ 774              	.LASF14:
+ 775 0140 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 775      206C6F6E 
+ 775      6720756E 
+ 775      7369676E 
+ 775      65642069 
+ 776              	.LASF15:
+ 777 0157 75696E74 		.ascii	"uint8_t\000"
+ 777      385F7400 
+ 778              	.LASF29:
+ 779 015f 63665F63 		.ascii	"cf_chash_ctx\000"
+ 779      68617368 
+ 779      5F637478 
+ 779      00
+ 780              	.LASF19:
+ 781 016c 63665F63 		.ascii	"cf_chash_init\000"
  781      68617368 
- 781      5F637478 
- 781      00
- 782              	.LASF19:
- 783 0176 63665F63 		.ascii	"cf_chash_init\000"
- 783      68617368 
- 783      5F696E69 
- 783      7400
- 784              	.LASF34:
- 785 0184 6D656D5F 		.ascii	"mem_clean\000"
- 785      636C6561 
- 785      6E00
- 786              	.LASF28:
- 787 018e 73697A65 		.ascii	"sizetype\000"
- 787      74797065 
- 787      00
- 788              	.LASF1:
- 789 0197 6C6F6E67 		.ascii	"long long int\000"
- 789      206C6F6E 
- 789      6720696E 
- 789      7400
- 790              	.LASF30:
- 791 01a5 63686172 		.ascii	"char\000"
- 791      00
- 792              	.LASF20:
- 793 01aa 63665F63 		.ascii	"cf_chash_update\000"
- 793      68617368 
- 793      5F757064 
- 793      61746500 
- 794              	.LASF23:
- 795 01ba 626C6F63 		.ascii	"blocksz\000"
- 795      6B737A00 
- 796              	.LASF33:
- 797 01c2 443A5C44 		.ascii	"D:\\Dropbox\\5_kurs\\diploma\\led_lamp(for_diploma)"
- 797      726F7062 
- 797      6F785C35 
- 797      5F6B7572 
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccLa8FI9.s 			page 18
+ 781      5F696E69 
+ 781      7400
+ 782              	.LASF34:
+ 783 017a 6D656D5F 		.ascii	"mem_clean\000"
+ 783      636C6561 
+ 783      6E00
+ 784              	.LASF28:
+ 785 0184 73697A65 		.ascii	"sizetype\000"
+ 785      74797065 
+ 785      00
+ 786              	.LASF1:
+ 787 018d 6C6F6E67 		.ascii	"long long int\000"
+ 787      206C6F6E 
+ 787      6720696E 
+ 787      7400
+ 788              	.LASF30:
+ 789 019b 63686172 		.ascii	"char\000"
+ 789      00
+ 790              	.LASF20:
+ 791 01a0 63665F63 		.ascii	"cf_chash_update\000"
+ 791      68617368 
+ 791      5F757064 
+ 791      61746500 
+ 792              	.LASF23:
+ 793 01b0 626C6F63 		.ascii	"blocksz\000"
+ 793      6B737A00 
+ 794              	.LASF7:
+ 795 01b8 73686F72 		.ascii	"short int\000"
+ 795      7420696E 
+ 795      7400
+ 796              	.LASF13:
+ 797 01c2 5F5F7569 		.ascii	"__uint64_t\000"
+ 797      6E743634 
+ 797      5F7400
+ 798              	.LASF16:
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccGHxFY4.s 			page 18
 
 
- 797      735C6469 
- 798 01f1 5C424C45 		.ascii	"\\BLE_Dynamic_GATT_Service_Configuration\\BLE_Dynam"
- 798      5F44796E 
- 798      616D6963 
- 798      5F474154 
- 798      545F5365 
- 799 0222 69635F47 		.ascii	"ic_GATT_Service_Configuration.cydsn\000"
- 799      4154545F 
- 799      53657276 
- 799      6963655F 
- 799      436F6E66 
- 800              	.LASF13:
- 801 0246 5F5F7569 		.ascii	"__uint64_t\000"
- 801      6E743634 
- 801      5F7400
- 802              	.LASF16:
- 803 0251 75696E74 		.ascii	"uint16_t\000"
- 803      31365F74 
- 803      00
- 804              	.LASF22:
- 805 025a 68617368 		.ascii	"hashsz\000"
- 805      737A00
- 806              	.LASF26:
- 807 0261 64696765 		.ascii	"digest\000"
- 807      737400
- 808              	.LASF10:
- 809 0268 6C6F6E67 		.ascii	"long int\000"
- 809      20696E74 
- 809      00
+ 799 01cd 75696E74 		.ascii	"uint16_t\000"
+ 799      31365F74 
+ 799      00
+ 800              	.LASF22:
+ 801 01d6 68617368 		.ascii	"hashsz\000"
+ 801      737A00
+ 802              	.LASF26:
+ 803 01dd 64696765 		.ascii	"digest\000"
+ 803      737400
+ 804              	.LASF10:
+ 805 01e4 6C6F6E67 		.ascii	"long int\000"
+ 805      20696E74 
+ 805      00
+ 806              	.LASF33:
+ 807 01ed 443A5C44 		.ascii	"D:\\Dropbox\\6_kurs\\diploma\\crypto_miscocontrolle"
+ 807      726F7062 
+ 807      6F785C36 
+ 807      5F6B7572 
+ 807      735C6469 
+ 808 021c 725F5354 		.ascii	"r_STABLE\\BLE_Dynamic_GATT_Service_Configuration\\B"
+ 808      41424C45 
+ 808      5C424C45 
+ 808      5F44796E 
+ 808      616D6963 
+ 809 024d 4C455F44 		.ascii	"LE_Dynamic_GATT_Service_Configuration.cydsn\000"
+ 809      796E616D 
+ 809      69635F47 
+ 809      4154545F 
+ 809      53657276 
  810              	.LASF2:
- 811 0271 6C6F6E67 		.ascii	"long double\000"
+ 811 0279 6C6F6E67 		.ascii	"long double\000"
  811      20646F75 
  811      626C6500 
  812              	.LASF3:
- 813 027d 7369676E 		.ascii	"signed char\000"
+ 813 0285 7369676E 		.ascii	"signed char\000"
  813      65642063 
  813      68617200 
  814              	.LASF17:
- 815 0289 75696E74 		.ascii	"uint32_t\000"
+ 815 0291 75696E74 		.ascii	"uint32_t\000"
  815      33325F74 
  815      00
  816              	.LASF32:
- 817 0292 63686173 		.ascii	"chash.c\000"
+ 817 029a 63686173 		.ascii	"chash.c\000"
  817      682E6300 
  818              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

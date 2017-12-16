@@ -1,5 +1,5 @@
 -- Project:   BLE_Dynamic_GATT_Service_Configuration
--- Generated: 12/10/2017 18:41:24
+-- Generated: 12/16/2017 13:22:59
 -- PSoC Creator  4.1 Update 1
 
 ENTITY BLE_Dynamic_GATT_Service_Configuration IS

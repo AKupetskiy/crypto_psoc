@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
   29:bitops.h      **** 
   30:bitops.h      **** /** Circularly rotate left x by n bits.
   31:bitops.h      ****  *  0 > n > 32. */
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 2
 
 
   32:bitops.h      **** static inline uint32_t rotl32(uint32_t x, unsigned n)
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
   86:bitops.h      **** 
   87:bitops.h      **** /** Encode v as a 32-bit big endian quantity into buf. */
   88:bitops.h      **** static inline void write32_be(uint32_t v, uint8_t buf[4])
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 3
 
 
   89:bitops.h      **** {
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
   35 0004 0291     		str	r1, [sp, #8]
   36 0006 0093     		str	r3, [sp]
   37 0008 6B46     		mov	r3, sp
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 4
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 4
 
 
   38 000a 0733     		adds	r3, r3, #7
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
    1:handy.h       **** #ifndef HANDY_H
    2:handy.h       **** #define HANDY_H
    3:handy.h       **** 
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 5
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 5
 
 
    4:handy.h       **** #include <stddef.h>
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
   58:handy.h       **** 
   59:handy.h       **** /** Like memset(ptr, 0, len), but not allowed to be removed by
   60:handy.h       ****  *  compilers. */
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 6
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 6
 
 
   61:handy.h       **** static inline void mem_clean(volatile void *v, size_t len)
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
    5:hmac.c        ****  * To the extent possible under law, the author(s) have dedicated all
    6:hmac.c        ****  * copyright and related and neighboring rights to this software to the
    7:hmac.c        ****  * public domain worldwide. This software is distributed without any
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 7
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 7
 
 
    8:hmac.c        ****  * warranty.
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  160 0024 039B     		ldr	r3, [sp, #12]
  161 0026 1100     		movs	r1, r2
  162 0028 1800     		movs	r0, r3
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 8
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 8
 
 
  163 002a FFF7FEFF 		bl	mem_clean
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
   50:hmac.c        ****   if (k != key)
  198              		.loc 3 50 0
  199 0064 24AB     		add	r3, sp, #144
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 9
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 9
 
 
  200 0066 019A     		ldr	r2, [sp, #4]
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  244 00b4 DC68     		ldr	r4, [r3, #12]
  245 00b6 039B     		ldr	r3, [sp, #12]
  246 00b8 0833     		adds	r3, r3, #8
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 10
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 10
 
 
  247 00ba 1800     		movs	r0, r3
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  292 010e 44B0     		add	sp, sp, #272
  293              		@ sp needed
  294 0110 10BD     		pop	{r4, pc}
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 11
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 11
 
 
  295              		.cfi_endproc
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  342 002e C046     		nop
  343 0030 05B0     		add	sp, sp, #20
  344              		@ sp needed
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 12
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 12
 
 
  345 0032 00BD     		pop	{pc}
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  391 0026 1B68     		ldr	r3, [r3]
  392 0028 1B69     		ldr	r3, [r3, #16]
  393 002a 019A     		ldr	r2, [sp, #4]
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 13
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 13
 
 
  394 002c 0832     		adds	r2, r2, #8
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  442              		.type	cf_hmac, %function
  443              	cf_hmac:
  444              	.LFB30:
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 14
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 14
 
 
   91:hmac.c        **** 
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  104:hmac.c        ****   cf_hmac_finish(&ctx, out);
  486              		.loc 3 104 0
  487 003a BC9A     		ldr	r2, [sp, #752]
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 15
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 15
 
 
  488 003c 04AB     		add	r3, sp, #16
@@ -874,10 +874,10 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  517 0006 00000000 		.4byte	.Ldebug_abbrev0
  518 000a 04       		.byte	0x4
  519 000b 01       		.uleb128 0x1
- 520 000c D1010000 		.4byte	.LASF45
+ 520 000c 4D010000 		.4byte	.LASF45
  521 0010 0C       		.byte	0xc
- 522 0011 E9020000 		.4byte	.LASF46
- 523 0015 FF000000 		.4byte	.LASF47
+ 522 0011 65020000 		.4byte	.LASF46
+ 523 0015 72020000 		.4byte	.LASF47
  524 0019 00000000 		.4byte	.Ldebug_ranges0+0
  525 001d 00000000 		.4byte	0
  526 0021 00000000 		.4byte	.Ldebug_line0
@@ -898,13 +898,13 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  541 003f 08       		.byte	0x8
  542 0040 05       		.byte	0x5
  543 0041 36000000 		.4byte	.LASF1
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 16
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 16
 
 
  544 0045 04       		.uleb128 0x4
  545 0046 08       		.byte	0x8
  546 0047 04       		.byte	0x4
- 547 0048 9F010000 		.4byte	.LASF2
+ 547 0048 1B010000 		.4byte	.LASF2
  548 004c 04       		.uleb128 0x4
  549 004d 01       		.byte	0x1
  550 004e 06       		.byte	0x6
@@ -917,13 +917,13 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  557 005e 04       		.uleb128 0x4
  558 005f 01       		.byte	0x1
  559 0060 08       		.byte	0x8
- 560 0061 74020000 		.4byte	.LASF6
+ 560 0061 F0010000 		.4byte	.LASF6
  561 0065 04       		.uleb128 0x4
  562 0066 02       		.byte	0x2
  563 0067 05       		.byte	0x5
- 564 0068 8A020000 		.4byte	.LASF7
+ 564 0068 06020000 		.4byte	.LASF7
  565 006c 03       		.uleb128 0x3
- 566 006d A2020000 		.4byte	.LASF8
+ 566 006d 1E020000 		.4byte	.LASF8
  567 0071 05       		.byte	0x5
  568 0072 2B       		.byte	0x2b
  569 0073 77000000 		.4byte	0x77
@@ -945,7 +945,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  585 0092 07       		.byte	0x7
  586 0093 B9000000 		.4byte	.LASF12
  587 0097 03       		.uleb128 0x3
- 588 0098 B0010000 		.4byte	.LASF13
+ 588 0098 2C010000 		.4byte	.LASF13
  589 009c 05       		.byte	0x5
  590 009d 5B       		.byte	0x5b
  591 009e A2000000 		.4byte	0xa2
@@ -954,11 +954,11 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  594 00a4 07       		.byte	0x7
  595 00a5 1F000000 		.4byte	.LASF14
  596 00a9 03       		.uleb128 0x3
- 597 00aa D2020000 		.4byte	.LASF15
+ 597 00aa 4E020000 		.4byte	.LASF15
  598 00ae 06       		.byte	0x6
  599 00af 18       		.byte	0x18
  600 00b0 53000000 		.4byte	0x53
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 17
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 17
 
 
  601 00b4 03       		.uleb128 0x3
@@ -967,7 +967,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  604 00ba 24       		.byte	0x24
  605 00bb 6C000000 		.4byte	0x6c
  606 00bf 03       		.uleb128 0x3
- 607 00c0 94020000 		.4byte	.LASF17
+ 607 00c0 10020000 		.4byte	.LASF17
  608 00c4 06       		.byte	0x6
  609 00c5 30       		.byte	0x30
  610 00c6 85000000 		.4byte	0x85
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  655 0126 45       		.byte	0x45
  656 0127 2B010000 		.4byte	0x12b
  657 012b 05       		.uleb128 0x5
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 18
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 18
 
 
  658 012c 04       		.byte	0x4
@@ -1039,7 +1039,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  673 014a 5A       		.byte	0x5a
  674 014b 8C010000 		.4byte	0x18c
  675 014f 0B       		.uleb128 0xb
- 676 0150 CA010000 		.4byte	.LASF22
+ 676 0150 46010000 		.4byte	.LASF22
  677 0154 07       		.byte	0x7
  678 0155 5C       		.byte	0x5c
  679 0156 2C000000 		.4byte	0x2c
@@ -1057,7 +1057,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  691 016e D5000000 		.4byte	0xd5
  692 0172 08       		.byte	0x8
  693 0173 0B       		.uleb128 0xb
- 694 0174 C5020000 		.4byte	.LASF25
+ 694 0174 41020000 		.4byte	.LASF25
  695 0178 07       		.byte	0x7
  696 0179 60       		.byte	0x60
  697 017a F3000000 		.4byte	0xf3
@@ -1070,7 +1070,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  704 018a 10       		.byte	0x10
  705 018b 00       		.byte	0
  706 018c 03       		.uleb128 0x3
- 707 018d F6020000 		.4byte	.LASF27
+ 707 018d FE020000 		.4byte	.LASF27
  708 0191 07       		.byte	0x7
  709 0192 62       		.byte	0x62
  710 0193 47010000 		.4byte	0x147
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  712 0198 6801     		.2byte	0x168
  713 019a 07       		.byte	0x7
  714 019b 74       		.byte	0x74
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 19
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 19
 
 
  715 019c CD010000 		.4byte	0x1cd
@@ -1113,9 +1113,9 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  744 01de 04       		.uleb128 0x4
  745 01df 04       		.byte	0x4
  746 01e0 07       		.byte	0x7
- 747 01e1 96010000 		.4byte	.LASF28
+ 747 01e1 12010000 		.4byte	.LASF28
  748 01e5 03       		.uleb128 0x3
- 749 01e6 83010000 		.4byte	.LASF29
+ 749 01e6 FF000000 		.4byte	.LASF29
  750 01ea 07       		.byte	0x7
  751 01eb 7A       		.byte	0x7a
  752 01ec 97010000 		.4byte	0x197
@@ -1125,20 +1125,20 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  756 01f4 2D       		.byte	0x2d
  757 01f5 1F020000 		.4byte	0x21f
  758 01f9 0B       		.uleb128 0xb
- 759 01fa B9020000 		.4byte	.LASF30
+ 759 01fa 35020000 		.4byte	.LASF30
  760 01fe 08       		.byte	0x8
  761 01ff 2F       		.byte	0x2f
  762 0200 1F020000 		.4byte	0x21f
  763 0204 00       		.byte	0
  764 0205 0B       		.uleb128 0xb
- 765 0206 F0020000 		.4byte	.LASF31
+ 765 0206 6C020000 		.4byte	.LASF31
  766 020a 08       		.byte	0x8
  767 020b 30       		.byte	0x30
  768 020c E5010000 		.4byte	0x1e5
  769 0210 08       		.byte	0x8
  770 0211 11       		.uleb128 0x11
- 771 0212 CC020000 		.4byte	.LASF32
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 20
+ 771 0212 48020000 		.4byte	.LASF32
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 20
 
 
  772 0216 08       		.byte	0x8
@@ -1152,14 +1152,14 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  780 0225 12       		.uleb128 0x12
  781 0226 8C010000 		.4byte	0x18c
  782 022a 03       		.uleb128 0x3
- 783 022b AD020000 		.4byte	.LASF33
+ 783 022b 29020000 		.4byte	.LASF33
  784 022f 08       		.byte	0x8
  785 0230 32       		.byte	0x32
  786 0231 F0010000 		.4byte	0x1f0
  787 0235 04       		.uleb128 0x4
  788 0236 01       		.byte	0x1
  789 0237 08       		.byte	0x8
- 790 0238 9D020000 		.4byte	.LASF34
+ 790 0238 19020000 		.4byte	.LASF34
  791 023c 13       		.uleb128 0x13
  792 023d 8A000000 		.4byte	.LASF35
  793 0241 01       		.byte	0x1
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  826 027e 01       		.byte	0x1
  827 027f 85       		.byte	0x85
  828 0280 2C000000 		.4byte	0x2c
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 21
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 21
 
 
  829 0284 02       		.uleb128 0x2
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  883 02e6 17       		.byte	0x17
  884 02e7 00000000 		.4byte	.LFB27
  885 02eb 12010000 		.4byte	.LFE27-.LFB27
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 22
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 22
 
 
  886 02ef 01       		.uleb128 0x1
@@ -1273,7 +1273,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  895 0301 91       		.byte	0x91
  896 0302 F47D     		.sleb128 -268
  897 0304 1A       		.uleb128 0x1a
- 898 0305 B9020000 		.4byte	.LASF30
+ 898 0305 35020000 		.4byte	.LASF30
  899 0309 03       		.byte	0x3
  900 030a 18       		.byte	0x18
  901 030b 1F020000 		.4byte	0x21f
@@ -1289,7 +1289,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  911 031f 91       		.byte	0x91
  912 0320 EC7D     		.sleb128 -276
  913 0322 1A       		.uleb128 0x1a
- 914 0323 AB010000 		.4byte	.LASF37
+ 914 0323 27010000 		.4byte	.LASF37
  915 0327 03       		.byte	0x3
  916 0328 19       		.byte	0x19
  917 0329 2C000000 		.4byte	0x2c
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  940 0350 2A020000 		.4byte	0x22a
  941 0354 0E       		.uleb128 0xe
  942 0355 A9000000 		.4byte	0xa9
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 23
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 23
 
 
  943 0359 64030000 		.4byte	0x364
@@ -1327,7 +1327,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  946 0362 7F       		.byte	0x7f
  947 0363 00       		.byte	0
  948 0364 19       		.uleb128 0x19
- 949 0365 BB010000 		.4byte	.LASF39
+ 949 0365 37010000 		.4byte	.LASF39
  950 0369 03       		.byte	0x3
  951 036a 47       		.byte	0x47
  952 036b 00000000 		.4byte	.LFB28
@@ -1352,7 +1352,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  971 0393 91       		.byte	0x91
  972 0394 70       		.sleb128 -16
  973 0395 1A       		.uleb128 0x1a
- 974 0396 90010000 		.4byte	.LASF41
+ 974 0396 0C010000 		.4byte	.LASF41
  975 039a 03       		.byte	0x3
  976 039b 47       		.byte	0x47
  977 039c 2C000000 		.4byte	0x2c
@@ -1361,7 +1361,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  980 03a2 6C       		.sleb128 -20
  981 03a3 00       		.byte	0
  982 03a4 19       		.uleb128 0x19
- 983 03a5 DA020000 		.4byte	.LASF42
+ 983 03a5 56020000 		.4byte	.LASF42
  984 03a9 03       		.byte	0x3
  985 03aa 4E       		.byte	0x4e
  986 03ab 00000000 		.4byte	.LFB29
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  997 03c5 91       		.byte	0x91
  998 03c6 B47F     		.sleb128 -76
  999 03c8 14       		.uleb128 0x14
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 24
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 24
 
 
  1000 03c9 6F757400 		.ascii	"out\000"
@@ -1389,7 +1389,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  1005 03d4 91       		.byte	0x91
  1006 03d5 B07F     		.sleb128 -80
  1007 03d7 1C       		.uleb128 0x1c
- 1008 03d8 BE020000 		.4byte	.LASF43
+ 1008 03d8 3A020000 		.4byte	.LASF43
  1009 03dc 03       		.byte	0x3
  1010 03dd 53       		.byte	0x53
  1011 03de E7030000 		.4byte	0x3e7
@@ -1405,7 +1405,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  1021 03f5 3F       		.byte	0x3f
  1022 03f6 00       		.byte	0
  1023 03f7 1D       		.uleb128 0x1d
- 1024 03f8 82020000 		.4byte	.LASF48
+ 1024 03f8 FE010000 		.4byte	.LASF48
  1025 03fc 03       		.byte	0x3
  1026 03fd 5C       		.byte	0x5c
  1027 03fe 00000000 		.4byte	.LFB30
@@ -1421,7 +1421,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  1037 0414 91       		.byte	0x91
  1038 0415 9C7A     		.sleb128 -740
  1039 0417 1A       		.uleb128 0x1a
- 1040 0418 AB010000 		.4byte	.LASF37
+ 1040 0418 27010000 		.4byte	.LASF37
  1041 041c 03       		.byte	0x3
  1042 041d 5C       		.byte	0x5c
  1043 041e 2C000000 		.4byte	0x2c
@@ -1437,8 +1437,8 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  1053 0432 91       		.byte	0x91
  1054 0433 947A     		.sleb128 -748
  1055 0435 1A       		.uleb128 0x1a
- 1056 0436 FF020000 		.4byte	.LASF44
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 25
+ 1056 0436 07030000 		.4byte	.LASF44
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 25
 
 
  1057 043a 03       		.byte	0x3
@@ -1456,7 +1456,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  1069 0450 91       		.byte	0x91
  1070 0451 00       		.sleb128 0
  1071 0452 1A       		.uleb128 0x1a
- 1072 0453 B9020000 		.4byte	.LASF30
+ 1072 0453 35020000 		.4byte	.LASF30
  1073 0457 03       		.byte	0x3
  1074 0458 5F       		.byte	0x5f
  1075 0459 1F020000 		.4byte	0x21f
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  1111 0014 24       		.uleb128 0x24
  1112 0015 00       		.byte	0
  1113 0016 0B       		.uleb128 0xb
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 26
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 26
 
 
  1114 0017 0B       		.uleb128 0xb
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  1168 004d 00       		.byte	0
  1169 004e 00       		.byte	0
  1170 004f 08       		.uleb128 0x8
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 27
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 27
 
 
  1171 0050 0F       		.uleb128 0xf
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  1225 0086 00       		.byte	0
  1226 0087 03       		.uleb128 0x3
  1227 0088 08       		.uleb128 0x8
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 28
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 28
 
 
  1228 0089 3A       		.uleb128 0x3a
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  1282 00bf 12       		.uleb128 0x12
  1283 00c0 26       		.uleb128 0x26
  1284 00c1 00       		.byte	0
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 29
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 29
 
 
  1285 00c2 49       		.uleb128 0x49
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  1339 00f9 03       		.uleb128 0x3
  1340 00fa 08       		.uleb128 0x8
  1341 00fb 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 30
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 30
 
 
  1342 00fc 0B       		.uleb128 0xb
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  1396 0133 40       		.uleb128 0x40
  1397 0134 18       		.uleb128 0x18
  1398 0135 9642     		.uleb128 0x2116
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 31
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 31
 
 
  1399 0137 19       		.uleb128 0x19
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  1453 016d 0B       		.uleb128 0xb
  1454 016e 27       		.uleb128 0x27
  1455 016f 19       		.uleb128 0x19
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 32
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 32
 
 
  1456 0170 11       		.uleb128 0x11
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  1507      FB0E0D00 
  1507      01010101 
  1508              	.LASF4:
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 33
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 33
 
 
  1509 0000 73697A65 		.ascii	"size_t\000"
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  1535 0091 5F5F7569 		.ascii	"__uint32_t\000"
  1535      6E743332 
  1535      5F7400
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 34
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 34
 
 
  1536              	.LASF0:
@@ -2017,136 +2017,136 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 1
  1550              	.LASF26:
  1551 00f8 64696765 		.ascii	"digest\000"
  1551      737400
- 1552              	.LASF47:
- 1553 00ff 443A5C44 		.ascii	"D:\\Dropbox\\5_kurs\\diploma\\led_lamp(for_diploma)"
- 1553      726F7062 
- 1553      6F785C35 
- 1553      5F6B7572 
- 1553      735C6469 
- 1554 012e 5C424C45 		.ascii	"\\BLE_Dynamic_GATT_Service_Configuration\\BLE_Dynam"
- 1554      5F44796E 
- 1554      616D6963 
- 1554      5F474154 
- 1554      545F5365 
- 1555 015f 69635F47 		.ascii	"ic_GATT_Service_Configuration.cydsn\000"
- 1555      4154545F 
- 1555      53657276 
- 1555      6963655F 
- 1555      436F6E66 
- 1556              	.LASF29:
- 1557 0183 63665F63 		.ascii	"cf_chash_ctx\000"
- 1557      68617368 
- 1557      5F637478 
+ 1552              	.LASF29:
+ 1553 00ff 63665F63 		.ascii	"cf_chash_ctx\000"
+ 1553      68617368 
+ 1553      5F637478 
+ 1553      00
+ 1554              	.LASF41:
+ 1555 010c 6E646174 		.ascii	"ndata\000"
+ 1555      6100
+ 1556              	.LASF28:
+ 1557 0112 73697A65 		.ascii	"sizetype\000"
+ 1557      74797065 
  1557      00
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 35
-
-
- 1558              	.LASF41:
- 1559 0190 6E646174 		.ascii	"ndata\000"
- 1559      6100
- 1560              	.LASF28:
- 1561 0196 73697A65 		.ascii	"sizetype\000"
- 1561      74797065 
+ 1558              	.LASF2:
+ 1559 011b 6C6F6E67 		.ascii	"long double\000"
+ 1559      20646F75 
+ 1559      626C6500 
+ 1560              	.LASF37:
+ 1561 0127 6E6B6579 		.ascii	"nkey\000"
  1561      00
- 1562              	.LASF2:
- 1563 019f 6C6F6E67 		.ascii	"long double\000"
- 1563      20646F75 
- 1563      626C6500 
- 1564              	.LASF37:
- 1565 01ab 6E6B6579 		.ascii	"nkey\000"
- 1565      00
- 1566              	.LASF13:
- 1567 01b0 5F5F7569 		.ascii	"__uint64_t\000"
- 1567      6E743634 
- 1567      5F7400
- 1568              	.LASF39:
- 1569 01bb 63665F68 		.ascii	"cf_hmac_update\000"
- 1569      6D61635F 
- 1569      75706461 
- 1569      746500
- 1570              	.LASF22:
- 1571 01ca 68617368 		.ascii	"hashsz\000"
- 1571      737A00
- 1572              	.LASF45:
- 1573 01d1 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1573      43313120 
- 1573      352E342E 
- 1573      31203230 
- 1573      31363036 
- 1574 0204 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 1574      20726576 
- 1574      6973696F 
- 1574      6E203233 
- 1574      37373135 
- 1575 0237 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects -fomit-fram"
- 1575      66756E63 
- 1575      74696F6E 
- 1575      2D736563 
- 1575      74696F6E 
- 1576 026a 652D706F 		.ascii	"e-pointer\000"
- 1576      696E7465 
- 1576      7200
- 1577              	.LASF6:
- 1578 0274 756E7369 		.ascii	"unsigned char\000"
- 1578      676E6564 
- 1578      20636861 
- 1578      7200
- 1579              	.LASF48:
- 1580 0282 63665F68 		.ascii	"cf_hmac\000"
- 1580      6D616300 
- 1581              	.LASF7:
- 1582 028a 73686F72 		.ascii	"short int\000"
- 1582      7420696E 
- 1582      7400
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccWhXCkS.s 			page 36
+ 1562              	.LASF13:
+ 1563 012c 5F5F7569 		.ascii	"__uint64_t\000"
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 35
 
 
- 1583              	.LASF17:
- 1584 0294 75696E74 		.ascii	"uint32_t\000"
- 1584      33325F74 
- 1584      00
- 1585              	.LASF34:
- 1586 029d 63686172 		.ascii	"char\000"
- 1586      00
- 1587              	.LASF8:
- 1588 02a2 5F5F7569 		.ascii	"__uint16_t\000"
- 1588      6E743136 
- 1588      5F7400
- 1589              	.LASF33:
- 1590 02ad 63665F68 		.ascii	"cf_hmac_ctx\000"
- 1590      6D61635F 
- 1590      63747800 
- 1591              	.LASF30:
- 1592 02b9 68617368 		.ascii	"hash\000"
- 1592      00
- 1593              	.LASF43:
- 1594 02be 696E6E65 		.ascii	"innerh\000"
- 1594      726800
- 1595              	.LASF25:
- 1596 02c5 75706461 		.ascii	"update\000"
- 1596      746500
- 1597              	.LASF32:
- 1598 02cc 6F757465 		.ascii	"outer\000"
- 1598      7200
- 1599              	.LASF15:
- 1600 02d2 75696E74 		.ascii	"uint8_t\000"
- 1600      385F7400 
- 1601              	.LASF42:
- 1602 02da 63665F68 		.ascii	"cf_hmac_finish\000"
- 1602      6D61635F 
- 1602      66696E69 
- 1602      736800
- 1603              	.LASF46:
- 1604 02e9 686D6163 		.ascii	"hmac.c\000"
- 1604      2E6300
- 1605              	.LASF31:
- 1606 02f0 696E6E65 		.ascii	"inner\000"
- 1606      7200
+ 1563      6E743634 
+ 1563      5F7400
+ 1564              	.LASF39:
+ 1565 0137 63665F68 		.ascii	"cf_hmac_update\000"
+ 1565      6D61635F 
+ 1565      75706461 
+ 1565      746500
+ 1566              	.LASF22:
+ 1567 0146 68617368 		.ascii	"hashsz\000"
+ 1567      737A00
+ 1568              	.LASF45:
+ 1569 014d 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1569      43313120 
+ 1569      352E342E 
+ 1569      31203230 
+ 1569      31363036 
+ 1570 0180 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1570      20726576 
+ 1570      6973696F 
+ 1570      6E203233 
+ 1570      37373135 
+ 1571 01b3 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects -fomit-fram"
+ 1571      66756E63 
+ 1571      74696F6E 
+ 1571      2D736563 
+ 1571      74696F6E 
+ 1572 01e6 652D706F 		.ascii	"e-pointer\000"
+ 1572      696E7465 
+ 1572      7200
+ 1573              	.LASF6:
+ 1574 01f0 756E7369 		.ascii	"unsigned char\000"
+ 1574      676E6564 
+ 1574      20636861 
+ 1574      7200
+ 1575              	.LASF48:
+ 1576 01fe 63665F68 		.ascii	"cf_hmac\000"
+ 1576      6D616300 
+ 1577              	.LASF7:
+ 1578 0206 73686F72 		.ascii	"short int\000"
+ 1578      7420696E 
+ 1578      7400
+ 1579              	.LASF17:
+ 1580 0210 75696E74 		.ascii	"uint32_t\000"
+ 1580      33325F74 
+ 1580      00
+ 1581              	.LASF34:
+ 1582 0219 63686172 		.ascii	"char\000"
+ 1582      00
+ 1583              	.LASF8:
+ 1584 021e 5F5F7569 		.ascii	"__uint16_t\000"
+ 1584      6E743136 
+ 1584      5F7400
+ 1585              	.LASF33:
+ 1586 0229 63665F68 		.ascii	"cf_hmac_ctx\000"
+ 1586      6D61635F 
+ 1586      63747800 
+ 1587              	.LASF30:
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccxkc8RS.s 			page 36
+
+
+ 1588 0235 68617368 		.ascii	"hash\000"
+ 1588      00
+ 1589              	.LASF43:
+ 1590 023a 696E6E65 		.ascii	"innerh\000"
+ 1590      726800
+ 1591              	.LASF25:
+ 1592 0241 75706461 		.ascii	"update\000"
+ 1592      746500
+ 1593              	.LASF32:
+ 1594 0248 6F757465 		.ascii	"outer\000"
+ 1594      7200
+ 1595              	.LASF15:
+ 1596 024e 75696E74 		.ascii	"uint8_t\000"
+ 1596      385F7400 
+ 1597              	.LASF42:
+ 1598 0256 63665F68 		.ascii	"cf_hmac_finish\000"
+ 1598      6D61635F 
+ 1598      66696E69 
+ 1598      736800
+ 1599              	.LASF46:
+ 1600 0265 686D6163 		.ascii	"hmac.c\000"
+ 1600      2E6300
+ 1601              	.LASF31:
+ 1602 026c 696E6E65 		.ascii	"inner\000"
+ 1602      7200
+ 1603              	.LASF47:
+ 1604 0272 443A5C44 		.ascii	"D:\\Dropbox\\6_kurs\\diploma\\crypto_miscocontrolle"
+ 1604      726F7062 
+ 1604      6F785C36 
+ 1604      5F6B7572 
+ 1604      735C6469 
+ 1605 02a1 725F5354 		.ascii	"r_STABLE\\BLE_Dynamic_GATT_Service_Configuration\\B"
+ 1605      41424C45 
+ 1605      5C424C45 
+ 1605      5F44796E 
+ 1605      616D6963 
+ 1606 02d2 4C455F44 		.ascii	"LE_Dynamic_GATT_Service_Configuration.cydsn\000"
+ 1606      796E616D 
+ 1606      69635F47 
+ 1606      4154545F 
+ 1606      53657276 
  1607              	.LASF27:
- 1608 02f6 63665F63 		.ascii	"cf_chash\000"
+ 1608 02fe 63665F63 		.ascii	"cf_chash\000"
  1608      68617368 
  1608      00
  1609              	.LASF44:
- 1610 02ff 6E6D7367 		.ascii	"nmsg\000"
+ 1610 0307 6E6D7367 		.ascii	"nmsg\000"
  1610      00
  1611              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

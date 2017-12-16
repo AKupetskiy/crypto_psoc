@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Source Files\AES_crypto\ak_aes_crypto.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\TopDesign">
 <ExpandedNodeIds>
 <v>BLE_Dynamic_GATT_Service_Configuration</v>
 <v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration</v>
@@ -74,6 +74,16 @@
 <v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Generated_Source</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
+<v>BLE_Dynamic_GATT_Service_Configuration</v>
+<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration</v>
+<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\TopDesign</v>
+<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydwr</v>
+<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydwr\Pins</v>
+<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydwr\Analog</v>
+<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydwr\DMA</v>
+<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydwr\Clocks</v>
+<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydwr\Interrupts</v>
+<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydwr\System</v>
 <v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydwr\Directives</v>
 <v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydwr\Flash Security</v>
 <v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Header files</v>
@@ -95,32 +105,6 @@
 <v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Header files\sha256.h</v>
 <v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Header files\types.h</v>
 <v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Header files\uECC.h</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Header files\uECC_vli.h</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Include</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Include\asm_arm.inc</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Include\asm_arm_mult_square.inc</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Include\asm_arm_mult_square_umaal.inc</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Include\asm_avr.inc</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Include\asm_avr_mult_square.inc</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Include\curve-specific.inc</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Include\platform-specific.inc</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Source Files</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Source Files\AES_crypto</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Source Files\AES_crypto\aes.c</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Source Files\AES_crypto\ak_aes_crypto.c</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Source Files\AES_crypto\blockwise.c</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Source Files\AES_crypto\cbcmac.c</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Source Files\AES_crypto\ccm.c</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Source Files\AES_crypto\chash.c</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Source Files\AES_crypto\gf128.c</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Source Files\AES_crypto\hmac.c</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Source Files\AES_crypto\modes.c</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Source Files\debug.c</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Source Files\ecc_crypto.c</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Source Files\main.c</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Source Files\sha256.c</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Source Files\uECC.c</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\Generated_Source</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="BLE_Dynamic_GATT_Service_Configuration">
@@ -227,21 +211,6 @@
 <v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
 <v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
 <v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\debug.lst</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\ecc_crypto.lst</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\gf128.lst</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\GREEN_LED.lst</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\GREEN_LED_PM.lst</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\hmac.lst</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\modes.lst</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\RED_LED.lst</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\RED_LED_PM.lst</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\sha256.lst</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\UART.lst</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_BOOT.lst</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_PM.lst</v>
-<v>BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_rx.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -291,17 +260,17 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
+<name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\sha256.c" />
+<name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\uECC.c" />
+<name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\ecc_crypto.c" />
+<name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\uECC.h" />
+<name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\TopDesign\TopDesign.cysch" />
+<name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\ak_aes_crypto.c" />
 <name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\main.c" />
+<name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\Generated_Source\PSoC4\BLE_eventHandler.c" />
+<name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\Generated_Source\PSoC4\BLE_custom.h" />
 <name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\Generated_Source\PSoC4\CyLib.c" />
 <name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\ak_aes_crypto.h" />
-<name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\ak_aes_crypto.c" />
-<name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\ecc_crypto.h" />
-<name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\ecc_crypto.c" />
-<name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\TopDesign\TopDesign.cysch" />
-<name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\aes.h" />
-<name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\uECC.c" />
-<name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\modes.h" />
-<name v=".\BLE_Dynamic_GATT_Service_Configuration.cydsn\ccm.c" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -309,7 +278,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1384, 893" SelectedTabbedMdiWindow="d8290b2f-1c1c-4b0e-8b8f-9b9b3555caf8"><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\main.c" Guid="ed2695d8-b533-47be-9eaf-bfda88367005" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\Generated_Source\PSoC4\CyLib.c" Guid="69634c2b-1b52-4ce4-b04f-5756db52f2c7" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\ak_aes_crypto.h" Guid="5759c932-7281-40db-a7e5-27163345b0e2" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\ak_aes_crypto.c" Guid="df2c6b0e-9196-4216-9e2c-eaa3b6b8fbc4" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\ecc_crypto.h" Guid="ad249ff2-8f46-47d9-824b-f6303c303274" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\ecc_crypto.c" Guid="def24682-d46e-4156-a691-4da571d5f5c5" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="a78ded0c-127b-4858-b40b-1cdc4892d0e9" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\TopDesign\TopDesign.cysch" Guid="e94ead67-9ab4-4135-b06b-127d33b7eb57" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\aes.h" Guid="6347bfcd-5df0-4908-ba57-af7c504cf6d0" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\uECC.c" Guid="8ff26021-fce8-40aa-b907-e3a021f00336" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\modes.h" Guid="9d075261-5fba-4b1c-84aa-363f99701932" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\ccm.c" Guid="d8290b2f-1c1c-4b0e-8b8f-9b9b3555caf8" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1448, 611" SelectedTabbedMdiWindow="69e629ef-0733-4f60-b59a-d8c3ab2fdce4"><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\sha256.c" Guid="4092c4ff-9533-4547-911a-5c11432b16d2" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\uECC.c" Guid="69058f9a-84ed-4e71-ac8b-8b6614800514" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\ecc_crypto.c" Guid="b431cefa-aaac-460c-8788-f38baa6d5fb3" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\uECC.h" Guid="688d63db-2904-4616-b771-92b00cff96cf" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\TopDesign\TopDesign.cysch" Guid="1b9111fe-b9b4-4c11-829a-6f40819e2274" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\ak_aes_crypto.c" Guid="6e115c3c-b74a-45c1-88b3-62554615e2e9" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\main.c" Guid="69e629ef-0733-4f60-b59a-d8c3ab2fdce4" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\Generated_Source\PSoC4\BLE_eventHandler.c" Guid="e5afc200-7d99-4a4a-9622-97c6f0392c92" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\Generated_Source\PSoC4\BLE_custom.h" Guid="fa68a458-bf64-4aa7-8426-6e0562528038" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\Generated_Source\PSoC4\CyLib.c" Guid="9f7d078d-7571-46dc-80a2-cf31016d0b40" /><DocumentWindow Key="D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\ak_aes_crypto.h" Guid="1f6a28d1-23bf-4820-9b8f-3f541e80f358" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
