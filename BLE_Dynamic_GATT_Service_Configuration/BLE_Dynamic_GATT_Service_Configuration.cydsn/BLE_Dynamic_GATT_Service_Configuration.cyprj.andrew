@@ -20,6 +20,22 @@
 <CyGuid_f44455c5-3770-4452-b988-0a7a7ff46256 type_name="CyDesigner.Common.ProjMgmt.Model.CyConfigDependencies" version="1">
 <dependency_info name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0" xml_contents_version="2">
 <CyGuid_1173175f-1b9b-4ad4-a065-754a48a27021 type_name="CyDesigner.Common.Base.CyFileDeps" version="1">
+<file name=".\CortexM0\ARM_GCC_541\Debug\ak_aes_crypto.o">
+<dep name=".\aes.h" />
+<dep name=".\ak_aes_crypto.c" />
+<dep name=".\ak_aes_crypto.h" />
+<dep name=".\handy.h" />
+<dep name=".\modes.h" />
+<dep name=".\prp.h" />
+<dep name=".\tassert.h" />
+</file>
+<file name=".\aes.h" />
+<file name=".\ak_aes_crypto.c" />
+<file name=".\ak_aes_crypto.h" />
+<file name=".\handy.h" />
+<file name=".\modes.h" />
+<file name=".\prp.h" />
+<file name=".\tassert.h" />
 <file name=".\CortexM0\ARM_GCC_541\Debug\main.o">
 <dep name=".\Generated_Source\PSoC4\BLE.h" />
 <dep name=".\Generated_Source\PSoC4\BLE_HAL_PVT.h" />
@@ -126,25 +142,77 @@
 <file name=".\Generated_Source\PSoC4\cypins.h" />
 <file name=".\Generated_Source\PSoC4\cytypes.h" />
 <file name=".\Generated_Source\PSoC4\project.h" />
-<file name=".\aes.h" />
-<file name=".\ak_aes_crypto.h" />
 <file name=".\ecc_crypto.h" />
 <file name=".\main.c" />
-<file name=".\prp.h" />
 <file name=".\uECC.h" />
-<file name=".\CortexM0\ARM_GCC_541\Debug\ak_aes_crypto.o">
+<file name=".\CortexM0\ARM_GCC_541\Debug\aes.o">
+<dep name=".\aes.c" />
 <dep name=".\aes.h" />
-<dep name=".\ak_aes_crypto.c" />
-<dep name=".\ak_aes_crypto.h" />
+<dep name=".\bitops.h" />
+<dep name=".\cf_config.h" />
+<dep name=".\handy.h" />
+<dep name=".\prp.h" />
+<dep name=".\tassert.h" />
+</file>
+<file name=".\aes.c" />
+<file name=".\bitops.h" />
+<file name=".\cf_config.h" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\blockwise.o">
+<dep name=".\bitops.h" />
+<dep name=".\blockwise.c" />
+<dep name=".\blockwise.h" />
+<dep name=".\handy.h" />
+<dep name=".\tassert.h" />
+</file>
+<file name=".\blockwise.c" />
+<file name=".\blockwise.h" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\cbcmac.o">
+<dep name=".\bitops.h" />
+<dep name=".\blockwise.h" />
+<dep name=".\cbcmac.c" />
+<dep name=".\gf128.h" />
 <dep name=".\handy.h" />
 <dep name=".\modes.h" />
 <dep name=".\prp.h" />
 <dep name=".\tassert.h" />
 </file>
-<file name=".\ak_aes_crypto.c" />
-<file name=".\handy.h" />
-<file name=".\modes.h" />
-<file name=".\tassert.h" />
+<file name=".\cbcmac.c" />
+<file name=".\gf128.h" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\ccm.o">
+<dep name=".\ccm.c" />
+<dep name=".\handy.h" />
+<dep name=".\modes.h" />
+<dep name=".\prp.h" />
+<dep name=".\tassert.h" />
+</file>
+<file name=".\ccm.c" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\chash.o">
+<dep name=".\chash.c" />
+<dep name=".\chash.h" />
+<dep name=".\handy.h" />
+<dep name=".\tassert.h" />
+</file>
+<file name=".\chash.c" />
+<file name=".\chash.h" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\hmac.o">
+<dep name=".\bitops.h" />
+<dep name=".\chash.h" />
+<dep name=".\handy.h" />
+<dep name=".\hmac.c" />
+<dep name=".\hmac.h" />
+<dep name=".\tassert.h" />
+</file>
+<file name=".\hmac.c" />
+<file name=".\hmac.h" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\modes.o">
+<dep name=".\bitops.h" />
+<dep name=".\blockwise.h" />
+<dep name=".\modes.c" />
+<dep name=".\modes.h" />
+<dep name=".\prp.h" />
+<dep name=".\tassert.h" />
+</file>
+<file name=".\modes.c" />
 <file name=".\CortexM0\ARM_GCC_541\Debug\BLE_gatt.o">
 <dep name=".\Generated_Source\PSoC4\BLE.h" />
 <dep name=".\Generated_Source\PSoC4\BLE_Stack.h" />
@@ -625,55 +693,6 @@
 <dep name=".\Generated_Source\PSoC4\cyutils.c" />
 </file>
 <file name=".\Generated_Source\PSoC4\cyutils.c" />
-<file name=".\CortexM0\ARM_GCC_541\Debug\aes.o">
-<dep name=".\aes.c" />
-<dep name=".\aes.h" />
-<dep name=".\bitops.h" />
-<dep name=".\cf_config.h" />
-<dep name=".\handy.h" />
-<dep name=".\prp.h" />
-<dep name=".\tassert.h" />
-</file>
-<file name=".\aes.c" />
-<file name=".\bitops.h" />
-<file name=".\cf_config.h" />
-<file name=".\CortexM0\ARM_GCC_541\Debug\blockwise.o">
-<dep name=".\bitops.h" />
-<dep name=".\blockwise.c" />
-<dep name=".\blockwise.h" />
-<dep name=".\handy.h" />
-<dep name=".\tassert.h" />
-</file>
-<file name=".\blockwise.c" />
-<file name=".\blockwise.h" />
-<file name=".\CortexM0\ARM_GCC_541\Debug\cbcmac.o">
-<dep name=".\bitops.h" />
-<dep name=".\blockwise.h" />
-<dep name=".\cbcmac.c" />
-<dep name=".\gf128.h" />
-<dep name=".\handy.h" />
-<dep name=".\modes.h" />
-<dep name=".\prp.h" />
-<dep name=".\tassert.h" />
-</file>
-<file name=".\cbcmac.c" />
-<file name=".\gf128.h" />
-<file name=".\CortexM0\ARM_GCC_541\Debug\ccm.o">
-<dep name=".\ccm.c" />
-<dep name=".\handy.h" />
-<dep name=".\modes.h" />
-<dep name=".\prp.h" />
-<dep name=".\tassert.h" />
-</file>
-<file name=".\ccm.c" />
-<file name=".\CortexM0\ARM_GCC_541\Debug\chash.o">
-<dep name=".\chash.c" />
-<dep name=".\chash.h" />
-<dep name=".\handy.h" />
-<dep name=".\tassert.h" />
-</file>
-<file name=".\chash.c" />
-<file name=".\chash.h" />
 <file name=".\CortexM0\ARM_GCC_541\Debug\debug.o">
 <dep name=".\Generated_Source\PSoC4\cmsis_armcc.h" />
 <dep name=".\Generated_Source\PSoC4\cmsis_compiler.h" />
@@ -791,25 +810,6 @@
 <dep name=".\gf128.h" />
 </file>
 <file name=".\gf128.c" />
-<file name=".\CortexM0\ARM_GCC_541\Debug\hmac.o">
-<dep name=".\bitops.h" />
-<dep name=".\chash.h" />
-<dep name=".\handy.h" />
-<dep name=".\hmac.c" />
-<dep name=".\hmac.h" />
-<dep name=".\tassert.h" />
-</file>
-<file name=".\hmac.c" />
-<file name=".\hmac.h" />
-<file name=".\CortexM0\ARM_GCC_541\Debug\modes.o">
-<dep name=".\bitops.h" />
-<dep name=".\blockwise.h" />
-<dep name=".\modes.c" />
-<dep name=".\modes.h" />
-<dep name=".\prp.h" />
-<dep name=".\tassert.h" />
-</file>
-<file name=".\modes.c" />
 <file name=".\CortexM0\ARM_GCC_541\Debug\sha256.o">
 <dep name=".\rotate-bits.h" />
 <dep name=".\sha256.c" />
@@ -1410,7 +1410,7 @@
 <dataGuid v="769d31ea-68b1-4f0c-b90a-7c10a43ee563">
 <CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563 type_name="CyDesigner.Common.ProjMgmt.Model.CyLinkCustomData" version="1">
 <link_deps_times>
-<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0" v="131579044365434131" />
+<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0" v="131581083031136353" />
 </link_deps_times>
 </CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563>
 </dataGuid>
@@ -1421,12 +1421,16 @@
 </dataGuid>
 <dataGuid v="504337dd-7d07-4bc7-9057-90e60cf6c469">
 <CyGuid_504337dd-7d07-4bc7-9057-90e60cf6c469 type_name="CyDesigner.Common.Debugger.CyBreakpointList" version="1">
-<debugger_breakpoint_list />
+<debugger_breakpoint_list>
+<CyGuid_76464711-0ae1-4583-b869-f07a0403fc6e type_name="CyDesigner.Common.Debugger.CyFileLineBreakpoint" version="1" hitcount="0" condition="" enabled="False" hardware="True" temparary="False" filename=".\ccm.c" linenumber="96" />
+</debugger_breakpoint_list>
 </CyGuid_504337dd-7d07-4bc7-9057-90e60cf6c469>
 </dataGuid>
 <dataGuid v="bf610382-39c6-441f-80b8-b04622ea7845">
 <CyGuid_bf610382-39c6-441f-80b8-b04622ea7845 type_name="CyDesigner.Common.Debugger.CyWatchedVariableList" version="1">
-<debugger_watch_list />
+<debugger_watch_list>
+<CyGuid_ccf7a56e-c00d-460c-82dd-56c8f54feb7f type_name="CyDesigner.Common.Debugger.CyWatchedVariableList+CyWatchedItem" version="1" window="0" name="aes_ccm_ctx" radix="Default" />
+</debugger_watch_list>
 </CyGuid_bf610382-39c6-441f-80b8-b04622ea7845>
 </dataGuid>
 </userData>

@@ -192,7 +192,6 @@ void clearSecret() {
 
 void clearAES() {
     ak_aes_finish(aes_ccm_ctx);
-    free(aes_ccm_ctx);   
 }
 
 void startRoutine()
@@ -502,6 +501,7 @@ void StackEventHandler(uint32 event, void *eventParam)
                 clearLocalKeys();
                 clearSecret();
                 clearAES();
+                failEncryptCount = 0;
             }
             break;
             

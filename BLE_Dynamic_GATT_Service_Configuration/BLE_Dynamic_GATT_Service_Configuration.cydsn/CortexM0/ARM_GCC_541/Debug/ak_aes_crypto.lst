@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 1
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 1
   29:handy.h       **** /* Swap two values.  Uses GCC type inference magic. */
   30:handy.h       **** #ifndef SWAP
   31:handy.h       ****   #define SWAP(x, y) \
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 2
 
 
   32:handy.h       ****     do { \
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 1
   47 0016 FFF7FEFF 		bl	memset
   66:handy.h       ****     (void) *((volatile uint8_t *) v);
   48              		.loc 1 66 0
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 3
 
 
   49 001a 019B     		ldr	r3, [sp, #4]
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 1
   83 000c DAB2     		uxtb	r2, r3
   84 000e 03AB     		add	r3, sp, #12
   85 0010 1A70     		strb	r2, [r3]
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 4
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 4
 
 
   19:ak_aes_crypto.c ****     ctr_array[1] = counter >> 16;
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 1
  133              	.LFB4:
   25:ak_aes_crypto.c **** 
   26:ak_aes_crypto.c **** void c_print(uint8_t *vli, unsigned int size) {
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 5
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 5
 
 
  134              		.loc 2 26 0
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 1
  180 003e C046     		nop
  181 0040 05B0     		add	sp, sp, #20
  182              		@ sp needed
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 6
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 6
 
 
  183 0042 00BD     		pop	{pc}
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 1
   40:ak_aes_crypto.c ****     ctx->counter = 0;
  225              		.loc 2 40 0
  226 0016 039B     		ldr	r3, [sp, #12]
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 7
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 7
 
 
  227 0018 0022     		movs	r2, #0
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 1
  265              		.loc 2 56 0
  266 0064 F420     		movs	r0, #244
  267 0066 FFF7FEFF 		bl	malloc
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 8
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 8
 
 
  268 006a 0300     		movs	r3, r0
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 1
  310              		.section	.text.ak_aes_finish,"ax",%progbits
  311              		.align	2
  312              		.global	ak_aes_finish
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 9
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 9
 
 
  313              		.code	16
@@ -499,2125 +499,2119 @@ ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 1
  325 0002 83B0     		sub	sp, sp, #12
  326              		.cfi_def_cfa_offset 16
  327 0004 0190     		str	r0, [sp, #4]
-  72:ak_aes_crypto.c ****     free(ctx->nonce);
+  72:ak_aes_crypto.c ****     cf_aes_finish(ctx->ccm_ctx);
  328              		.loc 2 72 0
  329 0006 019B     		ldr	r3, [sp, #4]
- 330 0008 0433     		adds	r3, r3, #4
+ 330 0008 5B69     		ldr	r3, [r3, #20]
  331 000a 1800     		movs	r0, r3
- 332 000c FFF7FEFF 		bl	free
-  73:ak_aes_crypto.c ****     free(ctx->ccm_ctx);
+ 332 000c FFF7FEFF 		bl	cf_aes_finish
+  73:ak_aes_crypto.c ****     mem_clean(ctx, sizeof *ctx);
  333              		.loc 2 73 0
  334 0010 019B     		ldr	r3, [sp, #4]
- 335 0012 5B69     		ldr	r3, [r3, #20]
+ 335 0012 1821     		movs	r1, #24
  336 0014 1800     		movs	r0, r3
- 337 0016 FFF7FEFF 		bl	free
-  74:ak_aes_crypto.c ****     mem_clean(ctx, sizeof *ctx);
+ 337 0016 FFF7FEFF 		bl	mem_clean
+  74:ak_aes_crypto.c **** }
  338              		.loc 2 74 0
- 339 001a 019B     		ldr	r3, [sp, #4]
- 340 001c 1821     		movs	r1, #24
- 341 001e 1800     		movs	r0, r3
- 342 0020 FFF7FEFF 		bl	mem_clean
-  75:ak_aes_crypto.c **** }
- 343              		.loc 2 75 0
- 344 0024 C046     		nop
- 345 0026 03B0     		add	sp, sp, #12
- 346              		@ sp needed
- 347 0028 00BD     		pop	{pc}
- 348              		.cfi_endproc
- 349              	.LFE6:
- 350              		.size	ak_aes_finish, .-ak_aes_finish
- 351 002a C046     		.section	.rodata
- 352 0027 00       		.align	2
- 353              	.LC10:
- 354 0028 636F756E 		.ascii	"counter = %d\015\012\000"
- 354      74657220 
- 354      3D202564 
- 354      0D0A00
- 355              		.section	.text.ak_aes_encrypt,"ax",%progbits
- 356              		.align	2
- 357              		.global	ak_aes_encrypt
- 358              		.code	16
- 359              		.thumb_func
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 10
+ 339 001a C046     		nop
+ 340 001c 03B0     		add	sp, sp, #12
+ 341              		@ sp needed
+ 342 001e 00BD     		pop	{pc}
+ 343              		.cfi_endproc
+ 344              	.LFE6:
+ 345              		.size	ak_aes_finish, .-ak_aes_finish
+ 346              		.section	.rodata
+ 347 0027 00       		.align	2
+ 348              	.LC10:
+ 349 0028 636F756E 		.ascii	"counter = %d\015\012\000"
+ 349      74657220 
+ 349      3D202564 
+ 349      0D0A00
+ 350              		.section	.text.ak_aes_encrypt,"ax",%progbits
+ 351              		.align	2
+ 352              		.global	ak_aes_encrypt
+ 353              		.code	16
+ 354              		.thumb_func
+ 355              		.type	ak_aes_encrypt, %function
+ 356              	ak_aes_encrypt:
+ 357              	.LFB7:
+  75:ak_aes_crypto.c **** 
+  76:ak_aes_crypto.c **** //----------------------------------------------------------------------
+  77:ak_aes_crypto.c **** 
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 10
 
 
- 360              		.type	ak_aes_encrypt, %function
- 361              	ak_aes_encrypt:
- 362              	.LFB7:
-  76:ak_aes_crypto.c **** 
-  77:ak_aes_crypto.c **** //----------------------------------------------------------------------
-  78:ak_aes_crypto.c **** 
-  79:ak_aes_crypto.c **** void ak_aes_encrypt(ak_aes_context *ctx,
-  80:ak_aes_crypto.c ****                     const uint8_t *plain_data, size_t plain_data_size,
-  81:ak_aes_crypto.c ****                     uint8_t *encrypted_data,
-  82:ak_aes_crypto.c ****                     uint8_t *tag, size_t ntag) {
- 363              		.loc 2 82 0
- 364              		.cfi_startproc
- 365              		@ args = 8, pretend = 0, frame = 16
- 366              		@ frame_needed = 0, uses_anonymous_args = 0
- 367 0000 30B5     		push	{r4, r5, lr}
- 368              		.cfi_def_cfa_offset 12
- 369              		.cfi_offset 4, -12
- 370              		.cfi_offset 5, -8
- 371              		.cfi_offset 14, -4
- 372 0002 8DB0     		sub	sp, sp, #52
- 373              		.cfi_def_cfa_offset 64
- 374 0004 0B90     		str	r0, [sp, #44]
- 375 0006 0A91     		str	r1, [sp, #40]
- 376 0008 0992     		str	r2, [sp, #36]
- 377 000a 0893     		str	r3, [sp, #32]
-  83:ak_aes_crypto.c ****     
-  84:ak_aes_crypto.c ****     printf("nonce = \r\n");
- 378              		.loc 2 84 0
- 379 000c 1D4B     		ldr	r3, .L15
- 380 000e 1800     		movs	r0, r3
- 381 0010 FFF7FEFF 		bl	puts
-  85:ak_aes_crypto.c ****     c_print(ctx->nonce, 13);
- 382              		.loc 2 85 0
- 383 0014 0B9B     		ldr	r3, [sp, #44]
- 384 0016 0433     		adds	r3, r3, #4
- 385 0018 0D21     		movs	r1, #13
- 386 001a 1800     		movs	r0, r3
- 387 001c FFF7FEFF 		bl	c_print
-  86:ak_aes_crypto.c ****     
-  87:ak_aes_crypto.c ****     //apply counter value onto it
-  88:ak_aes_crypto.c ****     append_counter_to_nonce(ctx->nonce, ctx->counter);
- 388              		.loc 2 88 0
- 389 0020 0B9B     		ldr	r3, [sp, #44]
- 390 0022 1A1D     		adds	r2, r3, #4
- 391 0024 0B9B     		ldr	r3, [sp, #44]
- 392 0026 1B68     		ldr	r3, [r3]
- 393 0028 1900     		movs	r1, r3
- 394 002a 1000     		movs	r0, r2
- 395 002c FFF7FEFF 		bl	append_counter_to_nonce
-  89:ak_aes_crypto.c ****     
-  90:ak_aes_crypto.c ****     cf_ccm_encrypt(&cf_aes, ctx->ccm_ctx,
- 396              		.loc 2 90 0
- 397 0030 0B9B     		ldr	r3, [sp, #44]
- 398 0032 5969     		ldr	r1, [r3, #20]
-  91:ak_aes_crypto.c ****                    plain_data, plain_data_size, L_SIZE,
-  92:ak_aes_crypto.c ****                    NULL, 0,
-  93:ak_aes_crypto.c ****                    ctx->nonce, NONCE_SIZE,
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 11
-
-
- 399              		.loc 2 93 0
- 400 0034 0B9B     		ldr	r3, [sp, #44]
- 401 0036 0433     		adds	r3, r3, #4
+  78:ak_aes_crypto.c **** void ak_aes_encrypt(ak_aes_context *ctx,
+  79:ak_aes_crypto.c ****                     const uint8_t *plain_data, size_t plain_data_size,
+  80:ak_aes_crypto.c ****                     uint8_t *encrypted_data,
+  81:ak_aes_crypto.c ****                     uint8_t *tag, size_t ntag) {
+ 358              		.loc 2 81 0
+ 359              		.cfi_startproc
+ 360              		@ args = 8, pretend = 0, frame = 16
+ 361              		@ frame_needed = 0, uses_anonymous_args = 0
+ 362 0000 30B5     		push	{r4, r5, lr}
+ 363              		.cfi_def_cfa_offset 12
+ 364              		.cfi_offset 4, -12
+ 365              		.cfi_offset 5, -8
+ 366              		.cfi_offset 14, -4
+ 367 0002 8DB0     		sub	sp, sp, #52
+ 368              		.cfi_def_cfa_offset 64
+ 369 0004 0B90     		str	r0, [sp, #44]
+ 370 0006 0A91     		str	r1, [sp, #40]
+ 371 0008 0992     		str	r2, [sp, #36]
+ 372 000a 0893     		str	r3, [sp, #32]
+  82:ak_aes_crypto.c ****     
+  83:ak_aes_crypto.c ****     printf("nonce = \r\n");
+ 373              		.loc 2 83 0
+ 374 000c 1D4B     		ldr	r3, .L15
+ 375 000e 1800     		movs	r0, r3
+ 376 0010 FFF7FEFF 		bl	puts
+  84:ak_aes_crypto.c ****     c_print(ctx->nonce, 13);
+ 377              		.loc 2 84 0
+ 378 0014 0B9B     		ldr	r3, [sp, #44]
+ 379 0016 0433     		adds	r3, r3, #4
+ 380 0018 0D21     		movs	r1, #13
+ 381 001a 1800     		movs	r0, r3
+ 382 001c FFF7FEFF 		bl	c_print
+  85:ak_aes_crypto.c ****     
+  86:ak_aes_crypto.c ****     //apply counter value onto it
+  87:ak_aes_crypto.c ****     append_counter_to_nonce(ctx->nonce, ctx->counter);
+ 383              		.loc 2 87 0
+ 384 0020 0B9B     		ldr	r3, [sp, #44]
+ 385 0022 1A1D     		adds	r2, r3, #4
+ 386 0024 0B9B     		ldr	r3, [sp, #44]
+ 387 0026 1B68     		ldr	r3, [r3]
+ 388 0028 1900     		movs	r1, r3
+ 389 002a 1000     		movs	r0, r2
+ 390 002c FFF7FEFF 		bl	append_counter_to_nonce
+  88:ak_aes_crypto.c ****     
+  89:ak_aes_crypto.c ****     cf_ccm_encrypt(&cf_aes, ctx->ccm_ctx,
+ 391              		.loc 2 89 0
+ 392 0030 0B9B     		ldr	r3, [sp, #44]
+ 393 0032 5969     		ldr	r1, [r3, #20]
   90:ak_aes_crypto.c ****                    plain_data, plain_data_size, L_SIZE,
- 402              		.loc 2 90 0
- 403 0038 099D     		ldr	r5, [sp, #36]
- 404 003a 0A9C     		ldr	r4, [sp, #40]
- 405 003c 1248     		ldr	r0, .L15+4
- 406 003e 119A     		ldr	r2, [sp, #68]
- 407 0040 0792     		str	r2, [sp, #28]
- 408 0042 109A     		ldr	r2, [sp, #64]
- 409 0044 0692     		str	r2, [sp, #24]
- 410 0046 089A     		ldr	r2, [sp, #32]
- 411 0048 0592     		str	r2, [sp, #20]
- 412 004a 0D22     		movs	r2, #13
- 413 004c 0492     		str	r2, [sp, #16]
- 414 004e 0393     		str	r3, [sp, #12]
- 415 0050 0023     		movs	r3, #0
- 416 0052 0293     		str	r3, [sp, #8]
- 417 0054 0023     		movs	r3, #0
- 418 0056 0193     		str	r3, [sp, #4]
- 419 0058 0223     		movs	r3, #2
- 420 005a 0093     		str	r3, [sp]
- 421 005c 2B00     		movs	r3, r5
- 422 005e 2200     		movs	r2, r4
- 423 0060 FFF7FEFF 		bl	cf_ccm_encrypt
-  94:ak_aes_crypto.c ****                    encrypted_data,
-  95:ak_aes_crypto.c ****                    tag, ntag);
-  96:ak_aes_crypto.c ****     
-  97:ak_aes_crypto.c ****     //increment counter
-  98:ak_aes_crypto.c ****     ctx->counter = ctx->counter + 1;
- 424              		.loc 2 98 0
- 425 0064 0B9B     		ldr	r3, [sp, #44]
- 426 0066 1B68     		ldr	r3, [r3]
- 427 0068 5A1C     		adds	r2, r3, #1
- 428 006a 0B9B     		ldr	r3, [sp, #44]
- 429 006c 1A60     		str	r2, [r3]
-  99:ak_aes_crypto.c ****     printf("counter = %d\r\n", ctx->counter);
- 430              		.loc 2 99 0
- 431 006e 0B9B     		ldr	r3, [sp, #44]
- 432 0070 1A68     		ldr	r2, [r3]
- 433 0072 064B     		ldr	r3, .L15+8
- 434 0074 1100     		movs	r1, r2
- 435 0076 1800     		movs	r0, r3
- 436 0078 FFF7FEFF 		bl	printf
- 100:ak_aes_crypto.c ****     
- 101:ak_aes_crypto.c **** }
- 437              		.loc 2 101 0
- 438 007c C046     		nop
- 439 007e 0DB0     		add	sp, sp, #52
- 440              		@ sp needed
- 441 0080 30BD     		pop	{r4, r5, pc}
- 442              	.L16:
- 443 0082 C046     		.align	2
- 444              	.L15:
- 445 0084 0C000000 		.word	.LC4
- 446 0088 00000000 		.word	cf_aes
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 12
-
-
- 447 008c 28000000 		.word	.LC10
- 448              		.cfi_endproc
- 449              	.LFE7:
- 450              		.size	ak_aes_encrypt, .-ak_aes_encrypt
- 451              		.section	.text.ak_aes_decrypt,"ax",%progbits
- 452              		.align	2
- 453              		.global	ak_aes_decrypt
- 454              		.code	16
- 455              		.thumb_func
- 456              		.type	ak_aes_decrypt, %function
- 457              	ak_aes_decrypt:
- 458              	.LFB8:
- 102:ak_aes_crypto.c **** 
- 103:ak_aes_crypto.c **** int ak_aes_decrypt(ak_aes_context *ctx,
- 104:ak_aes_crypto.c ****                    const uint8_t *encrypted_data, size_t encrypted_data_size,
- 105:ak_aes_crypto.c ****                    const uint8_t *tag, size_t ntag,
- 106:ak_aes_crypto.c ****                    uint8_t *plain_data) {
- 459              		.loc 2 106 0
- 460              		.cfi_startproc
- 461              		@ args = 8, pretend = 0, frame = 24
- 462              		@ frame_needed = 0, uses_anonymous_args = 0
- 463 0000 30B5     		push	{r4, r5, lr}
- 464              		.cfi_def_cfa_offset 12
- 465              		.cfi_offset 4, -12
- 466              		.cfi_offset 5, -8
- 467              		.cfi_offset 14, -4
- 468 0002 8FB0     		sub	sp, sp, #60
- 469              		.cfi_def_cfa_offset 72
- 470 0004 0B90     		str	r0, [sp, #44]
- 471 0006 0A91     		str	r1, [sp, #40]
- 472 0008 0992     		str	r2, [sp, #36]
- 473 000a 0893     		str	r3, [sp, #32]
- 107:ak_aes_crypto.c ****     
- 108:ak_aes_crypto.c ****     printf("nonce = \r\n");
- 474              		.loc 2 108 0
- 475 000c 1F4B     		ldr	r3, .L19
- 476 000e 1800     		movs	r0, r3
- 477 0010 FFF7FEFF 		bl	puts
- 109:ak_aes_crypto.c ****     c_print(ctx->nonce, 13);
- 478              		.loc 2 109 0
- 479 0014 0B9B     		ldr	r3, [sp, #44]
- 480 0016 0433     		adds	r3, r3, #4
- 481 0018 0D21     		movs	r1, #13
- 482 001a 1800     		movs	r0, r3
- 483 001c FFF7FEFF 		bl	c_print
- 110:ak_aes_crypto.c ****     
- 111:ak_aes_crypto.c ****     //apply counter value onto it
- 112:ak_aes_crypto.c ****     append_counter_to_nonce(ctx->nonce, ctx->counter);
- 484              		.loc 2 112 0
- 485 0020 0B9B     		ldr	r3, [sp, #44]
- 486 0022 1A1D     		adds	r2, r3, #4
- 487 0024 0B9B     		ldr	r3, [sp, #44]
- 488 0026 1B68     		ldr	r3, [r3]
- 489 0028 1900     		movs	r1, r3
- 490 002a 1000     		movs	r0, r2
- 491 002c FFF7FEFF 		bl	append_counter_to_nonce
- 113:ak_aes_crypto.c ****     
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 13
-
-
- 114:ak_aes_crypto.c ****     int err = 0;
- 492              		.loc 2 114 0
- 493 0030 0023     		movs	r3, #0
- 494 0032 0D93     		str	r3, [sp, #52]
- 115:ak_aes_crypto.c ****     err = cf_ccm_decrypt(&cf_aes, ctx->ccm_ctx,
- 495              		.loc 2 115 0
- 496 0034 0B9B     		ldr	r3, [sp, #44]
- 497 0036 5969     		ldr	r1, [r3, #20]
- 116:ak_aes_crypto.c ****                          encrypted_data, encrypted_data_size, L_SIZE,
- 117:ak_aes_crypto.c ****                          NULL, 0,
- 118:ak_aes_crypto.c ****                          ctx->nonce, NONCE_SIZE,
- 498              		.loc 2 118 0
- 499 0038 0B9B     		ldr	r3, [sp, #44]
- 500 003a 0433     		adds	r3, r3, #4
- 115:ak_aes_crypto.c ****     err = cf_ccm_decrypt(&cf_aes, ctx->ccm_ctx,
- 501              		.loc 2 115 0
- 502 003c 099D     		ldr	r5, [sp, #36]
- 503 003e 0A9C     		ldr	r4, [sp, #40]
- 504 0040 1348     		ldr	r0, .L19+4
- 505 0042 139A     		ldr	r2, [sp, #76]
- 506 0044 0792     		str	r2, [sp, #28]
- 507 0046 129A     		ldr	r2, [sp, #72]
- 508 0048 0692     		str	r2, [sp, #24]
- 509 004a 089A     		ldr	r2, [sp, #32]
- 510 004c 0592     		str	r2, [sp, #20]
- 511 004e 0D22     		movs	r2, #13
- 512 0050 0492     		str	r2, [sp, #16]
- 513 0052 0393     		str	r3, [sp, #12]
- 514 0054 0023     		movs	r3, #0
- 515 0056 0293     		str	r3, [sp, #8]
- 516 0058 0023     		movs	r3, #0
- 517 005a 0193     		str	r3, [sp, #4]
- 518 005c 0223     		movs	r3, #2
- 519 005e 0093     		str	r3, [sp]
- 520 0060 2B00     		movs	r3, r5
- 521 0062 2200     		movs	r2, r4
- 522 0064 FFF7FEFF 		bl	cf_ccm_decrypt
- 523 0068 0300     		movs	r3, r0
- 524 006a 0D93     		str	r3, [sp, #52]
- 119:ak_aes_crypto.c ****                          tag, ntag,
- 120:ak_aes_crypto.c ****                          plain_data);
- 121:ak_aes_crypto.c ****     
- 122:ak_aes_crypto.c ****     //increment counter
- 123:ak_aes_crypto.c ****     ctx->counter = ctx->counter + 1;
- 525              		.loc 2 123 0
- 526 006c 0B9B     		ldr	r3, [sp, #44]
- 527 006e 1B68     		ldr	r3, [r3]
- 528 0070 5A1C     		adds	r2, r3, #1
- 529 0072 0B9B     		ldr	r3, [sp, #44]
- 530 0074 1A60     		str	r2, [r3]
- 124:ak_aes_crypto.c ****     printf("counter = %d\r\n", ctx->counter);
- 531              		.loc 2 124 0
- 532 0076 0B9B     		ldr	r3, [sp, #44]
- 533 0078 1A68     		ldr	r2, [r3]
- 534 007a 064B     		ldr	r3, .L19+8
- 535 007c 1100     		movs	r1, r2
- 536 007e 1800     		movs	r0, r3
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 14
-
-
- 537 0080 FFF7FEFF 		bl	printf
- 125:ak_aes_crypto.c ****     return err;
- 538              		.loc 2 125 0
- 539 0084 0D9B     		ldr	r3, [sp, #52]
- 126:ak_aes_crypto.c **** }
- 540              		.loc 2 126 0
- 541 0086 1800     		movs	r0, r3
- 542 0088 0FB0     		add	sp, sp, #60
- 543              		@ sp needed
- 544 008a 30BD     		pop	{r4, r5, pc}
- 545              	.L20:
- 546              		.align	2
- 547              	.L19:
- 548 008c 0C000000 		.word	.LC4
- 549 0090 00000000 		.word	cf_aes
- 550 0094 28000000 		.word	.LC10
- 551              		.cfi_endproc
- 552              	.LFE8:
- 553              		.size	ak_aes_decrypt, .-ak_aes_decrypt
- 554              		.section	.rodata
- 555 0037 00       		.align	2
- 556              	.LC15:
- 557 0038 74616720 		.ascii	"tag = \015\000"
- 557      3D200D00 
- 558              		.align	2
- 559              	.LC17:
- 560 0040 656E6372 		.ascii	"encrypted message = \015\000"
- 560      79707465 
- 560      64206D65 
- 560      73736167 
- 560      65203D20 
- 561 0056 0000     		.align	2
- 562              	.LC19:
- 563 0058 7061636B 		.ascii	"package = \015\000"
- 563      61676520 
- 563      3D200D00 
- 564              		.section	.text.ak_aes_encrypt_and_pack,"ax",%progbits
- 565              		.align	2
- 566              		.global	ak_aes_encrypt_and_pack
- 567              		.code	16
- 568              		.thumb_func
- 569              		.type	ak_aes_encrypt_and_pack, %function
- 570              	ak_aes_encrypt_and_pack:
- 571              	.LFB9:
- 127:ak_aes_crypto.c **** 
- 128:ak_aes_crypto.c **** // -------------------------------------------------------------------
- 129:ak_aes_crypto.c **** 
- 130:ak_aes_crypto.c **** void ak_aes_encrypt_and_pack(ak_aes_context *ctx,
- 131:ak_aes_crypto.c ****                              const uint8_t *plain_data, size_t plain_data_size,
- 132:ak_aes_crypto.c ****                              uint8_t *package, uint8_t *package_size) {
- 572              		.loc 2 132 0
- 573              		.cfi_startproc
- 574              		@ args = 4, pretend = 0, frame = 72
- 575              		@ frame_needed = 1, uses_anonymous_args = 0
- 576 0000 F0B5     		push	{r4, r5, r6, r7, lr}
- 577              		.cfi_def_cfa_offset 20
- 578              		.cfi_offset 4, -20
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 15
-
-
- 579              		.cfi_offset 5, -16
- 580              		.cfi_offset 6, -12
- 581              		.cfi_offset 7, -8
- 582              		.cfi_offset 14, -4
- 583 0002 95B0     		sub	sp, sp, #84
- 584              		.cfi_def_cfa_offset 104
- 585 0004 02AF     		add	r7, sp, #8
- 586              		.cfi_def_cfa 7, 96
- 587 0006 F862     		str	r0, [r7, #44]
- 588 0008 B962     		str	r1, [r7, #40]
- 589 000a 7A62     		str	r2, [r7, #36]
- 590 000c 3B62     		str	r3, [r7, #32]
- 591              		.loc 2 132 0
- 592 000e 6B46     		mov	r3, sp
- 593 0010 7B60     		str	r3, [r7, #4]
- 133:ak_aes_crypto.c ****     uint8_t encrypted_data[plain_data_size], tag[TAG_SIZE];
- 594              		.loc 2 133 0
- 595 0012 7B6A     		ldr	r3, [r7, #36]
- 596 0014 1A00     		movs	r2, r3
- 597 0016 013A     		subs	r2, r2, #1
- 598 0018 7A64     		str	r2, [r7, #68]
- 599 001a 3B61     		str	r3, [r7, #16]
- 600 001c 0022     		movs	r2, #0
- 601 001e 7A61     		str	r2, [r7, #20]
- 602 0020 3869     		ldr	r0, [r7, #16]
- 603 0022 7969     		ldr	r1, [r7, #20]
- 604 0024 0200     		movs	r2, r0
- 605 0026 520F     		lsrs	r2, r2, #29
- 606 0028 0E00     		movs	r6, r1
- 607 002a F600     		lsls	r6, r6, #3
- 608 002c FE61     		str	r6, [r7, #28]
- 609 002e FE69     		ldr	r6, [r7, #28]
- 610 0030 1643     		orrs	r6, r2
- 611 0032 FE61     		str	r6, [r7, #28]
- 612 0034 0200     		movs	r2, r0
- 613 0036 D200     		lsls	r2, r2, #3
- 614 0038 BA61     		str	r2, [r7, #24]
- 615 003a BB60     		str	r3, [r7, #8]
- 616 003c 0022     		movs	r2, #0
- 617 003e FA60     		str	r2, [r7, #12]
- 618 0040 B868     		ldr	r0, [r7, #8]
- 619 0042 F968     		ldr	r1, [r7, #12]
- 620 0044 0200     		movs	r2, r0
- 621 0046 520F     		lsrs	r2, r2, #29
- 622 0048 0E00     		movs	r6, r1
- 623 004a F500     		lsls	r5, r6, #3
- 624 004c 1543     		orrs	r5, r2
- 625 004e 0200     		movs	r2, r0
- 626 0050 D400     		lsls	r4, r2, #3
- 627 0052 0733     		adds	r3, r3, #7
- 628 0054 DB08     		lsrs	r3, r3, #3
- 629 0056 DB00     		lsls	r3, r3, #3
- 630 0058 6A46     		mov	r2, sp
- 631 005a D31A     		subs	r3, r2, r3
- 632 005c 9D46     		mov	sp, r3
- 633 005e 02AB     		add	r3, sp, #8
- 634 0060 0033     		adds	r3, r3, #0
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 16
-
-
- 635 0062 3B64     		str	r3, [r7, #64]
- 134:ak_aes_crypto.c ****     //apply counter value onto it
- 135:ak_aes_crypto.c ****     
- 136:ak_aes_crypto.c ****     ak_aes_encrypt(ctx, plain_data, plain_data_size, encrypted_data, tag, TAG_SIZE);
- 636              		.loc 2 136 0
- 637 0064 3C6C     		ldr	r4, [r7, #64]
- 638 0066 7A6A     		ldr	r2, [r7, #36]
- 639 0068 B96A     		ldr	r1, [r7, #40]
- 640 006a F86A     		ldr	r0, [r7, #44]
- 641 006c 1023     		movs	r3, #16
- 642 006e 0193     		str	r3, [sp, #4]
- 643 0070 1023     		movs	r3, #16
- 644 0072 2025     		movs	r5, #32
- 645 0074 AC46     		mov	ip, r5
- 646 0076 BC44     		add	ip, ip, r7
- 647 0078 6344     		add	r3, r3, ip
- 648 007a 0093     		str	r3, [sp]
- 649 007c 2300     		movs	r3, r4
- 650 007e FFF7FEFF 		bl	ak_aes_encrypt
- 137:ak_aes_crypto.c ****     
- 138:ak_aes_crypto.c ****     printf("tag = \r\n");
- 651              		.loc 2 138 0
- 652 0082 1E4B     		ldr	r3, .L22
- 653 0084 1800     		movs	r0, r3
- 654 0086 FFF7FEFF 		bl	puts
- 139:ak_aes_crypto.c ****     c_print(tag, TAG_SIZE);
- 655              		.loc 2 139 0
- 656 008a 1023     		movs	r3, #16
- 657 008c 2022     		movs	r2, #32
- 658 008e 9446     		mov	ip, r2
- 659 0090 BC44     		add	ip, ip, r7
- 660 0092 6344     		add	r3, r3, ip
- 661 0094 1021     		movs	r1, #16
- 662 0096 1800     		movs	r0, r3
- 663 0098 FFF7FEFF 		bl	c_print
- 140:ak_aes_crypto.c ****     
- 141:ak_aes_crypto.c ****     printf("encrypted message = \r\n");
- 664              		.loc 2 141 0
- 665 009c 184B     		ldr	r3, .L22+4
- 666 009e 1800     		movs	r0, r3
- 667 00a0 FFF7FEFF 		bl	puts
- 142:ak_aes_crypto.c ****     c_print(encrypted_data, plain_data_size);
- 668              		.loc 2 142 0
- 669 00a4 3B6C     		ldr	r3, [r7, #64]
- 670 00a6 7A6A     		ldr	r2, [r7, #36]
- 671 00a8 1100     		movs	r1, r2
- 672 00aa 1800     		movs	r0, r3
- 673 00ac FFF7FEFF 		bl	c_print
- 143:ak_aes_crypto.c ****     
- 144:ak_aes_crypto.c ****     // copy tag first
- 145:ak_aes_crypto.c ****     memcpy(package, tag, TAG_SIZE);
- 674              		.loc 2 145 0
- 675 00b0 3A6A     		ldr	r2, [r7, #32]
- 676 00b2 1023     		movs	r3, #16
- 677 00b4 2021     		movs	r1, #32
- 678 00b6 8C46     		mov	ip, r1
- 679 00b8 BC44     		add	ip, ip, r7
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 17
-
-
- 680 00ba 6344     		add	r3, r3, ip
- 681 00bc 1000     		movs	r0, r2
- 682 00be 1900     		movs	r1, r3
- 683 00c0 1023     		movs	r3, #16
- 684 00c2 1A00     		movs	r2, r3
- 685 00c4 FFF7FEFF 		bl	memcpy
- 146:ak_aes_crypto.c ****     // then message
- 147:ak_aes_crypto.c ****     memcpy(package + TAG_SIZE, encrypted_data, plain_data_size);
- 686              		.loc 2 147 0
- 687 00c8 3B6A     		ldr	r3, [r7, #32]
- 688 00ca 1033     		adds	r3, r3, #16
- 689 00cc 396C     		ldr	r1, [r7, #64]
- 690 00ce 7A6A     		ldr	r2, [r7, #36]
- 691 00d0 1800     		movs	r0, r3
- 692 00d2 FFF7FEFF 		bl	memcpy
- 148:ak_aes_crypto.c ****     
- 149:ak_aes_crypto.c ****     printf("package = \r\n");
- 693              		.loc 2 149 0
- 694 00d6 0B4B     		ldr	r3, .L22+8
- 695 00d8 1800     		movs	r0, r3
- 696 00da FFF7FEFF 		bl	puts
- 150:ak_aes_crypto.c ****     c_print(package, TAG_SIZE + plain_data_size);
- 697              		.loc 2 150 0
- 698 00de 7B6A     		ldr	r3, [r7, #36]
- 699 00e0 1033     		adds	r3, r3, #16
- 700 00e2 1A00     		movs	r2, r3
- 701 00e4 3B6A     		ldr	r3, [r7, #32]
- 702 00e6 1100     		movs	r1, r2
- 703 00e8 1800     		movs	r0, r3
- 704 00ea FFF7FEFF 		bl	c_print
- 705 00ee 7B68     		ldr	r3, [r7, #4]
- 706 00f0 9D46     		mov	sp, r3
- 151:ak_aes_crypto.c **** }
- 707              		.loc 2 151 0
- 708 00f2 C046     		nop
- 709 00f4 BD46     		mov	sp, r7
- 710 00f6 13B0     		add	sp, sp, #76
- 711              		@ sp needed
- 712 00f8 F0BD     		pop	{r4, r5, r6, r7, pc}
- 713              	.L23:
- 714 00fa C046     		.align	2
- 715              	.L22:
- 716 00fc 38000000 		.word	.LC15
- 717 0100 40000000 		.word	.LC17
- 718 0104 58000000 		.word	.LC19
- 719              		.cfi_endproc
- 720              	.LFE9:
- 721              		.size	ak_aes_encrypt_and_pack, .-ak_aes_encrypt_and_pack
- 722              		.section	.text.ak_aes_unpack_and_decrypt,"ax",%progbits
- 723              		.align	2
- 724              		.global	ak_aes_unpack_and_decrypt
- 725              		.code	16
- 726              		.thumb_func
- 727              		.type	ak_aes_unpack_and_decrypt, %function
- 728              	ak_aes_unpack_and_decrypt:
- 729              	.LFB10:
- 152:ak_aes_crypto.c **** 
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 18
-
-
- 153:ak_aes_crypto.c **** int ak_aes_unpack_and_decrypt(ak_aes_context *ctx,
- 154:ak_aes_crypto.c ****                               const uint8_t *package, size_t package_size,
- 155:ak_aes_crypto.c ****                               uint8_t *plain_data) {
- 730              		.loc 2 155 0
- 731              		.cfi_startproc
- 732              		@ args = 0, pretend = 0, frame = 80
- 733              		@ frame_needed = 1, uses_anonymous_args = 0
- 734 0000 F0B5     		push	{r4, r5, r6, r7, lr}
- 735              		.cfi_def_cfa_offset 20
- 736              		.cfi_offset 4, -20
- 737              		.cfi_offset 5, -16
- 738              		.cfi_offset 6, -12
- 739              		.cfi_offset 7, -8
- 740              		.cfi_offset 14, -4
- 741 0002 97B0     		sub	sp, sp, #92
- 742              		.cfi_def_cfa_offset 112
- 743 0004 02AF     		add	r7, sp, #8
- 744              		.cfi_def_cfa 7, 104
- 745 0006 F862     		str	r0, [r7, #44]
- 746 0008 B962     		str	r1, [r7, #40]
- 747 000a 7A62     		str	r2, [r7, #36]
- 748 000c 3B62     		str	r3, [r7, #32]
- 749              		.loc 2 155 0
- 750 000e 6B46     		mov	r3, sp
- 751 0010 7B60     		str	r3, [r7, #4]
- 156:ak_aes_crypto.c ****     size_t encrypted_data_size = package_size - TAG_SIZE;
- 752              		.loc 2 156 0
- 753 0012 7B6A     		ldr	r3, [r7, #36]
- 754 0014 103B     		subs	r3, r3, #16
- 755 0016 FB64     		str	r3, [r7, #76]
- 157:ak_aes_crypto.c ****     uint8_t encrypted_data[encrypted_data_size], tag[TAG_SIZE];
- 756              		.loc 2 157 0
- 757 0018 FB6C     		ldr	r3, [r7, #76]
- 758 001a 1A00     		movs	r2, r3
- 759 001c 013A     		subs	r2, r2, #1
- 760 001e BA64     		str	r2, [r7, #72]
- 761 0020 3B61     		str	r3, [r7, #16]
- 762 0022 0022     		movs	r2, #0
- 763 0024 7A61     		str	r2, [r7, #20]
- 764 0026 3869     		ldr	r0, [r7, #16]
- 765 0028 7969     		ldr	r1, [r7, #20]
- 766 002a 0200     		movs	r2, r0
- 767 002c 520F     		lsrs	r2, r2, #29
- 768 002e 0E00     		movs	r6, r1
- 769 0030 F600     		lsls	r6, r6, #3
- 770 0032 FE61     		str	r6, [r7, #28]
- 771 0034 FE69     		ldr	r6, [r7, #28]
- 772 0036 1643     		orrs	r6, r2
- 773 0038 FE61     		str	r6, [r7, #28]
- 774 003a 0200     		movs	r2, r0
- 775 003c D200     		lsls	r2, r2, #3
- 776 003e BA61     		str	r2, [r7, #24]
- 777 0040 BB60     		str	r3, [r7, #8]
- 778 0042 0022     		movs	r2, #0
- 779 0044 FA60     		str	r2, [r7, #12]
- 780 0046 B868     		ldr	r0, [r7, #8]
- 781 0048 F968     		ldr	r1, [r7, #12]
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 19
-
-
- 782 004a 0200     		movs	r2, r0
- 783 004c 520F     		lsrs	r2, r2, #29
- 784 004e 0E00     		movs	r6, r1
- 785 0050 F500     		lsls	r5, r6, #3
- 786 0052 1543     		orrs	r5, r2
- 787 0054 0200     		movs	r2, r0
- 788 0056 D400     		lsls	r4, r2, #3
- 789 0058 0733     		adds	r3, r3, #7
- 790 005a DB08     		lsrs	r3, r3, #3
- 791 005c DB00     		lsls	r3, r3, #3
- 792 005e 6A46     		mov	r2, sp
- 793 0060 D31A     		subs	r3, r2, r3
- 794 0062 9D46     		mov	sp, r3
- 795 0064 02AB     		add	r3, sp, #8
- 796 0066 0033     		adds	r3, r3, #0
- 797 0068 7B64     		str	r3, [r7, #68]
- 158:ak_aes_crypto.c ****     
- 159:ak_aes_crypto.c ****     printf("package = \r\n");
- 798              		.loc 2 159 0
- 799 006a 254B     		ldr	r3, .L26
- 800 006c 1800     		movs	r0, r3
- 801 006e FFF7FEFF 		bl	puts
- 160:ak_aes_crypto.c ****     c_print(package, TAG_SIZE + package_size);
- 802              		.loc 2 160 0
- 803 0072 7B6A     		ldr	r3, [r7, #36]
- 804 0074 1033     		adds	r3, r3, #16
- 805 0076 1A00     		movs	r2, r3
- 806 0078 BB6A     		ldr	r3, [r7, #40]
- 807 007a 1100     		movs	r1, r2
- 808 007c 1800     		movs	r0, r3
- 809 007e FFF7FEFF 		bl	c_print
- 161:ak_aes_crypto.c ****     
- 162:ak_aes_crypto.c ****     // copy tag first
- 163:ak_aes_crypto.c ****     memcpy(tag, package, TAG_SIZE);
- 810              		.loc 2 163 0
- 811 0082 1423     		movs	r3, #20
- 812 0084 2022     		movs	r2, #32
- 813 0086 BA18     		adds	r2, r7, r2
- 814 0088 D218     		adds	r2, r2, r3
- 815 008a BB6A     		ldr	r3, [r7, #40]
- 816 008c 1000     		movs	r0, r2
- 817 008e 1900     		movs	r1, r3
- 818 0090 1023     		movs	r3, #16
- 819 0092 1A00     		movs	r2, r3
- 820 0094 FFF7FEFF 		bl	memcpy
- 164:ak_aes_crypto.c ****     
- 165:ak_aes_crypto.c ****     printf("tag = \r\n");
- 821              		.loc 2 165 0
- 822 0098 1A4B     		ldr	r3, .L26+4
- 823 009a 1800     		movs	r0, r3
- 824 009c FFF7FEFF 		bl	puts
- 166:ak_aes_crypto.c ****     c_print(tag, TAG_SIZE);
- 825              		.loc 2 166 0
- 826 00a0 1423     		movs	r3, #20
- 827 00a2 2022     		movs	r2, #32
- 828 00a4 9446     		mov	ip, r2
- 829 00a6 BC44     		add	ip, ip, r7
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 20
-
-
- 830 00a8 6344     		add	r3, r3, ip
- 831 00aa 1021     		movs	r1, #16
- 832 00ac 1800     		movs	r0, r3
- 833 00ae FFF7FEFF 		bl	c_print
- 167:ak_aes_crypto.c ****     
- 168:ak_aes_crypto.c ****     // then message
- 169:ak_aes_crypto.c ****     memcpy(encrypted_data,package + TAG_SIZE, encrypted_data_size);
- 834              		.loc 2 169 0
- 835 00b2 786C     		ldr	r0, [r7, #68]
- 836 00b4 BB6A     		ldr	r3, [r7, #40]
- 837 00b6 1033     		adds	r3, r3, #16
- 838 00b8 FA6C     		ldr	r2, [r7, #76]
- 839 00ba 1900     		movs	r1, r3
- 840 00bc FFF7FEFF 		bl	memcpy
- 170:ak_aes_crypto.c ****     
- 171:ak_aes_crypto.c ****     printf("encrypted message = \r\n");
- 841              		.loc 2 171 0
- 842 00c0 114B     		ldr	r3, .L26+8
- 843 00c2 1800     		movs	r0, r3
- 844 00c4 FFF7FEFF 		bl	puts
- 172:ak_aes_crypto.c ****     c_print(encrypted_data, encrypted_data_size);
- 845              		.loc 2 172 0
- 846 00c8 7B6C     		ldr	r3, [r7, #68]
- 847 00ca FA6C     		ldr	r2, [r7, #76]
- 848 00cc 1100     		movs	r1, r2
- 849 00ce 1800     		movs	r0, r3
- 850 00d0 FFF7FEFF 		bl	c_print
- 173:ak_aes_crypto.c ****     
- 174:ak_aes_crypto.c ****     return ak_aes_decrypt(ctx, encrypted_data, encrypted_data_size, tag, TAG_SIZE, plain_data);
- 851              		.loc 2 174 0
- 852 00d4 796C     		ldr	r1, [r7, #68]
- 853 00d6 1423     		movs	r3, #20
- 854 00d8 2022     		movs	r2, #32
- 855 00da BA18     		adds	r2, r7, r2
- 856 00dc D418     		adds	r4, r2, r3
- 857 00de FA6C     		ldr	r2, [r7, #76]
- 858 00e0 F86A     		ldr	r0, [r7, #44]
- 859 00e2 3B6A     		ldr	r3, [r7, #32]
- 860 00e4 0193     		str	r3, [sp, #4]
- 861 00e6 1023     		movs	r3, #16
- 862 00e8 0093     		str	r3, [sp]
- 863 00ea 2300     		movs	r3, r4
- 864 00ec FFF7FEFF 		bl	ak_aes_decrypt
- 865 00f0 0300     		movs	r3, r0
- 866 00f2 7A68     		ldr	r2, [r7, #4]
- 867 00f4 9546     		mov	sp, r2
- 175:ak_aes_crypto.c **** }
- 868              		.loc 2 175 0
- 869 00f6 1800     		movs	r0, r3
- 870 00f8 BD46     		mov	sp, r7
- 871 00fa 15B0     		add	sp, sp, #84
- 872              		@ sp needed
- 873 00fc F0BD     		pop	{r4, r5, r6, r7, pc}
- 874              	.L27:
- 875 00fe C046     		.align	2
- 876              	.L26:
- 877 0100 58000000 		.word	.LC19
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 21
-
-
- 878 0104 38000000 		.word	.LC15
- 879 0108 40000000 		.word	.LC17
- 880              		.cfi_endproc
- 881              	.LFE10:
- 882              		.size	ak_aes_unpack_and_decrypt, .-ak_aes_unpack_and_decrypt
- 883              		.text
- 884              	.Letext0:
- 885              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
- 886              		.file 4 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
- 887              		.file 5 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
- 888              		.file 6 "prp.h"
- 889              		.file 7 "aes.h"
- 890              		.file 8 "ak_aes_crypto.h"
- 891              		.section	.debug_info,"",%progbits
- 892              	.Ldebug_info0:
- 893 0000 27050000 		.4byte	0x527
- 894 0004 0400     		.2byte	0x4
- 895 0006 00000000 		.4byte	.Ldebug_abbrev0
- 896 000a 04       		.byte	0x4
- 897 000b 01       		.uleb128 0x1
- 898 000c 0F000000 		.4byte	.LASF49
- 899 0010 0C       		.byte	0xc
- 900 0011 AA010000 		.4byte	.LASF50
- 901 0015 E1020000 		.4byte	.LASF51
- 902 0019 00000000 		.4byte	.Ldebug_ranges0+0
- 903 001d 00000000 		.4byte	0
- 904 0021 00000000 		.4byte	.Ldebug_line0
- 905 0025 02       		.uleb128 0x2
- 906 0026 01       		.byte	0x1
- 907 0027 06       		.byte	0x6
- 908 0028 79030000 		.4byte	.LASF0
- 909 002c 03       		.uleb128 0x3
- 910 002d 05000000 		.4byte	.LASF5
- 911 0031 03       		.byte	0x3
- 912 0032 1D       		.byte	0x1d
- 913 0033 37000000 		.4byte	0x37
- 914 0037 02       		.uleb128 0x2
- 915 0038 01       		.byte	0x1
- 916 0039 08       		.byte	0x8
- 917 003a BA010000 		.4byte	.LASF1
- 918 003e 02       		.uleb128 0x2
- 919 003f 02       		.byte	0x2
- 920 0040 05       		.byte	0x5
- 921 0041 AC020000 		.4byte	.LASF2
- 922 0045 02       		.uleb128 0x2
- 923 0046 02       		.byte	0x2
- 924 0047 07       		.byte	0x7
- 925 0048 88010000 		.4byte	.LASF3
- 926 004c 02       		.uleb128 0x2
- 927 004d 04       		.byte	0x4
- 928 004e 05       		.byte	0x5
- 929 004f D8020000 		.4byte	.LASF4
- 930 0053 03       		.uleb128 0x3
- 931 0054 D6010000 		.4byte	.LASF6
- 932 0058 03       		.byte	0x3
- 933 0059 41       		.byte	0x41
- 934 005a 5E000000 		.4byte	0x5e
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 22
-
-
- 935 005e 02       		.uleb128 0x2
- 936 005f 04       		.byte	0x4
- 937 0060 07       		.byte	0x7
- 938 0061 76010000 		.4byte	.LASF7
- 939 0065 02       		.uleb128 0x2
- 940 0066 08       		.byte	0x8
- 941 0067 05       		.byte	0x5
- 942 0068 76020000 		.4byte	.LASF8
- 943 006c 02       		.uleb128 0x2
- 944 006d 08       		.byte	0x8
- 945 006e 07       		.byte	0x7
- 946 006f 1F020000 		.4byte	.LASF9
- 947 0073 04       		.uleb128 0x4
- 948 0074 04       		.byte	0x4
- 949 0075 05       		.byte	0x5
- 950 0076 696E7400 		.ascii	"int\000"
- 951 007a 02       		.uleb128 0x2
- 952 007b 04       		.byte	0x4
- 953 007c 07       		.byte	0x7
- 954 007d 12020000 		.4byte	.LASF10
- 955 0081 03       		.uleb128 0x3
- 956 0082 9B010000 		.4byte	.LASF11
- 957 0086 04       		.byte	0x4
- 958 0087 D8       		.byte	0xd8
- 959 0088 7A000000 		.4byte	0x7a
- 960 008c 02       		.uleb128 0x2
- 961 008d 08       		.byte	0x8
- 962 008e 04       		.byte	0x4
- 963 008f 6D030000 		.4byte	.LASF12
- 964 0093 05       		.uleb128 0x5
- 965 0094 04       		.byte	0x4
- 966 0095 02       		.uleb128 0x2
- 967 0096 04       		.byte	0x4
- 968 0097 07       		.byte	0x7
- 969 0098 6D020000 		.4byte	.LASF13
- 970 009c 02       		.uleb128 0x2
- 971 009d 01       		.byte	0x1
- 972 009e 08       		.byte	0x8
- 973 009f 93020000 		.4byte	.LASF14
- 974 00a3 03       		.uleb128 0x3
- 975 00a4 36020000 		.4byte	.LASF15
- 976 00a8 05       		.byte	0x5
- 977 00a9 18       		.byte	0x18
- 978 00aa 2C000000 		.4byte	0x2c
- 979 00ae 03       		.uleb128 0x3
- 980 00af CF020000 		.4byte	.LASF16
- 981 00b3 05       		.byte	0x5
- 982 00b4 30       		.byte	0x30
- 983 00b5 53000000 		.4byte	0x53
- 984 00b9 03       		.uleb128 0x3
- 985 00ba F9010000 		.4byte	.LASF17
- 986 00be 06       		.byte	0x6
- 987 00bf 26       		.byte	0x26
- 988 00c0 C4000000 		.4byte	0xc4
- 989 00c4 06       		.uleb128 0x6
- 990 00c5 04       		.byte	0x4
- 991 00c6 CA000000 		.4byte	0xca
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 23
-
-
- 992 00ca 07       		.uleb128 0x7
- 993 00cb DF000000 		.4byte	0xdf
- 994 00cf 08       		.uleb128 0x8
- 995 00d0 93000000 		.4byte	0x93
- 996 00d4 08       		.uleb128 0x8
- 997 00d5 DF000000 		.4byte	0xdf
- 998 00d9 08       		.uleb128 0x8
- 999 00da EA000000 		.4byte	0xea
- 1000 00de 00       		.byte	0
- 1001 00df 06       		.uleb128 0x6
- 1002 00e0 04       		.byte	0x4
- 1003 00e1 E5000000 		.4byte	0xe5
- 1004 00e5 09       		.uleb128 0x9
- 1005 00e6 A3000000 		.4byte	0xa3
- 1006 00ea 06       		.uleb128 0x6
- 1007 00eb 04       		.byte	0x4
- 1008 00ec A3000000 		.4byte	0xa3
- 1009 00f0 0A       		.uleb128 0xa
- 1010 00f1 0C       		.byte	0xc
- 1011 00f2 06       		.byte	0x6
- 1012 00f3 34       		.byte	0x34
- 1013 00f4 1D010000 		.4byte	0x11d
- 1014 00f8 0B       		.uleb128 0xb
- 1015 00f9 F1010000 		.4byte	.LASF18
- 1016 00fd 06       		.byte	0x6
- 1017 00fe 36       		.byte	0x36
- 1018 00ff 81000000 		.4byte	0x81
- 1019 0103 00       		.byte	0
- 1020 0104 0B       		.uleb128 0xb
- 1021 0105 CC000000 		.4byte	.LASF19
- 1022 0109 06       		.byte	0x6
- 1023 010a 37       		.byte	0x37
- 1024 010b B9000000 		.4byte	0xb9
- 1025 010f 04       		.byte	0x4
- 1026 0110 0B       		.uleb128 0xb
- 1027 0111 1A010000 		.4byte	.LASF20
- 1028 0115 06       		.byte	0x6
- 1029 0116 38       		.byte	0x38
- 1030 0117 B9000000 		.4byte	0xb9
- 1031 011b 08       		.byte	0x8
- 1032 011c 00       		.byte	0
- 1033 011d 03       		.uleb128 0x3
- 1034 011e 6F010000 		.4byte	.LASF21
- 1035 0122 06       		.byte	0x6
- 1036 0123 39       		.byte	0x39
- 1037 0124 F0000000 		.4byte	0xf0
- 1038 0128 0A       		.uleb128 0xa
- 1039 0129 F4       		.byte	0xf4
- 1040 012a 07       		.byte	0x7
- 1041 012b 5F       		.byte	0x5f
- 1042 012c 48010000 		.4byte	0x148
- 1043 0130 0B       		.uleb128 0xb
- 1044 0131 C8020000 		.4byte	.LASF22
- 1045 0135 07       		.byte	0x7
- 1046 0136 61       		.byte	0x61
- 1047 0137 AE000000 		.4byte	0xae
- 1048 013b 00       		.byte	0
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 24
-
-
- 1049 013c 0C       		.uleb128 0xc
- 1050 013d 6B7300   		.ascii	"ks\000"
- 1051 0140 07       		.byte	0x7
- 1052 0141 62       		.byte	0x62
- 1053 0142 48010000 		.4byte	0x148
- 1054 0146 04       		.byte	0x4
- 1055 0147 00       		.byte	0
- 1056 0148 0D       		.uleb128 0xd
- 1057 0149 AE000000 		.4byte	0xae
- 1058 014d 58010000 		.4byte	0x158
- 1059 0151 0E       		.uleb128 0xe
- 1060 0152 95000000 		.4byte	0x95
- 1061 0156 3B       		.byte	0x3b
- 1062 0157 00       		.byte	0
- 1063 0158 03       		.uleb128 0x3
- 1064 0159 F8000000 		.4byte	.LASF23
- 1065 015d 07       		.byte	0x7
- 1066 015e 63       		.byte	0x63
- 1067 015f 28010000 		.4byte	0x128
- 1068 0163 0A       		.uleb128 0xa
- 1069 0164 18       		.byte	0x18
- 1070 0165 08       		.byte	0x8
- 1071 0166 16       		.byte	0x16
- 1072 0167 90010000 		.4byte	0x190
- 1073 016b 0B       		.uleb128 0xb
- 1074 016c 4C010000 		.4byte	.LASF24
- 1075 0170 08       		.byte	0x8
- 1076 0171 18       		.byte	0x18
- 1077 0172 AE000000 		.4byte	0xae
- 1078 0176 00       		.byte	0
- 1079 0177 0B       		.uleb128 0xb
- 1080 0178 C8010000 		.4byte	.LASF25
- 1081 017c 08       		.byte	0x8
- 1082 017d 19       		.byte	0x19
- 1083 017e 90010000 		.4byte	0x190
- 1084 0182 04       		.byte	0x4
- 1085 0183 0B       		.uleb128 0xb
- 1086 0184 CE010000 		.4byte	.LASF26
- 1087 0188 08       		.byte	0x8
- 1088 0189 1A       		.byte	0x1a
- 1089 018a A0010000 		.4byte	0x1a0
- 1090 018e 14       		.byte	0x14
- 1091 018f 00       		.byte	0
- 1092 0190 0D       		.uleb128 0xd
- 1093 0191 A3000000 		.4byte	0xa3
- 1094 0195 A0010000 		.4byte	0x1a0
- 1095 0199 0E       		.uleb128 0xe
- 1096 019a 95000000 		.4byte	0x95
- 1097 019e 0C       		.byte	0xc
- 1098 019f 00       		.byte	0
- 1099 01a0 06       		.uleb128 0x6
- 1100 01a1 04       		.byte	0x4
- 1101 01a2 58010000 		.4byte	0x158
- 1102 01a6 03       		.uleb128 0x3
- 1103 01a7 84020000 		.4byte	.LASF27
- 1104 01ab 08       		.byte	0x8
- 1105 01ac 1B       		.byte	0x1b
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 25
-
-
- 1106 01ad 63010000 		.4byte	0x163
- 1107 01b1 09       		.uleb128 0x9
- 1108 01b2 1D010000 		.4byte	0x11d
- 1109 01b6 0D       		.uleb128 0xd
- 1110 01b7 A3000000 		.4byte	0xa3
- 1111 01bb C6010000 		.4byte	0x1c6
- 1112 01bf 0E       		.uleb128 0xe
- 1113 01c0 95000000 		.4byte	0x95
- 1114 01c4 0F       		.byte	0xf
- 1115 01c5 00       		.byte	0
- 1116 01c6 0F       		.uleb128 0xf
- 1117 01c7 63020000 		.4byte	.LASF52
- 1118 01cb 01       		.byte	0x1
- 1119 01cc 3D       		.byte	0x3d
- 1120 01cd 00000000 		.4byte	.LFB1
- 1121 01d1 24000000 		.4byte	.LFE1-.LFB1
- 1122 01d5 01       		.uleb128 0x1
- 1123 01d6 9C       		.byte	0x9c
- 1124 01d7 F6010000 		.4byte	0x1f6
- 1125 01db 10       		.uleb128 0x10
- 1126 01dc 7600     		.ascii	"v\000"
- 1127 01de 01       		.byte	0x1
- 1128 01df 3D       		.byte	0x3d
- 1129 01e0 F6010000 		.4byte	0x1f6
- 1130 01e4 02       		.uleb128 0x2
- 1131 01e5 91       		.byte	0x91
- 1132 01e6 74       		.sleb128 -12
- 1133 01e7 10       		.uleb128 0x10
- 1134 01e8 6C656E00 		.ascii	"len\000"
- 1135 01ec 01       		.byte	0x1
- 1136 01ed 3D       		.byte	0x3d
- 1137 01ee 81000000 		.4byte	0x81
- 1138 01f2 02       		.uleb128 0x2
- 1139 01f3 91       		.byte	0x91
- 1140 01f4 70       		.sleb128 -16
- 1141 01f5 00       		.byte	0
- 1142 01f6 06       		.uleb128 0x6
- 1143 01f7 04       		.byte	0x4
- 1144 01f8 FC010000 		.4byte	0x1fc
- 1145 01fc 11       		.uleb128 0x11
- 1146 01fd 12       		.uleb128 0x12
- 1147 01fe E0000000 		.4byte	.LASF28
- 1148 0202 02       		.byte	0x2
- 1149 0203 10       		.byte	0x10
- 1150 0204 00000000 		.4byte	.LFB3
- 1151 0208 44000000 		.4byte	.LFE3-.LFB3
- 1152 020c 01       		.uleb128 0x1
- 1153 020d 9C       		.byte	0x9c
- 1154 020e 3D020000 		.4byte	0x23d
- 1155 0212 13       		.uleb128 0x13
- 1156 0213 C8010000 		.4byte	.LASF25
- 1157 0217 02       		.byte	0x2
- 1158 0218 10       		.byte	0x10
- 1159 0219 EA000000 		.4byte	0xea
- 1160 021d 02       		.uleb128 0x2
- 1161 021e 91       		.byte	0x91
- 1162 021f 6C       		.sleb128 -20
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 26
-
-
- 1163 0220 13       		.uleb128 0x13
- 1164 0221 4C010000 		.4byte	.LASF24
- 1165 0225 02       		.byte	0x2
- 1166 0226 10       		.byte	0x10
- 1167 0227 AE000000 		.4byte	0xae
- 1168 022b 02       		.uleb128 0x2
- 1169 022c 91       		.byte	0x91
- 1170 022d 68       		.sleb128 -24
- 1171 022e 14       		.uleb128 0x14
- 1172 022f BE020000 		.4byte	.LASF31
- 1173 0233 02       		.byte	0x2
- 1174 0234 11       		.byte	0x11
- 1175 0235 3D020000 		.4byte	0x23d
- 1176 0239 02       		.uleb128 0x2
- 1177 023a 91       		.byte	0x91
- 1178 023b 74       		.sleb128 -12
- 1179 023c 00       		.byte	0
- 1180 023d 0D       		.uleb128 0xd
- 1181 023e A3000000 		.4byte	0xa3
- 1182 0242 4D020000 		.4byte	0x24d
- 1183 0246 0E       		.uleb128 0xe
- 1184 0247 95000000 		.4byte	0x95
- 1185 024b 03       		.byte	0x3
- 1186 024c 00       		.byte	0
- 1187 024d 12       		.uleb128 0x12
- 1188 024e B6020000 		.4byte	.LASF29
- 1189 0252 02       		.byte	0x2
- 1190 0253 1A       		.byte	0x1a
- 1191 0254 00000000 		.4byte	.LFB4
- 1192 0258 4C000000 		.4byte	.LFE4-.LFB4
- 1193 025c 01       		.uleb128 0x1
- 1194 025d 9C       		.byte	0x9c
- 1195 025e 95020000 		.4byte	0x295
- 1196 0262 10       		.uleb128 0x10
- 1197 0263 766C6900 		.ascii	"vli\000"
- 1198 0267 02       		.byte	0x2
- 1199 0268 1A       		.byte	0x1a
- 1200 0269 EA000000 		.4byte	0xea
- 1201 026d 02       		.uleb128 0x2
- 1202 026e 91       		.byte	0x91
- 1203 026f 6C       		.sleb128 -20
- 1204 0270 13       		.uleb128 0x13
- 1205 0271 6A010000 		.4byte	.LASF30
- 1206 0275 02       		.byte	0x2
- 1207 0276 1A       		.byte	0x1a
- 1208 0277 7A000000 		.4byte	0x7a
- 1209 027b 02       		.uleb128 0x2
- 1210 027c 91       		.byte	0x91
- 1211 027d 68       		.sleb128 -24
- 1212 027e 15       		.uleb128 0x15
- 1213 027f 0E000000 		.4byte	.LBB2
- 1214 0283 28000000 		.4byte	.LBE2-.LBB2
- 1215 0287 16       		.uleb128 0x16
- 1216 0288 6900     		.ascii	"i\000"
- 1217 028a 02       		.byte	0x2
- 1218 028b 1C       		.byte	0x1c
- 1219 028c 7A000000 		.4byte	0x7a
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 27
-
-
- 1220 0290 02       		.uleb128 0x2
- 1221 0291 91       		.byte	0x91
- 1222 0292 74       		.sleb128 -12
- 1223 0293 00       		.byte	0
- 1224 0294 00       		.byte	0
- 1225 0295 12       		.uleb128 0x12
- 1226 0296 D4000000 		.4byte	.LASF32
- 1227 029a 02       		.byte	0x2
- 1228 029b 24       		.byte	0x24
- 1229 029c 00000000 		.4byte	.LFB5
- 1230 02a0 B0000000 		.4byte	.LFE5-.LFB5
- 1231 02a4 01       		.uleb128 0x1
- 1232 02a5 9C       		.byte	0x9c
- 1233 02a6 F1020000 		.4byte	0x2f1
- 1234 02aa 10       		.uleb128 0x10
- 1235 02ab 63747800 		.ascii	"ctx\000"
- 1236 02af 02       		.byte	0x2
- 1237 02b0 24       		.byte	0x24
- 1238 02b1 F1020000 		.4byte	0x2f1
- 1239 02b5 02       		.uleb128 0x2
- 1240 02b6 91       		.byte	0x91
- 1241 02b7 5C       		.sleb128 -36
- 1242 02b8 13       		.uleb128 0x13
- 1243 02b9 22010000 		.4byte	.LASF33
- 1244 02bd 02       		.byte	0x2
- 1245 02be 25       		.byte	0x25
- 1246 02bf DF000000 		.4byte	0xdf
- 1247 02c3 02       		.uleb128 0x2
- 1248 02c4 91       		.byte	0x91
- 1249 02c5 58       		.sleb128 -40
- 1250 02c6 13       		.uleb128 0x13
- 1251 02c7 07010000 		.4byte	.LASF34
- 1252 02cb 02       		.byte	0x2
- 1253 02cc 26       		.byte	0x26
- 1254 02cd 81000000 		.4byte	0x81
- 1255 02d1 02       		.uleb128 0x2
- 1256 02d2 91       		.byte	0x91
- 1257 02d3 54       		.sleb128 -44
- 1258 02d4 14       		.uleb128 0x14
- 1259 02d5 06020000 		.4byte	.LASF35
- 1260 02d9 02       		.byte	0x2
- 1261 02da 38       		.byte	0x38
- 1262 02db A0010000 		.4byte	0x1a0
- 1263 02df 02       		.uleb128 0x2
- 1264 02e0 91       		.byte	0x91
- 1265 02e1 74       		.sleb128 -12
- 1266 02e2 14       		.uleb128 0x14
- 1267 02e3 4D020000 		.4byte	.LASF36
- 1268 02e7 02       		.byte	0x2
- 1269 02e8 3B       		.byte	0x3b
- 1270 02e9 B6010000 		.4byte	0x1b6
- 1271 02ed 02       		.uleb128 0x2
- 1272 02ee 91       		.byte	0x91
- 1273 02ef 64       		.sleb128 -28
- 1274 02f0 00       		.byte	0
- 1275 02f1 06       		.uleb128 0x6
- 1276 02f2 04       		.byte	0x4
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 28
-
-
- 1277 02f3 A6010000 		.4byte	0x1a6
- 1278 02f7 12       		.uleb128 0x12
- 1279 02f8 85030000 		.4byte	.LASF37
- 1280 02fc 02       		.byte	0x2
- 1281 02fd 46       		.byte	0x46
- 1282 02fe 00000000 		.4byte	.LFB6
- 1283 0302 2A000000 		.4byte	.LFE6-.LFB6
- 1284 0306 01       		.uleb128 0x1
- 1285 0307 9C       		.byte	0x9c
- 1286 0308 1B030000 		.4byte	0x31b
- 1287 030c 10       		.uleb128 0x10
- 1288 030d 63747800 		.ascii	"ctx\000"
- 1289 0311 02       		.byte	0x2
- 1290 0312 46       		.byte	0x46
- 1291 0313 F1020000 		.4byte	0x2f1
- 1292 0317 02       		.uleb128 0x2
- 1293 0318 91       		.byte	0x91
- 1294 0319 74       		.sleb128 -12
- 1295 031a 00       		.byte	0
- 1296 031b 12       		.uleb128 0x12
- 1297 031c 54010000 		.4byte	.LASF38
- 1298 0320 02       		.byte	0x2
- 1299 0321 4F       		.byte	0x4f
- 1300 0322 00000000 		.4byte	.LFB7
- 1301 0326 90000000 		.4byte	.LFE7-.LFB7
- 1302 032a 01       		.uleb128 0x1
- 1303 032b 9C       		.byte	0x9c
- 1304 032c 85030000 		.4byte	0x385
- 1305 0330 10       		.uleb128 0x10
- 1306 0331 63747800 		.ascii	"ctx\000"
- 1307 0335 02       		.byte	0x2
- 1308 0336 4F       		.byte	0x4f
- 1309 0337 F1020000 		.4byte	0x2f1
- 1310 033b 02       		.uleb128 0x2
- 1311 033c 91       		.byte	0x91
- 1312 033d 6C       		.sleb128 -20
- 1313 033e 13       		.uleb128 0x13
- 1314 033f 58020000 		.4byte	.LASF39
- 1315 0343 02       		.byte	0x2
- 1316 0344 50       		.byte	0x50
- 1317 0345 DF000000 		.4byte	0xdf
- 1318 0349 02       		.uleb128 0x2
- 1319 034a 91       		.byte	0x91
- 1320 034b 68       		.sleb128 -24
- 1321 034c 13       		.uleb128 0x13
- 1322 034d E1010000 		.4byte	.LASF40
- 1323 0351 02       		.byte	0x2
- 1324 0352 50       		.byte	0x50
- 1325 0353 81000000 		.4byte	0x81
- 1326 0357 02       		.uleb128 0x2
- 1327 0358 91       		.byte	0x91
- 1328 0359 64       		.sleb128 -28
- 1329 035a 13       		.uleb128 0x13
- 1330 035b 3E020000 		.4byte	.LASF41
- 1331 035f 02       		.byte	0x2
- 1332 0360 51       		.byte	0x51
- 1333 0361 EA000000 		.4byte	0xea
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 29
-
-
- 1334 0365 02       		.uleb128 0x2
- 1335 0366 91       		.byte	0x91
- 1336 0367 60       		.sleb128 -32
- 1337 0368 10       		.uleb128 0x10
- 1338 0369 74616700 		.ascii	"tag\000"
- 1339 036d 02       		.byte	0x2
- 1340 036e 52       		.byte	0x52
- 1341 036f EA000000 		.4byte	0xea
- 1342 0373 02       		.uleb128 0x2
- 1343 0374 91       		.byte	0x91
- 1344 0375 00       		.sleb128 0
- 1345 0376 13       		.uleb128 0x13
- 1346 0377 00000000 		.4byte	.LASF42
- 1347 037b 02       		.byte	0x2
- 1348 037c 52       		.byte	0x52
- 1349 037d 81000000 		.4byte	0x81
- 1350 0381 02       		.uleb128 0x2
- 1351 0382 91       		.byte	0x91
- 1352 0383 04       		.sleb128 4
- 1353 0384 00       		.byte	0
- 1354 0385 17       		.uleb128 0x17
- 1355 0386 3D010000 		.4byte	.LASF47
- 1356 038a 02       		.byte	0x2
- 1357 038b 67       		.byte	0x67
- 1358 038c 73000000 		.4byte	0x73
- 1359 0390 00000000 		.4byte	.LFB8
- 1360 0394 98000000 		.4byte	.LFE8-.LFB8
- 1361 0398 01       		.uleb128 0x1
- 1362 0399 9C       		.byte	0x9c
- 1363 039a 01040000 		.4byte	0x401
- 1364 039e 10       		.uleb128 0x10
- 1365 039f 63747800 		.ascii	"ctx\000"
- 1366 03a3 02       		.byte	0x2
- 1367 03a4 67       		.byte	0x67
- 1368 03a5 F1020000 		.4byte	0x2f1
- 1369 03a9 02       		.uleb128 0x2
- 1370 03aa 91       		.byte	0x91
- 1371 03ab 64       		.sleb128 -28
- 1372 03ac 13       		.uleb128 0x13
- 1373 03ad 3E020000 		.4byte	.LASF41
- 1374 03b1 02       		.byte	0x2
- 1375 03b2 68       		.byte	0x68
- 1376 03b3 DF000000 		.4byte	0xdf
- 1377 03b7 02       		.uleb128 0x2
- 1378 03b8 91       		.byte	0x91
- 1379 03b9 60       		.sleb128 -32
- 1380 03ba 13       		.uleb128 0x13
- 1381 03bb 98020000 		.4byte	.LASF43
- 1382 03bf 02       		.byte	0x2
- 1383 03c0 68       		.byte	0x68
- 1384 03c1 81000000 		.4byte	0x81
- 1385 03c5 02       		.uleb128 0x2
- 1386 03c6 91       		.byte	0x91
- 1387 03c7 5C       		.sleb128 -36
- 1388 03c8 10       		.uleb128 0x10
- 1389 03c9 74616700 		.ascii	"tag\000"
- 1390 03cd 02       		.byte	0x2
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 30
-
-
- 1391 03ce 69       		.byte	0x69
- 1392 03cf DF000000 		.4byte	0xdf
- 1393 03d3 02       		.uleb128 0x2
- 1394 03d4 91       		.byte	0x91
- 1395 03d5 58       		.sleb128 -40
- 1396 03d6 13       		.uleb128 0x13
- 1397 03d7 00000000 		.4byte	.LASF42
- 1398 03db 02       		.byte	0x2
- 1399 03dc 69       		.byte	0x69
- 1400 03dd 81000000 		.4byte	0x81
- 1401 03e1 02       		.uleb128 0x2
- 1402 03e2 91       		.byte	0x91
- 1403 03e3 00       		.sleb128 0
- 1404 03e4 13       		.uleb128 0x13
- 1405 03e5 58020000 		.4byte	.LASF39
- 1406 03e9 02       		.byte	0x2
- 1407 03ea 6A       		.byte	0x6a
- 1408 03eb EA000000 		.4byte	0xea
- 1409 03ef 02       		.uleb128 0x2
- 1410 03f0 91       		.byte	0x91
- 1411 03f1 04       		.sleb128 4
- 1412 03f2 16       		.uleb128 0x16
- 1413 03f3 65727200 		.ascii	"err\000"
- 1414 03f7 02       		.byte	0x2
- 1415 03f8 72       		.byte	0x72
- 1416 03f9 73000000 		.4byte	0x73
- 1417 03fd 02       		.uleb128 0x2
- 1418 03fe 91       		.byte	0x91
- 1419 03ff 6C       		.sleb128 -20
- 1420 0400 00       		.byte	0
- 1421 0401 12       		.uleb128 0x12
- 1422 0402 93030000 		.4byte	.LASF44
- 1423 0406 02       		.byte	0x2
- 1424 0407 82       		.byte	0x82
- 1425 0408 00000000 		.4byte	.LFB9
- 1426 040c 08010000 		.4byte	.LFE9-.LFB9
- 1427 0410 01       		.uleb128 0x1
- 1428 0411 9C       		.byte	0x9c
- 1429 0412 7A040000 		.4byte	0x47a
- 1430 0416 10       		.uleb128 0x10
- 1431 0417 63747800 		.ascii	"ctx\000"
- 1432 041b 02       		.byte	0x2
- 1433 041c 82       		.byte	0x82
- 1434 041d F1020000 		.4byte	0x2f1
- 1435 0421 02       		.uleb128 0x2
- 1436 0422 91       		.byte	0x91
- 1437 0423 4C       		.sleb128 -52
- 1438 0424 13       		.uleb128 0x13
- 1439 0425 58020000 		.4byte	.LASF39
- 1440 0429 02       		.byte	0x2
- 1441 042a 83       		.byte	0x83
- 1442 042b DF000000 		.4byte	0xdf
- 1443 042f 02       		.uleb128 0x2
- 1444 0430 91       		.byte	0x91
- 1445 0431 48       		.sleb128 -56
- 1446 0432 13       		.uleb128 0x13
- 1447 0433 E1010000 		.4byte	.LASF40
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 31
-
-
- 1448 0437 02       		.byte	0x2
- 1449 0438 83       		.byte	0x83
- 1450 0439 81000000 		.4byte	0x81
- 1451 043d 02       		.uleb128 0x2
- 1452 043e 91       		.byte	0x91
- 1453 043f 44       		.sleb128 -60
- 1454 0440 13       		.uleb128 0x13
- 1455 0441 A2010000 		.4byte	.LASF45
- 1456 0445 02       		.byte	0x2
- 1457 0446 84       		.byte	0x84
- 1458 0447 EA000000 		.4byte	0xea
- 1459 044b 02       		.uleb128 0x2
- 1460 044c 91       		.byte	0x91
- 1461 044d 40       		.sleb128 -64
- 1462 044e 13       		.uleb128 0x13
- 1463 044f 30010000 		.4byte	.LASF46
- 1464 0453 02       		.byte	0x2
- 1465 0454 84       		.byte	0x84
- 1466 0455 EA000000 		.4byte	0xea
- 1467 0459 02       		.uleb128 0x2
- 1468 045a 91       		.byte	0x91
- 1469 045b 00       		.sleb128 0
- 1470 045c 14       		.uleb128 0x14
- 1471 045d 3E020000 		.4byte	.LASF41
- 1472 0461 02       		.byte	0x2
- 1473 0462 85       		.byte	0x85
- 1474 0463 7A040000 		.4byte	0x47a
- 1475 0467 03       		.uleb128 0x3
- 1476 0468 91       		.byte	0x91
- 1477 0469 60       		.sleb128 -32
- 1478 046a 06       		.byte	0x6
- 1479 046b 16       		.uleb128 0x16
- 1480 046c 74616700 		.ascii	"tag\000"
- 1481 0470 02       		.byte	0x2
- 1482 0471 85       		.byte	0x85
- 1483 0472 B6010000 		.4byte	0x1b6
- 1484 0476 02       		.uleb128 0x2
- 1485 0477 91       		.byte	0x91
- 1486 0478 50       		.sleb128 -48
- 1487 0479 00       		.byte	0
- 1488 047a 0D       		.uleb128 0xd
- 1489 047b A3000000 		.4byte	0xa3
- 1490 047f 8D040000 		.4byte	0x48d
- 1491 0483 18       		.uleb128 0x18
- 1492 0484 95000000 		.4byte	0x95
- 1493 0488 03       		.uleb128 0x3
- 1494 0489 91       		.byte	0x91
- 1495 048a 64       		.sleb128 -28
- 1496 048b 06       		.byte	0x6
- 1497 048c 00       		.byte	0
- 1498 048d 17       		.uleb128 0x17
- 1499 048e B2000000 		.4byte	.LASF48
- 1500 0492 02       		.byte	0x2
- 1501 0493 99       		.byte	0x99
- 1502 0494 73000000 		.4byte	0x73
- 1503 0498 00000000 		.4byte	.LFB10
- 1504 049c 0C010000 		.4byte	.LFE10-.LFB10
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 32
-
-
- 1505 04a0 01       		.uleb128 0x1
- 1506 04a1 9C       		.byte	0x9c
- 1507 04a2 0C050000 		.4byte	0x50c
- 1508 04a6 10       		.uleb128 0x10
- 1509 04a7 63747800 		.ascii	"ctx\000"
- 1510 04ab 02       		.byte	0x2
- 1511 04ac 99       		.byte	0x99
- 1512 04ad F1020000 		.4byte	0x2f1
- 1513 04b1 02       		.uleb128 0x2
- 1514 04b2 91       		.byte	0x91
- 1515 04b3 44       		.sleb128 -60
- 1516 04b4 13       		.uleb128 0x13
- 1517 04b5 A2010000 		.4byte	.LASF45
- 1518 04b9 02       		.byte	0x2
- 1519 04ba 9A       		.byte	0x9a
- 1520 04bb DF000000 		.4byte	0xdf
- 1521 04bf 02       		.uleb128 0x2
- 1522 04c0 91       		.byte	0x91
- 1523 04c1 40       		.sleb128 -64
- 1524 04c2 13       		.uleb128 0x13
- 1525 04c3 30010000 		.4byte	.LASF46
- 1526 04c7 02       		.byte	0x2
- 1527 04c8 9A       		.byte	0x9a
- 1528 04c9 81000000 		.4byte	0x81
- 1529 04cd 03       		.uleb128 0x3
- 1530 04ce 91       		.byte	0x91
- 1531 04cf BC7F     		.sleb128 -68
- 1532 04d1 13       		.uleb128 0x13
- 1533 04d2 58020000 		.4byte	.LASF39
- 1534 04d6 02       		.byte	0x2
- 1535 04d7 9B       		.byte	0x9b
- 1536 04d8 EA000000 		.4byte	0xea
- 1537 04dc 03       		.uleb128 0x3
- 1538 04dd 91       		.byte	0x91
- 1539 04de B87F     		.sleb128 -72
- 1540 04e0 14       		.uleb128 0x14
- 1541 04e1 98020000 		.4byte	.LASF43
- 1542 04e5 02       		.byte	0x2
- 1543 04e6 9C       		.byte	0x9c
- 1544 04e7 81000000 		.4byte	0x81
- 1545 04eb 02       		.uleb128 0x2
- 1546 04ec 91       		.byte	0x91
- 1547 04ed 64       		.sleb128 -28
- 1548 04ee 14       		.uleb128 0x14
- 1549 04ef 3E020000 		.4byte	.LASF41
- 1550 04f3 02       		.byte	0x2
- 1551 04f4 9D       		.byte	0x9d
- 1552 04f5 0C050000 		.4byte	0x50c
- 1553 04f9 03       		.uleb128 0x3
- 1554 04fa 91       		.byte	0x91
- 1555 04fb 5C       		.sleb128 -36
- 1556 04fc 06       		.byte	0x6
- 1557 04fd 16       		.uleb128 0x16
- 1558 04fe 74616700 		.ascii	"tag\000"
- 1559 0502 02       		.byte	0x2
- 1560 0503 9D       		.byte	0x9d
- 1561 0504 B6010000 		.4byte	0x1b6
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 33
-
-
- 1562 0508 02       		.uleb128 0x2
- 1563 0509 91       		.byte	0x91
- 1564 050a 4C       		.sleb128 -52
- 1565 050b 00       		.byte	0
- 1566 050c 0D       		.uleb128 0xd
- 1567 050d A3000000 		.4byte	0xa3
- 1568 0511 1F050000 		.4byte	0x51f
- 1569 0515 18       		.uleb128 0x18
- 1570 0516 95000000 		.4byte	0x95
- 1571 051a 03       		.uleb128 0x3
- 1572 051b 91       		.byte	0x91
- 1573 051c 60       		.sleb128 -32
- 1574 051d 06       		.byte	0x6
- 1575 051e 00       		.byte	0
- 1576 051f 19       		.uleb128 0x19
- 1577 0520 63010000 		.4byte	.LASF53
- 1578 0524 07       		.byte	0x7
- 1579 0525 96       		.byte	0x96
- 1580 0526 B1010000 		.4byte	0x1b1
- 1581 052a 00       		.byte	0
- 1582              		.section	.debug_abbrev,"",%progbits
- 1583              	.Ldebug_abbrev0:
- 1584 0000 01       		.uleb128 0x1
- 1585 0001 11       		.uleb128 0x11
- 1586 0002 01       		.byte	0x1
- 1587 0003 25       		.uleb128 0x25
- 1588 0004 0E       		.uleb128 0xe
- 1589 0005 13       		.uleb128 0x13
- 1590 0006 0B       		.uleb128 0xb
- 1591 0007 03       		.uleb128 0x3
- 1592 0008 0E       		.uleb128 0xe
- 1593 0009 1B       		.uleb128 0x1b
- 1594 000a 0E       		.uleb128 0xe
- 1595 000b 55       		.uleb128 0x55
- 1596 000c 17       		.uleb128 0x17
- 1597 000d 11       		.uleb128 0x11
- 1598 000e 01       		.uleb128 0x1
- 1599 000f 10       		.uleb128 0x10
- 1600 0010 17       		.uleb128 0x17
- 1601 0011 00       		.byte	0
- 1602 0012 00       		.byte	0
- 1603 0013 02       		.uleb128 0x2
- 1604 0014 24       		.uleb128 0x24
- 1605 0015 00       		.byte	0
- 1606 0016 0B       		.uleb128 0xb
- 1607 0017 0B       		.uleb128 0xb
- 1608 0018 3E       		.uleb128 0x3e
- 1609 0019 0B       		.uleb128 0xb
- 1610 001a 03       		.uleb128 0x3
- 1611 001b 0E       		.uleb128 0xe
- 1612 001c 00       		.byte	0
- 1613 001d 00       		.byte	0
- 1614 001e 03       		.uleb128 0x3
- 1615 001f 16       		.uleb128 0x16
- 1616 0020 00       		.byte	0
- 1617 0021 03       		.uleb128 0x3
- 1618 0022 0E       		.uleb128 0xe
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 34
-
-
- 1619 0023 3A       		.uleb128 0x3a
- 1620 0024 0B       		.uleb128 0xb
- 1621 0025 3B       		.uleb128 0x3b
- 1622 0026 0B       		.uleb128 0xb
- 1623 0027 49       		.uleb128 0x49
- 1624 0028 13       		.uleb128 0x13
- 1625 0029 00       		.byte	0
- 1626 002a 00       		.byte	0
- 1627 002b 04       		.uleb128 0x4
- 1628 002c 24       		.uleb128 0x24
- 1629 002d 00       		.byte	0
- 1630 002e 0B       		.uleb128 0xb
- 1631 002f 0B       		.uleb128 0xb
- 1632 0030 3E       		.uleb128 0x3e
- 1633 0031 0B       		.uleb128 0xb
- 1634 0032 03       		.uleb128 0x3
- 1635 0033 08       		.uleb128 0x8
- 1636 0034 00       		.byte	0
- 1637 0035 00       		.byte	0
- 1638 0036 05       		.uleb128 0x5
- 1639 0037 0F       		.uleb128 0xf
- 1640 0038 00       		.byte	0
- 1641 0039 0B       		.uleb128 0xb
- 1642 003a 0B       		.uleb128 0xb
- 1643 003b 00       		.byte	0
- 1644 003c 00       		.byte	0
- 1645 003d 06       		.uleb128 0x6
- 1646 003e 0F       		.uleb128 0xf
- 1647 003f 00       		.byte	0
- 1648 0040 0B       		.uleb128 0xb
- 1649 0041 0B       		.uleb128 0xb
- 1650 0042 49       		.uleb128 0x49
- 1651 0043 13       		.uleb128 0x13
- 1652 0044 00       		.byte	0
- 1653 0045 00       		.byte	0
- 1654 0046 07       		.uleb128 0x7
- 1655 0047 15       		.uleb128 0x15
- 1656 0048 01       		.byte	0x1
- 1657 0049 27       		.uleb128 0x27
- 1658 004a 19       		.uleb128 0x19
- 1659 004b 01       		.uleb128 0x1
- 1660 004c 13       		.uleb128 0x13
- 1661 004d 00       		.byte	0
- 1662 004e 00       		.byte	0
- 1663 004f 08       		.uleb128 0x8
- 1664 0050 05       		.uleb128 0x5
- 1665 0051 00       		.byte	0
- 1666 0052 49       		.uleb128 0x49
- 1667 0053 13       		.uleb128 0x13
- 1668 0054 00       		.byte	0
- 1669 0055 00       		.byte	0
- 1670 0056 09       		.uleb128 0x9
- 1671 0057 26       		.uleb128 0x26
- 1672 0058 00       		.byte	0
- 1673 0059 49       		.uleb128 0x49
- 1674 005a 13       		.uleb128 0x13
- 1675 005b 00       		.byte	0
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 35
-
-
- 1676 005c 00       		.byte	0
- 1677 005d 0A       		.uleb128 0xa
- 1678 005e 13       		.uleb128 0x13
- 1679 005f 01       		.byte	0x1
- 1680 0060 0B       		.uleb128 0xb
- 1681 0061 0B       		.uleb128 0xb
- 1682 0062 3A       		.uleb128 0x3a
- 1683 0063 0B       		.uleb128 0xb
- 1684 0064 3B       		.uleb128 0x3b
- 1685 0065 0B       		.uleb128 0xb
- 1686 0066 01       		.uleb128 0x1
- 1687 0067 13       		.uleb128 0x13
- 1688 0068 00       		.byte	0
- 1689 0069 00       		.byte	0
- 1690 006a 0B       		.uleb128 0xb
- 1691 006b 0D       		.uleb128 0xd
- 1692 006c 00       		.byte	0
- 1693 006d 03       		.uleb128 0x3
- 1694 006e 0E       		.uleb128 0xe
- 1695 006f 3A       		.uleb128 0x3a
- 1696 0070 0B       		.uleb128 0xb
- 1697 0071 3B       		.uleb128 0x3b
- 1698 0072 0B       		.uleb128 0xb
- 1699 0073 49       		.uleb128 0x49
- 1700 0074 13       		.uleb128 0x13
- 1701 0075 38       		.uleb128 0x38
- 1702 0076 0B       		.uleb128 0xb
- 1703 0077 00       		.byte	0
- 1704 0078 00       		.byte	0
- 1705 0079 0C       		.uleb128 0xc
- 1706 007a 0D       		.uleb128 0xd
- 1707 007b 00       		.byte	0
- 1708 007c 03       		.uleb128 0x3
- 1709 007d 08       		.uleb128 0x8
- 1710 007e 3A       		.uleb128 0x3a
- 1711 007f 0B       		.uleb128 0xb
- 1712 0080 3B       		.uleb128 0x3b
- 1713 0081 0B       		.uleb128 0xb
- 1714 0082 49       		.uleb128 0x49
- 1715 0083 13       		.uleb128 0x13
- 1716 0084 38       		.uleb128 0x38
- 1717 0085 0B       		.uleb128 0xb
- 1718 0086 00       		.byte	0
- 1719 0087 00       		.byte	0
- 1720 0088 0D       		.uleb128 0xd
- 1721 0089 01       		.uleb128 0x1
- 1722 008a 01       		.byte	0x1
- 1723 008b 49       		.uleb128 0x49
- 1724 008c 13       		.uleb128 0x13
- 1725 008d 01       		.uleb128 0x1
- 1726 008e 13       		.uleb128 0x13
- 1727 008f 00       		.byte	0
- 1728 0090 00       		.byte	0
- 1729 0091 0E       		.uleb128 0xe
- 1730 0092 21       		.uleb128 0x21
- 1731 0093 00       		.byte	0
- 1732 0094 49       		.uleb128 0x49
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 36
-
-
- 1733 0095 13       		.uleb128 0x13
- 1734 0096 2F       		.uleb128 0x2f
- 1735 0097 0B       		.uleb128 0xb
- 1736 0098 00       		.byte	0
- 1737 0099 00       		.byte	0
- 1738 009a 0F       		.uleb128 0xf
- 1739 009b 2E       		.uleb128 0x2e
- 1740 009c 01       		.byte	0x1
- 1741 009d 03       		.uleb128 0x3
- 1742 009e 0E       		.uleb128 0xe
- 1743 009f 3A       		.uleb128 0x3a
- 1744 00a0 0B       		.uleb128 0xb
- 1745 00a1 3B       		.uleb128 0x3b
- 1746 00a2 0B       		.uleb128 0xb
- 1747 00a3 27       		.uleb128 0x27
- 1748 00a4 19       		.uleb128 0x19
- 1749 00a5 11       		.uleb128 0x11
- 1750 00a6 01       		.uleb128 0x1
- 1751 00a7 12       		.uleb128 0x12
- 1752 00a8 06       		.uleb128 0x6
- 1753 00a9 40       		.uleb128 0x40
- 1754 00aa 18       		.uleb128 0x18
- 1755 00ab 9642     		.uleb128 0x2116
- 1756 00ad 19       		.uleb128 0x19
- 1757 00ae 01       		.uleb128 0x1
- 1758 00af 13       		.uleb128 0x13
- 1759 00b0 00       		.byte	0
- 1760 00b1 00       		.byte	0
- 1761 00b2 10       		.uleb128 0x10
- 1762 00b3 05       		.uleb128 0x5
- 1763 00b4 00       		.byte	0
- 1764 00b5 03       		.uleb128 0x3
- 1765 00b6 08       		.uleb128 0x8
- 1766 00b7 3A       		.uleb128 0x3a
- 1767 00b8 0B       		.uleb128 0xb
- 1768 00b9 3B       		.uleb128 0x3b
- 1769 00ba 0B       		.uleb128 0xb
- 1770 00bb 49       		.uleb128 0x49
- 1771 00bc 13       		.uleb128 0x13
- 1772 00bd 02       		.uleb128 0x2
- 1773 00be 18       		.uleb128 0x18
- 1774 00bf 00       		.byte	0
- 1775 00c0 00       		.byte	0
- 1776 00c1 11       		.uleb128 0x11
- 1777 00c2 35       		.uleb128 0x35
- 1778 00c3 00       		.byte	0
- 1779 00c4 00       		.byte	0
- 1780 00c5 00       		.byte	0
- 1781 00c6 12       		.uleb128 0x12
- 1782 00c7 2E       		.uleb128 0x2e
- 1783 00c8 01       		.byte	0x1
- 1784 00c9 3F       		.uleb128 0x3f
- 1785 00ca 19       		.uleb128 0x19
- 1786 00cb 03       		.uleb128 0x3
- 1787 00cc 0E       		.uleb128 0xe
- 1788 00cd 3A       		.uleb128 0x3a
- 1789 00ce 0B       		.uleb128 0xb
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 37
-
-
- 1790 00cf 3B       		.uleb128 0x3b
- 1791 00d0 0B       		.uleb128 0xb
- 1792 00d1 27       		.uleb128 0x27
- 1793 00d2 19       		.uleb128 0x19
- 1794 00d3 11       		.uleb128 0x11
- 1795 00d4 01       		.uleb128 0x1
- 1796 00d5 12       		.uleb128 0x12
- 1797 00d6 06       		.uleb128 0x6
- 1798 00d7 40       		.uleb128 0x40
- 1799 00d8 18       		.uleb128 0x18
- 1800 00d9 9642     		.uleb128 0x2116
- 1801 00db 19       		.uleb128 0x19
- 1802 00dc 01       		.uleb128 0x1
- 1803 00dd 13       		.uleb128 0x13
- 1804 00de 00       		.byte	0
- 1805 00df 00       		.byte	0
- 1806 00e0 13       		.uleb128 0x13
- 1807 00e1 05       		.uleb128 0x5
- 1808 00e2 00       		.byte	0
- 1809 00e3 03       		.uleb128 0x3
- 1810 00e4 0E       		.uleb128 0xe
- 1811 00e5 3A       		.uleb128 0x3a
- 1812 00e6 0B       		.uleb128 0xb
- 1813 00e7 3B       		.uleb128 0x3b
- 1814 00e8 0B       		.uleb128 0xb
- 1815 00e9 49       		.uleb128 0x49
- 1816 00ea 13       		.uleb128 0x13
- 1817 00eb 02       		.uleb128 0x2
- 1818 00ec 18       		.uleb128 0x18
- 1819 00ed 00       		.byte	0
- 1820 00ee 00       		.byte	0
- 1821 00ef 14       		.uleb128 0x14
- 1822 00f0 34       		.uleb128 0x34
- 1823 00f1 00       		.byte	0
- 1824 00f2 03       		.uleb128 0x3
- 1825 00f3 0E       		.uleb128 0xe
- 1826 00f4 3A       		.uleb128 0x3a
- 1827 00f5 0B       		.uleb128 0xb
- 1828 00f6 3B       		.uleb128 0x3b
- 1829 00f7 0B       		.uleb128 0xb
- 1830 00f8 49       		.uleb128 0x49
- 1831 00f9 13       		.uleb128 0x13
- 1832 00fa 02       		.uleb128 0x2
- 1833 00fb 18       		.uleb128 0x18
- 1834 00fc 00       		.byte	0
- 1835 00fd 00       		.byte	0
- 1836 00fe 15       		.uleb128 0x15
- 1837 00ff 0B       		.uleb128 0xb
- 1838 0100 01       		.byte	0x1
- 1839 0101 11       		.uleb128 0x11
- 1840 0102 01       		.uleb128 0x1
- 1841 0103 12       		.uleb128 0x12
- 1842 0104 06       		.uleb128 0x6
- 1843 0105 00       		.byte	0
- 1844 0106 00       		.byte	0
- 1845 0107 16       		.uleb128 0x16
- 1846 0108 34       		.uleb128 0x34
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 38
-
-
- 1847 0109 00       		.byte	0
- 1848 010a 03       		.uleb128 0x3
- 1849 010b 08       		.uleb128 0x8
- 1850 010c 3A       		.uleb128 0x3a
- 1851 010d 0B       		.uleb128 0xb
- 1852 010e 3B       		.uleb128 0x3b
- 1853 010f 0B       		.uleb128 0xb
- 1854 0110 49       		.uleb128 0x49
- 1855 0111 13       		.uleb128 0x13
- 1856 0112 02       		.uleb128 0x2
- 1857 0113 18       		.uleb128 0x18
- 1858 0114 00       		.byte	0
- 1859 0115 00       		.byte	0
- 1860 0116 17       		.uleb128 0x17
- 1861 0117 2E       		.uleb128 0x2e
- 1862 0118 01       		.byte	0x1
- 1863 0119 3F       		.uleb128 0x3f
- 1864 011a 19       		.uleb128 0x19
- 1865 011b 03       		.uleb128 0x3
- 1866 011c 0E       		.uleb128 0xe
- 1867 011d 3A       		.uleb128 0x3a
- 1868 011e 0B       		.uleb128 0xb
- 1869 011f 3B       		.uleb128 0x3b
- 1870 0120 0B       		.uleb128 0xb
- 1871 0121 27       		.uleb128 0x27
- 1872 0122 19       		.uleb128 0x19
- 1873 0123 49       		.uleb128 0x49
- 1874 0124 13       		.uleb128 0x13
- 1875 0125 11       		.uleb128 0x11
- 1876 0126 01       		.uleb128 0x1
- 1877 0127 12       		.uleb128 0x12
- 1878 0128 06       		.uleb128 0x6
- 1879 0129 40       		.uleb128 0x40
- 1880 012a 18       		.uleb128 0x18
- 1881 012b 9642     		.uleb128 0x2116
- 1882 012d 19       		.uleb128 0x19
- 1883 012e 01       		.uleb128 0x1
- 1884 012f 13       		.uleb128 0x13
- 1885 0130 00       		.byte	0
- 1886 0131 00       		.byte	0
- 1887 0132 18       		.uleb128 0x18
- 1888 0133 21       		.uleb128 0x21
- 1889 0134 00       		.byte	0
- 1890 0135 49       		.uleb128 0x49
- 1891 0136 13       		.uleb128 0x13
- 1892 0137 2F       		.uleb128 0x2f
- 1893 0138 18       		.uleb128 0x18
- 1894 0139 00       		.byte	0
- 1895 013a 00       		.byte	0
- 1896 013b 19       		.uleb128 0x19
- 1897 013c 34       		.uleb128 0x34
- 1898 013d 00       		.byte	0
- 1899 013e 03       		.uleb128 0x3
- 1900 013f 0E       		.uleb128 0xe
- 1901 0140 3A       		.uleb128 0x3a
- 1902 0141 0B       		.uleb128 0xb
- 1903 0142 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 39
-
-
- 1904 0143 0B       		.uleb128 0xb
- 1905 0144 49       		.uleb128 0x49
- 1906 0145 13       		.uleb128 0x13
- 1907 0146 3F       		.uleb128 0x3f
- 1908 0147 19       		.uleb128 0x19
- 1909 0148 3C       		.uleb128 0x3c
- 1910 0149 19       		.uleb128 0x19
- 1911 014a 00       		.byte	0
- 1912 014b 00       		.byte	0
- 1913 014c 00       		.byte	0
- 1914              		.section	.debug_aranges,"",%progbits
- 1915 0000 5C000000 		.4byte	0x5c
- 1916 0004 0200     		.2byte	0x2
- 1917 0006 00000000 		.4byte	.Ldebug_info0
- 1918 000a 04       		.byte	0x4
- 1919 000b 00       		.byte	0
- 1920 000c 0000     		.2byte	0
- 1921 000e 0000     		.2byte	0
- 1922 0010 00000000 		.4byte	.LFB1
- 1923 0014 24000000 		.4byte	.LFE1-.LFB1
- 1924 0018 00000000 		.4byte	.LFB3
- 1925 001c 44000000 		.4byte	.LFE3-.LFB3
- 1926 0020 00000000 		.4byte	.LFB4
- 1927 0024 4C000000 		.4byte	.LFE4-.LFB4
- 1928 0028 00000000 		.4byte	.LFB5
- 1929 002c B0000000 		.4byte	.LFE5-.LFB5
- 1930 0030 00000000 		.4byte	.LFB6
- 1931 0034 2A000000 		.4byte	.LFE6-.LFB6
- 1932 0038 00000000 		.4byte	.LFB7
- 1933 003c 90000000 		.4byte	.LFE7-.LFB7
- 1934 0040 00000000 		.4byte	.LFB8
- 1935 0044 98000000 		.4byte	.LFE8-.LFB8
- 1936 0048 00000000 		.4byte	.LFB9
- 1937 004c 08010000 		.4byte	.LFE9-.LFB9
- 1938 0050 00000000 		.4byte	.LFB10
- 1939 0054 0C010000 		.4byte	.LFE10-.LFB10
- 1940 0058 00000000 		.4byte	0
- 1941 005c 00000000 		.4byte	0
- 1942              		.section	.debug_ranges,"",%progbits
- 1943              	.Ldebug_ranges0:
- 1944 0000 00000000 		.4byte	.LFB1
- 1945 0004 24000000 		.4byte	.LFE1
- 1946 0008 00000000 		.4byte	.LFB3
- 1947 000c 44000000 		.4byte	.LFE3
- 1948 0010 00000000 		.4byte	.LFB4
- 1949 0014 4C000000 		.4byte	.LFE4
- 1950 0018 00000000 		.4byte	.LFB5
- 1951 001c B0000000 		.4byte	.LFE5
- 1952 0020 00000000 		.4byte	.LFB6
- 1953 0024 2A000000 		.4byte	.LFE6
- 1954 0028 00000000 		.4byte	.LFB7
- 1955 002c 90000000 		.4byte	.LFE7
- 1956 0030 00000000 		.4byte	.LFB8
- 1957 0034 98000000 		.4byte	.LFE8
- 1958 0038 00000000 		.4byte	.LFB9
- 1959 003c 08010000 		.4byte	.LFE9
- 1960 0040 00000000 		.4byte	.LFB10
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 40
-
-
- 1961 0044 0C010000 		.4byte	.LFE10
- 1962 0048 00000000 		.4byte	0
- 1963 004c 00000000 		.4byte	0
- 1964              		.section	.debug_line,"",%progbits
- 1965              	.Ldebug_line0:
- 1966 0000 DD020000 		.section	.debug_str,"MS",%progbits,1
- 1966      0200D501 
- 1966      00000201 
- 1966      FB0E0D00 
- 1966      01010101 
- 1967              	.LASF42:
- 1968 0000 6E746167 		.ascii	"ntag\000"
- 1968      00
- 1969              	.LASF5:
- 1970 0005 5F5F7569 		.ascii	"__uint8_t\000"
- 1970      6E74385F 
- 1970      7400
- 1971              	.LASF49:
- 1972 000f 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1972      43313120 
- 1972      352E342E 
- 1972      31203230 
- 1972      31363036 
- 1973 0042 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 1973      20726576 
- 1973      6973696F 
- 1973      6E203233 
- 1973      37373135 
- 1974 0075 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects -fomit-fram"
- 1974      66756E63 
- 1974      74696F6E 
- 1974      2D736563 
- 1974      74696F6E 
- 1975 00a8 652D706F 		.ascii	"e-pointer\000"
- 1975      696E7465 
- 1975      7200
- 1976              	.LASF48:
- 1977 00b2 616B5F61 		.ascii	"ak_aes_unpack_and_decrypt\000"
- 1977      65735F75 
- 1977      6E706163 
- 1977      6B5F616E 
- 1977      645F6465 
- 1978              	.LASF19:
- 1979 00cc 656E6372 		.ascii	"encrypt\000"
- 1979      79707400 
- 1980              	.LASF32:
- 1981 00d4 616B5F61 		.ascii	"ak_aes_init\000"
- 1981      65735F69 
- 1981      6E697400 
- 1982              	.LASF28:
- 1983 00e0 61707065 		.ascii	"append_counter_to_nonce\000"
- 1983      6E645F63 
- 1983      6F756E74 
- 1983      65725F74 
- 1983      6F5F6E6F 
- 1984              	.LASF23:
- 1985 00f8 63665F61 		.ascii	"cf_aes_context\000"
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 41
-
-
- 1985      65735F63 
- 1985      6F6E7465 
- 1985      787400
- 1986              	.LASF34:
- 1987 0107 73686172 		.ascii	"shared_secret_size\000"
- 1987      65645F73 
- 1987      65637265 
- 1987      745F7369 
- 1987      7A6500
- 1988              	.LASF20:
- 1989 011a 64656372 		.ascii	"decrypt\000"
- 1989      79707400 
- 1990              	.LASF33:
- 1991 0122 73686172 		.ascii	"shared_secret\000"
- 1991      65645F73 
- 1991      65637265 
- 1991      7400
- 1992              	.LASF46:
- 1993 0130 7061636B 		.ascii	"package_size\000"
- 1993      6167655F 
- 1993      73697A65 
- 1993      00
- 1994              	.LASF47:
- 1995 013d 616B5F61 		.ascii	"ak_aes_decrypt\000"
- 1995      65735F64 
- 1995      65637279 
- 1995      707400
- 1996              	.LASF24:
- 1997 014c 636F756E 		.ascii	"counter\000"
- 1997      74657200 
- 1998              	.LASF38:
- 1999 0154 616B5F61 		.ascii	"ak_aes_encrypt\000"
- 1999      65735F65 
- 1999      6E637279 
- 1999      707400
- 2000              	.LASF53:
- 2001 0163 63665F61 		.ascii	"cf_aes\000"
- 2001      657300
- 2002              	.LASF30:
- 2003 016a 73697A65 		.ascii	"size\000"
- 2003      00
- 2004              	.LASF21:
- 2005 016f 63665F70 		.ascii	"cf_prp\000"
- 2005      727000
- 2006              	.LASF7:
- 2007 0176 6C6F6E67 		.ascii	"long unsigned int\000"
- 2007      20756E73 
- 2007      69676E65 
- 2007      6420696E 
- 2007      7400
- 2008              	.LASF3:
- 2009 0188 73686F72 		.ascii	"short unsigned int\000"
- 2009      7420756E 
- 2009      7369676E 
- 2009      65642069 
- 2009      6E7400
- 2010              	.LASF11:
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 42
-
-
- 2011 019b 73697A65 		.ascii	"size_t\000"
- 2011      5F7400
- 2012              	.LASF45:
- 2013 01a2 7061636B 		.ascii	"package\000"
- 2013      61676500 
- 2014              	.LASF50:
- 2015 01aa 616B5F61 		.ascii	"ak_aes_crypto.c\000"
- 2015      65735F63 
- 2015      72797074 
- 2015      6F2E6300 
- 2016              	.LASF1:
- 2017 01ba 756E7369 		.ascii	"unsigned char\000"
- 2017      676E6564 
- 2017      20636861 
- 2017      7200
- 2018              	.LASF25:
- 2019 01c8 6E6F6E63 		.ascii	"nonce\000"
- 2019      6500
- 2020              	.LASF26:
- 2021 01ce 63636D5F 		.ascii	"ccm_ctx\000"
- 2021      63747800 
- 2022              	.LASF6:
- 2023 01d6 5F5F7569 		.ascii	"__uint32_t\000"
- 2023      6E743332 
- 2023      5F7400
- 2024              	.LASF40:
- 2025 01e1 706C6169 		.ascii	"plain_data_size\000"
- 2025      6E5F6461 
- 2025      74615F73 
- 2025      697A6500 
- 2026              	.LASF18:
- 2027 01f1 626C6F63 		.ascii	"blocksz\000"
- 2027      6B737A00 
- 2028              	.LASF17:
- 2029 01f9 63665F70 		.ascii	"cf_prp_block\000"
- 2029      72705F62 
- 2029      6C6F636B 
- 2029      00
- 2030              	.LASF35:
- 2031 0206 63636D5F 		.ascii	"ccm_context\000"
- 2031      636F6E74 
- 2031      65787400 
- 2032              	.LASF10:
- 2033 0212 756E7369 		.ascii	"unsigned int\000"
- 2033      676E6564 
- 2033      20696E74 
- 2033      00
- 2034              	.LASF9:
- 2035 021f 6C6F6E67 		.ascii	"long long unsigned int\000"
- 2035      206C6F6E 
- 2035      6720756E 
- 2035      7369676E 
- 2035      65642069 
- 2036              	.LASF15:
- 2037 0236 75696E74 		.ascii	"uint8_t\000"
- 2037      385F7400 
- 2038              	.LASF41:
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 43
-
-
- 2039 023e 656E6372 		.ascii	"encrypted_data\000"
- 2039      79707465 
- 2039      645F6461 
- 2039      746100
- 2040              	.LASF36:
- 2041 024d 73656372 		.ascii	"secret_key\000"
- 2041      65745F6B 
- 2041      657900
- 2042              	.LASF39:
- 2043 0258 706C6169 		.ascii	"plain_data\000"
- 2043      6E5F6461 
- 2043      746100
- 2044              	.LASF52:
- 2045 0263 6D656D5F 		.ascii	"mem_clean\000"
- 2045      636C6561 
- 2045      6E00
- 2046              	.LASF13:
- 2047 026d 73697A65 		.ascii	"sizetype\000"
- 2047      74797065 
- 2047      00
- 2048              	.LASF8:
- 2049 0276 6C6F6E67 		.ascii	"long long int\000"
- 2049      206C6F6E 
- 2049      6720696E 
- 2049      7400
- 2050              	.LASF27:
- 2051 0284 616B5F61 		.ascii	"ak_aes_context\000"
- 2051      65735F63 
- 2051      6F6E7465 
- 2051      787400
- 2052              	.LASF14:
- 2053 0293 63686172 		.ascii	"char\000"
- 2053      00
- 2054              	.LASF43:
- 2055 0298 656E6372 		.ascii	"encrypted_data_size\000"
- 2055      79707465 
- 2055      645F6461 
- 2055      74615F73 
- 2055      697A6500 
- 2056              	.LASF2:
- 2057 02ac 73686F72 		.ascii	"short int\000"
- 2057      7420696E 
- 2057      7400
- 2058              	.LASF29:
- 2059 02b6 635F7072 		.ascii	"c_print\000"
- 2059      696E7400 
- 2060              	.LASF31:
- 2061 02be 6374725F 		.ascii	"ctr_array\000"
- 2061      61727261 
- 2061      7900
- 2062              	.LASF22:
- 2063 02c8 726F756E 		.ascii	"rounds\000"
- 2063      647300
- 2064              	.LASF16:
- 2065 02cf 75696E74 		.ascii	"uint32_t\000"
- 2065      33325F74 
- 2065      00
-ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccBJlqrP.s 			page 44
-
-
- 2066              	.LASF4:
- 2067 02d8 6C6F6E67 		.ascii	"long int\000"
- 2067      20696E74 
- 2067      00
- 2068              	.LASF51:
- 2069 02e1 443A5C44 		.ascii	"D:\\Dropbox\\6_kurs\\diploma\\crypto_miscocontrolle"
- 2069      726F7062 
- 2069      6F785C36 
- 2069      5F6B7572 
- 2069      735C6469 
- 2070 0310 725F5354 		.ascii	"r_STABLE\\BLE_Dynamic_GATT_Service_Configuration\\B"
- 2070      41424C45 
- 2070      5C424C45 
- 2070      5F44796E 
- 2070      616D6963 
- 2071 0341 4C455F44 		.ascii	"LE_Dynamic_GATT_Service_Configuration.cydsn\000"
- 2071      796E616D 
- 2071      69635F47 
- 2071      4154545F 
- 2071      53657276 
- 2072              	.LASF12:
- 2073 036d 6C6F6E67 		.ascii	"long double\000"
- 2073      20646F75 
- 2073      626C6500 
- 2074              	.LASF0:
- 2075 0379 7369676E 		.ascii	"signed char\000"
- 2075      65642063 
- 2075      68617200 
- 2076              	.LASF37:
- 2077 0385 616B5F61 		.ascii	"ak_aes_finish\000"
- 2077      65735F66 
- 2077      696E6973 
- 2077      6800
- 2078              	.LASF44:
- 2079 0393 616B5F61 		.ascii	"ak_aes_encrypt_and_pack\000"
- 2079      65735F65 
- 2079      6E637279 
- 2079      70745F61 
- 2079      6E645F70 
- 2080              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+  91:ak_aes_crypto.c ****                    NULL, 0,
+  92:ak_aes_crypto.c ****                    ctx->nonce, NONCE_SIZE,
+ 394              		.loc 2 92 0
+ 395 0034 0B9B     		ldr	r3, [sp, #44]
+ 396 0036 0433     		adds	r3, r3, #4
+  89:ak_aes_crypto.c ****                    plain_data, plain_data_size, L_SIZE,
+ 397              		.loc 2 89 0
+ 398 0038 099D     		ldr	r5, [sp, #36]
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 11
+
+
+ 399 003a 0A9C     		ldr	r4, [sp, #40]
+ 400 003c 1248     		ldr	r0, .L15+4
+ 401 003e 119A     		ldr	r2, [sp, #68]
+ 402 0040 0792     		str	r2, [sp, #28]
+ 403 0042 109A     		ldr	r2, [sp, #64]
+ 404 0044 0692     		str	r2, [sp, #24]
+ 405 0046 089A     		ldr	r2, [sp, #32]
+ 406 0048 0592     		str	r2, [sp, #20]
+ 407 004a 0D22     		movs	r2, #13
+ 408 004c 0492     		str	r2, [sp, #16]
+ 409 004e 0393     		str	r3, [sp, #12]
+ 410 0050 0023     		movs	r3, #0
+ 411 0052 0293     		str	r3, [sp, #8]
+ 412 0054 0023     		movs	r3, #0
+ 413 0056 0193     		str	r3, [sp, #4]
+ 414 0058 0223     		movs	r3, #2
+ 415 005a 0093     		str	r3, [sp]
+ 416 005c 2B00     		movs	r3, r5
+ 417 005e 2200     		movs	r2, r4
+ 418 0060 FFF7FEFF 		bl	cf_ccm_encrypt
+  93:ak_aes_crypto.c ****                    encrypted_data,
+  94:ak_aes_crypto.c ****                    tag, ntag);
+  95:ak_aes_crypto.c ****     
+  96:ak_aes_crypto.c ****     //increment counter
+  97:ak_aes_crypto.c ****     ctx->counter = ctx->counter + 1;
+ 419              		.loc 2 97 0
+ 420 0064 0B9B     		ldr	r3, [sp, #44]
+ 421 0066 1B68     		ldr	r3, [r3]
+ 422 0068 5A1C     		adds	r2, r3, #1
+ 423 006a 0B9B     		ldr	r3, [sp, #44]
+ 424 006c 1A60     		str	r2, [r3]
+  98:ak_aes_crypto.c ****     printf("counter = %d\r\n", ctx->counter);
+ 425              		.loc 2 98 0
+ 426 006e 0B9B     		ldr	r3, [sp, #44]
+ 427 0070 1A68     		ldr	r2, [r3]
+ 428 0072 064B     		ldr	r3, .L15+8
+ 429 0074 1100     		movs	r1, r2
+ 430 0076 1800     		movs	r0, r3
+ 431 0078 FFF7FEFF 		bl	printf
+  99:ak_aes_crypto.c ****     
+ 100:ak_aes_crypto.c **** }
+ 432              		.loc 2 100 0
+ 433 007c C046     		nop
+ 434 007e 0DB0     		add	sp, sp, #52
+ 435              		@ sp needed
+ 436 0080 30BD     		pop	{r4, r5, pc}
+ 437              	.L16:
+ 438 0082 C046     		.align	2
+ 439              	.L15:
+ 440 0084 0C000000 		.word	.LC4
+ 441 0088 00000000 		.word	cf_aes
+ 442 008c 28000000 		.word	.LC10
+ 443              		.cfi_endproc
+ 444              	.LFE7:
+ 445              		.size	ak_aes_encrypt, .-ak_aes_encrypt
+ 446              		.section	.text.ak_aes_decrypt,"ax",%progbits
+ 447              		.align	2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 12
+
+
+ 448              		.global	ak_aes_decrypt
+ 449              		.code	16
+ 450              		.thumb_func
+ 451              		.type	ak_aes_decrypt, %function
+ 452              	ak_aes_decrypt:
+ 453              	.LFB8:
+ 101:ak_aes_crypto.c **** 
+ 102:ak_aes_crypto.c **** int ak_aes_decrypt(ak_aes_context *ctx,
+ 103:ak_aes_crypto.c ****                    const uint8_t *encrypted_data, size_t encrypted_data_size,
+ 104:ak_aes_crypto.c ****                    const uint8_t *tag, size_t ntag,
+ 105:ak_aes_crypto.c ****                    uint8_t *plain_data) {
+ 454              		.loc 2 105 0
+ 455              		.cfi_startproc
+ 456              		@ args = 8, pretend = 0, frame = 24
+ 457              		@ frame_needed = 0, uses_anonymous_args = 0
+ 458 0000 30B5     		push	{r4, r5, lr}
+ 459              		.cfi_def_cfa_offset 12
+ 460              		.cfi_offset 4, -12
+ 461              		.cfi_offset 5, -8
+ 462              		.cfi_offset 14, -4
+ 463 0002 8FB0     		sub	sp, sp, #60
+ 464              		.cfi_def_cfa_offset 72
+ 465 0004 0B90     		str	r0, [sp, #44]
+ 466 0006 0A91     		str	r1, [sp, #40]
+ 467 0008 0992     		str	r2, [sp, #36]
+ 468 000a 0893     		str	r3, [sp, #32]
+ 106:ak_aes_crypto.c ****     
+ 107:ak_aes_crypto.c ****     printf("nonce = \r\n");
+ 469              		.loc 2 107 0
+ 470 000c 1F4B     		ldr	r3, .L19
+ 471 000e 1800     		movs	r0, r3
+ 472 0010 FFF7FEFF 		bl	puts
+ 108:ak_aes_crypto.c ****     c_print(ctx->nonce, 13);
+ 473              		.loc 2 108 0
+ 474 0014 0B9B     		ldr	r3, [sp, #44]
+ 475 0016 0433     		adds	r3, r3, #4
+ 476 0018 0D21     		movs	r1, #13
+ 477 001a 1800     		movs	r0, r3
+ 478 001c FFF7FEFF 		bl	c_print
+ 109:ak_aes_crypto.c ****     
+ 110:ak_aes_crypto.c ****     //apply counter value onto it
+ 111:ak_aes_crypto.c ****     append_counter_to_nonce(ctx->nonce, ctx->counter);
+ 479              		.loc 2 111 0
+ 480 0020 0B9B     		ldr	r3, [sp, #44]
+ 481 0022 1A1D     		adds	r2, r3, #4
+ 482 0024 0B9B     		ldr	r3, [sp, #44]
+ 483 0026 1B68     		ldr	r3, [r3]
+ 484 0028 1900     		movs	r1, r3
+ 485 002a 1000     		movs	r0, r2
+ 486 002c FFF7FEFF 		bl	append_counter_to_nonce
+ 112:ak_aes_crypto.c ****     
+ 113:ak_aes_crypto.c ****     int err = 0;
+ 487              		.loc 2 113 0
+ 488 0030 0023     		movs	r3, #0
+ 489 0032 0D93     		str	r3, [sp, #52]
+ 114:ak_aes_crypto.c ****     err = cf_ccm_decrypt(&cf_aes, ctx->ccm_ctx,
+ 490              		.loc 2 114 0
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 13
+
+
+ 491 0034 0B9B     		ldr	r3, [sp, #44]
+ 492 0036 5969     		ldr	r1, [r3, #20]
+ 115:ak_aes_crypto.c ****                          encrypted_data, encrypted_data_size, L_SIZE,
+ 116:ak_aes_crypto.c ****                          NULL, 0,
+ 117:ak_aes_crypto.c ****                          ctx->nonce, NONCE_SIZE,
+ 493              		.loc 2 117 0
+ 494 0038 0B9B     		ldr	r3, [sp, #44]
+ 495 003a 0433     		adds	r3, r3, #4
+ 114:ak_aes_crypto.c ****     err = cf_ccm_decrypt(&cf_aes, ctx->ccm_ctx,
+ 496              		.loc 2 114 0
+ 497 003c 099D     		ldr	r5, [sp, #36]
+ 498 003e 0A9C     		ldr	r4, [sp, #40]
+ 499 0040 1348     		ldr	r0, .L19+4
+ 500 0042 139A     		ldr	r2, [sp, #76]
+ 501 0044 0792     		str	r2, [sp, #28]
+ 502 0046 129A     		ldr	r2, [sp, #72]
+ 503 0048 0692     		str	r2, [sp, #24]
+ 504 004a 089A     		ldr	r2, [sp, #32]
+ 505 004c 0592     		str	r2, [sp, #20]
+ 506 004e 0D22     		movs	r2, #13
+ 507 0050 0492     		str	r2, [sp, #16]
+ 508 0052 0393     		str	r3, [sp, #12]
+ 509 0054 0023     		movs	r3, #0
+ 510 0056 0293     		str	r3, [sp, #8]
+ 511 0058 0023     		movs	r3, #0
+ 512 005a 0193     		str	r3, [sp, #4]
+ 513 005c 0223     		movs	r3, #2
+ 514 005e 0093     		str	r3, [sp]
+ 515 0060 2B00     		movs	r3, r5
+ 516 0062 2200     		movs	r2, r4
+ 517 0064 FFF7FEFF 		bl	cf_ccm_decrypt
+ 518 0068 0300     		movs	r3, r0
+ 519 006a 0D93     		str	r3, [sp, #52]
+ 118:ak_aes_crypto.c ****                          tag, ntag,
+ 119:ak_aes_crypto.c ****                          plain_data);
+ 120:ak_aes_crypto.c ****     
+ 121:ak_aes_crypto.c ****     //increment counter
+ 122:ak_aes_crypto.c ****     ctx->counter = ctx->counter + 1;
+ 520              		.loc 2 122 0
+ 521 006c 0B9B     		ldr	r3, [sp, #44]
+ 522 006e 1B68     		ldr	r3, [r3]
+ 523 0070 5A1C     		adds	r2, r3, #1
+ 524 0072 0B9B     		ldr	r3, [sp, #44]
+ 525 0074 1A60     		str	r2, [r3]
+ 123:ak_aes_crypto.c ****     printf("counter = %d\r\n", ctx->counter);
+ 526              		.loc 2 123 0
+ 527 0076 0B9B     		ldr	r3, [sp, #44]
+ 528 0078 1A68     		ldr	r2, [r3]
+ 529 007a 064B     		ldr	r3, .L19+8
+ 530 007c 1100     		movs	r1, r2
+ 531 007e 1800     		movs	r0, r3
+ 532 0080 FFF7FEFF 		bl	printf
+ 124:ak_aes_crypto.c ****     return err;
+ 533              		.loc 2 124 0
+ 534 0084 0D9B     		ldr	r3, [sp, #52]
+ 125:ak_aes_crypto.c **** }
+ 535              		.loc 2 125 0
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 14
+
+
+ 536 0086 1800     		movs	r0, r3
+ 537 0088 0FB0     		add	sp, sp, #60
+ 538              		@ sp needed
+ 539 008a 30BD     		pop	{r4, r5, pc}
+ 540              	.L20:
+ 541              		.align	2
+ 542              	.L19:
+ 543 008c 0C000000 		.word	.LC4
+ 544 0090 00000000 		.word	cf_aes
+ 545 0094 28000000 		.word	.LC10
+ 546              		.cfi_endproc
+ 547              	.LFE8:
+ 548              		.size	ak_aes_decrypt, .-ak_aes_decrypt
+ 549              		.section	.rodata
+ 550 0037 00       		.align	2
+ 551              	.LC15:
+ 552 0038 74616720 		.ascii	"tag = \015\000"
+ 552      3D200D00 
+ 553              		.align	2
+ 554              	.LC17:
+ 555 0040 656E6372 		.ascii	"encrypted message = \015\000"
+ 555      79707465 
+ 555      64206D65 
+ 555      73736167 
+ 555      65203D20 
+ 556 0056 0000     		.align	2
+ 557              	.LC19:
+ 558 0058 7061636B 		.ascii	"package = \015\000"
+ 558      61676520 
+ 558      3D200D00 
+ 559              		.section	.text.ak_aes_encrypt_and_pack,"ax",%progbits
+ 560              		.align	2
+ 561              		.global	ak_aes_encrypt_and_pack
+ 562              		.code	16
+ 563              		.thumb_func
+ 564              		.type	ak_aes_encrypt_and_pack, %function
+ 565              	ak_aes_encrypt_and_pack:
+ 566              	.LFB9:
+ 126:ak_aes_crypto.c **** 
+ 127:ak_aes_crypto.c **** // -------------------------------------------------------------------
+ 128:ak_aes_crypto.c **** 
+ 129:ak_aes_crypto.c **** void ak_aes_encrypt_and_pack(ak_aes_context *ctx,
+ 130:ak_aes_crypto.c ****                              const uint8_t *plain_data, size_t plain_data_size,
+ 131:ak_aes_crypto.c ****                              uint8_t *package, uint8_t *package_size) {
+ 567              		.loc 2 131 0
+ 568              		.cfi_startproc
+ 569              		@ args = 4, pretend = 0, frame = 72
+ 570              		@ frame_needed = 1, uses_anonymous_args = 0
+ 571 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 572              		.cfi_def_cfa_offset 20
+ 573              		.cfi_offset 4, -20
+ 574              		.cfi_offset 5, -16
+ 575              		.cfi_offset 6, -12
+ 576              		.cfi_offset 7, -8
+ 577              		.cfi_offset 14, -4
+ 578 0002 95B0     		sub	sp, sp, #84
+ 579              		.cfi_def_cfa_offset 104
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 15
+
+
+ 580 0004 02AF     		add	r7, sp, #8
+ 581              		.cfi_def_cfa 7, 96
+ 582 0006 F862     		str	r0, [r7, #44]
+ 583 0008 B962     		str	r1, [r7, #40]
+ 584 000a 7A62     		str	r2, [r7, #36]
+ 585 000c 3B62     		str	r3, [r7, #32]
+ 586              		.loc 2 131 0
+ 587 000e 6B46     		mov	r3, sp
+ 588 0010 7B60     		str	r3, [r7, #4]
+ 132:ak_aes_crypto.c ****     uint8_t encrypted_data[plain_data_size], tag[TAG_SIZE];
+ 589              		.loc 2 132 0
+ 590 0012 7B6A     		ldr	r3, [r7, #36]
+ 591 0014 1A00     		movs	r2, r3
+ 592 0016 013A     		subs	r2, r2, #1
+ 593 0018 7A64     		str	r2, [r7, #68]
+ 594 001a 3B61     		str	r3, [r7, #16]
+ 595 001c 0022     		movs	r2, #0
+ 596 001e 7A61     		str	r2, [r7, #20]
+ 597 0020 3869     		ldr	r0, [r7, #16]
+ 598 0022 7969     		ldr	r1, [r7, #20]
+ 599 0024 0200     		movs	r2, r0
+ 600 0026 520F     		lsrs	r2, r2, #29
+ 601 0028 0E00     		movs	r6, r1
+ 602 002a F600     		lsls	r6, r6, #3
+ 603 002c FE61     		str	r6, [r7, #28]
+ 604 002e FE69     		ldr	r6, [r7, #28]
+ 605 0030 1643     		orrs	r6, r2
+ 606 0032 FE61     		str	r6, [r7, #28]
+ 607 0034 0200     		movs	r2, r0
+ 608 0036 D200     		lsls	r2, r2, #3
+ 609 0038 BA61     		str	r2, [r7, #24]
+ 610 003a BB60     		str	r3, [r7, #8]
+ 611 003c 0022     		movs	r2, #0
+ 612 003e FA60     		str	r2, [r7, #12]
+ 613 0040 B868     		ldr	r0, [r7, #8]
+ 614 0042 F968     		ldr	r1, [r7, #12]
+ 615 0044 0200     		movs	r2, r0
+ 616 0046 520F     		lsrs	r2, r2, #29
+ 617 0048 0E00     		movs	r6, r1
+ 618 004a F500     		lsls	r5, r6, #3
+ 619 004c 1543     		orrs	r5, r2
+ 620 004e 0200     		movs	r2, r0
+ 621 0050 D400     		lsls	r4, r2, #3
+ 622 0052 0733     		adds	r3, r3, #7
+ 623 0054 DB08     		lsrs	r3, r3, #3
+ 624 0056 DB00     		lsls	r3, r3, #3
+ 625 0058 6A46     		mov	r2, sp
+ 626 005a D31A     		subs	r3, r2, r3
+ 627 005c 9D46     		mov	sp, r3
+ 628 005e 02AB     		add	r3, sp, #8
+ 629 0060 0033     		adds	r3, r3, #0
+ 630 0062 3B64     		str	r3, [r7, #64]
+ 133:ak_aes_crypto.c ****     //apply counter value onto it
+ 134:ak_aes_crypto.c ****     
+ 135:ak_aes_crypto.c ****     ak_aes_encrypt(ctx, plain_data, plain_data_size, encrypted_data, tag, TAG_SIZE);
+ 631              		.loc 2 135 0
+ 632 0064 3C6C     		ldr	r4, [r7, #64]
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 16
+
+
+ 633 0066 7A6A     		ldr	r2, [r7, #36]
+ 634 0068 B96A     		ldr	r1, [r7, #40]
+ 635 006a F86A     		ldr	r0, [r7, #44]
+ 636 006c 1023     		movs	r3, #16
+ 637 006e 0193     		str	r3, [sp, #4]
+ 638 0070 1023     		movs	r3, #16
+ 639 0072 2025     		movs	r5, #32
+ 640 0074 AC46     		mov	ip, r5
+ 641 0076 BC44     		add	ip, ip, r7
+ 642 0078 6344     		add	r3, r3, ip
+ 643 007a 0093     		str	r3, [sp]
+ 644 007c 2300     		movs	r3, r4
+ 645 007e FFF7FEFF 		bl	ak_aes_encrypt
+ 136:ak_aes_crypto.c ****     
+ 137:ak_aes_crypto.c ****     printf("tag = \r\n");
+ 646              		.loc 2 137 0
+ 647 0082 1E4B     		ldr	r3, .L22
+ 648 0084 1800     		movs	r0, r3
+ 649 0086 FFF7FEFF 		bl	puts
+ 138:ak_aes_crypto.c ****     c_print(tag, TAG_SIZE);
+ 650              		.loc 2 138 0
+ 651 008a 1023     		movs	r3, #16
+ 652 008c 2022     		movs	r2, #32
+ 653 008e 9446     		mov	ip, r2
+ 654 0090 BC44     		add	ip, ip, r7
+ 655 0092 6344     		add	r3, r3, ip
+ 656 0094 1021     		movs	r1, #16
+ 657 0096 1800     		movs	r0, r3
+ 658 0098 FFF7FEFF 		bl	c_print
+ 139:ak_aes_crypto.c ****     
+ 140:ak_aes_crypto.c ****     printf("encrypted message = \r\n");
+ 659              		.loc 2 140 0
+ 660 009c 184B     		ldr	r3, .L22+4
+ 661 009e 1800     		movs	r0, r3
+ 662 00a0 FFF7FEFF 		bl	puts
+ 141:ak_aes_crypto.c ****     c_print(encrypted_data, plain_data_size);
+ 663              		.loc 2 141 0
+ 664 00a4 3B6C     		ldr	r3, [r7, #64]
+ 665 00a6 7A6A     		ldr	r2, [r7, #36]
+ 666 00a8 1100     		movs	r1, r2
+ 667 00aa 1800     		movs	r0, r3
+ 668 00ac FFF7FEFF 		bl	c_print
+ 142:ak_aes_crypto.c ****     
+ 143:ak_aes_crypto.c ****     // copy tag first
+ 144:ak_aes_crypto.c ****     memcpy(package, tag, TAG_SIZE);
+ 669              		.loc 2 144 0
+ 670 00b0 3A6A     		ldr	r2, [r7, #32]
+ 671 00b2 1023     		movs	r3, #16
+ 672 00b4 2021     		movs	r1, #32
+ 673 00b6 8C46     		mov	ip, r1
+ 674 00b8 BC44     		add	ip, ip, r7
+ 675 00ba 6344     		add	r3, r3, ip
+ 676 00bc 1000     		movs	r0, r2
+ 677 00be 1900     		movs	r1, r3
+ 678 00c0 1023     		movs	r3, #16
+ 679 00c2 1A00     		movs	r2, r3
+ 680 00c4 FFF7FEFF 		bl	memcpy
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 17
+
+
+ 145:ak_aes_crypto.c ****     // then message
+ 146:ak_aes_crypto.c ****     memcpy(package + TAG_SIZE, encrypted_data, plain_data_size);
+ 681              		.loc 2 146 0
+ 682 00c8 3B6A     		ldr	r3, [r7, #32]
+ 683 00ca 1033     		adds	r3, r3, #16
+ 684 00cc 396C     		ldr	r1, [r7, #64]
+ 685 00ce 7A6A     		ldr	r2, [r7, #36]
+ 686 00d0 1800     		movs	r0, r3
+ 687 00d2 FFF7FEFF 		bl	memcpy
+ 147:ak_aes_crypto.c ****     
+ 148:ak_aes_crypto.c ****     printf("package = \r\n");
+ 688              		.loc 2 148 0
+ 689 00d6 0B4B     		ldr	r3, .L22+8
+ 690 00d8 1800     		movs	r0, r3
+ 691 00da FFF7FEFF 		bl	puts
+ 149:ak_aes_crypto.c ****     c_print(package, TAG_SIZE + plain_data_size);
+ 692              		.loc 2 149 0
+ 693 00de 7B6A     		ldr	r3, [r7, #36]
+ 694 00e0 1033     		adds	r3, r3, #16
+ 695 00e2 1A00     		movs	r2, r3
+ 696 00e4 3B6A     		ldr	r3, [r7, #32]
+ 697 00e6 1100     		movs	r1, r2
+ 698 00e8 1800     		movs	r0, r3
+ 699 00ea FFF7FEFF 		bl	c_print
+ 700 00ee 7B68     		ldr	r3, [r7, #4]
+ 701 00f0 9D46     		mov	sp, r3
+ 150:ak_aes_crypto.c **** }
+ 702              		.loc 2 150 0
+ 703 00f2 C046     		nop
+ 704 00f4 BD46     		mov	sp, r7
+ 705 00f6 13B0     		add	sp, sp, #76
+ 706              		@ sp needed
+ 707 00f8 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 708              	.L23:
+ 709 00fa C046     		.align	2
+ 710              	.L22:
+ 711 00fc 38000000 		.word	.LC15
+ 712 0100 40000000 		.word	.LC17
+ 713 0104 58000000 		.word	.LC19
+ 714              		.cfi_endproc
+ 715              	.LFE9:
+ 716              		.size	ak_aes_encrypt_and_pack, .-ak_aes_encrypt_and_pack
+ 717              		.section	.text.ak_aes_unpack_and_decrypt,"ax",%progbits
+ 718              		.align	2
+ 719              		.global	ak_aes_unpack_and_decrypt
+ 720              		.code	16
+ 721              		.thumb_func
+ 722              		.type	ak_aes_unpack_and_decrypt, %function
+ 723              	ak_aes_unpack_and_decrypt:
+ 724              	.LFB10:
+ 151:ak_aes_crypto.c **** 
+ 152:ak_aes_crypto.c **** int ak_aes_unpack_and_decrypt(ak_aes_context *ctx,
+ 153:ak_aes_crypto.c ****                               const uint8_t *package, size_t package_size,
+ 154:ak_aes_crypto.c ****                               uint8_t *plain_data) {
+ 725              		.loc 2 154 0
+ 726              		.cfi_startproc
+ 727              		@ args = 0, pretend = 0, frame = 80
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 18
+
+
+ 728              		@ frame_needed = 1, uses_anonymous_args = 0
+ 729 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 730              		.cfi_def_cfa_offset 20
+ 731              		.cfi_offset 4, -20
+ 732              		.cfi_offset 5, -16
+ 733              		.cfi_offset 6, -12
+ 734              		.cfi_offset 7, -8
+ 735              		.cfi_offset 14, -4
+ 736 0002 97B0     		sub	sp, sp, #92
+ 737              		.cfi_def_cfa_offset 112
+ 738 0004 02AF     		add	r7, sp, #8
+ 739              		.cfi_def_cfa 7, 104
+ 740 0006 F862     		str	r0, [r7, #44]
+ 741 0008 B962     		str	r1, [r7, #40]
+ 742 000a 7A62     		str	r2, [r7, #36]
+ 743 000c 3B62     		str	r3, [r7, #32]
+ 744              		.loc 2 154 0
+ 745 000e 6B46     		mov	r3, sp
+ 746 0010 7B60     		str	r3, [r7, #4]
+ 155:ak_aes_crypto.c ****     size_t encrypted_data_size = package_size - TAG_SIZE;
+ 747              		.loc 2 155 0
+ 748 0012 7B6A     		ldr	r3, [r7, #36]
+ 749 0014 103B     		subs	r3, r3, #16
+ 750 0016 FB64     		str	r3, [r7, #76]
+ 156:ak_aes_crypto.c ****     uint8_t encrypted_data[encrypted_data_size], tag[TAG_SIZE];
+ 751              		.loc 2 156 0
+ 752 0018 FB6C     		ldr	r3, [r7, #76]
+ 753 001a 1A00     		movs	r2, r3
+ 754 001c 013A     		subs	r2, r2, #1
+ 755 001e BA64     		str	r2, [r7, #72]
+ 756 0020 3B61     		str	r3, [r7, #16]
+ 757 0022 0022     		movs	r2, #0
+ 758 0024 7A61     		str	r2, [r7, #20]
+ 759 0026 3869     		ldr	r0, [r7, #16]
+ 760 0028 7969     		ldr	r1, [r7, #20]
+ 761 002a 0200     		movs	r2, r0
+ 762 002c 520F     		lsrs	r2, r2, #29
+ 763 002e 0E00     		movs	r6, r1
+ 764 0030 F600     		lsls	r6, r6, #3
+ 765 0032 FE61     		str	r6, [r7, #28]
+ 766 0034 FE69     		ldr	r6, [r7, #28]
+ 767 0036 1643     		orrs	r6, r2
+ 768 0038 FE61     		str	r6, [r7, #28]
+ 769 003a 0200     		movs	r2, r0
+ 770 003c D200     		lsls	r2, r2, #3
+ 771 003e BA61     		str	r2, [r7, #24]
+ 772 0040 BB60     		str	r3, [r7, #8]
+ 773 0042 0022     		movs	r2, #0
+ 774 0044 FA60     		str	r2, [r7, #12]
+ 775 0046 B868     		ldr	r0, [r7, #8]
+ 776 0048 F968     		ldr	r1, [r7, #12]
+ 777 004a 0200     		movs	r2, r0
+ 778 004c 520F     		lsrs	r2, r2, #29
+ 779 004e 0E00     		movs	r6, r1
+ 780 0050 F500     		lsls	r5, r6, #3
+ 781 0052 1543     		orrs	r5, r2
+ 782 0054 0200     		movs	r2, r0
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 19
+
+
+ 783 0056 D400     		lsls	r4, r2, #3
+ 784 0058 0733     		adds	r3, r3, #7
+ 785 005a DB08     		lsrs	r3, r3, #3
+ 786 005c DB00     		lsls	r3, r3, #3
+ 787 005e 6A46     		mov	r2, sp
+ 788 0060 D31A     		subs	r3, r2, r3
+ 789 0062 9D46     		mov	sp, r3
+ 790 0064 02AB     		add	r3, sp, #8
+ 791 0066 0033     		adds	r3, r3, #0
+ 792 0068 7B64     		str	r3, [r7, #68]
+ 157:ak_aes_crypto.c ****     
+ 158:ak_aes_crypto.c ****     printf("package = \r\n");
+ 793              		.loc 2 158 0
+ 794 006a 254B     		ldr	r3, .L26
+ 795 006c 1800     		movs	r0, r3
+ 796 006e FFF7FEFF 		bl	puts
+ 159:ak_aes_crypto.c ****     c_print(package, TAG_SIZE + package_size);
+ 797              		.loc 2 159 0
+ 798 0072 7B6A     		ldr	r3, [r7, #36]
+ 799 0074 1033     		adds	r3, r3, #16
+ 800 0076 1A00     		movs	r2, r3
+ 801 0078 BB6A     		ldr	r3, [r7, #40]
+ 802 007a 1100     		movs	r1, r2
+ 803 007c 1800     		movs	r0, r3
+ 804 007e FFF7FEFF 		bl	c_print
+ 160:ak_aes_crypto.c ****     
+ 161:ak_aes_crypto.c ****     // copy tag first
+ 162:ak_aes_crypto.c ****     memcpy(tag, package, TAG_SIZE);
+ 805              		.loc 2 162 0
+ 806 0082 1423     		movs	r3, #20
+ 807 0084 2022     		movs	r2, #32
+ 808 0086 BA18     		adds	r2, r7, r2
+ 809 0088 D218     		adds	r2, r2, r3
+ 810 008a BB6A     		ldr	r3, [r7, #40]
+ 811 008c 1000     		movs	r0, r2
+ 812 008e 1900     		movs	r1, r3
+ 813 0090 1023     		movs	r3, #16
+ 814 0092 1A00     		movs	r2, r3
+ 815 0094 FFF7FEFF 		bl	memcpy
+ 163:ak_aes_crypto.c ****     
+ 164:ak_aes_crypto.c ****     printf("tag = \r\n");
+ 816              		.loc 2 164 0
+ 817 0098 1A4B     		ldr	r3, .L26+4
+ 818 009a 1800     		movs	r0, r3
+ 819 009c FFF7FEFF 		bl	puts
+ 165:ak_aes_crypto.c ****     c_print(tag, TAG_SIZE);
+ 820              		.loc 2 165 0
+ 821 00a0 1423     		movs	r3, #20
+ 822 00a2 2022     		movs	r2, #32
+ 823 00a4 9446     		mov	ip, r2
+ 824 00a6 BC44     		add	ip, ip, r7
+ 825 00a8 6344     		add	r3, r3, ip
+ 826 00aa 1021     		movs	r1, #16
+ 827 00ac 1800     		movs	r0, r3
+ 828 00ae FFF7FEFF 		bl	c_print
+ 166:ak_aes_crypto.c ****     
+ 167:ak_aes_crypto.c ****     // then message
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 20
+
+
+ 168:ak_aes_crypto.c ****     memcpy(encrypted_data,package + TAG_SIZE, encrypted_data_size);
+ 829              		.loc 2 168 0
+ 830 00b2 786C     		ldr	r0, [r7, #68]
+ 831 00b4 BB6A     		ldr	r3, [r7, #40]
+ 832 00b6 1033     		adds	r3, r3, #16
+ 833 00b8 FA6C     		ldr	r2, [r7, #76]
+ 834 00ba 1900     		movs	r1, r3
+ 835 00bc FFF7FEFF 		bl	memcpy
+ 169:ak_aes_crypto.c ****     
+ 170:ak_aes_crypto.c ****     printf("encrypted message = \r\n");
+ 836              		.loc 2 170 0
+ 837 00c0 114B     		ldr	r3, .L26+8
+ 838 00c2 1800     		movs	r0, r3
+ 839 00c4 FFF7FEFF 		bl	puts
+ 171:ak_aes_crypto.c ****     c_print(encrypted_data, encrypted_data_size);
+ 840              		.loc 2 171 0
+ 841 00c8 7B6C     		ldr	r3, [r7, #68]
+ 842 00ca FA6C     		ldr	r2, [r7, #76]
+ 843 00cc 1100     		movs	r1, r2
+ 844 00ce 1800     		movs	r0, r3
+ 845 00d0 FFF7FEFF 		bl	c_print
+ 172:ak_aes_crypto.c ****     
+ 173:ak_aes_crypto.c ****     return ak_aes_decrypt(ctx, encrypted_data, encrypted_data_size, tag, TAG_SIZE, plain_data);
+ 846              		.loc 2 173 0
+ 847 00d4 796C     		ldr	r1, [r7, #68]
+ 848 00d6 1423     		movs	r3, #20
+ 849 00d8 2022     		movs	r2, #32
+ 850 00da BA18     		adds	r2, r7, r2
+ 851 00dc D418     		adds	r4, r2, r3
+ 852 00de FA6C     		ldr	r2, [r7, #76]
+ 853 00e0 F86A     		ldr	r0, [r7, #44]
+ 854 00e2 3B6A     		ldr	r3, [r7, #32]
+ 855 00e4 0193     		str	r3, [sp, #4]
+ 856 00e6 1023     		movs	r3, #16
+ 857 00e8 0093     		str	r3, [sp]
+ 858 00ea 2300     		movs	r3, r4
+ 859 00ec FFF7FEFF 		bl	ak_aes_decrypt
+ 860 00f0 0300     		movs	r3, r0
+ 861 00f2 7A68     		ldr	r2, [r7, #4]
+ 862 00f4 9546     		mov	sp, r2
+ 174:ak_aes_crypto.c **** }
+ 863              		.loc 2 174 0
+ 864 00f6 1800     		movs	r0, r3
+ 865 00f8 BD46     		mov	sp, r7
+ 866 00fa 15B0     		add	sp, sp, #84
+ 867              		@ sp needed
+ 868 00fc F0BD     		pop	{r4, r5, r6, r7, pc}
+ 869              	.L27:
+ 870 00fe C046     		.align	2
+ 871              	.L26:
+ 872 0100 58000000 		.word	.LC19
+ 873 0104 38000000 		.word	.LC15
+ 874 0108 40000000 		.word	.LC17
+ 875              		.cfi_endproc
+ 876              	.LFE10:
+ 877              		.size	ak_aes_unpack_and_decrypt, .-ak_aes_unpack_and_decrypt
+ 878              		.text
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 21
+
+
+ 879              	.Letext0:
+ 880              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 881              		.file 4 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 882              		.file 5 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 883              		.file 6 "prp.h"
+ 884              		.file 7 "aes.h"
+ 885              		.file 8 "ak_aes_crypto.h"
+ 886              		.section	.debug_info,"",%progbits
+ 887              	.Ldebug_info0:
+ 888 0000 27050000 		.4byte	0x527
+ 889 0004 0400     		.2byte	0x4
+ 890 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 891 000a 04       		.byte	0x4
+ 892 000b 01       		.uleb128 0x1
+ 893 000c 0F000000 		.4byte	.LASF49
+ 894 0010 0C       		.byte	0xc
+ 895 0011 AA010000 		.4byte	.LASF50
+ 896 0015 E1020000 		.4byte	.LASF51
+ 897 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 898 001d 00000000 		.4byte	0
+ 899 0021 00000000 		.4byte	.Ldebug_line0
+ 900 0025 02       		.uleb128 0x2
+ 901 0026 01       		.byte	0x1
+ 902 0027 06       		.byte	0x6
+ 903 0028 79030000 		.4byte	.LASF0
+ 904 002c 03       		.uleb128 0x3
+ 905 002d 05000000 		.4byte	.LASF5
+ 906 0031 03       		.byte	0x3
+ 907 0032 1D       		.byte	0x1d
+ 908 0033 37000000 		.4byte	0x37
+ 909 0037 02       		.uleb128 0x2
+ 910 0038 01       		.byte	0x1
+ 911 0039 08       		.byte	0x8
+ 912 003a BA010000 		.4byte	.LASF1
+ 913 003e 02       		.uleb128 0x2
+ 914 003f 02       		.byte	0x2
+ 915 0040 05       		.byte	0x5
+ 916 0041 AC020000 		.4byte	.LASF2
+ 917 0045 02       		.uleb128 0x2
+ 918 0046 02       		.byte	0x2
+ 919 0047 07       		.byte	0x7
+ 920 0048 88010000 		.4byte	.LASF3
+ 921 004c 02       		.uleb128 0x2
+ 922 004d 04       		.byte	0x4
+ 923 004e 05       		.byte	0x5
+ 924 004f D8020000 		.4byte	.LASF4
+ 925 0053 03       		.uleb128 0x3
+ 926 0054 D6010000 		.4byte	.LASF6
+ 927 0058 03       		.byte	0x3
+ 928 0059 41       		.byte	0x41
+ 929 005a 5E000000 		.4byte	0x5e
+ 930 005e 02       		.uleb128 0x2
+ 931 005f 04       		.byte	0x4
+ 932 0060 07       		.byte	0x7
+ 933 0061 76010000 		.4byte	.LASF7
+ 934 0065 02       		.uleb128 0x2
+ 935 0066 08       		.byte	0x8
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 22
+
+
+ 936 0067 05       		.byte	0x5
+ 937 0068 76020000 		.4byte	.LASF8
+ 938 006c 02       		.uleb128 0x2
+ 939 006d 08       		.byte	0x8
+ 940 006e 07       		.byte	0x7
+ 941 006f 1F020000 		.4byte	.LASF9
+ 942 0073 04       		.uleb128 0x4
+ 943 0074 04       		.byte	0x4
+ 944 0075 05       		.byte	0x5
+ 945 0076 696E7400 		.ascii	"int\000"
+ 946 007a 02       		.uleb128 0x2
+ 947 007b 04       		.byte	0x4
+ 948 007c 07       		.byte	0x7
+ 949 007d 12020000 		.4byte	.LASF10
+ 950 0081 03       		.uleb128 0x3
+ 951 0082 9B010000 		.4byte	.LASF11
+ 952 0086 04       		.byte	0x4
+ 953 0087 D8       		.byte	0xd8
+ 954 0088 7A000000 		.4byte	0x7a
+ 955 008c 02       		.uleb128 0x2
+ 956 008d 08       		.byte	0x8
+ 957 008e 04       		.byte	0x4
+ 958 008f 6D030000 		.4byte	.LASF12
+ 959 0093 05       		.uleb128 0x5
+ 960 0094 04       		.byte	0x4
+ 961 0095 02       		.uleb128 0x2
+ 962 0096 04       		.byte	0x4
+ 963 0097 07       		.byte	0x7
+ 964 0098 6D020000 		.4byte	.LASF13
+ 965 009c 02       		.uleb128 0x2
+ 966 009d 01       		.byte	0x1
+ 967 009e 08       		.byte	0x8
+ 968 009f 93020000 		.4byte	.LASF14
+ 969 00a3 03       		.uleb128 0x3
+ 970 00a4 36020000 		.4byte	.LASF15
+ 971 00a8 05       		.byte	0x5
+ 972 00a9 18       		.byte	0x18
+ 973 00aa 2C000000 		.4byte	0x2c
+ 974 00ae 03       		.uleb128 0x3
+ 975 00af CF020000 		.4byte	.LASF16
+ 976 00b3 05       		.byte	0x5
+ 977 00b4 30       		.byte	0x30
+ 978 00b5 53000000 		.4byte	0x53
+ 979 00b9 03       		.uleb128 0x3
+ 980 00ba F9010000 		.4byte	.LASF17
+ 981 00be 06       		.byte	0x6
+ 982 00bf 26       		.byte	0x26
+ 983 00c0 C4000000 		.4byte	0xc4
+ 984 00c4 06       		.uleb128 0x6
+ 985 00c5 04       		.byte	0x4
+ 986 00c6 CA000000 		.4byte	0xca
+ 987 00ca 07       		.uleb128 0x7
+ 988 00cb DF000000 		.4byte	0xdf
+ 989 00cf 08       		.uleb128 0x8
+ 990 00d0 93000000 		.4byte	0x93
+ 991 00d4 08       		.uleb128 0x8
+ 992 00d5 DF000000 		.4byte	0xdf
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 23
+
+
+ 993 00d9 08       		.uleb128 0x8
+ 994 00da EA000000 		.4byte	0xea
+ 995 00de 00       		.byte	0
+ 996 00df 06       		.uleb128 0x6
+ 997 00e0 04       		.byte	0x4
+ 998 00e1 E5000000 		.4byte	0xe5
+ 999 00e5 09       		.uleb128 0x9
+ 1000 00e6 A3000000 		.4byte	0xa3
+ 1001 00ea 06       		.uleb128 0x6
+ 1002 00eb 04       		.byte	0x4
+ 1003 00ec A3000000 		.4byte	0xa3
+ 1004 00f0 0A       		.uleb128 0xa
+ 1005 00f1 0C       		.byte	0xc
+ 1006 00f2 06       		.byte	0x6
+ 1007 00f3 34       		.byte	0x34
+ 1008 00f4 1D010000 		.4byte	0x11d
+ 1009 00f8 0B       		.uleb128 0xb
+ 1010 00f9 F1010000 		.4byte	.LASF18
+ 1011 00fd 06       		.byte	0x6
+ 1012 00fe 36       		.byte	0x36
+ 1013 00ff 81000000 		.4byte	0x81
+ 1014 0103 00       		.byte	0
+ 1015 0104 0B       		.uleb128 0xb
+ 1016 0105 CC000000 		.4byte	.LASF19
+ 1017 0109 06       		.byte	0x6
+ 1018 010a 37       		.byte	0x37
+ 1019 010b B9000000 		.4byte	0xb9
+ 1020 010f 04       		.byte	0x4
+ 1021 0110 0B       		.uleb128 0xb
+ 1022 0111 1A010000 		.4byte	.LASF20
+ 1023 0115 06       		.byte	0x6
+ 1024 0116 38       		.byte	0x38
+ 1025 0117 B9000000 		.4byte	0xb9
+ 1026 011b 08       		.byte	0x8
+ 1027 011c 00       		.byte	0
+ 1028 011d 03       		.uleb128 0x3
+ 1029 011e 6F010000 		.4byte	.LASF21
+ 1030 0122 06       		.byte	0x6
+ 1031 0123 39       		.byte	0x39
+ 1032 0124 F0000000 		.4byte	0xf0
+ 1033 0128 0A       		.uleb128 0xa
+ 1034 0129 F4       		.byte	0xf4
+ 1035 012a 07       		.byte	0x7
+ 1036 012b 5F       		.byte	0x5f
+ 1037 012c 48010000 		.4byte	0x148
+ 1038 0130 0B       		.uleb128 0xb
+ 1039 0131 C8020000 		.4byte	.LASF22
+ 1040 0135 07       		.byte	0x7
+ 1041 0136 61       		.byte	0x61
+ 1042 0137 AE000000 		.4byte	0xae
+ 1043 013b 00       		.byte	0
+ 1044 013c 0C       		.uleb128 0xc
+ 1045 013d 6B7300   		.ascii	"ks\000"
+ 1046 0140 07       		.byte	0x7
+ 1047 0141 62       		.byte	0x62
+ 1048 0142 48010000 		.4byte	0x148
+ 1049 0146 04       		.byte	0x4
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 24
+
+
+ 1050 0147 00       		.byte	0
+ 1051 0148 0D       		.uleb128 0xd
+ 1052 0149 AE000000 		.4byte	0xae
+ 1053 014d 58010000 		.4byte	0x158
+ 1054 0151 0E       		.uleb128 0xe
+ 1055 0152 95000000 		.4byte	0x95
+ 1056 0156 3B       		.byte	0x3b
+ 1057 0157 00       		.byte	0
+ 1058 0158 03       		.uleb128 0x3
+ 1059 0159 F8000000 		.4byte	.LASF23
+ 1060 015d 07       		.byte	0x7
+ 1061 015e 63       		.byte	0x63
+ 1062 015f 28010000 		.4byte	0x128
+ 1063 0163 0A       		.uleb128 0xa
+ 1064 0164 18       		.byte	0x18
+ 1065 0165 08       		.byte	0x8
+ 1066 0166 16       		.byte	0x16
+ 1067 0167 90010000 		.4byte	0x190
+ 1068 016b 0B       		.uleb128 0xb
+ 1069 016c 4C010000 		.4byte	.LASF24
+ 1070 0170 08       		.byte	0x8
+ 1071 0171 18       		.byte	0x18
+ 1072 0172 AE000000 		.4byte	0xae
+ 1073 0176 00       		.byte	0
+ 1074 0177 0B       		.uleb128 0xb
+ 1075 0178 C8010000 		.4byte	.LASF25
+ 1076 017c 08       		.byte	0x8
+ 1077 017d 19       		.byte	0x19
+ 1078 017e 90010000 		.4byte	0x190
+ 1079 0182 04       		.byte	0x4
+ 1080 0183 0B       		.uleb128 0xb
+ 1081 0184 CE010000 		.4byte	.LASF26
+ 1082 0188 08       		.byte	0x8
+ 1083 0189 1A       		.byte	0x1a
+ 1084 018a A0010000 		.4byte	0x1a0
+ 1085 018e 14       		.byte	0x14
+ 1086 018f 00       		.byte	0
+ 1087 0190 0D       		.uleb128 0xd
+ 1088 0191 A3000000 		.4byte	0xa3
+ 1089 0195 A0010000 		.4byte	0x1a0
+ 1090 0199 0E       		.uleb128 0xe
+ 1091 019a 95000000 		.4byte	0x95
+ 1092 019e 0C       		.byte	0xc
+ 1093 019f 00       		.byte	0
+ 1094 01a0 06       		.uleb128 0x6
+ 1095 01a1 04       		.byte	0x4
+ 1096 01a2 58010000 		.4byte	0x158
+ 1097 01a6 03       		.uleb128 0x3
+ 1098 01a7 84020000 		.4byte	.LASF27
+ 1099 01ab 08       		.byte	0x8
+ 1100 01ac 1B       		.byte	0x1b
+ 1101 01ad 63010000 		.4byte	0x163
+ 1102 01b1 09       		.uleb128 0x9
+ 1103 01b2 1D010000 		.4byte	0x11d
+ 1104 01b6 0D       		.uleb128 0xd
+ 1105 01b7 A3000000 		.4byte	0xa3
+ 1106 01bb C6010000 		.4byte	0x1c6
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 25
+
+
+ 1107 01bf 0E       		.uleb128 0xe
+ 1108 01c0 95000000 		.4byte	0x95
+ 1109 01c4 0F       		.byte	0xf
+ 1110 01c5 00       		.byte	0
+ 1111 01c6 0F       		.uleb128 0xf
+ 1112 01c7 63020000 		.4byte	.LASF52
+ 1113 01cb 01       		.byte	0x1
+ 1114 01cc 3D       		.byte	0x3d
+ 1115 01cd 00000000 		.4byte	.LFB1
+ 1116 01d1 24000000 		.4byte	.LFE1-.LFB1
+ 1117 01d5 01       		.uleb128 0x1
+ 1118 01d6 9C       		.byte	0x9c
+ 1119 01d7 F6010000 		.4byte	0x1f6
+ 1120 01db 10       		.uleb128 0x10
+ 1121 01dc 7600     		.ascii	"v\000"
+ 1122 01de 01       		.byte	0x1
+ 1123 01df 3D       		.byte	0x3d
+ 1124 01e0 F6010000 		.4byte	0x1f6
+ 1125 01e4 02       		.uleb128 0x2
+ 1126 01e5 91       		.byte	0x91
+ 1127 01e6 74       		.sleb128 -12
+ 1128 01e7 10       		.uleb128 0x10
+ 1129 01e8 6C656E00 		.ascii	"len\000"
+ 1130 01ec 01       		.byte	0x1
+ 1131 01ed 3D       		.byte	0x3d
+ 1132 01ee 81000000 		.4byte	0x81
+ 1133 01f2 02       		.uleb128 0x2
+ 1134 01f3 91       		.byte	0x91
+ 1135 01f4 70       		.sleb128 -16
+ 1136 01f5 00       		.byte	0
+ 1137 01f6 06       		.uleb128 0x6
+ 1138 01f7 04       		.byte	0x4
+ 1139 01f8 FC010000 		.4byte	0x1fc
+ 1140 01fc 11       		.uleb128 0x11
+ 1141 01fd 12       		.uleb128 0x12
+ 1142 01fe E0000000 		.4byte	.LASF28
+ 1143 0202 02       		.byte	0x2
+ 1144 0203 10       		.byte	0x10
+ 1145 0204 00000000 		.4byte	.LFB3
+ 1146 0208 44000000 		.4byte	.LFE3-.LFB3
+ 1147 020c 01       		.uleb128 0x1
+ 1148 020d 9C       		.byte	0x9c
+ 1149 020e 3D020000 		.4byte	0x23d
+ 1150 0212 13       		.uleb128 0x13
+ 1151 0213 C8010000 		.4byte	.LASF25
+ 1152 0217 02       		.byte	0x2
+ 1153 0218 10       		.byte	0x10
+ 1154 0219 EA000000 		.4byte	0xea
+ 1155 021d 02       		.uleb128 0x2
+ 1156 021e 91       		.byte	0x91
+ 1157 021f 6C       		.sleb128 -20
+ 1158 0220 13       		.uleb128 0x13
+ 1159 0221 4C010000 		.4byte	.LASF24
+ 1160 0225 02       		.byte	0x2
+ 1161 0226 10       		.byte	0x10
+ 1162 0227 AE000000 		.4byte	0xae
+ 1163 022b 02       		.uleb128 0x2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 26
+
+
+ 1164 022c 91       		.byte	0x91
+ 1165 022d 68       		.sleb128 -24
+ 1166 022e 14       		.uleb128 0x14
+ 1167 022f BE020000 		.4byte	.LASF31
+ 1168 0233 02       		.byte	0x2
+ 1169 0234 11       		.byte	0x11
+ 1170 0235 3D020000 		.4byte	0x23d
+ 1171 0239 02       		.uleb128 0x2
+ 1172 023a 91       		.byte	0x91
+ 1173 023b 74       		.sleb128 -12
+ 1174 023c 00       		.byte	0
+ 1175 023d 0D       		.uleb128 0xd
+ 1176 023e A3000000 		.4byte	0xa3
+ 1177 0242 4D020000 		.4byte	0x24d
+ 1178 0246 0E       		.uleb128 0xe
+ 1179 0247 95000000 		.4byte	0x95
+ 1180 024b 03       		.byte	0x3
+ 1181 024c 00       		.byte	0
+ 1182 024d 12       		.uleb128 0x12
+ 1183 024e B6020000 		.4byte	.LASF29
+ 1184 0252 02       		.byte	0x2
+ 1185 0253 1A       		.byte	0x1a
+ 1186 0254 00000000 		.4byte	.LFB4
+ 1187 0258 4C000000 		.4byte	.LFE4-.LFB4
+ 1188 025c 01       		.uleb128 0x1
+ 1189 025d 9C       		.byte	0x9c
+ 1190 025e 95020000 		.4byte	0x295
+ 1191 0262 10       		.uleb128 0x10
+ 1192 0263 766C6900 		.ascii	"vli\000"
+ 1193 0267 02       		.byte	0x2
+ 1194 0268 1A       		.byte	0x1a
+ 1195 0269 EA000000 		.4byte	0xea
+ 1196 026d 02       		.uleb128 0x2
+ 1197 026e 91       		.byte	0x91
+ 1198 026f 6C       		.sleb128 -20
+ 1199 0270 13       		.uleb128 0x13
+ 1200 0271 6A010000 		.4byte	.LASF30
+ 1201 0275 02       		.byte	0x2
+ 1202 0276 1A       		.byte	0x1a
+ 1203 0277 7A000000 		.4byte	0x7a
+ 1204 027b 02       		.uleb128 0x2
+ 1205 027c 91       		.byte	0x91
+ 1206 027d 68       		.sleb128 -24
+ 1207 027e 15       		.uleb128 0x15
+ 1208 027f 0E000000 		.4byte	.LBB2
+ 1209 0283 28000000 		.4byte	.LBE2-.LBB2
+ 1210 0287 16       		.uleb128 0x16
+ 1211 0288 6900     		.ascii	"i\000"
+ 1212 028a 02       		.byte	0x2
+ 1213 028b 1C       		.byte	0x1c
+ 1214 028c 7A000000 		.4byte	0x7a
+ 1215 0290 02       		.uleb128 0x2
+ 1216 0291 91       		.byte	0x91
+ 1217 0292 74       		.sleb128 -12
+ 1218 0293 00       		.byte	0
+ 1219 0294 00       		.byte	0
+ 1220 0295 12       		.uleb128 0x12
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 27
+
+
+ 1221 0296 D4000000 		.4byte	.LASF32
+ 1222 029a 02       		.byte	0x2
+ 1223 029b 24       		.byte	0x24
+ 1224 029c 00000000 		.4byte	.LFB5
+ 1225 02a0 B0000000 		.4byte	.LFE5-.LFB5
+ 1226 02a4 01       		.uleb128 0x1
+ 1227 02a5 9C       		.byte	0x9c
+ 1228 02a6 F1020000 		.4byte	0x2f1
+ 1229 02aa 10       		.uleb128 0x10
+ 1230 02ab 63747800 		.ascii	"ctx\000"
+ 1231 02af 02       		.byte	0x2
+ 1232 02b0 24       		.byte	0x24
+ 1233 02b1 F1020000 		.4byte	0x2f1
+ 1234 02b5 02       		.uleb128 0x2
+ 1235 02b6 91       		.byte	0x91
+ 1236 02b7 5C       		.sleb128 -36
+ 1237 02b8 13       		.uleb128 0x13
+ 1238 02b9 22010000 		.4byte	.LASF33
+ 1239 02bd 02       		.byte	0x2
+ 1240 02be 25       		.byte	0x25
+ 1241 02bf DF000000 		.4byte	0xdf
+ 1242 02c3 02       		.uleb128 0x2
+ 1243 02c4 91       		.byte	0x91
+ 1244 02c5 58       		.sleb128 -40
+ 1245 02c6 13       		.uleb128 0x13
+ 1246 02c7 07010000 		.4byte	.LASF34
+ 1247 02cb 02       		.byte	0x2
+ 1248 02cc 26       		.byte	0x26
+ 1249 02cd 81000000 		.4byte	0x81
+ 1250 02d1 02       		.uleb128 0x2
+ 1251 02d2 91       		.byte	0x91
+ 1252 02d3 54       		.sleb128 -44
+ 1253 02d4 14       		.uleb128 0x14
+ 1254 02d5 06020000 		.4byte	.LASF35
+ 1255 02d9 02       		.byte	0x2
+ 1256 02da 38       		.byte	0x38
+ 1257 02db A0010000 		.4byte	0x1a0
+ 1258 02df 02       		.uleb128 0x2
+ 1259 02e0 91       		.byte	0x91
+ 1260 02e1 74       		.sleb128 -12
+ 1261 02e2 14       		.uleb128 0x14
+ 1262 02e3 4D020000 		.4byte	.LASF36
+ 1263 02e7 02       		.byte	0x2
+ 1264 02e8 3B       		.byte	0x3b
+ 1265 02e9 B6010000 		.4byte	0x1b6
+ 1266 02ed 02       		.uleb128 0x2
+ 1267 02ee 91       		.byte	0x91
+ 1268 02ef 64       		.sleb128 -28
+ 1269 02f0 00       		.byte	0
+ 1270 02f1 06       		.uleb128 0x6
+ 1271 02f2 04       		.byte	0x4
+ 1272 02f3 A6010000 		.4byte	0x1a6
+ 1273 02f7 12       		.uleb128 0x12
+ 1274 02f8 85030000 		.4byte	.LASF37
+ 1275 02fc 02       		.byte	0x2
+ 1276 02fd 46       		.byte	0x46
+ 1277 02fe 00000000 		.4byte	.LFB6
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 28
+
+
+ 1278 0302 20000000 		.4byte	.LFE6-.LFB6
+ 1279 0306 01       		.uleb128 0x1
+ 1280 0307 9C       		.byte	0x9c
+ 1281 0308 1B030000 		.4byte	0x31b
+ 1282 030c 10       		.uleb128 0x10
+ 1283 030d 63747800 		.ascii	"ctx\000"
+ 1284 0311 02       		.byte	0x2
+ 1285 0312 46       		.byte	0x46
+ 1286 0313 F1020000 		.4byte	0x2f1
+ 1287 0317 02       		.uleb128 0x2
+ 1288 0318 91       		.byte	0x91
+ 1289 0319 74       		.sleb128 -12
+ 1290 031a 00       		.byte	0
+ 1291 031b 12       		.uleb128 0x12
+ 1292 031c 54010000 		.4byte	.LASF38
+ 1293 0320 02       		.byte	0x2
+ 1294 0321 4E       		.byte	0x4e
+ 1295 0322 00000000 		.4byte	.LFB7
+ 1296 0326 90000000 		.4byte	.LFE7-.LFB7
+ 1297 032a 01       		.uleb128 0x1
+ 1298 032b 9C       		.byte	0x9c
+ 1299 032c 85030000 		.4byte	0x385
+ 1300 0330 10       		.uleb128 0x10
+ 1301 0331 63747800 		.ascii	"ctx\000"
+ 1302 0335 02       		.byte	0x2
+ 1303 0336 4E       		.byte	0x4e
+ 1304 0337 F1020000 		.4byte	0x2f1
+ 1305 033b 02       		.uleb128 0x2
+ 1306 033c 91       		.byte	0x91
+ 1307 033d 6C       		.sleb128 -20
+ 1308 033e 13       		.uleb128 0x13
+ 1309 033f 58020000 		.4byte	.LASF39
+ 1310 0343 02       		.byte	0x2
+ 1311 0344 4F       		.byte	0x4f
+ 1312 0345 DF000000 		.4byte	0xdf
+ 1313 0349 02       		.uleb128 0x2
+ 1314 034a 91       		.byte	0x91
+ 1315 034b 68       		.sleb128 -24
+ 1316 034c 13       		.uleb128 0x13
+ 1317 034d E1010000 		.4byte	.LASF40
+ 1318 0351 02       		.byte	0x2
+ 1319 0352 4F       		.byte	0x4f
+ 1320 0353 81000000 		.4byte	0x81
+ 1321 0357 02       		.uleb128 0x2
+ 1322 0358 91       		.byte	0x91
+ 1323 0359 64       		.sleb128 -28
+ 1324 035a 13       		.uleb128 0x13
+ 1325 035b 3E020000 		.4byte	.LASF41
+ 1326 035f 02       		.byte	0x2
+ 1327 0360 50       		.byte	0x50
+ 1328 0361 EA000000 		.4byte	0xea
+ 1329 0365 02       		.uleb128 0x2
+ 1330 0366 91       		.byte	0x91
+ 1331 0367 60       		.sleb128 -32
+ 1332 0368 10       		.uleb128 0x10
+ 1333 0369 74616700 		.ascii	"tag\000"
+ 1334 036d 02       		.byte	0x2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 29
+
+
+ 1335 036e 51       		.byte	0x51
+ 1336 036f EA000000 		.4byte	0xea
+ 1337 0373 02       		.uleb128 0x2
+ 1338 0374 91       		.byte	0x91
+ 1339 0375 00       		.sleb128 0
+ 1340 0376 13       		.uleb128 0x13
+ 1341 0377 00000000 		.4byte	.LASF42
+ 1342 037b 02       		.byte	0x2
+ 1343 037c 51       		.byte	0x51
+ 1344 037d 81000000 		.4byte	0x81
+ 1345 0381 02       		.uleb128 0x2
+ 1346 0382 91       		.byte	0x91
+ 1347 0383 04       		.sleb128 4
+ 1348 0384 00       		.byte	0
+ 1349 0385 17       		.uleb128 0x17
+ 1350 0386 3D010000 		.4byte	.LASF47
+ 1351 038a 02       		.byte	0x2
+ 1352 038b 66       		.byte	0x66
+ 1353 038c 73000000 		.4byte	0x73
+ 1354 0390 00000000 		.4byte	.LFB8
+ 1355 0394 98000000 		.4byte	.LFE8-.LFB8
+ 1356 0398 01       		.uleb128 0x1
+ 1357 0399 9C       		.byte	0x9c
+ 1358 039a 01040000 		.4byte	0x401
+ 1359 039e 10       		.uleb128 0x10
+ 1360 039f 63747800 		.ascii	"ctx\000"
+ 1361 03a3 02       		.byte	0x2
+ 1362 03a4 66       		.byte	0x66
+ 1363 03a5 F1020000 		.4byte	0x2f1
+ 1364 03a9 02       		.uleb128 0x2
+ 1365 03aa 91       		.byte	0x91
+ 1366 03ab 64       		.sleb128 -28
+ 1367 03ac 13       		.uleb128 0x13
+ 1368 03ad 3E020000 		.4byte	.LASF41
+ 1369 03b1 02       		.byte	0x2
+ 1370 03b2 67       		.byte	0x67
+ 1371 03b3 DF000000 		.4byte	0xdf
+ 1372 03b7 02       		.uleb128 0x2
+ 1373 03b8 91       		.byte	0x91
+ 1374 03b9 60       		.sleb128 -32
+ 1375 03ba 13       		.uleb128 0x13
+ 1376 03bb 98020000 		.4byte	.LASF43
+ 1377 03bf 02       		.byte	0x2
+ 1378 03c0 67       		.byte	0x67
+ 1379 03c1 81000000 		.4byte	0x81
+ 1380 03c5 02       		.uleb128 0x2
+ 1381 03c6 91       		.byte	0x91
+ 1382 03c7 5C       		.sleb128 -36
+ 1383 03c8 10       		.uleb128 0x10
+ 1384 03c9 74616700 		.ascii	"tag\000"
+ 1385 03cd 02       		.byte	0x2
+ 1386 03ce 68       		.byte	0x68
+ 1387 03cf DF000000 		.4byte	0xdf
+ 1388 03d3 02       		.uleb128 0x2
+ 1389 03d4 91       		.byte	0x91
+ 1390 03d5 58       		.sleb128 -40
+ 1391 03d6 13       		.uleb128 0x13
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 30
+
+
+ 1392 03d7 00000000 		.4byte	.LASF42
+ 1393 03db 02       		.byte	0x2
+ 1394 03dc 68       		.byte	0x68
+ 1395 03dd 81000000 		.4byte	0x81
+ 1396 03e1 02       		.uleb128 0x2
+ 1397 03e2 91       		.byte	0x91
+ 1398 03e3 00       		.sleb128 0
+ 1399 03e4 13       		.uleb128 0x13
+ 1400 03e5 58020000 		.4byte	.LASF39
+ 1401 03e9 02       		.byte	0x2
+ 1402 03ea 69       		.byte	0x69
+ 1403 03eb EA000000 		.4byte	0xea
+ 1404 03ef 02       		.uleb128 0x2
+ 1405 03f0 91       		.byte	0x91
+ 1406 03f1 04       		.sleb128 4
+ 1407 03f2 16       		.uleb128 0x16
+ 1408 03f3 65727200 		.ascii	"err\000"
+ 1409 03f7 02       		.byte	0x2
+ 1410 03f8 71       		.byte	0x71
+ 1411 03f9 73000000 		.4byte	0x73
+ 1412 03fd 02       		.uleb128 0x2
+ 1413 03fe 91       		.byte	0x91
+ 1414 03ff 6C       		.sleb128 -20
+ 1415 0400 00       		.byte	0
+ 1416 0401 12       		.uleb128 0x12
+ 1417 0402 93030000 		.4byte	.LASF44
+ 1418 0406 02       		.byte	0x2
+ 1419 0407 81       		.byte	0x81
+ 1420 0408 00000000 		.4byte	.LFB9
+ 1421 040c 08010000 		.4byte	.LFE9-.LFB9
+ 1422 0410 01       		.uleb128 0x1
+ 1423 0411 9C       		.byte	0x9c
+ 1424 0412 7A040000 		.4byte	0x47a
+ 1425 0416 10       		.uleb128 0x10
+ 1426 0417 63747800 		.ascii	"ctx\000"
+ 1427 041b 02       		.byte	0x2
+ 1428 041c 81       		.byte	0x81
+ 1429 041d F1020000 		.4byte	0x2f1
+ 1430 0421 02       		.uleb128 0x2
+ 1431 0422 91       		.byte	0x91
+ 1432 0423 4C       		.sleb128 -52
+ 1433 0424 13       		.uleb128 0x13
+ 1434 0425 58020000 		.4byte	.LASF39
+ 1435 0429 02       		.byte	0x2
+ 1436 042a 82       		.byte	0x82
+ 1437 042b DF000000 		.4byte	0xdf
+ 1438 042f 02       		.uleb128 0x2
+ 1439 0430 91       		.byte	0x91
+ 1440 0431 48       		.sleb128 -56
+ 1441 0432 13       		.uleb128 0x13
+ 1442 0433 E1010000 		.4byte	.LASF40
+ 1443 0437 02       		.byte	0x2
+ 1444 0438 82       		.byte	0x82
+ 1445 0439 81000000 		.4byte	0x81
+ 1446 043d 02       		.uleb128 0x2
+ 1447 043e 91       		.byte	0x91
+ 1448 043f 44       		.sleb128 -60
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 31
+
+
+ 1449 0440 13       		.uleb128 0x13
+ 1450 0441 A2010000 		.4byte	.LASF45
+ 1451 0445 02       		.byte	0x2
+ 1452 0446 83       		.byte	0x83
+ 1453 0447 EA000000 		.4byte	0xea
+ 1454 044b 02       		.uleb128 0x2
+ 1455 044c 91       		.byte	0x91
+ 1456 044d 40       		.sleb128 -64
+ 1457 044e 13       		.uleb128 0x13
+ 1458 044f 30010000 		.4byte	.LASF46
+ 1459 0453 02       		.byte	0x2
+ 1460 0454 83       		.byte	0x83
+ 1461 0455 EA000000 		.4byte	0xea
+ 1462 0459 02       		.uleb128 0x2
+ 1463 045a 91       		.byte	0x91
+ 1464 045b 00       		.sleb128 0
+ 1465 045c 14       		.uleb128 0x14
+ 1466 045d 3E020000 		.4byte	.LASF41
+ 1467 0461 02       		.byte	0x2
+ 1468 0462 84       		.byte	0x84
+ 1469 0463 7A040000 		.4byte	0x47a
+ 1470 0467 03       		.uleb128 0x3
+ 1471 0468 91       		.byte	0x91
+ 1472 0469 60       		.sleb128 -32
+ 1473 046a 06       		.byte	0x6
+ 1474 046b 16       		.uleb128 0x16
+ 1475 046c 74616700 		.ascii	"tag\000"
+ 1476 0470 02       		.byte	0x2
+ 1477 0471 84       		.byte	0x84
+ 1478 0472 B6010000 		.4byte	0x1b6
+ 1479 0476 02       		.uleb128 0x2
+ 1480 0477 91       		.byte	0x91
+ 1481 0478 50       		.sleb128 -48
+ 1482 0479 00       		.byte	0
+ 1483 047a 0D       		.uleb128 0xd
+ 1484 047b A3000000 		.4byte	0xa3
+ 1485 047f 8D040000 		.4byte	0x48d
+ 1486 0483 18       		.uleb128 0x18
+ 1487 0484 95000000 		.4byte	0x95
+ 1488 0488 03       		.uleb128 0x3
+ 1489 0489 91       		.byte	0x91
+ 1490 048a 64       		.sleb128 -28
+ 1491 048b 06       		.byte	0x6
+ 1492 048c 00       		.byte	0
+ 1493 048d 17       		.uleb128 0x17
+ 1494 048e B2000000 		.4byte	.LASF48
+ 1495 0492 02       		.byte	0x2
+ 1496 0493 98       		.byte	0x98
+ 1497 0494 73000000 		.4byte	0x73
+ 1498 0498 00000000 		.4byte	.LFB10
+ 1499 049c 0C010000 		.4byte	.LFE10-.LFB10
+ 1500 04a0 01       		.uleb128 0x1
+ 1501 04a1 9C       		.byte	0x9c
+ 1502 04a2 0C050000 		.4byte	0x50c
+ 1503 04a6 10       		.uleb128 0x10
+ 1504 04a7 63747800 		.ascii	"ctx\000"
+ 1505 04ab 02       		.byte	0x2
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 32
+
+
+ 1506 04ac 98       		.byte	0x98
+ 1507 04ad F1020000 		.4byte	0x2f1
+ 1508 04b1 02       		.uleb128 0x2
+ 1509 04b2 91       		.byte	0x91
+ 1510 04b3 44       		.sleb128 -60
+ 1511 04b4 13       		.uleb128 0x13
+ 1512 04b5 A2010000 		.4byte	.LASF45
+ 1513 04b9 02       		.byte	0x2
+ 1514 04ba 99       		.byte	0x99
+ 1515 04bb DF000000 		.4byte	0xdf
+ 1516 04bf 02       		.uleb128 0x2
+ 1517 04c0 91       		.byte	0x91
+ 1518 04c1 40       		.sleb128 -64
+ 1519 04c2 13       		.uleb128 0x13
+ 1520 04c3 30010000 		.4byte	.LASF46
+ 1521 04c7 02       		.byte	0x2
+ 1522 04c8 99       		.byte	0x99
+ 1523 04c9 81000000 		.4byte	0x81
+ 1524 04cd 03       		.uleb128 0x3
+ 1525 04ce 91       		.byte	0x91
+ 1526 04cf BC7F     		.sleb128 -68
+ 1527 04d1 13       		.uleb128 0x13
+ 1528 04d2 58020000 		.4byte	.LASF39
+ 1529 04d6 02       		.byte	0x2
+ 1530 04d7 9A       		.byte	0x9a
+ 1531 04d8 EA000000 		.4byte	0xea
+ 1532 04dc 03       		.uleb128 0x3
+ 1533 04dd 91       		.byte	0x91
+ 1534 04de B87F     		.sleb128 -72
+ 1535 04e0 14       		.uleb128 0x14
+ 1536 04e1 98020000 		.4byte	.LASF43
+ 1537 04e5 02       		.byte	0x2
+ 1538 04e6 9B       		.byte	0x9b
+ 1539 04e7 81000000 		.4byte	0x81
+ 1540 04eb 02       		.uleb128 0x2
+ 1541 04ec 91       		.byte	0x91
+ 1542 04ed 64       		.sleb128 -28
+ 1543 04ee 14       		.uleb128 0x14
+ 1544 04ef 3E020000 		.4byte	.LASF41
+ 1545 04f3 02       		.byte	0x2
+ 1546 04f4 9C       		.byte	0x9c
+ 1547 04f5 0C050000 		.4byte	0x50c
+ 1548 04f9 03       		.uleb128 0x3
+ 1549 04fa 91       		.byte	0x91
+ 1550 04fb 5C       		.sleb128 -36
+ 1551 04fc 06       		.byte	0x6
+ 1552 04fd 16       		.uleb128 0x16
+ 1553 04fe 74616700 		.ascii	"tag\000"
+ 1554 0502 02       		.byte	0x2
+ 1555 0503 9C       		.byte	0x9c
+ 1556 0504 B6010000 		.4byte	0x1b6
+ 1557 0508 02       		.uleb128 0x2
+ 1558 0509 91       		.byte	0x91
+ 1559 050a 4C       		.sleb128 -52
+ 1560 050b 00       		.byte	0
+ 1561 050c 0D       		.uleb128 0xd
+ 1562 050d A3000000 		.4byte	0xa3
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 33
+
+
+ 1563 0511 1F050000 		.4byte	0x51f
+ 1564 0515 18       		.uleb128 0x18
+ 1565 0516 95000000 		.4byte	0x95
+ 1566 051a 03       		.uleb128 0x3
+ 1567 051b 91       		.byte	0x91
+ 1568 051c 60       		.sleb128 -32
+ 1569 051d 06       		.byte	0x6
+ 1570 051e 00       		.byte	0
+ 1571 051f 19       		.uleb128 0x19
+ 1572 0520 63010000 		.4byte	.LASF53
+ 1573 0524 07       		.byte	0x7
+ 1574 0525 96       		.byte	0x96
+ 1575 0526 B1010000 		.4byte	0x1b1
+ 1576 052a 00       		.byte	0
+ 1577              		.section	.debug_abbrev,"",%progbits
+ 1578              	.Ldebug_abbrev0:
+ 1579 0000 01       		.uleb128 0x1
+ 1580 0001 11       		.uleb128 0x11
+ 1581 0002 01       		.byte	0x1
+ 1582 0003 25       		.uleb128 0x25
+ 1583 0004 0E       		.uleb128 0xe
+ 1584 0005 13       		.uleb128 0x13
+ 1585 0006 0B       		.uleb128 0xb
+ 1586 0007 03       		.uleb128 0x3
+ 1587 0008 0E       		.uleb128 0xe
+ 1588 0009 1B       		.uleb128 0x1b
+ 1589 000a 0E       		.uleb128 0xe
+ 1590 000b 55       		.uleb128 0x55
+ 1591 000c 17       		.uleb128 0x17
+ 1592 000d 11       		.uleb128 0x11
+ 1593 000e 01       		.uleb128 0x1
+ 1594 000f 10       		.uleb128 0x10
+ 1595 0010 17       		.uleb128 0x17
+ 1596 0011 00       		.byte	0
+ 1597 0012 00       		.byte	0
+ 1598 0013 02       		.uleb128 0x2
+ 1599 0014 24       		.uleb128 0x24
+ 1600 0015 00       		.byte	0
+ 1601 0016 0B       		.uleb128 0xb
+ 1602 0017 0B       		.uleb128 0xb
+ 1603 0018 3E       		.uleb128 0x3e
+ 1604 0019 0B       		.uleb128 0xb
+ 1605 001a 03       		.uleb128 0x3
+ 1606 001b 0E       		.uleb128 0xe
+ 1607 001c 00       		.byte	0
+ 1608 001d 00       		.byte	0
+ 1609 001e 03       		.uleb128 0x3
+ 1610 001f 16       		.uleb128 0x16
+ 1611 0020 00       		.byte	0
+ 1612 0021 03       		.uleb128 0x3
+ 1613 0022 0E       		.uleb128 0xe
+ 1614 0023 3A       		.uleb128 0x3a
+ 1615 0024 0B       		.uleb128 0xb
+ 1616 0025 3B       		.uleb128 0x3b
+ 1617 0026 0B       		.uleb128 0xb
+ 1618 0027 49       		.uleb128 0x49
+ 1619 0028 13       		.uleb128 0x13
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 34
+
+
+ 1620 0029 00       		.byte	0
+ 1621 002a 00       		.byte	0
+ 1622 002b 04       		.uleb128 0x4
+ 1623 002c 24       		.uleb128 0x24
+ 1624 002d 00       		.byte	0
+ 1625 002e 0B       		.uleb128 0xb
+ 1626 002f 0B       		.uleb128 0xb
+ 1627 0030 3E       		.uleb128 0x3e
+ 1628 0031 0B       		.uleb128 0xb
+ 1629 0032 03       		.uleb128 0x3
+ 1630 0033 08       		.uleb128 0x8
+ 1631 0034 00       		.byte	0
+ 1632 0035 00       		.byte	0
+ 1633 0036 05       		.uleb128 0x5
+ 1634 0037 0F       		.uleb128 0xf
+ 1635 0038 00       		.byte	0
+ 1636 0039 0B       		.uleb128 0xb
+ 1637 003a 0B       		.uleb128 0xb
+ 1638 003b 00       		.byte	0
+ 1639 003c 00       		.byte	0
+ 1640 003d 06       		.uleb128 0x6
+ 1641 003e 0F       		.uleb128 0xf
+ 1642 003f 00       		.byte	0
+ 1643 0040 0B       		.uleb128 0xb
+ 1644 0041 0B       		.uleb128 0xb
+ 1645 0042 49       		.uleb128 0x49
+ 1646 0043 13       		.uleb128 0x13
+ 1647 0044 00       		.byte	0
+ 1648 0045 00       		.byte	0
+ 1649 0046 07       		.uleb128 0x7
+ 1650 0047 15       		.uleb128 0x15
+ 1651 0048 01       		.byte	0x1
+ 1652 0049 27       		.uleb128 0x27
+ 1653 004a 19       		.uleb128 0x19
+ 1654 004b 01       		.uleb128 0x1
+ 1655 004c 13       		.uleb128 0x13
+ 1656 004d 00       		.byte	0
+ 1657 004e 00       		.byte	0
+ 1658 004f 08       		.uleb128 0x8
+ 1659 0050 05       		.uleb128 0x5
+ 1660 0051 00       		.byte	0
+ 1661 0052 49       		.uleb128 0x49
+ 1662 0053 13       		.uleb128 0x13
+ 1663 0054 00       		.byte	0
+ 1664 0055 00       		.byte	0
+ 1665 0056 09       		.uleb128 0x9
+ 1666 0057 26       		.uleb128 0x26
+ 1667 0058 00       		.byte	0
+ 1668 0059 49       		.uleb128 0x49
+ 1669 005a 13       		.uleb128 0x13
+ 1670 005b 00       		.byte	0
+ 1671 005c 00       		.byte	0
+ 1672 005d 0A       		.uleb128 0xa
+ 1673 005e 13       		.uleb128 0x13
+ 1674 005f 01       		.byte	0x1
+ 1675 0060 0B       		.uleb128 0xb
+ 1676 0061 0B       		.uleb128 0xb
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 35
+
+
+ 1677 0062 3A       		.uleb128 0x3a
+ 1678 0063 0B       		.uleb128 0xb
+ 1679 0064 3B       		.uleb128 0x3b
+ 1680 0065 0B       		.uleb128 0xb
+ 1681 0066 01       		.uleb128 0x1
+ 1682 0067 13       		.uleb128 0x13
+ 1683 0068 00       		.byte	0
+ 1684 0069 00       		.byte	0
+ 1685 006a 0B       		.uleb128 0xb
+ 1686 006b 0D       		.uleb128 0xd
+ 1687 006c 00       		.byte	0
+ 1688 006d 03       		.uleb128 0x3
+ 1689 006e 0E       		.uleb128 0xe
+ 1690 006f 3A       		.uleb128 0x3a
+ 1691 0070 0B       		.uleb128 0xb
+ 1692 0071 3B       		.uleb128 0x3b
+ 1693 0072 0B       		.uleb128 0xb
+ 1694 0073 49       		.uleb128 0x49
+ 1695 0074 13       		.uleb128 0x13
+ 1696 0075 38       		.uleb128 0x38
+ 1697 0076 0B       		.uleb128 0xb
+ 1698 0077 00       		.byte	0
+ 1699 0078 00       		.byte	0
+ 1700 0079 0C       		.uleb128 0xc
+ 1701 007a 0D       		.uleb128 0xd
+ 1702 007b 00       		.byte	0
+ 1703 007c 03       		.uleb128 0x3
+ 1704 007d 08       		.uleb128 0x8
+ 1705 007e 3A       		.uleb128 0x3a
+ 1706 007f 0B       		.uleb128 0xb
+ 1707 0080 3B       		.uleb128 0x3b
+ 1708 0081 0B       		.uleb128 0xb
+ 1709 0082 49       		.uleb128 0x49
+ 1710 0083 13       		.uleb128 0x13
+ 1711 0084 38       		.uleb128 0x38
+ 1712 0085 0B       		.uleb128 0xb
+ 1713 0086 00       		.byte	0
+ 1714 0087 00       		.byte	0
+ 1715 0088 0D       		.uleb128 0xd
+ 1716 0089 01       		.uleb128 0x1
+ 1717 008a 01       		.byte	0x1
+ 1718 008b 49       		.uleb128 0x49
+ 1719 008c 13       		.uleb128 0x13
+ 1720 008d 01       		.uleb128 0x1
+ 1721 008e 13       		.uleb128 0x13
+ 1722 008f 00       		.byte	0
+ 1723 0090 00       		.byte	0
+ 1724 0091 0E       		.uleb128 0xe
+ 1725 0092 21       		.uleb128 0x21
+ 1726 0093 00       		.byte	0
+ 1727 0094 49       		.uleb128 0x49
+ 1728 0095 13       		.uleb128 0x13
+ 1729 0096 2F       		.uleb128 0x2f
+ 1730 0097 0B       		.uleb128 0xb
+ 1731 0098 00       		.byte	0
+ 1732 0099 00       		.byte	0
+ 1733 009a 0F       		.uleb128 0xf
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 36
+
+
+ 1734 009b 2E       		.uleb128 0x2e
+ 1735 009c 01       		.byte	0x1
+ 1736 009d 03       		.uleb128 0x3
+ 1737 009e 0E       		.uleb128 0xe
+ 1738 009f 3A       		.uleb128 0x3a
+ 1739 00a0 0B       		.uleb128 0xb
+ 1740 00a1 3B       		.uleb128 0x3b
+ 1741 00a2 0B       		.uleb128 0xb
+ 1742 00a3 27       		.uleb128 0x27
+ 1743 00a4 19       		.uleb128 0x19
+ 1744 00a5 11       		.uleb128 0x11
+ 1745 00a6 01       		.uleb128 0x1
+ 1746 00a7 12       		.uleb128 0x12
+ 1747 00a8 06       		.uleb128 0x6
+ 1748 00a9 40       		.uleb128 0x40
+ 1749 00aa 18       		.uleb128 0x18
+ 1750 00ab 9642     		.uleb128 0x2116
+ 1751 00ad 19       		.uleb128 0x19
+ 1752 00ae 01       		.uleb128 0x1
+ 1753 00af 13       		.uleb128 0x13
+ 1754 00b0 00       		.byte	0
+ 1755 00b1 00       		.byte	0
+ 1756 00b2 10       		.uleb128 0x10
+ 1757 00b3 05       		.uleb128 0x5
+ 1758 00b4 00       		.byte	0
+ 1759 00b5 03       		.uleb128 0x3
+ 1760 00b6 08       		.uleb128 0x8
+ 1761 00b7 3A       		.uleb128 0x3a
+ 1762 00b8 0B       		.uleb128 0xb
+ 1763 00b9 3B       		.uleb128 0x3b
+ 1764 00ba 0B       		.uleb128 0xb
+ 1765 00bb 49       		.uleb128 0x49
+ 1766 00bc 13       		.uleb128 0x13
+ 1767 00bd 02       		.uleb128 0x2
+ 1768 00be 18       		.uleb128 0x18
+ 1769 00bf 00       		.byte	0
+ 1770 00c0 00       		.byte	0
+ 1771 00c1 11       		.uleb128 0x11
+ 1772 00c2 35       		.uleb128 0x35
+ 1773 00c3 00       		.byte	0
+ 1774 00c4 00       		.byte	0
+ 1775 00c5 00       		.byte	0
+ 1776 00c6 12       		.uleb128 0x12
+ 1777 00c7 2E       		.uleb128 0x2e
+ 1778 00c8 01       		.byte	0x1
+ 1779 00c9 3F       		.uleb128 0x3f
+ 1780 00ca 19       		.uleb128 0x19
+ 1781 00cb 03       		.uleb128 0x3
+ 1782 00cc 0E       		.uleb128 0xe
+ 1783 00cd 3A       		.uleb128 0x3a
+ 1784 00ce 0B       		.uleb128 0xb
+ 1785 00cf 3B       		.uleb128 0x3b
+ 1786 00d0 0B       		.uleb128 0xb
+ 1787 00d1 27       		.uleb128 0x27
+ 1788 00d2 19       		.uleb128 0x19
+ 1789 00d3 11       		.uleb128 0x11
+ 1790 00d4 01       		.uleb128 0x1
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 37
+
+
+ 1791 00d5 12       		.uleb128 0x12
+ 1792 00d6 06       		.uleb128 0x6
+ 1793 00d7 40       		.uleb128 0x40
+ 1794 00d8 18       		.uleb128 0x18
+ 1795 00d9 9642     		.uleb128 0x2116
+ 1796 00db 19       		.uleb128 0x19
+ 1797 00dc 01       		.uleb128 0x1
+ 1798 00dd 13       		.uleb128 0x13
+ 1799 00de 00       		.byte	0
+ 1800 00df 00       		.byte	0
+ 1801 00e0 13       		.uleb128 0x13
+ 1802 00e1 05       		.uleb128 0x5
+ 1803 00e2 00       		.byte	0
+ 1804 00e3 03       		.uleb128 0x3
+ 1805 00e4 0E       		.uleb128 0xe
+ 1806 00e5 3A       		.uleb128 0x3a
+ 1807 00e6 0B       		.uleb128 0xb
+ 1808 00e7 3B       		.uleb128 0x3b
+ 1809 00e8 0B       		.uleb128 0xb
+ 1810 00e9 49       		.uleb128 0x49
+ 1811 00ea 13       		.uleb128 0x13
+ 1812 00eb 02       		.uleb128 0x2
+ 1813 00ec 18       		.uleb128 0x18
+ 1814 00ed 00       		.byte	0
+ 1815 00ee 00       		.byte	0
+ 1816 00ef 14       		.uleb128 0x14
+ 1817 00f0 34       		.uleb128 0x34
+ 1818 00f1 00       		.byte	0
+ 1819 00f2 03       		.uleb128 0x3
+ 1820 00f3 0E       		.uleb128 0xe
+ 1821 00f4 3A       		.uleb128 0x3a
+ 1822 00f5 0B       		.uleb128 0xb
+ 1823 00f6 3B       		.uleb128 0x3b
+ 1824 00f7 0B       		.uleb128 0xb
+ 1825 00f8 49       		.uleb128 0x49
+ 1826 00f9 13       		.uleb128 0x13
+ 1827 00fa 02       		.uleb128 0x2
+ 1828 00fb 18       		.uleb128 0x18
+ 1829 00fc 00       		.byte	0
+ 1830 00fd 00       		.byte	0
+ 1831 00fe 15       		.uleb128 0x15
+ 1832 00ff 0B       		.uleb128 0xb
+ 1833 0100 01       		.byte	0x1
+ 1834 0101 11       		.uleb128 0x11
+ 1835 0102 01       		.uleb128 0x1
+ 1836 0103 12       		.uleb128 0x12
+ 1837 0104 06       		.uleb128 0x6
+ 1838 0105 00       		.byte	0
+ 1839 0106 00       		.byte	0
+ 1840 0107 16       		.uleb128 0x16
+ 1841 0108 34       		.uleb128 0x34
+ 1842 0109 00       		.byte	0
+ 1843 010a 03       		.uleb128 0x3
+ 1844 010b 08       		.uleb128 0x8
+ 1845 010c 3A       		.uleb128 0x3a
+ 1846 010d 0B       		.uleb128 0xb
+ 1847 010e 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 38
+
+
+ 1848 010f 0B       		.uleb128 0xb
+ 1849 0110 49       		.uleb128 0x49
+ 1850 0111 13       		.uleb128 0x13
+ 1851 0112 02       		.uleb128 0x2
+ 1852 0113 18       		.uleb128 0x18
+ 1853 0114 00       		.byte	0
+ 1854 0115 00       		.byte	0
+ 1855 0116 17       		.uleb128 0x17
+ 1856 0117 2E       		.uleb128 0x2e
+ 1857 0118 01       		.byte	0x1
+ 1858 0119 3F       		.uleb128 0x3f
+ 1859 011a 19       		.uleb128 0x19
+ 1860 011b 03       		.uleb128 0x3
+ 1861 011c 0E       		.uleb128 0xe
+ 1862 011d 3A       		.uleb128 0x3a
+ 1863 011e 0B       		.uleb128 0xb
+ 1864 011f 3B       		.uleb128 0x3b
+ 1865 0120 0B       		.uleb128 0xb
+ 1866 0121 27       		.uleb128 0x27
+ 1867 0122 19       		.uleb128 0x19
+ 1868 0123 49       		.uleb128 0x49
+ 1869 0124 13       		.uleb128 0x13
+ 1870 0125 11       		.uleb128 0x11
+ 1871 0126 01       		.uleb128 0x1
+ 1872 0127 12       		.uleb128 0x12
+ 1873 0128 06       		.uleb128 0x6
+ 1874 0129 40       		.uleb128 0x40
+ 1875 012a 18       		.uleb128 0x18
+ 1876 012b 9642     		.uleb128 0x2116
+ 1877 012d 19       		.uleb128 0x19
+ 1878 012e 01       		.uleb128 0x1
+ 1879 012f 13       		.uleb128 0x13
+ 1880 0130 00       		.byte	0
+ 1881 0131 00       		.byte	0
+ 1882 0132 18       		.uleb128 0x18
+ 1883 0133 21       		.uleb128 0x21
+ 1884 0134 00       		.byte	0
+ 1885 0135 49       		.uleb128 0x49
+ 1886 0136 13       		.uleb128 0x13
+ 1887 0137 2F       		.uleb128 0x2f
+ 1888 0138 18       		.uleb128 0x18
+ 1889 0139 00       		.byte	0
+ 1890 013a 00       		.byte	0
+ 1891 013b 19       		.uleb128 0x19
+ 1892 013c 34       		.uleb128 0x34
+ 1893 013d 00       		.byte	0
+ 1894 013e 03       		.uleb128 0x3
+ 1895 013f 0E       		.uleb128 0xe
+ 1896 0140 3A       		.uleb128 0x3a
+ 1897 0141 0B       		.uleb128 0xb
+ 1898 0142 3B       		.uleb128 0x3b
+ 1899 0143 0B       		.uleb128 0xb
+ 1900 0144 49       		.uleb128 0x49
+ 1901 0145 13       		.uleb128 0x13
+ 1902 0146 3F       		.uleb128 0x3f
+ 1903 0147 19       		.uleb128 0x19
+ 1904 0148 3C       		.uleb128 0x3c
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 39
+
+
+ 1905 0149 19       		.uleb128 0x19
+ 1906 014a 00       		.byte	0
+ 1907 014b 00       		.byte	0
+ 1908 014c 00       		.byte	0
+ 1909              		.section	.debug_aranges,"",%progbits
+ 1910 0000 5C000000 		.4byte	0x5c
+ 1911 0004 0200     		.2byte	0x2
+ 1912 0006 00000000 		.4byte	.Ldebug_info0
+ 1913 000a 04       		.byte	0x4
+ 1914 000b 00       		.byte	0
+ 1915 000c 0000     		.2byte	0
+ 1916 000e 0000     		.2byte	0
+ 1917 0010 00000000 		.4byte	.LFB1
+ 1918 0014 24000000 		.4byte	.LFE1-.LFB1
+ 1919 0018 00000000 		.4byte	.LFB3
+ 1920 001c 44000000 		.4byte	.LFE3-.LFB3
+ 1921 0020 00000000 		.4byte	.LFB4
+ 1922 0024 4C000000 		.4byte	.LFE4-.LFB4
+ 1923 0028 00000000 		.4byte	.LFB5
+ 1924 002c B0000000 		.4byte	.LFE5-.LFB5
+ 1925 0030 00000000 		.4byte	.LFB6
+ 1926 0034 20000000 		.4byte	.LFE6-.LFB6
+ 1927 0038 00000000 		.4byte	.LFB7
+ 1928 003c 90000000 		.4byte	.LFE7-.LFB7
+ 1929 0040 00000000 		.4byte	.LFB8
+ 1930 0044 98000000 		.4byte	.LFE8-.LFB8
+ 1931 0048 00000000 		.4byte	.LFB9
+ 1932 004c 08010000 		.4byte	.LFE9-.LFB9
+ 1933 0050 00000000 		.4byte	.LFB10
+ 1934 0054 0C010000 		.4byte	.LFE10-.LFB10
+ 1935 0058 00000000 		.4byte	0
+ 1936 005c 00000000 		.4byte	0
+ 1937              		.section	.debug_ranges,"",%progbits
+ 1938              	.Ldebug_ranges0:
+ 1939 0000 00000000 		.4byte	.LFB1
+ 1940 0004 24000000 		.4byte	.LFE1
+ 1941 0008 00000000 		.4byte	.LFB3
+ 1942 000c 44000000 		.4byte	.LFE3
+ 1943 0010 00000000 		.4byte	.LFB4
+ 1944 0014 4C000000 		.4byte	.LFE4
+ 1945 0018 00000000 		.4byte	.LFB5
+ 1946 001c B0000000 		.4byte	.LFE5
+ 1947 0020 00000000 		.4byte	.LFB6
+ 1948 0024 20000000 		.4byte	.LFE6
+ 1949 0028 00000000 		.4byte	.LFB7
+ 1950 002c 90000000 		.4byte	.LFE7
+ 1951 0030 00000000 		.4byte	.LFB8
+ 1952 0034 98000000 		.4byte	.LFE8
+ 1953 0038 00000000 		.4byte	.LFB9
+ 1954 003c 08010000 		.4byte	.LFE9
+ 1955 0040 00000000 		.4byte	.LFB10
+ 1956 0044 0C010000 		.4byte	.LFE10
+ 1957 0048 00000000 		.4byte	0
+ 1958 004c 00000000 		.4byte	0
+ 1959              		.section	.debug_line,"",%progbits
+ 1960              	.Ldebug_line0:
+ 1961 0000 DC020000 		.section	.debug_str,"MS",%progbits,1
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 40
+
+
+ 1961      0200D501 
+ 1961      00000201 
+ 1961      FB0E0D00 
+ 1961      01010101 
+ 1962              	.LASF42:
+ 1963 0000 6E746167 		.ascii	"ntag\000"
+ 1963      00
+ 1964              	.LASF5:
+ 1965 0005 5F5F7569 		.ascii	"__uint8_t\000"
+ 1965      6E74385F 
+ 1965      7400
+ 1966              	.LASF49:
+ 1967 000f 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1967      43313120 
+ 1967      352E342E 
+ 1967      31203230 
+ 1967      31363036 
+ 1968 0042 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1968      20726576 
+ 1968      6973696F 
+ 1968      6E203233 
+ 1968      37373135 
+ 1969 0075 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects -fomit-fram"
+ 1969      66756E63 
+ 1969      74696F6E 
+ 1969      2D736563 
+ 1969      74696F6E 
+ 1970 00a8 652D706F 		.ascii	"e-pointer\000"
+ 1970      696E7465 
+ 1970      7200
+ 1971              	.LASF48:
+ 1972 00b2 616B5F61 		.ascii	"ak_aes_unpack_and_decrypt\000"
+ 1972      65735F75 
+ 1972      6E706163 
+ 1972      6B5F616E 
+ 1972      645F6465 
+ 1973              	.LASF19:
+ 1974 00cc 656E6372 		.ascii	"encrypt\000"
+ 1974      79707400 
+ 1975              	.LASF32:
+ 1976 00d4 616B5F61 		.ascii	"ak_aes_init\000"
+ 1976      65735F69 
+ 1976      6E697400 
+ 1977              	.LASF28:
+ 1978 00e0 61707065 		.ascii	"append_counter_to_nonce\000"
+ 1978      6E645F63 
+ 1978      6F756E74 
+ 1978      65725F74 
+ 1978      6F5F6E6F 
+ 1979              	.LASF23:
+ 1980 00f8 63665F61 		.ascii	"cf_aes_context\000"
+ 1980      65735F63 
+ 1980      6F6E7465 
+ 1980      787400
+ 1981              	.LASF34:
+ 1982 0107 73686172 		.ascii	"shared_secret_size\000"
+ 1982      65645F73 
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 41
+
+
+ 1982      65637265 
+ 1982      745F7369 
+ 1982      7A6500
+ 1983              	.LASF20:
+ 1984 011a 64656372 		.ascii	"decrypt\000"
+ 1984      79707400 
+ 1985              	.LASF33:
+ 1986 0122 73686172 		.ascii	"shared_secret\000"
+ 1986      65645F73 
+ 1986      65637265 
+ 1986      7400
+ 1987              	.LASF46:
+ 1988 0130 7061636B 		.ascii	"package_size\000"
+ 1988      6167655F 
+ 1988      73697A65 
+ 1988      00
+ 1989              	.LASF47:
+ 1990 013d 616B5F61 		.ascii	"ak_aes_decrypt\000"
+ 1990      65735F64 
+ 1990      65637279 
+ 1990      707400
+ 1991              	.LASF24:
+ 1992 014c 636F756E 		.ascii	"counter\000"
+ 1992      74657200 
+ 1993              	.LASF38:
+ 1994 0154 616B5F61 		.ascii	"ak_aes_encrypt\000"
+ 1994      65735F65 
+ 1994      6E637279 
+ 1994      707400
+ 1995              	.LASF53:
+ 1996 0163 63665F61 		.ascii	"cf_aes\000"
+ 1996      657300
+ 1997              	.LASF30:
+ 1998 016a 73697A65 		.ascii	"size\000"
+ 1998      00
+ 1999              	.LASF21:
+ 2000 016f 63665F70 		.ascii	"cf_prp\000"
+ 2000      727000
+ 2001              	.LASF7:
+ 2002 0176 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2002      20756E73 
+ 2002      69676E65 
+ 2002      6420696E 
+ 2002      7400
+ 2003              	.LASF3:
+ 2004 0188 73686F72 		.ascii	"short unsigned int\000"
+ 2004      7420756E 
+ 2004      7369676E 
+ 2004      65642069 
+ 2004      6E7400
+ 2005              	.LASF11:
+ 2006 019b 73697A65 		.ascii	"size_t\000"
+ 2006      5F7400
+ 2007              	.LASF45:
+ 2008 01a2 7061636B 		.ascii	"package\000"
+ 2008      61676500 
+ 2009              	.LASF50:
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 42
+
+
+ 2010 01aa 616B5F61 		.ascii	"ak_aes_crypto.c\000"
+ 2010      65735F63 
+ 2010      72797074 
+ 2010      6F2E6300 
+ 2011              	.LASF1:
+ 2012 01ba 756E7369 		.ascii	"unsigned char\000"
+ 2012      676E6564 
+ 2012      20636861 
+ 2012      7200
+ 2013              	.LASF25:
+ 2014 01c8 6E6F6E63 		.ascii	"nonce\000"
+ 2014      6500
+ 2015              	.LASF26:
+ 2016 01ce 63636D5F 		.ascii	"ccm_ctx\000"
+ 2016      63747800 
+ 2017              	.LASF6:
+ 2018 01d6 5F5F7569 		.ascii	"__uint32_t\000"
+ 2018      6E743332 
+ 2018      5F7400
+ 2019              	.LASF40:
+ 2020 01e1 706C6169 		.ascii	"plain_data_size\000"
+ 2020      6E5F6461 
+ 2020      74615F73 
+ 2020      697A6500 
+ 2021              	.LASF18:
+ 2022 01f1 626C6F63 		.ascii	"blocksz\000"
+ 2022      6B737A00 
+ 2023              	.LASF17:
+ 2024 01f9 63665F70 		.ascii	"cf_prp_block\000"
+ 2024      72705F62 
+ 2024      6C6F636B 
+ 2024      00
+ 2025              	.LASF35:
+ 2026 0206 63636D5F 		.ascii	"ccm_context\000"
+ 2026      636F6E74 
+ 2026      65787400 
+ 2027              	.LASF10:
+ 2028 0212 756E7369 		.ascii	"unsigned int\000"
+ 2028      676E6564 
+ 2028      20696E74 
+ 2028      00
+ 2029              	.LASF9:
+ 2030 021f 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2030      206C6F6E 
+ 2030      6720756E 
+ 2030      7369676E 
+ 2030      65642069 
+ 2031              	.LASF15:
+ 2032 0236 75696E74 		.ascii	"uint8_t\000"
+ 2032      385F7400 
+ 2033              	.LASF41:
+ 2034 023e 656E6372 		.ascii	"encrypted_data\000"
+ 2034      79707465 
+ 2034      645F6461 
+ 2034      746100
+ 2035              	.LASF36:
+ 2036 024d 73656372 		.ascii	"secret_key\000"
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 43
+
+
+ 2036      65745F6B 
+ 2036      657900
+ 2037              	.LASF39:
+ 2038 0258 706C6169 		.ascii	"plain_data\000"
+ 2038      6E5F6461 
+ 2038      746100
+ 2039              	.LASF52:
+ 2040 0263 6D656D5F 		.ascii	"mem_clean\000"
+ 2040      636C6561 
+ 2040      6E00
+ 2041              	.LASF13:
+ 2042 026d 73697A65 		.ascii	"sizetype\000"
+ 2042      74797065 
+ 2042      00
+ 2043              	.LASF8:
+ 2044 0276 6C6F6E67 		.ascii	"long long int\000"
+ 2044      206C6F6E 
+ 2044      6720696E 
+ 2044      7400
+ 2045              	.LASF27:
+ 2046 0284 616B5F61 		.ascii	"ak_aes_context\000"
+ 2046      65735F63 
+ 2046      6F6E7465 
+ 2046      787400
+ 2047              	.LASF14:
+ 2048 0293 63686172 		.ascii	"char\000"
+ 2048      00
+ 2049              	.LASF43:
+ 2050 0298 656E6372 		.ascii	"encrypted_data_size\000"
+ 2050      79707465 
+ 2050      645F6461 
+ 2050      74615F73 
+ 2050      697A6500 
+ 2051              	.LASF2:
+ 2052 02ac 73686F72 		.ascii	"short int\000"
+ 2052      7420696E 
+ 2052      7400
+ 2053              	.LASF29:
+ 2054 02b6 635F7072 		.ascii	"c_print\000"
+ 2054      696E7400 
+ 2055              	.LASF31:
+ 2056 02be 6374725F 		.ascii	"ctr_array\000"
+ 2056      61727261 
+ 2056      7900
+ 2057              	.LASF22:
+ 2058 02c8 726F756E 		.ascii	"rounds\000"
+ 2058      647300
+ 2059              	.LASF16:
+ 2060 02cf 75696E74 		.ascii	"uint32_t\000"
+ 2060      33325F74 
+ 2060      00
+ 2061              	.LASF4:
+ 2062 02d8 6C6F6E67 		.ascii	"long int\000"
+ 2062      20696E74 
+ 2062      00
+ 2063              	.LASF51:
+ 2064 02e1 443A5C44 		.ascii	"D:\\Dropbox\\6_kurs\\diploma\\crypto_miscocontrolle"
+ARM GAS  C:\Users\andrew\AppData\Local\Temp\ccyY92Rm.s 			page 44
+
+
+ 2064      726F7062 
+ 2064      6F785C36 
+ 2064      5F6B7572 
+ 2064      735C6469 
+ 2065 0310 725F5354 		.ascii	"r_STABLE\\BLE_Dynamic_GATT_Service_Configuration\\B"
+ 2065      41424C45 
+ 2065      5C424C45 
+ 2065      5F44796E 
+ 2065      616D6963 
+ 2066 0341 4C455F44 		.ascii	"LE_Dynamic_GATT_Service_Configuration.cydsn\000"
+ 2066      796E616D 
+ 2066      69635F47 
+ 2066      4154545F 
+ 2066      53657276 
+ 2067              	.LASF12:
+ 2068 036d 6C6F6E67 		.ascii	"long double\000"
+ 2068      20646F75 
+ 2068      626C6500 
+ 2069              	.LASF0:
+ 2070 0379 7369676E 		.ascii	"signed char\000"
+ 2070      65642063 
+ 2070      68617200 
+ 2071              	.LASF37:
+ 2072 0385 616B5F61 		.ascii	"ak_aes_finish\000"
+ 2072      65735F66 
+ 2072      696E6973 
+ 2072      6800
+ 2073              	.LASF44:
+ 2074 0393 616B5F61 		.ascii	"ak_aes_encrypt_and_pack\000"
+ 2074      65735F65 
+ 2074      6E637279 
+ 2074      70745F61 
+ 2074      6E645F70 
+ 2075              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

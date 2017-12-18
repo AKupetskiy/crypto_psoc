@@ -69,8 +69,7 @@ void ak_aes_init(ak_aes_context *ctx,
 
 void ak_aes_finish(ak_aes_context *ctx)
 {
-    free(ctx->nonce);
-    free(ctx->ccm_ctx);
+    cf_aes_finish(ctx->ccm_ctx);
     mem_clean(ctx, sizeof *ctx);
 }
 

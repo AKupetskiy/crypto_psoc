@@ -1,5 +1,23 @@
---------------- Build Started: 12/16/2017 15:27:13 Project: BLE_Dynamic_GATT_Service_Configuration, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+--------------- Build Started: 12/19/2017 00:04:58 Project: BLE_Dynamic_GATT_Service_Configuration, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
 The code generation step is up to date.
+arm-none-eabi-gcc.exe -mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=.\CortexM0\ARM_GCC_541\Debug/ak_aes_crypto.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -O0 -fomit-frame-pointer -c ak_aes_crypto.c -o .\CortexM0\ARM_GCC_541\Debug\ak_aes_crypto.o
+ak_aes_crypto.c: In function 'ak_aes_encrypt':
+ak_aes_crypto.c:98:12: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+     printf("counter = %d\r\n", ctx->counter);
+            ^
+ak_aes_crypto.c:98:12: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+ak_aes_crypto.c: In function 'ak_aes_decrypt':
+ak_aes_crypto.c:123:12: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+     printf("counter = %d\r\n", ctx->counter);
+            ^
+ak_aes_crypto.c:123:12: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+ak_aes_crypto.c: In function 'ak_aes_unpack_and_decrypt':
+ak_aes_crypto.c:159:13: warning: passing argument 1 of 'c_print' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     c_print(package, TAG_SIZE + package_size);
+             ^
+ak_aes_crypto.c:26:6: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'const uint8_t * {aka const unsigned char *}'
+ void c_print(uint8_t *vli, unsigned int size) {
+      ^
 arm-none-eabi-gcc.exe -mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=.\CortexM0\ARM_GCC_541\Debug/main.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -O0 -fomit-frame-pointer -c main.c -o .\CortexM0\ARM_GCC_541\Debug\main.o
 main.c: In function 'sendDataAck':
 main.c:116:15: warning: pointer targets in assignment differ in signedness [-Wpointer-sign]
@@ -9,15 +27,15 @@ main.c:118:15: warning: pointer targets in assignment differ in signedness [-Wpo
          value = "FFF0";
                ^
 main.c: In function 'startRoutine':
-main.c:200:24: warning: unused variable 'GattErrCode' [-Wunused-variable]
+main.c:199:24: warning: unused variable 'GattErrCode' [-Wunused-variable]
   CYBLE_GATT_ERR_CODE_T GattErrCode = CYBLE_GATT_ERR_NONE;
                         ^
 main.c: In function 'StackEventHandler':
-main.c:468:24: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+main.c:467:24: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
                  printf("counter value = %d \n",aes_ccm_ctx->counter);
                         ^
-main.c:468:24: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
-main.c:471:41: warning: pointer targets in passing argument 1 of 'UART_UartPutString' differ in signedness [-Wpointer-sign]
+main.c:467:24: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+main.c:470:41: warning: pointer targets in passing argument 1 of 'UART_UartPutString' differ in signedness [-Wpointer-sign]
                      UART_UartPutString (message );
                                          ^
 In file included from Generated_Source\PSoC4/project.h:36:0,
@@ -25,11 +43,11 @@ In file included from Generated_Source\PSoC4/project.h:36:0,
 Generated_Source\PSoC4/UART_SPI_UART.h:810:14: note: expected 'const char8 * {aka const char *}' but argument is of type 'uint8_t * {aka unsigned char *}'
          void UART_UartPutString(const char8 string[]);
               ^
-main.c:483:24: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+main.c:482:24: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
                  printf("counter value = %d \r\n",aes_ccm_ctx->counter);
                         ^
-main.c:483:24: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
-main.c:498:23: warning: unused variable 'ledValue' [-Wunused-variable]
+main.c:482:24: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+main.c:497:23: warning: unused variable 'ledValue' [-Wunused-variable]
                  uint8 ledValue = ALL_OFF;
                        ^
 arm-none-eabi-ar.exe -rs .\CortexM0\ARM_GCC_541\Debug\BLE_Dynamic_GATT_Service_Configuration.a .\CortexM0\ARM_GCC_541\Debug\BLE.o .\CortexM0\ARM_GCC_541\Debug\BLE_gatt.o .\CortexM0\ARM_GCC_541\Debug\BLE_eventHandler.o .\CortexM0\ARM_GCC_541\Debug\BLE_HAL_INT.o .\CortexM0\ARM_GCC_541\Debug\BLE_HAL_PVT.o .\CortexM0\ARM_GCC_541\Debug\BLE_custom.o .\CortexM0\ARM_GCC_541\Debug\UART.o .\CortexM0\ARM_GCC_541\Debug\UART_SPI_UART.o .\CortexM0\ARM_GCC_541\Debug\UART_SPI_UART_INT.o .\CortexM0\ARM_GCC_541\Debug\UART_PM.o .\CortexM0\ARM_GCC_541\Debug\UART_UART.o .\CortexM0\ARM_GCC_541\Debug\UART_BOOT.o .\CortexM0\ARM_GCC_541\Debug\UART_UART_BOOT.o .\CortexM0\ARM_GCC_541\Debug\GREEN_LED.o .\CortexM0\ARM_GCC_541\Debug\GREEN_LED_PM.o .\CortexM0\ARM_GCC_541\Debug\RED_LED.o .\CortexM0\ARM_GCC_541\Debug\RED_LED_PM.o .\CortexM0\ARM_GCC_541\Debug\BLUE_LED.o .\CortexM0\ARM_GCC_541\Debug\BLUE_LED_PM.o .\CortexM0\ARM_GCC_541\Debug\BLE_bless_isr.o .\CortexM0\ARM_GCC_541\Debug\UART_SCBCLK.o .\CortexM0\ARM_GCC_541\Debug\UART_tx.o .\CortexM0\ARM_GCC_541\Debug\UART_tx_PM.o .\CortexM0\ARM_GCC_541\Debug\UART_rx.o .\CortexM0\ARM_GCC_541\Debug\UART_rx_PM.o .\CortexM0\ARM_GCC_541\Debug\CyFlash.o .\CortexM0\ARM_GCC_541\Debug\CyLib.o .\CortexM0\ARM_GCC_541\Debug\cyPm.o .\CortexM0\ARM_GCC_541\Debug\cyutils.o .\CortexM0\ARM_GCC_541\Debug\CyDMA.o .\CortexM0\ARM_GCC_541\Debug\CyLFClk.o .\CortexM0\ARM_GCC_541\Debug\CyBootAsmGnu.o
@@ -37,6 +55,6 @@ arm-none-eabi-ar.exe: creating .\CortexM0\ARM_GCC_541\Debug\BLE_Dynamic_GATT_Ser
 arm-none-eabi-gcc.exe -Wl,--start-group -o D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\CortexM0\ARM_GCC_541\Debug\BLE_Dynamic_GATT_Service_Configuration.elf .\CortexM0\ARM_GCC_541\Debug\aes.o .\CortexM0\ARM_GCC_541\Debug\ak_aes_crypto.o .\CortexM0\ARM_GCC_541\Debug\blockwise.o .\CortexM0\ARM_GCC_541\Debug\cbcmac.o .\CortexM0\ARM_GCC_541\Debug\ccm.o .\CortexM0\ARM_GCC_541\Debug\chash.o .\CortexM0\ARM_GCC_541\Debug\gf128.o .\CortexM0\ARM_GCC_541\Debug\hmac.o .\CortexM0\ARM_GCC_541\Debug\modes.o .\CortexM0\ARM_GCC_541\Debug\main.o .\CortexM0\ARM_GCC_541\Debug\debug.o .\CortexM0\ARM_GCC_541\Debug\uECC.o .\CortexM0\ARM_GCC_541\Debug\ecc_crypto.o .\CortexM0\ARM_GCC_541\Debug\sha256.o .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o .\CortexM0\ARM_GCC_541\Debug\cymetadata.o .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o .\CortexM0\ARM_GCC_541\Debug\BLE_Dynamic_GATT_Service_Configuration.a "C:\Users\andrew\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\BLE_v3_40\Library\gccCyBLEStack_BLE_SOC_PERIPHERAL.a" "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CortexM0\ARM_GCC_541\Debug\CyComponentLibrary.a" -mcpu=cortex-m0 -mthumb -L Generated_Source\PSoC4 -Wl,-Map,.\CortexM0\ARM_GCC_541\Debug/BLE_Dynamic_GATT_Service_Configuration.map -T Generated_Source\PSoC4\cm0gcc.ld -specs=nano.specs -Wl,--gc-sections -g -ffunction-sections -O0 -ffat-lto-objects -Wl,--end-group
 cyelftool.exe -C D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\CortexM0\ARM_GCC_541\Debug\BLE_Dynamic_GATT_Service_Configuration.elf --flash_row_size 256 --flash_size 262144 --flash_offset 0x00000000
 cyelftool.exe -S D:\Dropbox\6_kurs\diploma\crypto_miscocontroller_STABLE\BLE_Dynamic_GATT_Service_Configuration\BLE_Dynamic_GATT_Service_Configuration.cydsn\CortexM0\ARM_GCC_541\Debug\BLE_Dynamic_GATT_Service_Configuration.elf
-Flash used: 115109 of 262144 bytes (43,9%).
+Flash used: 114885 of 262144 bytes (43,8%).
 SRAM used: 21560 of 32768 bytes (65,8%). Stack: 4096 bytes. Heap: 8192 bytes.
---------------- Build Succeeded: 12/16/2017 15:27:17 ---------------
+--------------- Build Succeeded: 12/19/2017 00:05:04 ---------------
